@@ -34,12 +34,6 @@ Install: `brew bundle`
 ln -sF $(pwd)/.condarc ~/.condarc
 ```
 
-### xonsh
-
-```
-ln -sf $(pwd)/.xonshrc ~/.xonshrc
-```
-
 ### Ohmyzsh
 
 ```
@@ -55,6 +49,12 @@ ln -sF $(pwd)/.oh-my-zsh/custom/plugins ~/.oh-my-zsh/custom
 ```
 ln -sf $(pwd)/.gitconfig ~/.gitconfig
 ln -sf $(pwd)/.gitignore_global ~/.gitignore_global
+```
+
+### tmux
+
+```
+ln -sf $(pwd)/.tmux.conf ~/.tmux.conf
 ```
 
 ### Atom

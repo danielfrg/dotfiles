@@ -13,6 +13,7 @@ alias cddl="cd ~/Downloads"
 alias k=clear
 alias l='ls -lAhG'
 alias ls='ls -lAhG'
+alias rm='trash'
 
 alias grep='grep -i --color=always'
 alias fuck='eval $(thefuck $(fc -ln -1))'
