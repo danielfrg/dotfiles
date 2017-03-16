@@ -4,11 +4,6 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
-# Shortcuts
-alias cdw='cd ~/workspace'
-alias work='cd ~/workspace'
-alias cddl="cd ~/Downloads"
-
 # copy file interactive
 alias cp='cp -i'
 
@@ -18,10 +13,8 @@ alias mv='mv -i'
 alias k=clear
 alias l='ls -lAhG'
 alias ls='ls -lAhG'
-alias rm='trash'
 
 alias grep='grep -i --color=always'
-alias fuck='eval $(thefuck $(fc -ln -1))'
 
 # Typos
 alias g='git'
@@ -39,11 +32,3 @@ alias localip="sudo ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | gre
 
 # untar
 alias untar='tar xvf'
-
-alias ssh=sshrc
-
-# Docker
-docker-stop-all() { docker stop $(docker ps -a -q) }
-docker-delete-stop() { docker rm $(docker ps -a -q) }
-docker-rmi-none() { docker rmi $(docker images | grep "^<none>" | awk '{print $3}') }
-docker-clean() { docker-delete-stop; docker-rmi-none; }

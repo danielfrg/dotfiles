@@ -57,6 +57,13 @@ ln -sf $(pwd)/.gitignore_global ~/.gitignore_global
 ln -sf $(pwd)/.tmux.conf ~/.tmux.conf
 ```
 
+### sshrc
+
+```
+ln -sf $(pwd)/.sshrc ~/.sshrc
+ln -sf $(pwd)/.sshrc.d ~/.sshrc.d
+```
+
 ### Atom
 
 ```bash
