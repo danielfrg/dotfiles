@@ -10,6 +10,7 @@ brew 'tmux'
 brew 'fzf'
 brew 'gnupg'
 brew 'unp'
+brew 'sshrc'
 brew 'trash'
 brew 'thefuck'
 
