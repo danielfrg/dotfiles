@@ -2,17 +2,17 @@
   {
     title: "adam"
     paths: [
-      "/Users/danielfrg/workspace/adam/adam"
-      "/Users/danielfrg/workspace/adam/adam-jupyter"
-      "/Users/danielfrg/workspace/adam/adam-openscoring"
-      "/Users/danielfrg/workspace/adam/adam-kubernetes"
-      "/Users/danielfrg/workspace/adam/adam-dask"
-      "/Users/danielfrg/workspace/adam/adam-enterprise-notebooks"
-      "/Users/danielfrg/workspace/adam/adam-repository"
-      "/Users/danielfrg/workspace/adam/adam-accelerate"
-      "/Users/danielfrg/workspace/adam/adam-kapsel"
-      "/Users/danielfrg/workspace/adam/adam-cloudera"
-      "/Users/danielfrg/workspace/adam/adam-mosaic"
+      "/Users/danielfrg/workspace/continuum/adam/adam"
+      "/Users/danielfrg/workspace/continuum/adam/adam-jupyter"
+      "/Users/danielfrg/workspace/continuum/adam/adam-openscoring"
+      "/Users/danielfrg/workspace/continuum/adam/adam-kubernetes"
+      "/Users/danielfrg/workspace/continuum/adam/adam-dask"
+      "/Users/danielfrg/workspace/continuum/adam/adam-enterprise-notebooks"
+      "/Users/danielfrg/workspace/continuum/adam/adam-repository"
+      "/Users/danielfrg/workspace/continuum/adam/adam-accelerate"
+      "/Users/danielfrg/workspace/continuum/adam/adam-kapsel"
+      "/Users/danielfrg/workspace/continuum/adam/adam-cloudera"
+      "/Users/danielfrg/workspace/continuum/adam/adam-mosaic"
       "/Users/danielfrg/.continuum"
     ]
     settings:
@@ -26,8 +26,8 @@
   {
     title: "anaconda-platform"
     paths: [
-      "/Users/danielfrg/workspace/anaconda-platform"
-      "/Users/danielfrg/workspace/anaconda-platform-dev"
+      "/Users/danielfrg/workspace/continuum/anaconda-platform"
+      "/Users/danielfrg/workspace/continuum/anaconda-platform-dev"
     ]
     settings:
       "linter-flake8":

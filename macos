@@ -109,6 +109,14 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 # Set a faster keyboard repeat rate
 defaults write NSGlobalDomain KeyRepeat -int 3
 
+# Enable auto replacement
+defaults write -g WebAutomaticTextReplacementEnabled -int 1
+
+# Disable auto-correct
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -int 0
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
+defaults write NSGlobalDomain KeyRepeat -int 2
+
 # Use scroll gesture with the Ctrl (^) modifier key to zoom
 defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
 defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144
@@ -165,6 +173,9 @@ defaults write com.apple.screencapture type -string "png"
 
 # Finder: allow quitting via ⌘ + Q; doing so will also hide desktop icons
 # defaults write com.apple.finder QuitMenuItem -bool true
+
+# Show hidden files
+defaults write com.apple.finder AppleShowAllFiles -bool YES
 
 # Set HOME as the default location for new Finder windows
 defaults write com.apple.finder NewWindowTarget -string "PfLo"
@@ -228,6 +239,30 @@ defaults write com.apple.dock dashboard-in-overlay -bool true
 
 # Don’t automatically rearrange Spaces based on most recent use
 defaults write com.apple.dock mru-spaces -bool false
+
+###############################################################################
+# Spotlight #
+##############################################################################
+
+# Disable Spotlight
+sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist
+sudo mdutil -a -i off
+
+# Hide Spotlight Icon
+sudo mv /System/Library/CoreServices/Search.bundle /System/Library/CoreServices/Search.bundle.bak
+
+# Show Spotlight Icon
+# sudo mv /System/Library/CoreServices/Search.bundle.bak /System/Library/CoreServices/Search.bundle
+
+###############################################################################
+# Siri #
+##############################################################################
+
+# Hide Siri Icon
+sudo mv /System/Library/CoreServices/Siri.bundle /System/Library/CoreServices/Siri.bundle.bak
+
+# Show Siri Icon
+# sudo mv /System/Library/CoreServices/Siri.bundle.bak /System/Library/CoreServices/Siri.bundle
 
 ###############################################################################
 # Terminal and iTerm 2 #

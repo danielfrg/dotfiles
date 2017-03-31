@@ -5,3 +5,5 @@
 .python-version
 .condaenv
 .idea
+.vscode
+

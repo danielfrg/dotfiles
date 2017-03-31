@@ -1,12 +1,14 @@
 [user]
 	name = Daniel Rodriguez
 	email = df.rodriguez143@gmail.com
+	signingkey = 8D222CABC39ED32B
 
 [push]
 	default = simple
 
 [core]
 	excludesfile = /Users/danielfrg/.gitignore_global
+	quotepath = false
 
 [alias]
     commiti = commit --interactive
@@ -19,11 +21,5 @@
 	rebase = rebase -i
     logl = log --pretty=oneline --abbrev-commit
     lg = log --graph --topo-order --use-mailmap --stat --decorate
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
 [commit]
 	gpgsign = true

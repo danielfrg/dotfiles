@@ -40,8 +40,7 @@
     userId: "31fb4b32-093c-7478-de1a-ab36924e609e"
   "go-plus":
     currentPanelHeight: "21.70675830469645vh"
-  linter:
-    showErrorPanel: false
+  linter: {}
   "linter-flake8":
     executablePath: "/Users/danielfrg/anaconda/envs/adam/bin/flake8"
     flakeErrors: true

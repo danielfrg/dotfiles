@@ -19,11 +19,6 @@ lsvirtualenvs() {
     ls $ANACONDA/envs
 }
 
-mkvirtualenv() {
-    conda_root_dir
-    $ANACONDA/bin/conda create -n $1 pip
-}
-
 _complete_conda_envs() {
     conda_root_dir
     compadd $(ls $ANACONDA/envs)
