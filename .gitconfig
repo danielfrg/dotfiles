@@ -21,5 +21,9 @@
 	rebase = rebase -i
     logl = log --pretty=oneline --abbrev-commit
     lg = log --graph --topo-order --use-mailmap --stat --decorate
+	prune = fetch --prune
+	undo = reset --soft HEAD^
+	stash-all = stash save --include-untracked
+	glog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
 [commit]
 	gpgsign = true

@@ -28,13 +28,14 @@ Install: `brew bundle`
 
 ## Others
 
-### conda
+### python
 
 ```
+ln -sF $(pwd)/.pylintrc ~/.pylintrc
 ln -sF $(pwd)/.condarc ~/.condarc
 ```
 
-### Ohmyzsh
+### ohmyzsh
 
 ```
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
@@ -44,7 +45,7 @@ rm -rf ~/.oh-my-zsh/custom/plugins
 ln -sF $(pwd)/.oh-my-zsh/custom/plugins ~/.oh-my-zsh/custom
 ```
 
-### Git
+### git
 
 ```
 ln -sf $(pwd)/.gitconfig ~/.gitconfig
@@ -57,14 +58,14 @@ ln -sf $(pwd)/.gitignore_global ~/.gitignore_global
 ln -sf $(pwd)/.tmux.conf ~/.tmux.conf
 ```
 
-### sshrc
+### sshr
 
 ```
 ln -sf $(pwd)/.sshrc ~/.sshrc
 ln -sf $(pwd)/.sshrc.d ~/.sshrc.d
 ```
 
-### Atom
+### atom
 
 ```bash
 bash .atom/packages.sh
@@ -82,11 +83,9 @@ pushd ~/workspace/atom-nbviewer
 apm install
 popd
 ln -sF ~/workspace/atom-nbviewer ~/.atom/packages/nbviewer
-
-# ln -sF ~/workspace/dot-files/no-highligh-syntax ~/.atom/packages/no-highligh-syntax
 ```
 
-### VI
+### vi
 
 ```
 ln -sF $(pwd)/.vim ~/.vim

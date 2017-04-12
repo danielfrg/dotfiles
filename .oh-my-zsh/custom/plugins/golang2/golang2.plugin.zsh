@@ -13,6 +13,7 @@ gopathhere() {
 
 gotoolsinstall() {
     local old_path=$PATH
+    local old_go_path=$GOPATH
     export GOPATH=$tools_dir
     go get -u github.com/golang/dep/... 
     go get -u -v github.com/nsf/gocode
@@ -30,5 +31,8 @@ gotoolsinstall() {
     go get -u -v github.com/fatih/gomodifytags
     go get -u github.com/kisielk/errcheck
     go get golang.org/x/tools/cmd/goimports
+    go get github.com/tsliwowicz/go-wrk  
+    go get github.com/uber/go-torch
     export PATH=$old_path   
+    export GOPATH=$old_go_path   
 }
