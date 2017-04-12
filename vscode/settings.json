@@ -1,0 +1,44 @@
+// Place your settings in this file to overwrite the default settings
+{
+    "go.lintOnSave": true,
+    "go.vetOnSave": true,
+    "go.formatOnSave": true,
+    "go.formatTool": "goimports",
+    "go.gopath": "~/workspace/go",
+    "go.toolsGopath": "~/workspace/go-tools",
+    "go.inferGopath": true,
+    "go.autocompleteUnimportedPackages": true,
+    "python.venvPath": "~/anaconda/envs",
+    "python.formatting.provider": "yapf",
+    "workbench.sideBar.location": "right",
+    "editor.fontSize": 15,
+    "editor.fontFamily": "Hack, Menlo, Monaco, 'Courier New', monospace",
+    "files.autoSave": "onFocusChange",
+    "files.insertFinalNewline": true,
+    "vim.easymotion": true,
+    // "vim.useSolidBlockCursor": true,
+    "vim.incsearch": true,
+    "vim.useSystemClipboard": true,
+    "vim.useCtrlKeys": true,
+    "vim.hlsearch": true,
+    "vim.insertModeKeyBindings": [
+        {
+            "before": ["j","k"],
+            "after": ["<Esc>"]
+        }
+    ],
+    "vim.otherModesKeyBindingsNonRecursive": [
+        {
+            "before": [";"],
+            "after": [],
+            "commands": [
+                {
+                    "command": "workbench.action.showCommands",
+                    "args": []
+                }
+            ]
+        }
+    ],
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.colorTheme": "Tomorrow Night Eighties"
+}
