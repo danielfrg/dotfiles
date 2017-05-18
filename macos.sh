@@ -245,8 +245,8 @@ defaults write com.apple.dock mru-spaces -bool false
 ##############################################################################
 
 # Disable Spotlight
-sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist
-sudo mdutil -a -i off
+# sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist
+# sudo mdutil -a -i off
 
 # Hide Spotlight Icon
 sudo mv /System/Library/CoreServices/Search.bundle /System/Library/CoreServices/Search.bundle.bak

@@ -7,8 +7,10 @@ export PATH=$GOPATH/bin:$PATH
 gopathhere() {
     export GOPATH=$(pwd)
     export PATH=$GOPATH/bin:$PATH
+    export GOBIN=$(pwd)/bin
     echo GOPATH=$GOPATH
     echo PATH=$PATH
+    echo GOBIN=$GOBIN
 }
 
 gotoolsinstall() {

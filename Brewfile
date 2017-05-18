@@ -4,6 +4,8 @@ brew 'findutils'
 brew 'gnu-sed', args: ['with-default-names']
 
 brew 'wget'
+brew 'curl', args: ['with-openssl']
+link 'xctool', args: ['force']
 brew 'zsh'
 brew 'git'
 brew 'tmux'
@@ -14,6 +16,12 @@ brew 'sshrc'
 brew 'trash'
 brew 'thefuck'
 
+brew 'bazel'
+brew 'terraform'
+brew 'go'
+brew 'node'
+brew 'yarn'
+
 tap 'caskroom/cask'
 tap 'caskroom/versions'
 
@@ -22,8 +30,7 @@ cask 'google-chrome'
 cask 'alfred'
 cask '1password'
 cask 'vlc'
-cask 'dropbox'
-cask 'transmission'
+cask 'google-drive'
 cask 'keyboard-maestro'
 cask 'clipmenu'
 cask 'keka'
@@ -34,10 +41,9 @@ cask 'smoothmouse'
 
 cask 'iterm2'
 cask 'java'
-cask 'atom'
+cask 'vscode'
 cask 'vagrant'
 cask 'virtualbox'
-cask 'sourcetree'
 cask 'licecap'
 
 cask 'caskroom/fonts/font-hack'
