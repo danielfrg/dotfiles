@@ -2,8 +2,12 @@
   "atom-beautify":
     general:
       _analyticsUserId: "fe65d581-8d0a-4297-bb97-847c4c758ba5"
+  "atom-package-deps":
+    ignored: [
+      "linter"
+    ]
   "autocomplete-python":
-    pythonPaths: "/Users/danielfrg/anaconda/envs/adam/bin/python"
+    pythonPaths: "/Users/danielfrg/anaconda/bin/python"
     useKite: false
   autosave:
     enabled: true
@@ -28,7 +32,7 @@
       "one-dark-ui"
       "base16-tomorrow-dark-theme"
     ]
-    useCustomTitleBar: true
+    titleBar: "custom"
   editor:
     fontFamily: "Hack"
     fontSize: 15
@@ -42,17 +46,16 @@
     currentPanelHeight: "21.70675830469645vh"
   linter: {}
   "linter-flake8":
-    executablePath: "/Users/danielfrg/anaconda/envs/adam/bin/flake8"
+    executablePath: "/Users/danielfrg/anaconda/bin/flake8"
     flakeErrors: true
     maxLineLength: 120
   "linter-pylint":
-    executable: "/Users/danielfrg/anaconda/envs/not-binder/bin/pylint"
+    executable: "/Users/danielfrg/anaconda/bin/pylint"
   nbviewer:
     jupyterConvertBin: "/Users/danielfrg/anaconda/bin/jupyter-nbconvert"
-  "one-dark-ui":
-    layoutMode: "Spacious"
+  "one-dark-ui": {}
   "python-tools":
-    pythonPath: "/Users/danielfrg/anconda/envs/adam/bin"
+    pythonPath: "/Users/danielfrg/anconda/bin"
   "sass-autocompile":
     nodeSassPath: "/Users/danielfrg/workspace/node_modules/.bin/"
   "tree-view":

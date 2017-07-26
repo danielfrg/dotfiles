@@ -35,6 +35,7 @@ gotoolsinstall() {
     go get golang.org/x/tools/cmd/goimports
     go get github.com/tsliwowicz/go-wrk  
     go get github.com/uber/go-torch
+    go get github.com/tj/mmake/cmd/mmake
     export PATH=$old_path   
     export GOPATH=$old_go_path   
 }

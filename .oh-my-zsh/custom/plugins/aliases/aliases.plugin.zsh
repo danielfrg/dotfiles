@@ -40,7 +40,9 @@ alias localip="sudo ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | gre
 # untar
 alias untar='tar xvf'
 
+# Replacements
 alias ssh=sshrc
+alias make=mmake
 
 # Docker
 docker-stop-all() { docker stop $(docker ps -a -q) }

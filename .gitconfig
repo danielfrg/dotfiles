@@ -9,6 +9,7 @@
 [core]
 	excludesfile = /Users/danielfrg/.gitignore_global
 	quotepath = false
+	abbrev = 7
 
 [alias]
     commiti = commit --interactive
@@ -27,3 +28,8 @@
 	glog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
 [commit]
 	gpgsign = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

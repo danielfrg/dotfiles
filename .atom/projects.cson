@@ -1,43 +1,5 @@
 [
   {
-    title: "adam"
-    paths: [
-      "/Users/danielfrg/workspace/continuum/adam/adam"
-      "/Users/danielfrg/workspace/continuum/adam/adam-jupyter"
-      "/Users/danielfrg/workspace/continuum/adam/adam-openscoring"
-      "/Users/danielfrg/workspace/continuum/adam/adam-kubernetes"
-      "/Users/danielfrg/workspace/continuum/adam/adam-dask"
-      "/Users/danielfrg/workspace/continuum/adam/adam-enterprise-notebooks"
-      "/Users/danielfrg/workspace/continuum/adam/adam-repository"
-      "/Users/danielfrg/workspace/continuum/adam/adam-accelerate"
-      "/Users/danielfrg/workspace/continuum/adam/adam-kapsel"
-      "/Users/danielfrg/workspace/continuum/adam/adam-cloudera"
-      "/Users/danielfrg/workspace/continuum/adam/adam-mosaic"
-      "/Users/danielfrg/.continuum"
-    ]
-    settings:
-      "linter-flake8":
-        executablePath: "/Users/danielfrg/anaconda/envs/adam/bin/flake8"
-      "autocomplete-python":
-        pythonPaths: "/Users/danielfrg/anaconda/envs/adam/bin/python"
-      "python-tools":
-        pythonPath: "/Users/danielfrg/anconda/envs/adam/bin"
-  }
-  {
-    title: "anaconda-platform"
-    paths: [
-      "/Users/danielfrg/workspace/continuum/anaconda-platform"
-      "/Users/danielfrg/workspace/continuum/anaconda-platform-dev"
-    ]
-    settings:
-      "linter-flake8":
-        executablePath: "/Users/danielfrg/anaconda/envs/adam/bin/flake8"
-      "autocomplete-python":
-        pythonPaths: "/Users/danielfrg/anaconda/envs/adam/bin/python"
-      "python-tools":
-        pythonPath: "/Users/danielfrg/anconda/envs/adam/bin"
-  }
-  {
     title: "jupyter"
     paths: [
       "/Users/danielfrg/workspace/jupyter/jupyterhub"
