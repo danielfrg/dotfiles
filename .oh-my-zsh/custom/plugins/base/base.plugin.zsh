@@ -3,9 +3,12 @@ BASE16_SHELL="$HOME/workspace/dotfiles/iterm2/base16-tomorrow.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 export PATH=/usr/local/sbin:$PATH
+
+# Slow
 # export PATH=$(brew --prefix coreutils)/libexec/bin:$PATH
-export PATH=/usr/local/opt/coreutils/libexec/bin:$PATH
 # export PATH=$(brew --prefix moreutils)/libexec/bin:$PATH
+# Fast
+export PATH=/usr/local/opt/coreutils/libexec/bin:$PATH
 export PATH=/usr/local/opt/moreutils/libexec/bin:$PATH
 
 bindkey '[C' forward-word
@@ -17,7 +20,8 @@ bindkey '\e\e[D' backward-word
 
 # GCP
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
-source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
+# Slow
+# source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
 
 # NPM
 export PATH=~/workspace/node_modules/.bin:$PATH

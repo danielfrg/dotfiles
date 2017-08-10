@@ -1,9 +1,10 @@
 export PATH=$HOME/anaconda/bin:$PATH
 
-mydir=${0:a:h}
-source $mydir/conda_auto_env.sh
-autoload -U add-zsh-hook
-add-zsh-hook chpwd conda_auto_env
+# This is slow to create a new terminal? :S
+# mydir=${0:a:h}
+# source $mydir/conda_auto_env.sh
+# autoload -U add-zsh-hook
+# add-zsh-hook chpwd conda_auto_env
 
 fpath+=$PWD
 compinit conda

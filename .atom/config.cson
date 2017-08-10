@@ -20,7 +20,6 @@
       "autocomplete-python"
       "sass-autocompile"
     ]
-    excludeVcsIgnoredPaths: false
     ignoredNames: [
       ".DS_Store"
       ".git"
@@ -60,6 +59,7 @@
     nodeSassPath: "/Users/danielfrg/workspace/node_modules/.bin/"
   "tree-view":
     hideIgnoredNames: true
+    hideVcsIgnoredFiles: false
     showOnRightSide: true
     squashDirectoryNames: true
   welcome:
