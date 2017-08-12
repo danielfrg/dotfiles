@@ -49,3 +49,4 @@ cask 'virtualbox'
 cask 'licecap'
 
 cask 'caskroom/fonts/font-hack'
+cask 'font-hack-nerd-font'
