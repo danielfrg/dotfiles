@@ -202,9 +202,11 @@
 	<key>MaxVertically</key>
 	<false/>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/workspace/dotfiles/iterm2/preferences</string>
+	<string>~/Documents</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
 	<string>{712, 459}</string>
+	<key>NSNavPanelExpandedSizeForSaveMode</key>
+	<string>{712, 448}</string>
 	<key>NSQuotedKeystrokeBinding</key>
 	<string></string>
 	<key>NSRepeatCountBinding</key>
@@ -250,9 +252,9 @@
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>908 438 796 473 0 0 1440 878 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 21 2538 1397 0 0 2560 1418 </string>
+	<string>0 15 1433 863 0 0 1440 878 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>206 120 665 502 0 0 1440 878 </string>
+	<string>232 273 1921 1072 0 0 2560 1418 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1466,6 +1468,8 @@
 	<false/>
 	<key>PasteFromClipboard</key>
 	<true/>
+	<key>PasteTabToStringTabStopSize</key>
+	<integer>4</integer>
 	<key>PointerActions</key>
 	<dict>
 		<key>Button,1,1,,</key>
@@ -1520,7 +1524,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-05-19T16:54:30Z</date>
+	<date>2017-09-07T15:40:11Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>ShowBookmarkName</key>

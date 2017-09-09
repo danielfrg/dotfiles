@@ -58,7 +58,7 @@ ln -sf $(pwd)/.gitignore_global ~/.gitignore_global
 ln -sf $(pwd)/.tmux.conf ~/.tmux.conf
 ```
 
-### sshr
+### sshrc
 
 ```
 ln -sf $(pwd)/.sshrc ~/.sshrc

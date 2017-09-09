@@ -1,4 +1,4 @@
-code --install-extension PKief.material-icon-theme
+# code --install-extension PKief.material-icon-theme
 code --install-extension donjayamanne.python
 code --install-extension lukehoban.Go
 code --install-extension ms-vscode.Theme-TomorrowKit

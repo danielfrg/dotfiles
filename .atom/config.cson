@@ -34,7 +34,6 @@
     titleBar: "custom"
   editor:
     fontFamily: "Hack"
-    fontSize: 15
     invisibles: {}
     preferredLineLength: 120
     showIndentGuide: true
@@ -61,6 +60,6 @@
     hideIgnoredNames: true
     hideVcsIgnoredFiles: false
     showOnRightSide: true
-    squashDirectoryNames: true
+    squashDirectoryNames: false
   welcome:
     showOnStartup: false

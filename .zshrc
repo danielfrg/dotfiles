@@ -10,7 +10,7 @@ DISABLE_AUTO_UPDATE=true
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(osx base aliases z fzf git golang2 docker2 java rsync2 imgcat)
+plugins=(osx base aliases z fzf git golang2 docker2 java conda imgcat)
 
 # User configuration
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"

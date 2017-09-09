@@ -1,4 +1,4 @@
-echo "sshrc loaded :)";
+echo "sshrc loaded";
 
 source $SSHHOME/.sshrc.d/aliases.sh
 
