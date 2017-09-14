@@ -1,6 +1,9 @@
-# code --install-extension PKief.material-icon-theme
+# code --list-extensions
+code --install-extension PKief.material-icon-theme
+code --install-extension PeterJausovec.vscode-docker
 code --install-extension donjayamanne.python
 code --install-extension lukehoban.Go
+code --install-extension mauve.terraform
 code --install-extension ms-vscode.Theme-TomorrowKit
 code --install-extension redhat.java
 code --install-extension tht13.python

@@ -1,5 +1,6 @@
 // Place your settings in this file to overwrite the default settings
 {
+    "editor.disableTranslate3d": true,
     "go.lintOnSave": true,
     "go.vetOnSave": true,
     "go.formatOnSave": true,
@@ -18,6 +19,7 @@
     "vim.easymotion": true,
     // "vim.useSolidBlockCursor": true,
     "vim.incsearch": true,
+    "vim.overrideCopy": false,
     "vim.useSystemClipboard": true,
     "vim.useCtrlKeys": true,
     "vim.hlsearch": true,

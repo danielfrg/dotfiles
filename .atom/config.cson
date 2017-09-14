@@ -48,7 +48,7 @@
     flakeErrors: true
     maxLineLength: 120
   "linter-pylint":
-    executable: "/Users/danielfrg/anaconda/bin/pylint"
+    executable: "/Users/danielfrg/anaconda/envs/blog/bin/pylint"
   nbviewer:
     jupyterConvertBin: "/Users/danielfrg/anaconda/bin/jupyter-nbconvert"
   "one-dark-ui": {}
@@ -58,7 +58,7 @@
     nodeSassPath: "/Users/danielfrg/workspace/node_modules/.bin/"
   "tree-view":
     hideIgnoredNames: true
-    hideVcsIgnoredFiles: false
+    hideVcsIgnoredFiles: true
     showOnRightSide: true
     squashDirectoryNames: false
   welcome:
