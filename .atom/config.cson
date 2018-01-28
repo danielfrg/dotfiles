@@ -2,6 +2,9 @@
   "atom-beautify":
     general:
       _analyticsUserId: "fe65d581-8d0a-4297-bb97-847c4c758ba5"
+  "atom-ide-ui":
+    use:
+      "atom-ide-diagnostics-ui": false
   "atom-package-deps":
     ignored: [
       "linter"
@@ -19,6 +22,7 @@
     disabledPackages: [
       "autocomplete-python"
       "sass-autocompile"
+      "python-tools"
     ]
     ignoredNames: [
       ".DS_Store"
@@ -33,7 +37,6 @@
     ]
     titleBar: "custom"
   editor:
-    fontFamily: "Hack"
     invisibles: {}
     preferredLineLength: 120
     showIndentGuide: true
@@ -58,7 +61,6 @@
     nodeSassPath: "/Users/danielfrg/workspace/node_modules/.bin/"
   "tree-view":
     hideIgnoredNames: true
-    hideVcsIgnoredFiles: true
     showOnRightSide: true
     squashDirectoryNames: false
   welcome:

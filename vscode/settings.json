@@ -1,6 +1,7 @@
 // Place your settings in this file to overwrite the default settings
 {
     "editor.disableTranslate3d": true,
+    "window.zoomLevel": 0,
     "go.lintOnSave": true,
     "go.vetOnSave": true,
     "go.formatOnSave": true,
@@ -11,7 +12,7 @@
     "go.autocompleteUnimportedPackages": true,
     "python.venvPath": "~/anaconda/envs",
     "python.formatting.provider": "yapf",
-    "workbench.sideBar.location": "right",
+    "workbench.sideBar.location": "left",
     "editor.fontSize": 15,
     "editor.fontFamily": "Hack, Menlo, Monaco, 'Courier New', monospace",
     "files.autoSave": "onFocusChange",
