@@ -108,5 +108,5 @@ vim +PluginInstall +qall
 ### gnupg
 
 ```
-ln -sF $(pwd)/Google Drive/apps/gnupg ~/.gnupg
+ln -sF ~/Google Drive/apps/gnupg ~/.gnupg
 ```
