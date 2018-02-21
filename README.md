@@ -105,7 +105,11 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 vim +PluginInstall +qall
 ```
 
-### gnupg
+### iterm
+
+In the iTerm2 preferences point to use a file from `/Users/danielfrg/workspace/dotfiles/iterm2/preferences`
+
+### gpg
 
 ```
 ln -sF ~/Google Drive/apps/gnupg ~/.gnupg
