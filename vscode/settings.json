@@ -44,5 +44,6 @@
     ],
     "workbench.iconTheme": "material-icon-theme",
     "workbench.colorTheme": "Tomorrow Night Eighties",
-    "vim.disableAnnoyingNeovimMessage": true
+    "vim.disableAnnoyingNeovimMessage": true,
+    "git.autofetch": true
 }
