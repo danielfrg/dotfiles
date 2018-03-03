@@ -1,6 +1,10 @@
 .  ~/anaconda/etc/profile.d/conda.sh
 conda activate base
 
+function conda_prompt_info() {
+    echo "(%{$fg[green]%}conda%{$reset_color%}:$CONDA_DEFAULT_ENV)"
+}
+
 # export PATH=$HOME/anaconda/bin:$PATH
 
 # # This is slow to create a new terminal? :S

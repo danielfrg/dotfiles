@@ -20,7 +20,7 @@ bindkey '\e\e[D' backward-word
 
 # GCP
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
-# Slow
+# next line is slow :S
 # source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
 
 # NPM
@@ -40,3 +40,6 @@ export AWS_DEFAULT_REGION=$(read_aws_credentials_key default region)
 export TF_VAR_aws_access_key_id=$AWS_ACCESS_KEY_ID
 export TF_VAR_aws_secret_access_key=$AWS_SECRET_ACCESS_KEY
 export TF_VAR_aws_region=$AWS_DEFAULT_REGION
+
+# kube-ps1 prompt
+source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"

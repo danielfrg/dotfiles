@@ -42,7 +42,8 @@ alias untar='tar xvf'
 
 # Replacements
 alias ssh=sshrc
-alias make=mmake
+# alias make=mmake
 
 # Development
 alias ec2pubips="aws ec2 describe-instances --query 'Reservations[*].Instances[*].{A_PUB:PublicIpAddress, B_PRIV:NetworkInterfaces[0].PrivateDnsName}' --output text"
+alias kubeclt=kubectl

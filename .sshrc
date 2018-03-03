@@ -1,7 +1,4 @@
-echo "sshrc loaded";
-
 source $SSHHOME/.sshrc.d/aliases.sh
-
 export VIMINIT="let \$MYVIMRC='$SSHHOME/.sshrc.d/.vimrc' | source \$MYVIMRC"
-
 alias tmux='tmux -f $SSHHOME/.sshrc.d/.tmux.conf'
+echo "sshrc loaded";

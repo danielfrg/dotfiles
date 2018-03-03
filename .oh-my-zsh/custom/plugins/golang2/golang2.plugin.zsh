@@ -13,7 +13,7 @@ gopathhere() {
     echo GOBIN=$GOBIN
 }
 
-gotoolsinstall() {
+goinstalltools() {
     local old_path=$PATH
     local old_go_path=$GOPATH
     export GOPATH=$tools_dir
