@@ -1,10 +1,14 @@
 # dotfiles
 
-## Basic
+## Install
 
 ### 1. Homebrew
 
-[Homebrew](http://brew.sh/): `ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+[Homebrew](http://brew.sh/):
+
+```
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
 
 ### 2. Clone repo
 
@@ -22,58 +26,19 @@ pbcopy < ~/.ssh/id_rsa.pub
 
 Now can clone the repo: `git clone git@github.com:danielfrg/dotfiles.git`
 
-### 3. Brew packages
-
-Install: `brew bundle`
-
-## Others
-
-### python
+### 3. make
 
 ```
-ln -sF $(pwd)/.pylintrc ~/.pylintrc
-ln -sF $(pwd)/.condarc ~/.condarc
+make
 ```
 
-### ohmyzsh
+### 4. Manual steps
 
-```
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+#### iterm
 
-ln -sf $(pwd)/.zshrc ~/.zshrc
-rm -rf ~/.oh-my-zsh/custom/plugins
-ln -sF $(pwd)/.oh-my-zsh/custom/plugins ~/.oh-my-zsh/custom
-```
+In the iTerm2 preferences point to use a file from `/Users/danielfrg/workspace/dotfiles/iterm2/preferences`
 
-### git
-
-```
-ln -sf $(pwd)/.gitconfig ~/.gitconfig
-ln -sf $(pwd)/.gitignore_global ~/.gitignore_global
-```
-
-### tmux
-
-```
-ln -sf $(pwd)/.tmux.conf ~/.tmux.conf
-```
-
-### sshrc
-
-```
-ln -sf $(pwd)/.sshrc ~/.sshrc
-ln -sf $(pwd)/.sshrc.d ~/.sshrc.d
-```
-
-### vscode
-
-```
-bash vscode/extensions.sh
-
-ln -sf $(pwd)/vscode/settings.json ~/Library/Application\ Support/Code/User/settings.json
-ln -sf $(pwd)/vscode/keybindings.json ~/Library/Application\ Support/Code/User/keybindings.json
-ln -sf $(pwd)/vscode/snippets/ ~/Library/Application\ Support/Code/User/snippets
-```
+## Legacy
 
 ### atom
 
@@ -93,24 +58,4 @@ pushd ~/workspace/atom-nbviewer
 apm install
 popd
 ln -sF ~/workspace/atom-nbviewer ~/.atom/packages/nbviewer
-```
-
-### vi
-
-```
-ln -sF $(pwd)/.vim ~/.vim
-ln -sf $(pwd)/.vimrc ~/.vimrc
-
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-vim +PluginInstall +qall
-```
-
-### iterm
-
-In the iTerm2 preferences point to use a file from `/Users/danielfrg/workspace/dotfiles/iterm2/preferences`
-
-### gpg
-
-```
-ln -sF ~/Google Drive/apps/gnupg ~/.gnupg
 ```

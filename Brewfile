@@ -5,7 +5,6 @@ brew 'gnu-sed', args: ['with-default-names']
 
 brew 'wget'
 brew 'curl', args: ['with-openssl']
-link 'xctool', args: ['force']
 brew 'httpie'
 brew 'zsh'
 brew 'git'

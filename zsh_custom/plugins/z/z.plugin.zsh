@@ -1,4 +1,4 @@
-. /Users/danielfrg/.oh-my-zsh/custom/plugins/z/z.sh
+. $ZSH_CUSTOM/plugins/z/z.sh
 
 unalias z
 z() {

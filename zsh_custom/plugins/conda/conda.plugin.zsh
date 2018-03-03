@@ -7,7 +7,7 @@ function conda_prompt_info() {
 
 # export PATH=$HOME/anaconda/bin:$PATH
 
-# # This is slow to create a new terminal? :S
+# # This is slow :S
 # # mydir=${0:a:h}
 # # source $mydir/conda_auto_env.sh
 # # autoload -U add-zsh-hook

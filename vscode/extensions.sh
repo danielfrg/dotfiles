@@ -1,10 +1,12 @@
 # code --list-extensions
 code --install-extension PKief.material-icon-theme
 code --install-extension PeterJausovec.vscode-docker
-code --install-extension donjayamanne.python
 code --install-extension lukehoban.Go
 code --install-extension mauve.terraform
+code --install-extension ms-python.python
 code --install-extension ms-vscode.Theme-TomorrowKit
 code --install-extension redhat.java
+code --install-extension searKing.preview-vscode
 code --install-extension tht13.python
 code --install-extension vscodevim.vim
+code --install-extension wholroyd.jinja
