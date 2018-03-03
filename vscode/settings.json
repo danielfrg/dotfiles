@@ -18,12 +18,15 @@
     "files.autoSave": "onFocusChange",
     "files.insertFinalNewline": true,
     "vim.easymotion": true,
-    // "vim.useSolidBlockCursor": true,
+    "vim.useSolidBlockCursor": true,
     "vim.incsearch": true,
     "vim.overrideCopy": false,
     "vim.useSystemClipboard": true,
     "vim.useCtrlKeys": true,
     "vim.hlsearch": true,
+    "vim.handleKeys": {
+        "<C-d>": true
+    },
     "vim.insertModeKeyBindings": [
         {
             "before": ["j","k"],
@@ -42,8 +45,8 @@
             ]
         }
     ],
+    "vim.disableAnnoyingNeovimMessage": true,
     "workbench.iconTheme": "material-icon-theme",
     "workbench.colorTheme": "Tomorrow Night Eighties",
-    "vim.disableAnnoyingNeovimMessage": true,
-    "git.autofetch": true
+    "git.autofetch": false 
 }
