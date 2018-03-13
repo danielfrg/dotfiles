@@ -1,32 +1,46 @@
+# Core
 brew 'coreutils'
 brew 'moreutils'
 brew 'findutils'
 brew 'gnu-sed', args: ['with-default-names']
 
-brew 'wget'
-brew 'curl', args: ['with-openssl']
-brew 'httpie'
+# Fancy bash stuff
 brew 'zsh'
-brew 'git'
-brew 'tmux'
-brew 'fzf'
-brew 'unp'
-brew 'gnupg'
-brew 'sshrc'
+brew 'ack'
 brew 'trash'
 brew 'thefuck'
 brew 'watch'
 brew 'tldr'
+brew 'fzf'
 brew 'mobile-shell'
+
+# Install download utilities.
+brew 'wget'
+brew 'curl', args: ['with-openssl']
+brew 'httpie'
+brew 'youtube-dl'
+
+# General dev
+brew 'gnupg'
+brew 'git'
+brew 'tmux'
+brew 'unp'
+brew 'sshrc'
 brew 'terraform'
+brew 'bazel'
+brew 'pandoc'
+
+# Languages
 brew 'go'
+brew 'dep'
 brew 'node'
 brew 'yarn'
-brew 'bazel'
 
+# k8s
 brew 'kubectx'
 brew 'draft'
 
+# Casks
 tap 'caskroom/cask'
 tap 'caskroom/versions'
 
@@ -37,7 +51,7 @@ cask 'vlc'
 cask 'google-chrome'
 cask 'google-drive'
 cask 'firefox'
-cask 'keyboard-maestro'
+cask 'keyboard-maestro-7'
 cask 'clipmenu'
 cask 'keka'
 cask 'spotify'

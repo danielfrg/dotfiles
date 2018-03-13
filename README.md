@@ -2,45 +2,35 @@
 
 ## Install
 
-### 1. Homebrew
-
-[Homebrew](http://brew.sh/):
+Add SSH key to `~/.ssh/id_rsa`
 
 ```
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-```
-
-### 2. Clone repo
-
-Create [ssh key](https://help.github.com/articles/generating-ssh-keys):
-
-```
-ssh-keygen -t rsa -C "your_email@example.com"
+# Add ssh key
 ssh-add ~/.ssh/id_rsa
+
+# Clone the repo:
+git clone git@github.com:danielfrg/dotfiles.git
 ```
 
-Copy and paste the public key into [github account](https://github.com/settings/ssh)
-```
-pbcopy < ~/.ssh/id_rsa.pub
-```
+Docs:
+- [Github ssh keys](https://help.github.com/articles/generating-ssh-keys)
 
-Now can clone the repo: `git clone git@github.com:danielfrg/dotfiles.git`
-
-### 3. make
+### make
 
 ```
-make
+make install
+make link
 ```
 
-### 4. Manual steps
+### Manual steps
 
 #### iterm
 
 In the iTerm2 preferences point to use a file from `/Users/danielfrg/workspace/dotfiles/iterm2/preferences`
 
-## Legacy
+### Legacy
 
-### atom
+#### atom
 
 ```bash
 bash .atom/packages.sh

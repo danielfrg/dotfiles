@@ -1,5 +1,14 @@
-all: brew python zsh git tmux sshrc vscode
+install: xcode homebrew
 
+xcode:
+	xcode-select --install
+.PHONY:xcode
+
+homebrew:
+	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+.PHONY: homebrew
+
+link: brew python zsh git tmux sshrc vscode
 
 brew:  ## brew
 	brew bundle

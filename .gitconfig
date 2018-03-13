@@ -12,22 +12,23 @@
 	abbrev = 7
 
 [alias]
-    commiti = commit --interactive
-    diff = diff --color-words
     st = status
 	br = branch
 	ci = commit
     co = checkout
     gr = grep -i --color -n -E
+    commiti = commit --interactive
+    diff = diff --color-words
 	rebase = rebase -i
-    logl = log --pretty=oneline --abbrev-commit
-    lg = log --graph --topo-order --use-mailmap --stat --decorate
+    log = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 	prune = fetch --prune
 	undo = reset --soft HEAD^
 	stash-all = stash save --include-untracked
-	glog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+
 [commit]
 	gpgsign = true
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
