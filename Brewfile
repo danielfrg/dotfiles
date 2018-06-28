@@ -13,6 +13,7 @@ brew 'watch'
 brew 'tldr'
 brew 'fzf'
 brew 'mobile-shell'
+brew 'jq'
 
 # Install download utilities.
 brew 'wget'
@@ -38,14 +39,14 @@ brew 'yarn'
 
 # k8s
 brew 'kubectx'
-brew 'draft'
+# brew 'draft'
 
 # Casks
 tap 'caskroom/cask'
 tap 'caskroom/versions'
 
 brew 'caskroom/cask/brew-cask'
-cask 'alfred'
+# cask 'alfred'
 cask '1password'
 cask 'vlc'
 cask 'google-chrome'
@@ -58,8 +59,6 @@ cask 'spotify'
 cask 'silverlight'
 cask 'smoothmouse'
 
-cask 'atom'
-cask 'sublime-text'
 cask 'visual-studio-code'
 cask 'iterm2'
 cask 'java'

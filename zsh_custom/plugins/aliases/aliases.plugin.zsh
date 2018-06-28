@@ -15,7 +15,6 @@ alias cp='cp -i'
 # move file interactive
 alias mv='mv -i'
 
-alias k=clear
 alias l='ls -lAhG'
 alias ls='ls -lAhG'
 alias rm='trash'
@@ -29,6 +28,11 @@ alias it='git'
 alias gi='git'
 alias tit='git'
 alias sl='ls'
+alias k='kubectl'
+alias kubecl='kubectl'
+alias kubect='kubectl'
+alias kubelt='kubectl'
+alias kubeclt='kubectl'
 
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
@@ -43,3 +47,10 @@ alias untar='tar xvf'
 # Replacements
 alias ssh=sshrc
 # alias make=mmake
+
+# Linux like commands
+alias md5sum='md5 -r'
+alias sha256sum="shasum -a 256"
+
+# Helpers
+whoseport() { lsof -i ":$1" | grep LISTEN }

@@ -39,5 +39,5 @@ PROMPT=$'%{$fg[cyan]%}%~%{$reset_color%} $(conda_prompt_info) $(kube_ps1) $(git_
 function echo_blank() {
   echo
 }
-preexec_functions+=echo_blank
+# preexec_functions+=echo_blank  # Empty line before output? why? dont know...
 precmd_functions+=echo_blank

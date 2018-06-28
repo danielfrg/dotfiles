@@ -1,5 +1,6 @@
 // Place your settings in this file to overwrite the default settings
 {
+    "explorer.openEditors.visible": 0,
     "editor.disableTranslate3d": true,
     "window.zoomLevel": 0,
     "go.lintOnSave": true,
@@ -48,5 +49,6 @@
     "vim.disableAnnoyingNeovimMessage": true,
     "workbench.iconTheme": "material-icon-theme",
     "workbench.colorTheme": "Tomorrow Night Eighties",
-    "git.autofetch": false 
+    "git.autofetch": false,
+    "liveSassCompile.settings.generateMap": false
 }
