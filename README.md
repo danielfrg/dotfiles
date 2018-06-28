@@ -26,7 +26,7 @@ make link
 
 #### iterm
 
-In the iTerm2 preferences point to use a file from `/Users/danielfrg/workspace/dotfiles/iterm2/preferences`
+In the iTerm2 preferences point to use a file from `~/workspace/dotfiles/iterm2/preferences`
 
 ### Legacy
 

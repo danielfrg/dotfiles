@@ -43,11 +43,13 @@ brew 'yarn'
 
 # k8s
 brew 'kubectx'
+brew 'kube-ps1'
 # brew 'draft'
 
 # Casks
 
 cask 'java8'
+cask 'docker'
 
 # cask 'alfred'
 cask '1password'

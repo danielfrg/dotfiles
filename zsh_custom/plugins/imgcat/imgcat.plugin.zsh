@@ -1,1 +1,1 @@
-alias imgcat='bash /Users/danielfrg/.oh-my-zsh/custom/plugins/imgcat/imgcat.sh'
+alias imgcat='bash /Users/drodriguez/.oh-my-zsh/custom/plugins/imgcat/imgcat.sh'
