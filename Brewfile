@@ -1,3 +1,7 @@
+# Taps
+tap 'caskroom/cask'
+tap 'caskroom/versions'
+
 # Core
 brew 'coreutils'
 brew 'moreutils'
@@ -42,22 +46,20 @@ brew 'kubectx'
 # brew 'draft'
 
 # Casks
-tap 'caskroom/cask'
-tap 'caskroom/versions'
 
-brew 'caskroom/cask/brew-cask'
+cask 'java8'
+
 # cask 'alfred'
 cask '1password'
 cask 'vlc'
 cask 'google-chrome'
-cask 'google-drive'
+cask 'google-backup-and-sync'
 cask 'firefox'
-cask 'keyboard-maestro-7'
-cask 'clipmenu'
+cask 'keyboard-maestro7'
+#cask 'clipmenu'
 cask 'keka'
 cask 'spotify'
 cask 'silverlight'
-cask 'smoothmouse'
 
 cask 'visual-studio-code'
 cask 'iterm2'
