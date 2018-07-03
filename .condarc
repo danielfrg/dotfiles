@@ -1,6 +1,10 @@
 changeps1: False
 
+create_default_packages:
+  - pip
+  - ipython
+  - pylint
+
 channels:
 #  - conda-forge
   - defaults
-
