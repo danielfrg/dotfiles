@@ -53,4 +53,6 @@
         "command": "editor.action.insertCursorBelow",
         "when": "editorTextFocus"
    },
+    { "key": "cmd+\\",          "command": "workbench.action.focusActiveEditorGroup", "when": "terminalFocus" },
+    { "key": "cmd+\\",          "command": "workbench.action.terminal.focus", "when": "!terminalFocus" },
 ]

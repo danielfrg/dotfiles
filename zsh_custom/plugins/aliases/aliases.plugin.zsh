@@ -34,6 +34,7 @@ alias kubect='kubectl'
 alias kubelt='kubectl'
 alias kubeclt='kubectl'
 
+
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
 
@@ -54,3 +55,4 @@ alias sha256sum="shasum -a 256"
 
 # Helpers
 whoseport() { lsof -i ":$1" | grep LISTEN }
+alias nope="git reset HEAD --hard && git clean -fd"
