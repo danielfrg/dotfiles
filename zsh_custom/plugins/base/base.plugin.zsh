@@ -14,3 +14,6 @@ bindkey '^[^[[D' backward-word
 bindkey '^[^[[C' forward-word
 bindkey '\e\e[C' forward-word
 bindkey '\e\e[D' backward-word
+
+## For some stuff that want at startup but not commited
+source ~/.zshrc.local
