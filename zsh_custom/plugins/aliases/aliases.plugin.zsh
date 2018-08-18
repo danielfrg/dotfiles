@@ -33,7 +33,7 @@ alias kubecl='kubectl'
 alias kubect='kubectl'
 alias kubelt='kubectl'
 alias kubeclt='kubectl'
-
+alias kuebctl='kubectl'
 
 # Enable aliases to be sudo’ed
 alias sudo='sudo '

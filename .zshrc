@@ -12,7 +12,7 @@ ZSH_CUSTOM=~/workspace/dotfiles/zsh_custom
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(osx base aliases z fzf git imgcat pipenv golang2 java docker2 k8s cloud rsync2)
+plugins=(osx base aliases z fzf git imgcat conda golang2 java docker2 k8s cloud rsync2)
 
 # User configuration
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
@@ -34,7 +34,7 @@ source $ZSH/oh-my-zsh.sh
 # Looks like: ~ (conda:base) (kube:context) git:(master) X
 # Blue location: %{$fg[cyan]%}%c%{$reset_color%}
 # PROMPT=$'%{$fg[cyan]%}%~%{$reset_color%} $(conda_prompt_info) $(kube_ps1) $(git_prompt_info)\n${ret_status} %{$reset_color%}'
-PROMPT=$'%{$fg[cyan]%}%~%{$reset_color%} $(virtualenv_prompt_info) $(kube_ps1) $(git_prompt_info)\n${ret_status} %{$reset_color%}'
+PROMPT=$'%{$fg[cyan]%}%~%{$reset_color%} $(conda_prompt_info) $(kube_ps1) $(git_prompt_info)\n${ret_status} %{$reset_color%}'
 
 # Empty line after output
 function echo_blank() {

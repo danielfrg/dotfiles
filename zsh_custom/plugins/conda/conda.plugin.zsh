@@ -1,25 +1,22 @@
-.  ~/anaconda/etc/profile.d/conda.sh
+.  ~/workspace/conda/etc/profile.d/conda.sh
 conda activate base
 
 function conda_prompt_info() {
-    echo "(%{$fg[green]%}conda%{$reset_color%}:$CONDA_DEFAULT_ENV)"
+    echo "(%{$fg[yellow]%}py%{$reset_color%}:$CONDA_DEFAULT_ENV)"
 }
 
-# export PATH=$HOME/anaconda/bin:$PATH
+fpath+=$PWD
+compinit conda
 
-# # This is slow :S
-# # mydir=${0:a:h}
-# # source $mydir/conda_auto_env.sh
-# # autoload -U add-zsh-hook
-# # add-zsh-hook chpwd conda_auto_env
-
-# fpath+=$PWD
-# compinit conda
+thisdir=${0:a:h}
+source $thisdir/conda_auto_env.sh
+autoload -U add-zsh-hook
+add-zsh-hook chpwd conda_auto_env
 
 # conda_root_dir() {
-#     # This works but its slow, just hard coded :)
+#     # This works but its slow so just hard coded :)
 #     # ANACONDA=$(conda info | grep root | awk 'BEGIN { FS = " " } ; { print $4 }' | sed 's/^[ \t]*//;s/[ \t]*$//')
-#     ANACONDA="$HOME/anaconda"
+#     ANACONDA="$HOME/workspace/conda"
 # }
 
 # lsvirtualenvs() {
