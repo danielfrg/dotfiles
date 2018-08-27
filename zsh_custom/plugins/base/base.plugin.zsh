@@ -26,7 +26,7 @@
 #########################
 
 function powerline_precmd() {
-    PS1="$(~/Downloads/powerline-go -shell zsh -modules cwd,venv,kube,git,exit -error $? -newline -shorten-gke-names)"
+    PS1="$(/usr/local/bin/powerline-go -shell zsh -modules cwd,venv,kube,git,exit -error $? -newline -shorten-gke-names)"
 }
 
 function install_powerline_precmd() {
