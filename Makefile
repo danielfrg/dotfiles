@@ -1,4 +1,4 @@
-install: xcode homebrew
+install: xcode homebrew powerline
 
 xcode:
 	xcode-select --install
@@ -7,6 +7,9 @@ xcode:
 homebrew:
 	/usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 .PHONY: homebrew
+
+powerline:
+	curl https://github.com/justjanne/powerline-go/releases/download/v1.11.0/powerline-go-darwin-amd64 -o /usr/local/bin/powerline-go
 
 link: brew python zsh git tmux sshrc vscode
 
@@ -44,7 +47,6 @@ vscode:  ## vscode
 	ln -sf $(CURDIR)/vscode/keybindings.json ~/Library/Application\ Support/Code/User/keybindings.json
 	ln -sf $(CURDIR)/vscode/snippets/ ~/Library/Application\ Support/Code/User/snippets
 .PHONY: vscode
-
 
 vi:  ## vi
 	ln -sF $(CURDIR)/.vim ~/.vim; \

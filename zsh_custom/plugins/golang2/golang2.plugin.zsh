@@ -1,5 +1,5 @@
 local tools_dir=~/workspace/go
-# export PATH=$tools_dir/bin:$PATH
+export PATH=$tools_dir/bin:$PATH
 
 export GOPATH=~/workspace/go
 export PATH=$GOPATH/bin:$PATH

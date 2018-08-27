@@ -19,26 +19,3 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
-
-#########################
-# PROMPT
-# Has to be done after sourcing oh-my-zsh
-#########################
-
-# Looks like: danielfrg at host in ~ (with some spaces)
-# Blue user: %{$fg[blue]%}%n%{$reset_color%}
-# Green host: %{$fg[green]%}%m%{$reset_color%}
-# Blue location: %{$fg[cyan]%}%c%{$reset_color%}
-# PROMPT=$'%{$fg[blue]%}%n%{$reset_color%} at %{$fg[green]%}%m%{$reset_color%} in %{$fg[cyan]%}%~%{$reset_color%} $(git_prompt_info)\n${ret_status} %{$reset_color%}'
-
-# Looks like: ~ (conda:base) (kube:context) git:(master) X
-# Blue location: %{$fg[cyan]%}%c%{$reset_color%}
-# PROMPT=$'%{$fg[cyan]%}%~%{$reset_color%} $(conda_prompt_info) $(kube_ps1) $(git_prompt_info)\n${ret_status} %{$reset_color%}'
-PROMPT=$'%{$fg[cyan]%}%~%{$reset_color%} $(conda_prompt_info) $(kube_ps1) $(git_prompt_info)\n${ret_status} %{$reset_color%}'
-
-# Empty line after output
-function echo_blank() {
-  echo
-}
-# preexec_functions+=echo_blank  # Empty line before output? why? dont know...
-precmd_functions+=echo_blank
