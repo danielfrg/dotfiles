@@ -35,16 +35,20 @@ export PATH=/usr/local/opt/coreutils/libexec/bin:$PATH        # Fast
 # export PATH=$(brew --prefix moreutils)/libexec/gnubin:$PATH    # Slow
 export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH        # Fast
 
-bindkey '[C' forward-word
-bindkey '[D' backward-word
-bindkey '^[^[[D' backward-word
-bindkey '^[^[[C' forward-word
-bindkey '\e\e[C' forward-word
-bindkey '\e\e[D' backward-word
+# This are just bind keys so that they can later be mapped into iterm key combinations
+# List all binds with: zle -al
+bindkey "^[fw" forward-word       # Bind this to ctrl-(left arrow) = send escape sequence `w`
+bindkey "^[bw" backward-word      # Bind this to ctrl-(right arrow) = send escape sequence `b`
+bindkey "^[bl" beginning-of-line  # Bind this to cmd-(left arrow) = send escape sequence `bl`
+bindkey "^[el" end-of-line        # Bind this to cmd-(right arrow) = send escape sequence `el`
+bindkey "^[dw" delete-word                 # Bind this to option(alt)-d = send escape sequence `dw`
+bindkey "^[dwb" backward-delete-word       # Bind this to ctrl-w = send escape sequence `dwb`
 
+#########################
+# ALIASES
+#########################
 
-
-# Easier navigation: .., ..., ...., .....
+# Easier navigation
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
@@ -93,7 +97,7 @@ alias untar='tar xvf'
 
 # Replacements
 alias rm='trash'
-alias ssh=sshrc
+alias ssh='sshrc'
 alias cat='bat'
 alias ping='prettyping --nolegend'
 alias top='htop'
