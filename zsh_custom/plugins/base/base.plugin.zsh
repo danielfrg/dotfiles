@@ -1,32 +1,13 @@
-
-#########################
-# PROMPT
-# Has to be done after sourcing oh-my-zsh
-#########################
-
-# Looks like: danielfrg at host in ~ (with some spaces)
-# Blue user: %{$fg[blue]%}%n%{$reset_color%}
-# Green host: %{$fg[green]%}%m%{$reset_color%}
-# Blue location: %{$fg[cyan]%}%c%{$reset_color%}
-# PROMPT=$'%{$fg[blue]%}%n%{$reset_color%} at %{$fg[green]%}%m%{$reset_color%} in %{$fg[cyan]%}%~%{$reset_color%} $(git_prompt_info)\n${ret_status} %{$reset_color%}'
-
-# Looks like: ~ (conda:base) (kube:context) git:(master) X
-# PROMPT=$'%{$fg[cyan]%}%~%{$reset_color%} $(conda_prompt_info) $(kube_ps1) $(git_prompt_info)\n${ret_status} %{$reset_color%}'
-
-# # Empty line after output
-# function echo_blank() {
-#   echo
-# }
-# # preexec_functions+=echo_blank  # Empty line before output? why? dont know...
-# precmd_functions+=echo_blank
-
+## For some stuff that want at startup but not commited
+source ~/.zshrc.local
 
 #########################
 # POWERLINE-GO
+# PROMPT REPLACEMENT
 #########################
 
 function powerline_precmd() {
-    PS1="$(/usr/local/bin/powerline-go -shell zsh -modules cwd,venv,kube,git,exit -error $? -newline -shorten-gke-names)"
+    PS1="$(/usr/local/bin/powerline-go -shell zsh -modules venv,kube,cwd,git,exit -error $? -newline -shorten-gke-names)"
 }
 
 function install_powerline_precmd() {
@@ -61,5 +42,70 @@ bindkey '^[^[[C' forward-word
 bindkey '\e\e[C' forward-word
 bindkey '\e\e[D' backward-word
 
-## For some stuff that want at startup but not commited
-source ~/.zshrc.local
+
+
+# Easier navigation: .., ..., ...., .....
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+
+# Shortcuts
+alias cdw='cd ~/workspace'
+alias work='cd ~/workspace'
+alias cddl="cd ~/Downloads"
+
+# copy file interactive
+alias cp='cp -i'
+
+# move file interactive
+alias mv='mv -i'
+
+# listing
+alias l='ls -lAhG'
+alias ls='ls -lAhG'
+
+alias grep='grep -i --color=always'
+alias fuck='eval $(thefuck $(fc -ln -1))'
+
+# Typos
+alias g='git'
+alias it='git'
+alias gi='git'
+alias tit='git'
+alias sl='ls'
+alias k='kubectl'
+alias kubecl='kubectl'
+alias kubect='kubectl'
+alias kubelt='kubectl'
+alias kubeclt='kubectl'
+alias kuebctl='kubectl'
+
+# Enable aliases to be sudo’ed
+alias sudo='sudo '
+
+# IP addresses
+alias pubip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias localip="sudo ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"
+
+# untar
+alias untar='tar xvf'
+
+# Replacements
+alias rm='trash'
+alias ssh=sshrc
+alias cat='bat'
+alias ping='prettyping --nolegend'
+alias top='htop'
+alias preview="fzf --preview 'bat --color \"always\" {}'"
+# add support for ctrl+o to open selected file in VS Code
+export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(code {})+abort'"
+
+# Linux like commands
+alias md5sum='md5 -r'
+alias sha256sum="shasum -a 256"
+
+# Helpers
+whoseport() { lsof -i ":$1" | grep LISTEN }
+alias nope="git reset HEAD --hard && git clean -fd"
+alias docker-transmission="open http://localhost:9091 && docker run -it -v ~/Downloads:/downloads -p 9091:9091 linuxserver/transmission"

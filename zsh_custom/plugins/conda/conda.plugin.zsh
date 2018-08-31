@@ -1,10 +1,11 @@
 .  ~/workspace/conda/etc/profile.d/conda.sh
 conda activate base
 
-function conda_prompt_info() {
-    echo "(%{$fg[yellow]%}py%{$reset_color%}:$CONDA_DEFAULT_ENV)"
-}
+# function conda_prompt_info() {
+#     echo "(%{$fg[yellow]%}py%{$reset_color%}:$CONDA_DEFAULT_ENV)"
+# }
 
+# Autocomplete
 fpath+=$PWD
 compinit conda
 

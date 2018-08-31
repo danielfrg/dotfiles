@@ -20,8 +20,8 @@ export TF_VAR_aws_secret_access_key=$AWS_SECRET_ACCESS_KEY
 export TF_VAR_aws_region=$AWS_DEFAULT_REGION
 
 ###############################################################################
-# AWS
+# Google Cloud
 ###############################################################################
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
-# next line is slow :S
+# next line is slow
 # source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'

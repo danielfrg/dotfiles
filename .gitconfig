@@ -18,13 +18,17 @@
     co = checkout
     gr = grep -i --color -n -E
     commiti = commit --interactive
-    diff = diff --color-words
+    # diff = diff --color-words
 	rebase = rebase -i
     log = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
     l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 	prune = fetch --prune
 	undo = reset --soft HEAD^
 	stash-all = stash save --include-untracked
+
+[pager]
+    diff = diff-so-fancy | less --tabs=1,5 -RFX
+    show = diff-so-fancy | less --tabs=1,5 -RFX
 
 [commit]
 	gpgsign = true
