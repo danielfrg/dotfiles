@@ -111,5 +111,4 @@ alias sha256sum="shasum -a 256"
 
 # Helpers
 whoseport() { lsof -i ":$1" | grep LISTEN }
-alias nope="git reset HEAD --hard && git clean -fd"
 alias docker-transmission="open http://localhost:9091 && docker run -it -v ~/Downloads:/downloads -p 9091:9091 linuxserver/transmission"
