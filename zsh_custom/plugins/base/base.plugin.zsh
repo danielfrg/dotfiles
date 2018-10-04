@@ -96,7 +96,7 @@ alias localip="sudo ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | gre
 alias untar='tar xvf'
 
 # Replacements
-alias rm='trash'
+# alias rm='trash'
 alias ssh='sshrc'
 alias cat='bat'
 alias ping='prettyping --nolegend'
