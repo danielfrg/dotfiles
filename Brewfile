@@ -49,6 +49,7 @@ brew 'yarn'
 # k8s
 brew 'kubectx'
 brew 'kube-ps1'
+brew 'kubernetes-helm'
 # brew 'draft'
 
 # Casks
