@@ -8,9 +8,13 @@ homebrew:  ## Install homebrew
 	/usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 .PHONY: homebrew
 
-powerline:  ##
-	@curl https://github.com/justjanne/powerline-go/releases/download/v1.11.0/powerline-go-darwin-amd64 -o /usr/local/bin/powerline-go -L
+powerline:  ## Download and install powerline
+	@curl -L https://github.com/justjanne/powerline-go/releases/download/v1.11.0/powerline-go-darwin-amd64 -o /usr/local/bin/powerline-go
 	@chmod +x /usr/local/bin/powerline-go
+
+up:  ## Download and install up
+	@curl -L https://github.com/akavel/up/releases/download/v0.3/up-darwin -o /usr/local/bin/up
+	@chmod +x /usr/local/bin/up
 
 brew:  ##
 	brew bundle
@@ -25,9 +29,9 @@ python:  ##
 
 jupyter:
 	@mkdir -p ~/.jupyter/
-	ln -sf $(CURDIR)/.jupyter/jupyter_notebook_config.py ~/.jupyter/jupyter_notebook_config.py
+	ln -sf $(CURDIR)/.jupyter/jupyter_notebook_config.py ~/.jupyter/jupyter_notebook_config.py && \
+	ln -sf $(CURDIR)/.jupyter/jupyter_notebook_config.json ~/.jupyter/jupyter_notebook_config.json
 .PHONY: jupyter
-
 
 zsh:  ##
 	bash -c "$$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"; \

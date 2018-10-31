@@ -1,7 +1,7 @@
 c = get_config()
 
 # The IP address the notebook server will listen on.
-c.NotebookApp.ip = "0.0.0.0"
+c.NotebookApp.ip = "127.0.0.1"
 
 ## Set the Access-Control-Allow-Origin header
 #
