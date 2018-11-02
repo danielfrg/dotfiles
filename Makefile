@@ -20,7 +20,7 @@ brew:  ##
 	brew bundle
 .PHONY: brew
 
-link: python zsh git tmux sshrc vscode jupyter  ## Create symlinks to the all the stuff
+link: python zsh git tmux sshrc vscode jupyter rstudio ## Create symlinks to the all the stuff
 
 python:  ##
 	ln -sF $(CURDIR)/.pylintrc ~/.pylintrc; \
@@ -32,6 +32,11 @@ jupyter:
 	ln -sf $(CURDIR)/.jupyter/jupyter_notebook_config.py ~/.jupyter/jupyter_notebook_config.py && \
 	ln -sf $(CURDIR)/.jupyter/jupyter_notebook_config.json ~/.jupyter/jupyter_notebook_config.json
 .PHONY: jupyter
+
+rstudio:  ##
+	@mkdir -p ~/.R
+	ln -sf $(CURDIR)/rstudio ~/.R/rstudio
+.PHONY: rstudio
 
 zsh:  ##
 	bash -c "$$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"; \
