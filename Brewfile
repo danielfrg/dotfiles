@@ -50,6 +50,7 @@ brew 'yarn'
 brew 'kubectx'
 brew 'kube-ps1'
 brew 'kubernetes-helm'
+brew 'txn2/tap/kubefwd'
 # brew 'draft'
 
 # Casks

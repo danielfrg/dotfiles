@@ -1,3 +1,5 @@
 {
-    "commentUncomment" : "Cmd+/"
+    "commentUncomment" : "Cmd+/",
+    "insertAssignmentOperator" : "Shift+Cmd+J",
+    "switchFocusSourceConsole" : "Cmd+\\"
 }
