@@ -110,5 +110,6 @@ alias md5sum='md5 -r'
 alias sha256sum="shasum -a 256"
 
 # Helpers
+exportpathhere() { export PATH=$(pwd):$PATH }
 whoseport() { lsof -i ":$1" | grep LISTEN }
 alias docker-transmission="open http://localhost:9091 && docker run -it -v ~/Downloads:/downloads -p 9091:9091 linuxserver/transmission"
