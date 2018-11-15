@@ -35,6 +35,9 @@ export PATH=/usr/local/opt/coreutils/libexec/bin:$PATH        # Fast
 # export PATH=$(brew --prefix moreutils)/libexec/gnubin:$PATH    # Slow
 export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH        # Fast
 
+# # Git and GPG
+# export GPG_TTY=$(tty)
+
 # This are just bind keys so that they can later be mapped into iterm key combinations
 # List all binds with: zle -al
 bindkey "^[fw" forward-word       # Bind this to ctrl-(left arrow) = send escape sequence `w`

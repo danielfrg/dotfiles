@@ -73,7 +73,9 @@ vi:  ##
 
 gpg:  ##
 	@gpg --list-keys
-	@echo "run `gpg --import` for the public and private keys in 1password"
+	@ln -sf $(CURDIR)/.gnupg/gpg.conf ~/.gnupg/gpg.conf
+	@ln -sf $(CURDIR)/.gnupg/gpg-agent.conf ~/.gnupg/gpg-agent.conf
+	@echo "Manually run 'gpg --import' for the public and private keys"
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?##.*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?##"; OFS="\t\t"}; {printf "\033[36m%-30s\033[0m %s\n", $$1, ($$2==""?"":$$2)}'

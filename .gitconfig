@@ -1,7 +1,7 @@
 [user]
 	name = Daniel Rodriguez
 	email = df.rodriguez143@gmail.com
-	signingkey = 8D222CABC39ED32B
+    signingkey = C39ED32B
 
 [push]
 	default = simple
@@ -43,3 +43,6 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+
+[tag]
+	forceSignAnnotated = true
