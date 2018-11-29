@@ -87,6 +87,9 @@ sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
 # Use `sudo mdutil -i off "/Volumes/foo"` to stop indexing any volume.
 sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
 
+# Don’t show recent applications in Dock
+defaults write com.apple.dock show-recents -bool false
+
 ###############################################################################
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input #
 ###############################################################################
