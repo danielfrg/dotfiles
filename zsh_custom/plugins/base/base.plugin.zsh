@@ -101,7 +101,7 @@ alias untar='tar xvf'
 # Replacements
 # alias rm='trash'
 alias ssh='sshrc'
-alias cat='bat'
+# alias cat='bat'
 alias ping='prettyping --nolegend'
 alias top='htop'
 alias preview="fzf --preview 'bat --color \"always\" {}'"
