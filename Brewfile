@@ -53,12 +53,13 @@ brew 'kubernetes-helm'
 brew 'txn2/tap/kubefwd'
 # brew 'draft'
 
+###################
 # Casks
 
 cask 'java8'
 cask 'docker'
 
-# cask 'alfred'
+cask 'alfred'
 cask '1password'
 cask 'vlc'
 cask 'google-chrome'
@@ -69,6 +70,10 @@ cask 'clipy'
 cask 'keka'
 cask 'spotify'
 cask 'silverlight'
+cask 'windscribe'
+cask 'soundflower'
+cask 'soundflowerbed'
+#cask 'licecap'
 
 cask 'visual-studio-code'
 cask 'iterm2'
@@ -81,6 +86,3 @@ cask 'slack'
 cask 'xquartz'
 cask 'ngrok'
 cask 'gpg-suite'
-cask 'soundflower'
-cask 'soundflowerbed'
-#cask 'licecap'
