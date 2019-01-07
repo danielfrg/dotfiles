@@ -35,7 +35,7 @@ export PATH=/usr/local/opt/coreutils/libexec/bin:$PATH        # Fast
 # export PATH=$(brew --prefix moreutils)/libexec/gnubin:$PATH    # Slow
 export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH        # Fast
 
-# # Git and GPG
+# Git and GPG
 # export GPG_TTY=$(tty)
 
 # This are just bind keys so that they can later be mapped into iterm key combinations
@@ -47,9 +47,41 @@ bindkey "^[el" end-of-line        # Bind this to cmd-(right arrow) = send escape
 bindkey "^[dw" delete-word                 # Bind this to option(alt)-d = send escape sequence `dw`
 bindkey "^[dwb" backward-delete-word       # Bind this to ctrl-w = send escape sequence `dwb`
 
+# History
+HISTCONTROL=ignoredups:ignorespace
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
 #########################
 # ALIASES
 #########################
+
+# List
+alias l='ls -lAhG'
+alias ls='ls -lAhG'
+alias ll='ls -lAhG'
+alias la='ls -lAhG'
+
+# Files
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+alias mkdir='mkdir -p' # -> Prevents accidentally clobbering files.
+
+alias h='history'
+alias j='jobs -l'
+alias which='type -a'
+alias path='echo -e ${PATH//:/\\n}'
+alias libpath='echo -e ${LD_LIBRARY_PATH//:/\\n}'
+alias grep='grep -i --color=always'
+alias fuck='eval $(thefuck $(fc -ln -1))'
+
+# Makes a more readable output.
+alias du='du -kh'
+alias df='df -kTh'
 
 # Easier navigation
 alias ..="cd .."
@@ -61,19 +93,6 @@ alias .....="cd ../../../.."
 alias cdw='cd ~/workspace'
 alias work='cd ~/workspace'
 alias cddl="cd ~/Downloads"
-
-# copy file interactive
-alias cp='cp -i'
-
-# move file interactive
-alias mv='mv -i'
-
-# listing
-alias l='ls -lAhG'
-alias ls='ls -lAhG'
-
-alias grep='grep -i --color=always'
-alias fuck='eval $(thefuck $(fc -ln -1))'
 
 # Typos
 alias g='git'
@@ -87,6 +106,21 @@ alias kubect='kubectl'
 alias kubelt='kubectl'
 alias kubeclt='kubectl'
 alias kuebctl='kubectl'
+
+# Git
+alias ga='git add'
+alias gp='git push'
+alias gl='git log'
+alias gs='git status'
+alias gd='git diff'
+alias gm='git commit -m'
+alias gma='git commit -am'
+alias gb='git branch'
+alias gc='git checkout'
+alias gra='git remote add'
+alias grr='git remote rm'
+alias gpu='git pull'
+alias gcl='git clone'
 
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
