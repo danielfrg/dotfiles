@@ -259,7 +259,7 @@
 			<key>AWDS Tab Option</key>
 			<string>Recycle</string>
 			<key>AWDS Window Directory</key>
-			<string>/Users/drodriguez/workspace</string>
+			<string>/Users/danielfrg/workspace</string>
 			<key>AWDS Window Option</key>
 			<string>Yes</string>
 			<key>Ambiguous Double Width</key>
@@ -861,7 +861,7 @@
 			<key>Window Type</key>
 			<integer>0</integer>
 			<key>Working Directory</key>
-			<string>/Users/drodriguez/workspace</string>
+			<string>/Users/danielfrg/workspace</string>
 		</dict>
 	</array>
 	<key>NoSyncHaveRequestedFullDiskAccess</key>
@@ -930,7 +930,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/drodriguez/workspace/dotfiles/iterm2/preferences</string>
+	<string>/Users/danielfrg/workspace/dotfiles/iterm2/preferences</string>
 	<key>Print In Black And White</key>
 	<true/>
 	<key>PromptOnQuit</key>

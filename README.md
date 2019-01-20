@@ -9,7 +9,8 @@ Add SSH key to `~/.ssh/id_rsa`
 ssh-add ~/.ssh/id_rsa
 
 # Clone the repo:
-git clone git@github.com:danielfrg/dotfiles.git
+mkdir -p ~/workspace
+git clone git@github.com:danielfrg/dotfiles.git ~/workspace/dotfiles
 ```
 
 Docs:
@@ -18,7 +19,9 @@ Docs:
 ### make
 
 ```
+make xcode
 make install
+make brew
 make link
 ```
 

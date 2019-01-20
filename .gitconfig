@@ -7,7 +7,7 @@
 	default = simple
 
 [core]
-	excludesfile = /Users/drodriguez/.gitignore_global
+	excludesfile = /Users/danielfrg/.gitignore_global
 	quotepath = false
 	abbrev = 7
 

@@ -68,6 +68,6 @@ c.NotebookApp.tornado_settings = {
 #     },
 #     # Args for the FileContentsManager mapped to /directory
 #     "local_directory": {
-#         "root_dir": "/Users/drodriguez/Downloads",
+#         "root_dir": "/Users/danielfrg/Downloads",
 #     },
 # }

@@ -7,8 +7,8 @@ export PATH=/usr/local/opt/python/libexec/bin:$PATH
 # pyenv
 # export PYENV_ROOT=$(pyenv root)                  # Slow
 # export PATH=$(pyenv root)/shims:$PATH            # Slow
-export PYENV_ROOT=/Users/drodriguez/.pyenv         # Fast 
-export PATH=/Users/drodriguez/.pyenv/shims:$PATH   # Fast
+export PYENV_ROOT=/Users/danielfrg/.pyenv         # Fast 
+export PATH=/Users/danielfrg/.pyenv/shims:$PATH   # Fast
 
 # Make pipenv use pyenv activated python
 export PIPENV_PYTHON=$PYENV_ROOT/shims/python

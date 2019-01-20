@@ -1,6 +1,3 @@
-## For some stuff that want at startup but not commited
-source ~/.zshrc.local
-
 #########################
 # POWERLINE-GO
 # PROMPT REPLACEMENT
@@ -53,7 +50,7 @@ HISTSIZE=1000
 HISTFILESIZE=2000
 
 # append to the history file, don't overwrite it
-shopt -s histappend
+# shopt -s histappend
 
 #########################
 # ALIASES
@@ -150,3 +147,7 @@ alias sha256sum="shasum -a 256"
 exportpathhere() { export PATH=$(pwd):$PATH }
 whoseport() { lsof -i ":$1" | grep LISTEN }
 alias docker-transmission="open http://localhost:9091 && docker run -it -v ~/Downloads:/downloads -p 9091:9091 linuxserver/transmission"
+
+## For some stuff that want at startup but not commited
+touch ~/.zshrc.local
+source ~/.zshrc.local

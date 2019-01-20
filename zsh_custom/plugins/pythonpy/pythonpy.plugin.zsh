@@ -1,1 +1,1 @@
-alias py='python /Users/drodriguez/.oh-my-zsh/custom/plugins/pythonpy/pythonpy/pythonpy/__main__.py'
+alias py='python /Users/danielfrg/.oh-my-zsh/custom/plugins/pythonpy/pythonpy/pythonpy/__main__.py'

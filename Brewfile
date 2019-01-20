@@ -37,7 +37,6 @@ brew 'git'
 brew 'tmux'
 brew 'unp'
 brew 'terraform'
-brew 'bazel'
 brew 'pandoc'
 
 # Languages

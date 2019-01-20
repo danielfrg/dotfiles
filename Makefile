@@ -1,4 +1,4 @@
-install: xcode homebrew powerline
+install: homebrew ohmyzsh powerline up
 
 xcode: ## Install xcode
 	xcode-select --install
@@ -7,6 +7,9 @@ xcode: ## Install xcode
 homebrew:  ## Install homebrew
 	/usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 .PHONY: homebrew
+
+ohmyzsh: ## Download and install oh my zsh
+	bash -c "$$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"; \
 
 powerline:  ## Download and install powerline
 	@curl -L https://github.com/justjanne/powerline-go/releases/download/v1.11.0/powerline-go-darwin-amd64 -o /usr/local/bin/powerline-go
@@ -20,26 +23,9 @@ brew:  ##
 	brew bundle
 .PHONY: brew
 
-link: python zsh git tmux sshrc vscode jupyter rstudio ## Create symlinks to the all the stuff
-
-python:  ##
-	ln -sF $(CURDIR)/.pylintrc ~/.pylintrc; \
-	ln -sF $(CURDIR)/.condarc ~/.condarc
-.PHONY: python
-
-jupyter:
-	@mkdir -p ~/.jupyter/
-	ln -sf $(CURDIR)/.jupyter/jupyter_notebook_config.py ~/.jupyter/jupyter_notebook_config.py && \
-	ln -sf $(CURDIR)/.jupyter/jupyter_notebook_config.json ~/.jupyter/jupyter_notebook_config.json
-.PHONY: jupyter
-
-rstudio:  ##
-	@mkdir -p ~/.R
-	ln -sf $(CURDIR)/rstudio ~/.R/rstudio
-.PHONY: rstudio
+link: zsh git tmux sshrc vscode python jupyter rstudio gpg ## Create symlinks to the all the stuff
 
 zsh:  ##
-	bash -c "$$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"; \
 	ln -sf $(CURDIR)/.zshrc ~/.zshrc
 .PHONY: zsh
 
@@ -64,18 +50,34 @@ vscode:  ##
 	ln -sf $(CURDIR)/vscode/snippets/ ~/Library/Application\ Support/Code/User/snippets
 .PHONY: vscode
 
-vi:  ##
-	ln -sF $(CURDIR)/.vim ~/.vim; \
-	ln -sf $(CURDIR)/.vimrc ~/.vimrc; \
-	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim; \
-	vim +PluginInstall +qall
-.PHONY: vi
+python:  ##
+	ln -sF $(CURDIR)/.pylintrc ~/.pylintrc; \
+	ln -sF $(CURDIR)/.condarc ~/.condarc
+.PHONY: python
+
+jupyter:
+	@mkdir -p ~/.jupyter/
+	ln -sf $(CURDIR)/.jupyter/jupyter_notebook_config.py ~/.jupyter/jupyter_notebook_config.py && \
+	ln -sf $(CURDIR)/.jupyter/jupyter_notebook_config.json ~/.jupyter/jupyter_notebook_config.json
+.PHONY: jupyter
+
+rstudio:  ##
+	@mkdir -p ~/.R
+	ln -sf $(CURDIR)/rstudio ~/.R/rstudio
+.PHONY: rstudio
 
 gpg:  ##
 	@gpg --list-keys
 	@ln -sf $(CURDIR)/.gnupg/gpg.conf ~/.gnupg/gpg.conf
 	@ln -sf $(CURDIR)/.gnupg/gpg-agent.conf ~/.gnupg/gpg-agent.conf
 	@echo "Manually run 'gpg --import' for the public and private keys"
+
+vi:  ##
+	ln -sF $(CURDIR)/.vim ~/.vim; \
+	ln -sf $(CURDIR)/.vimrc ~/.vimrc; \
+	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim; \
+	vim +PluginInstall +qall
+.PHONY: vi
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?##.*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?##"; OFS="\t\t"}; {printf "\033[36m%-30s\033[0m %s\n", $$1, ($$2==""?"":$$2)}'

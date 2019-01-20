@@ -1,9 +1,5 @@
-.  ~/workspace/conda/etc/profile.d/conda.sh
+.  ~/anaconda/etc/profile.d/conda.sh
 conda activate base
-
-# function conda_prompt_info() {
-#     echo "(%{$fg[yellow]%}py%{$reset_color%}:$CONDA_DEFAULT_ENV)"
-# }
 
 # Autocomplete
 fpath+=$PWD
@@ -13,6 +9,10 @@ thisdir=${0:a:h}
 source $thisdir/conda_auto_env.sh
 autoload -U add-zsh-hook
 add-zsh-hook chpwd conda_auto_env
+
+# function conda_prompt_info() {
+#     echo "(%{$fg[yellow]%}py%{$reset_color%}:$CONDA_DEFAULT_ENV)"
+# }
 
 # conda_root_dir() {
 #     # This works but its slow so just hard coded :)
