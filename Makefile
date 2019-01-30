@@ -44,15 +44,18 @@ sshrc:  ##
 .PHONY: sshrc
 
 vscode:  ##
-	bash vscode/extensions.sh
-	ln -sf $(CURDIR)/vscode/settings.json ~/Library/Application\ Support/Code/User/settings.json
-	ln -sf $(CURDIR)/vscode/keybindings.json ~/Library/Application\ Support/Code/User/keybindings.json
-	ln -sf $(CURDIR)/vscode/snippets/ ~/Library/Application\ Support/Code/User/snippets
+	bash vscode/extensions.sh; \
+	ln -sf $(CURDIR)/vscode/settings.json ~/Library/Application\ Support/Code/User/settings.json ; \
+	ln -sf $(CURDIR)/vscode/keybindings.json ~/Library/Application\ Support/Code/User/keybindings.json ; \
+	ln -sf $(CURDIR)/vscode/snippets/ ~/Library/Application\ Support/Code/User
 .PHONY: vscode
 
 python:  ##
-	ln -sF $(CURDIR)/.pylintrc ~/.pylintrc; \
-	ln -sF $(CURDIR)/.condarc ~/.condarc
+	mkdir -p ~/Library/Application\ Support/pypoetry/ ; \
+	ln -sF $(CURDIR)/.pylintrc ~/.pylintrc ; \
+	ln -sF $(CURDIR)/.condarc ~/.condarc ; \
+	ln -sF $(CURDIR)/poetry/auth.toml ~/Library/Application\ Support/pypoetry/auth.toml ; \
+	ln -sF $(CURDIR)/poetry/config.toml ~/Library/Application\ Support/pypoetry/config.toml
 .PHONY: python
 
 jupyter:
