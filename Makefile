@@ -47,7 +47,7 @@ vscode:  ##
 	bash vscode/extensions.sh; \
 	ln -sf $(CURDIR)/vscode/settings.json ~/Library/Application\ Support/Code/User/settings.json ; \
 	ln -sf $(CURDIR)/vscode/keybindings.json ~/Library/Application\ Support/Code/User/keybindings.json ; \
-	ln -sf $(CURDIR)/vscode/snippets/ ~/Library/Application\ Support/Code/User
+	rm -rf ~/Library/Application\ Support/Code/User/snippets && ln -sf $(CURDIR)/vscode/snippets/ ~/Library/Application\ Support/Code/User
 .PHONY: vscode
 
 python:  ##

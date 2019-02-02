@@ -72,24 +72,6 @@ defaults write com.apple.mail SpellCheckingBehavior -string "NoSpellCheckingEnab
 # in the login window
 sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
 
-# Use dark menu bar and dock
-defaults write NSGlobalDomain AppleInterfaceStyle Dark
-
-###############################################################################
-# Spotlight                                                                   #
-###############################################################################
-
-# Hide Spotlight tray-icon (and subsequent helper)
-sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
-
-# Disable Spotlight indexing for any volume that gets mounted and has not yet
-# been indexed before.
-# Use `sudo mdutil -i off "/Volumes/foo"` to stop indexing any volume.
-sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
-
-# Don’t show recent applications in Dock
-defaults write com.apple.dock show-recents -bool false
-
 ###############################################################################
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input #
 ###############################################################################
@@ -298,6 +280,9 @@ defaults write com.apple.dock autohide-delay -float 0
 # Remove the animation when hiding/showing the Dock
 # defaults write com.apple.dock autohide-time-modifier -float 0
 
+# Don’t show recent applications in Dock
+defaults write com.apple.dock show-recents -bool false
+
 ###############################################################################
 # Spotlight #
 ##############################################################################
@@ -350,7 +335,7 @@ sudo mdutil -i on / > /dev/null
 sudo mdutil -E / > /dev/null
 
 # Hide Spotlight Icon
-sudo mv /System/Library/CoreServices/Search.bundle /System/Library/CoreServices/Search.bundle.bak
+# sudo mv /System/Library/CoreServices/Search.bundle /System/Library/CoreServices/Search.bundle.bak
 # Show Spotlight Icon
 # sudo mv /System/Library/CoreServices/Search.bundle.bak /System/Library/CoreServices/Search.bundle
 
@@ -359,8 +344,7 @@ sudo mv /System/Library/CoreServices/Search.bundle /System/Library/CoreServices/
 ##############################################################################
 
 # Hide Siri Icon
-sudo mv /System/Library/CoreServices/Siri.bundle /System/Library/CoreServices/Siri.bundle.bak
-
+# sudo mv /System/Library/CoreServices/Siri.bundle /System/Library/CoreServices/Siri.bundle.bak
 # Show Siri Icon
 # sudo mv /System/Library/CoreServices/Siri.bundle.bak /System/Library/CoreServices/Siri.bundle
 

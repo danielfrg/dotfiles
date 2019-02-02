@@ -6,9 +6,12 @@ alias ec2pubips="aws ec2 describe-instances --query 'Reservations[*].Instances[*
 
 # AWS Credentials as ENV VARs
 function read_aws_credentials_key {
-  section=$1
-  key=$2
-  awk -F ' *= *' '{ if ($1 ~ /^\[/) section=$1; else if ($1 !~ /^$/) print $1 section "=" $2 }' ~/.aws/credentials | grep "$2\[$1\]" | sed 's/.*=//'
+  FILE=~/.aws/credentials
+  if [ -f $FILE ]; then
+    section=$1
+    key=$2
+    awk -F ' *= *' '{ if ($1 ~ /^\[/) section=$1; else if ($1 !~ /^$/) print $1 section "=" $2 }' $FILE | grep "$2\[$1\]" | sed 's/.*=//'
+  fi
 }
 
 export AWS_ACCESS_KEY_ID=$(read_aws_credentials_key default aws_access_key_id)
