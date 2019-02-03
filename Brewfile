@@ -34,6 +34,7 @@ brew 'youtube-dl'
 # General dev
 brew 'gnupg'
 brew 'git'
+brew 'hub'
 brew 'tmux'
 brew 'unp'
 brew 'terraform'
