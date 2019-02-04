@@ -51,10 +51,9 @@ vscode:  ##
 .PHONY: vscode
 
 python:  ##
-	mkdir -p ~/Library/Application\ Support/pypoetry/ ; \
 	ln -sF $(CURDIR)/.pylintrc ~/.pylintrc ; \
 	ln -sF $(CURDIR)/.condarc ~/.condarc ; \
-	ln -sF $(CURDIR)/poetry/auth.toml ~/Library/Application\ Support/pypoetry/auth.toml ; \
+	mkdir -p ~/Library/Application\ Support/pypoetry/ ; \
 	ln -sF $(CURDIR)/poetry/config.toml ~/Library/Application\ Support/pypoetry/config.toml
 .PHONY: python
 

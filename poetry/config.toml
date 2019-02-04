@@ -4,3 +4,8 @@
 in-project = true
 
 [repositories]
+# [repositories.pypi]
+# url = "https://pypi.org"
+
+[repositories.testpypi]
+url = "https://test.pypi.org/legacy/"

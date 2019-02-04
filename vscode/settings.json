@@ -14,8 +14,8 @@
     "python.venvPath": "~/anaconda/envs",
     "python.formatting.provider": "yapf",
     "workbench.sideBar.location": "left",
-    "editor.fontSize": 15,
-    "editor.fontFamily": "Hack, Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontSize": 17,
+    "editor.fontFamily": "Inconsolata for Powerline, Hack, Menlo, Monaco, 'Courier New', monospace",
     "files.autoSave": "onFocusChange",
     "files.insertFinalNewline": true,
     "vim.easymotion": true,
@@ -52,5 +52,7 @@
     "git.autofetch": false,
     "liveSassCompile.settings.generateMap": false,
     "workbench.statusBar.feedback.visible": false,
-    "editor.minimap.enabled": false
+    "editor.minimap.enabled": false,
+    "files.trimTrailingWhitespace": true,
+    "files.trimFinalNewlines": true
 }

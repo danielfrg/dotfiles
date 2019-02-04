@@ -38,9 +38,9 @@ c.NotebookApp.tornado_settings = {
 # c.S3ContentsManager.secret_access_key = "secret-key"
 # c.S3ContentsManager.endpoint_url = "http://localhost:9000"
 # c.S3ContentsManager.bucket = "notebooks"
-# c.S3ContentsManager.prefix = "notebooks/test"
+# c.S3ContentsManager.prefix = "this/is/the/prefix"
 
-## s3contents with HybridContentsManager
+# s3contents with HybridContentsManager
 # from s3contents import S3ContentsManager
 # from pgcontents.hybridmanager import HybridContentsManager
 # from IPython.html.services.contents.filemanager import FileContentsManager
