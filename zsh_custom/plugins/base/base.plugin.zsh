@@ -1,6 +1,5 @@
 #########################
 # POWERLINE-GO
-# PROMPT REPLACEMENT
 #########################
 
 function powerline_precmd() {
@@ -118,6 +117,10 @@ alias gra='git remote add'
 alias grr='git remote rm'
 alias gpu='git pull'
 alias gcl='git clone'
+
+# NeoVim
+# alias vim="nvim"
+# alias vimdiff="nvim -d"
 
 # Enable aliases to be sudo’ed
 alias sudo='sudo '

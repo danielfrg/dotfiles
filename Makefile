@@ -23,7 +23,11 @@ brew:  ##
 	brew bundle
 .PHONY: brew
 
-link: zsh git tmux sshrc vscode python jupyter rstudio gpg ## Create symlinks to the all the stuff
+link: fonts zsh git tmux sshrc vscode python jupyter rstudio vim gpg ## Create symlinks to the all the stuff
+
+fonts:  ##
+	bash install-fonts.sh
+.PHONY: fonts
 
 zsh:  ##
 	ln -sf $(CURDIR)/.zshrc ~/.zshrc
@@ -35,6 +39,7 @@ git:  ##
 .PHONY: zsh
 
 tmux:  ##
+	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm ; \
 	ln -sf $(CURDIR)/.tmux.conf ~/.tmux.conf
 .PHONY: tmux
 
@@ -74,11 +79,12 @@ gpg:  ##
 	@ln -sf $(CURDIR)/.gnupg/gpg-agent.conf ~/.gnupg/gpg-agent.conf
 	@echo "Manually run 'gpg --import' for the public and private keys"
 
-vi:  ##
-	ln -sF $(CURDIR)/.vim ~/.vim; \
-	ln -sf $(CURDIR)/.vimrc ~/.vimrc; \
-	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim; \
-	vim +PluginInstall +qall
+vim:  ##
+	mkdir -p ~/.config/nvim
+	ln -sf $(CURDIR)/.config/init.vim ~/.config/nvim/init.vim ; \
+	# ln -sF $(CURDIR)/.vim ~/.vim ; \
+	# ln -sf $(CURDIR)/.vimrc ~/.vimrc ; \
+	# curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 .PHONY: vi
 
 help:

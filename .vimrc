@@ -1,107 +1,106 @@
 set nocompatible
 " ^^^ Trust me!
 
-""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""
+" Mostly based on: https://github.com/lucasfcosta/dotfiles/blob/master/.config/nvim/init.vim
+"""""""""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""""""""
 " General
-""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""
 
-" Set to auto read/write when a file is changed from the outside
-set autoread
-set autowrite
+set encoding=utf-8          " The encoding displayed
+set fileencoding=utf-8      " The encoding written to file
+syntax on                   " Enable syntax highlight
+set ttyfast                 " Faster redrawing
+set lazyredraw              " Only redraw when necessary
+set cursorline              " Find the current line quickly.
 
-" Color scheme
-colorscheme base16-railscasts
-let base16colorspace=256 " Fix for green line numbers
+"""""""""""""""""""""""""""""""""""""""""""""""
+" Plugins List
+"""""""""""""""""""""""""""""""""""""""""""""""
 
-" Enable syntax highlighting
-syntax on
+call plug#begin('~/.vim/plugged')
 
-" Display line numbers on the left
+" neomake
+Plug 'neomake/neomake'
+
+" NERDTree
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+
+" Async FuzzyFind
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf.vim'
+
+call plug#end()
+
+"""""""""""""""""""""""""""""""""""""""""""""""
+" Visual Related Configs
+"""""""""""""""""""""""""""""""""""""""""""""""
+
+" 256 colors
+set t_Co=256
+
+" long lines as just one line (have to scroll horizontally)
+set nowrap
+
+" line numbers
 set number
-set numberwidth=4
 
-" Show matching brackets when text indicator is over them
-set showmatch
-" How many tenths of a second to blink when matching brackets
-set mat=2
-
-" Use case insensitive search, except when using capital letters
-set ignorecase
-set smartcase
-
-" Makes search act like search in modern browsers
-set incsearch
-
-" When opening a new line and no filetype-specific indenting is enabled, keep
-" the same indent as the line you're currently on. Useful for READMEs, etc.
-set autoindent
-
-" Always display the status line, even if only one window is displayed
+" show the status line all the time
 set laststatus=2
 
-" Instead of failing a command because of unsaved changes, instead raise a
-" dialogue asking if you wish to save changed files.
-set confirm
+" toggle invisible characters
+set invlist
+set list
+set listchars=tab:¦\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
 
-" Use visual bell instead of beeping when doing something wrong
-set visualbell
+" disable scrollbars (real hackers don't use scrollbars)
+" set guioptions-=r
+" set guioptions-=R
+" set guioptions-=l
+" set guioptions-=L
 
-" Enable use of the mouse for all modes
-set mouse=a
-
-" Indentation settings for using 4 spaces instead of tabs.
-" Do not change 'tabstop' from its default value of 8 with this setup.
-set shiftwidth=4
-set softtabstop=4
-set expandtab
-" Be smart when using tabs ;)
-set smarttab
-
-" Turn backup off, since most stuff is in SVN, git et.c anyway...
-set nobackup
-set nowb
-set noswapfile
-
-" Delete trailing white space on save, useful for Python and CoffeeScript
-func! DeleteTrailingWS()
-  exe "normal mz"
-  %s/\s\+$//ge
-  exe "normal `z"
-endfunc
-autocmd BufWrite *.py :call DeleteTrailingWS()
-autocmd BufWrite *.coffee :call DeleteTrailingWS()
-
-""""""""""""""""""""""""""""""
-" Status line
-""""""""""""""""""""""""""""""
-
-" Always show the status line
-set laststatus=2
-
+" status line
 set statusline=%t\ %m\ %r\ [%{strlen(&fenc)?&fenc:'none'},%{&ff}]\ %y%=%c,%l/%L\ %P
 
 """"""""""""""""""""""""""""""
 " Mappings
 """"""""""""""""""""""""""""""
 
-" HardMode: Disable arrow keys
-nmap <up> <nop>
-nmap <down> <nop>
-nmap <left> <nop>
-nmap <right> <nop>
-imap <up> <nop>
-imap <down> <nop>
-imap <left> <nop>
-imap <right> <nop>
+" dont use arrowkeys
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
 
-nnoremap <silent> <ESC>OA <nop>
-nnoremap <silent> <ESC>OB <nop>
-nnoremap <silent> <ESC>OC <nop>
-nnoremap <silent> <ESC>OD <nop>
-inoremap <silent> <ESC>OA <nop>
-inoremap <silent> <ESC>OB <nop>
-inoremap <silent> <ESC>OC <nop>
-inoremap <silent> <ESC>OD <nop>
+" really, just dont
+inoremap <Up>    <NOP>
+inoremap <Down>  <NOP>
+inoremap <Left>  <NOP>
+inoremap <Right> <NOP>
+
+" use 'jk' as Escape
+noremap jk <Esc>
+inoremap jk <Esc>
+map jk <Esc>
+imap jk <Esc>
+
+" copy and paste to/from vIM and the clipboard
+nnoremap <C-y> +y
+vnoremap <C-y> +y
+nnoremap <C-p> +P
+vnoremap <C-p> +P
+
+" access system clipboard
+set clipboard=unnamed
+
+" swapfiles location
+set backupdir=/tmp//
+set directory=/tmp//
+
+" map fzf to ctrl+p
+nnoremap <C-P> :Files<CR>
 
 " Fast saving
 nmap <leader>w :w!<cr>
@@ -109,42 +108,45 @@ nmap <leader>w :w!<cr>
 " Remap VIM 0 to first non-blank character
 map 0 ^
 
-" use jk for <esc> and disable <esc>
-inoremap jk <esc>
-inoremap <esc> <nop>
+" :W sudo saves the file
+" (useful for handling the permission-denied error)
+command W w !sudo tee % > /dev/null
 
-""""""""""""""""""""""""""""""
-" Plugins
-""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""
+" Indentation
+"""""""""""""""""""""""""""""""""""""""""""""""
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" Use spaces instead of tabs
+set expandtab
 
-" Vundle Bundle manager. Great stuff.
-" https://github.com/VundleVim/Vundle.vim
-" let Vundle manage Vundle (required)
-Plugin 'VundleVim/Vundle.vim'
+" Be smart when using tabs ;)
+" :help smarttab
+set smarttab
 
-" very nice file browser
-Bundle 'scrooloose/nerdtree'
+" 1 tab == 4 spaces
+set shiftwidth=4
+set tabstop=4
 
-" full path fuzzy search
-Bundle 'kien/ctrlp.vim'
+" Auto indent
+" Copy the indentation from the previous line when starting a new line
+set ai
 
-" Python
-Bundle 'python.vim'
+" Smart indent
+" Automatically inserts one extra level of indentation in some cases, and works for C-like files
+set si
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " Enable filetype plugins (required)
+"""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin Related Configs
+"""""""""""""""""""""""""""""""""""""""""""""""
 
-" NERDTree automatically when vim starts up if no files were specified
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" Neomake async hooks
+call neomake#configure#automake('w')
 
-" map a specific key or shortcut to open NERDTree
-map <C-n> :NERDTreeToggle<CR>
+" Open NERDTree automatically when vim starts up
+" autocmd vimenter * NERDTree
+" NERDTree
+let NERDTreeShowHidden=1
+map <silent> <C-n> :NERDTreeToggle<CR>
 
-" close vim if the only window left open is a NERDTree
-" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" close NERDTree after a file is opened
+let g:NERDTreeQuitOnOpen=1

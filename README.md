@@ -25,13 +25,17 @@ make brew
 make link
 ```
 
-### Manual steps
+## Manual steps
 
-#### iterm
+#### iTerm2
 
 In the iTerm2 preferences point to use a file from `~/workspace/dotfiles/iterm2/preferences`
 
-### Legacy
+### VIM
+
+To install using [https://github.com/junegunn/vim-plug](https://github.com/junegunn/vim-plug): Open vim and run `:PlugInstall`.
+
+## Legacy
 
 #### atom
 

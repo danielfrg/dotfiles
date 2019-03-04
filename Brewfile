@@ -32,6 +32,7 @@ brew 'httpie'
 brew 'youtube-dl'
 
 # General dev
+brew 'neovim'
 brew 'gnupg'
 brew 'git'
 brew 'hub'
@@ -55,6 +56,9 @@ brew 'kubefwd'
 
 ###################
 # Casks
+###################
+
+echo "Installing applications through brew casks..."
 
 cask 'java8'
 cask 'docker'
