@@ -40,6 +40,7 @@ brew 'tmux'
 brew 'unp'
 brew 'terraform'
 brew 'pandoc'
+brew 'hugo'
 
 # Languages
 brew 'go'

@@ -119,8 +119,11 @@ alias gpu='git pull'
 alias gcl='git clone'
 
 # NeoVim
-# alias vim="nvim"
-# alias vimdiff="nvim -d"
+alias vim="nvim"
+alias vimdiff="nvim -d"
+
+# Python
+alias poetry-activate="source ./.venv/bin/activate"
 
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
@@ -151,6 +154,10 @@ exportpathhere() { export PATH=$(pwd):$PATH }
 whoseport() { lsof -i ":$1" | grep LISTEN }
 alias docker-transmission="open http://localhost:9091 && docker run -it -v ~/Downloads:/downloads -p 9091:9091 linuxserver/transmission"
 
-## For some stuff that want at startup but not commited
+# My apps
+alias dinero='~/workspace/dinero/.venv/bin/dinero'
+
+# ===============================================
+# KEEP AT THE END: Stuff that want at startup but not commited
 touch ~/.zshrc.local
 source ~/.zshrc.local
