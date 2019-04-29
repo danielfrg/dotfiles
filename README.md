@@ -22,8 +22,9 @@ Docs:
 ```
 make install
 make brew
-make powerline up
+make miniconda powerline up
 make link
+make gpg
 ```
 
 ## Manual steps
@@ -36,7 +37,15 @@ In the iTerm2 preferences point to use a file from `~/workspace/dotfiles/iterm2/
 
 To install using [https://github.com/junegunn/vim-plug](https://github.com/junegunn/vim-plug): Open vim and run `:PlugInstall`.
 
-## Legacy
+### GPG
+
+Import the gpg keys:
+
+```
+gpg --import <file>
+```
+
+## Old and not used
 
 #### atom
 

@@ -1,29 +1,37 @@
-install: homebrew ohmyzsh
-
 xcode: ## Install xcode
 	xcode-select --install
 .PHONY:xcode
+
+install: homebrew ohmyzsh
 
 homebrew:  ## Install homebrew
 	/usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 .PHONY: homebrew
 
-ohmyzsh: ## Download and install oh my zsh
-	bash -c "$$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"; \
-
-powerline:  ## Download and install powerline
-	@curl -L https://github.com/justjanne/powerline-go/releases/download/v1.11.0/powerline-go-darwin-amd64 -o /usr/local/bin/powerline-go
-	@chmod +x /usr/local/bin/powerline-go
-
-up:  ## Download and install up
-	@curl -L https://github.com/akavel/up/releases/download/v0.3/up-darwin -o /usr/local/bin/up
-	@chmod +x /usr/local/bin/up
-
 brew:  ##
 	brew bundle
 .PHONY: brew
 
-link: fonts zsh git tmux sshrc vscode python jupyter rstudio vim gpg ## Create symlinks to the all the stuff
+ohmyzsh: ## Download and install oh my zsh
+	bash -c "$$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)";
+.PHONY: ohmyzsh
+
+powerline:  ## Download and install powerline
+	@curl -L https://github.com/justjanne/powerline-go/releases/download/v1.11.0/powerline-go-darwin-amd64 -o /usr/local/bin/powerline-go
+	@chmod +x /usr/local/bin/powerline-go
+.PHONY: powerline
+
+up:  ## Download and install up
+	@curl -L https://github.com/akavel/up/releases/download/v0.3/up-darwin -o /usr/local/bin/up
+	@chmod +x /usr/local/bin/up
+.PHONY: up
+
+miniconda:  ##
+	@curl -L https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -o ~/Downloads/Miniconda3-latest.sh
+	bash ~/Downloads/Miniconda3-latest.sh -b -p ~/anaconda
+.PHONY: miniconda
+
+link: fonts zsh git tmux sshrc vscode python jupyter rstudio vim ## Create symlinks to the all the stuff
 
 fonts:  ##
 	bash install-fonts.sh
@@ -89,3 +97,4 @@ vim:  ##
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?##.*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?##"; OFS="\t\t"}; {printf "\033[36m%-30s\033[0m %s\n", $$1, ($$2==""?"":$$2)}'
+.PHONY: help
