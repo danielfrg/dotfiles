@@ -1,4 +1,4 @@
-install: homebrew ohmyzsh powerline up
+install: homebrew ohmyzsh
 
 xcode: ## Install xcode
 	xcode-select --install
@@ -77,7 +77,7 @@ gpg:  ##
 	@gpg --list-keys
 	@ln -sf $(CURDIR)/.gnupg/gpg.conf ~/.gnupg/gpg.conf
 	@ln -sf $(CURDIR)/.gnupg/gpg-agent.conf ~/.gnupg/gpg-agent.conf
-	@echo "Manually run 'gpg --import' for the public and private keys"
+	@echo "Manually run 'gpg --import <file>' for the public and private keys"
 
 vim:  ##
 	mkdir -p ~/.config/nvim

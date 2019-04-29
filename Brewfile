@@ -6,7 +6,8 @@ tap 'caskroom/versions'
 brew 'coreutils'
 brew 'moreutils'
 brew 'findutils'
-brew 'gnu-sed', args: ['with-default-names']
+brew 'gnu-sed'
+# brew 'gnu-sed', args: ['with-default-names']
 
 # Fancy CLI stuff
 brew 'zsh'
@@ -27,7 +28,8 @@ brew 'sshrc'
 
 # Install download utilities.
 brew 'wget'
-brew 'curl', args: ['with-openssl']
+brew 'curl'
+# brew 'curl', args: ['with-openssl']
 brew 'httpie'
 brew 'youtube-dl'
 
@@ -52,17 +54,12 @@ brew 'yarn'
 brew 'kubectx'
 brew 'kube-ps1'
 brew 'kubernetes-helm'
-brew 'kubefwd'
+# brew 'kubefwd'
 # brew 'draft'
 
 ###################
 # Casks
 ###################
-
-echo "Installing applications through brew casks..."
-
-cask 'java8'
-cask 'docker'
 
 # cask 'alfred'
 cask '1password'
@@ -83,9 +80,10 @@ cask 'homebrew/cask-drivers/logitech-options'
 # cask 'soundflowerbed'
 # cask 'licecap'
 
-cask 'visual-studio-code'
 cask 'iterm2'
+cask 'visual-studio-code'
 cask 'java'
+cask 'docker'
 cask 'vagrant'
 cask 'virtualbox'
 cask 'insomnia'

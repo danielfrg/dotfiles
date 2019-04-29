@@ -7,6 +7,7 @@ Add SSH key to `~/.ssh/id_rsa`
 ```
 # Add ssh key
 ssh-add ~/.ssh/id_rsa
+chmod 600 ~/.ssh/id_rsa
 
 # Clone the repo:
 mkdir -p ~/workspace
@@ -19,9 +20,9 @@ Docs:
 ### make
 
 ```
-make xcode
 make install
 make brew
+make powerline up
 make link
 ```
 
