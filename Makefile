@@ -31,7 +31,7 @@ miniconda:  ##
 	bash ~/Downloads/Miniconda3-latest.sh -b -p ~/anaconda
 .PHONY: miniconda
 
-link: fonts zsh git tmux sshrc vscode python jupyter rstudio vim ## Create symlinks to the all the stuff
+link: fonts zsh git tmux sshrc vscode vscode-ext python jupyter rstudio vim ## Create symlinks to the all the stuff
 
 fonts:  ##
 	bash install-fonts.sh
@@ -57,11 +57,14 @@ sshrc:  ##
 .PHONY: sshrc
 
 vscode:  ##
-	bash vscode/extensions.sh; \
 	ln -sf $(CURDIR)/vscode/settings.json ~/Library/Application\ Support/Code/User/settings.json ; \
 	ln -sf $(CURDIR)/vscode/keybindings.json ~/Library/Application\ Support/Code/User/keybindings.json ; \
 	rm -rf ~/Library/Application\ Support/Code/User/snippets && ln -sf $(CURDIR)/vscode/snippets/ ~/Library/Application\ Support/Code/User
 .PHONY: vscode
+
+vscode-ext:  ##
+	bash $(CURDIR)/vscode/extensions.sh
+.PHONY: vscode-ext
 
 python:  ##
 	ln -sF $(CURDIR)/.pylintrc ~/.pylintrc ; \
@@ -81,12 +84,6 @@ rstudio:  ##
 	ln -sf $(CURDIR)/rstudio ~/.R/rstudio
 .PHONY: rstudio
 
-gpg:  ##
-	@gpg --list-keys
-	@ln -sf $(CURDIR)/.gnupg/gpg.conf ~/.gnupg/gpg.conf
-	@ln -sf $(CURDIR)/.gnupg/gpg-agent.conf ~/.gnupg/gpg-agent.conf
-	@echo "Manually run 'gpg --import <file>' for the public and private keys"
-
 vim:  ##
 	mkdir -p ~/.config/nvim
 	ln -sf $(CURDIR)/.config/init.vim ~/.config/nvim/init.vim ; \
@@ -94,6 +91,13 @@ vim:  ##
 	# ln -sf $(CURDIR)/.vimrc ~/.vimrc ; \
 	# curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 .PHONY: vi
+
+gpg:  ##
+	@gpg --list-keys
+	@ln -sf $(CURDIR)/.gnupg/gpg.conf ~/.gnupg/gpg.conf
+	@ln -sf $(CURDIR)/.gnupg/gpg-agent.conf ~/.gnupg/gpg-agent.conf
+	@echo "Manually run 'gpg --import <file>' for the public and private keys"
+.PHONY: gpg
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?##.*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?##"; OFS="\t\t"}; {printf "\033[36m%-30s\033[0m %s\n", $$1, ($$2==""?"":$$2)}'

@@ -25,6 +25,7 @@ make brew
 make miniconda powerline up
 make link
 make gpg
+make vscode
 ```
 
 ## Manual steps
@@ -32,6 +33,7 @@ make gpg
 #### iTerm2
 
 In the iTerm2 preferences point to use a file from `~/workspace/dotfiles/iterm2/preferences`
+
 
 ### VIM
 
