@@ -79,6 +79,10 @@ jupyter:
 	ln -sf $(CURDIR)/.jupyter/jupyter_notebook_config.json ~/.jupyter/jupyter_notebook_config.json
 .PHONY: jupyter
 
+r:  ##
+	ln -sF $(CURDIR)/.Rprofile ~/.Rprofile
+.PHONY: r
+
 rstudio:  ##
 	@mkdir -p ~/.R
 	ln -sf $(CURDIR)/rstudio ~/.R/rstudio
@@ -87,9 +91,9 @@ rstudio:  ##
 vim:  ##
 	mkdir -p ~/.config/nvim
 	ln -sf $(CURDIR)/.config/init.vim ~/.config/nvim/init.vim ; \
-	# ln -sF $(CURDIR)/.vim ~/.vim ; \
-	# ln -sf $(CURDIR)/.vimrc ~/.vimrc ; \
-	# curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	ln -sF $(CURDIR)/.vim ~/.vim ; \
+	ln -sf $(CURDIR)/.vimrc ~/.vimrc ; \
+	curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 .PHONY: vi
 
 gpg:  ##

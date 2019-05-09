@@ -68,5 +68,6 @@
     "editor.minimap.enabled": false,
     "files.trimTrailingWhitespace": true,
     "files.trimFinalNewlines": true,
-    "terminal.external.osxExec": "iTerm2.app"
+    "terminal.external.osxExec": "iTerm2.app",
+    "python.dataScience.sendSelectionToInteractiveWindow": true
 }

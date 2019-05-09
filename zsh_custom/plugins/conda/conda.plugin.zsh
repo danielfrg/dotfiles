@@ -10,6 +10,8 @@ source $thisdir/conda_auto_env.sh
 autoload -U add-zsh-hook
 add-zsh-hook chpwd conda_auto_env
 
+alias activatehere='source $PWD/.venv/bin/activate'
+
 # function conda_prompt_info() {
 #     echo "(%{$fg[yellow]%}py%{$reset_color%}:$CONDA_DEFAULT_ENV)"
 # }

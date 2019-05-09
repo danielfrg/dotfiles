@@ -51,6 +51,9 @@ HISTFILESIZE=2000
 # append to the history file, don't overwrite it
 # shopt -s histappend
 
+# autojump
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+
 #########################
 # ALIASES
 #########################
@@ -68,7 +71,7 @@ alias mv='mv -i'
 alias mkdir='mkdir -p' # -> Prevents accidentally clobbering files.
 
 alias h='history'
-alias j='jobs -l'
+# alias j='jobs -l'
 alias which='type -a'
 alias path='echo -e ${PATH//:/\\n}'
 alias libpath='echo -e ${LD_LIBRARY_PATH//:/\\n}'

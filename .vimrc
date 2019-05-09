@@ -53,7 +53,8 @@ set laststatus=2
 " toggle invisible characters
 set invlist
 set list
-set listchars=tab:¦\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
+set listchars=tab:¦\ ,trail:⋅,extends:❯,precedes:❮
+" set listchars=tab:¦\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
 
 " disable scrollbars (real hackers don't use scrollbars)
 " set guioptions-=r
