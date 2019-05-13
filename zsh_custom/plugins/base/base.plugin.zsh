@@ -65,7 +65,8 @@ alias ll='ls -lAhG'
 alias la='ls -lAhG'
 
 # Files
-alias rm='rm -i'
+# alias rm='rm -i'
+alias rm="echo Use 'trash', or the full path i.e. '/bin/rm'"
 alias cp='cp -i'
 alias mv='mv -i'
 alias mkdir='mkdir -p' # -> Prevents accidentally clobbering files.

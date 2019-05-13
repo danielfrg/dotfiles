@@ -1,4 +1,4 @@
-.  ~/anaconda/etc/profile.d/conda.sh
+.  ~/miniconda/etc/profile.d/conda.sh
 conda activate base
 
 # Autocomplete
@@ -10,7 +10,9 @@ source $thisdir/conda_auto_env.sh
 autoload -U add-zsh-hook
 add-zsh-hook chpwd conda_auto_env
 
-alias activatehere='source $PWD/.venv/bin/activate'
+export PIPENV_VENV_IN_PROJECT=true
+export PIPENV_SKIP_LOCK=true
+alias activatethis='source $PWD/.venv/bin/activate'
 
 # function conda_prompt_info() {
 #     echo "(%{$fg[yellow]%}py%{$reset_color%}:$CONDA_DEFAULT_ENV)"

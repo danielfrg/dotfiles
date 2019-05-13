@@ -26,6 +26,7 @@ brew 'tldr'
 brew 'jq'
 brew 'mobile-shell'
 brew 'sshrc'
+brew 'rmtrash'
 
 # Install download utilities.
 brew 'wget'
