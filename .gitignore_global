@@ -1,9 +1,23 @@
+# General
 *~
 .DS_Store
 
+# JetBrains (IntelliJ, GoLand, WebStorm, etc.)
+/.idea/
+*.iml
+
+# Emacs
+/.dir-locals.el
+.#*
+
+# Vim
+*.swp
+
+# Visual Studio Code
+/.vscode/
+
+# Python
 .env
 .python-version
 .condaenv
-.idea
-.vscode
 

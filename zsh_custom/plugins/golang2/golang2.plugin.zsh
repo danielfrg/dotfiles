@@ -1,7 +1,7 @@
-local tools_dir=~/workspace/go
-export PATH=$tools_dir/bin:$PATH
+# local tools_dir=~/go
+# export PATH=$tools_dir/bin:$PATH
 
-export GOPATH=~/workspace/go
+export GOPATH=~/go
 export PATH=$GOPATH/bin:$PATH
 
 gopathhere() {

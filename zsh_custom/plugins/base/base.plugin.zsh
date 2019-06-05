@@ -1,23 +1,25 @@
 #########################
-# POWERLINE-GO
-#########################
+# POWERLINE
 
-function powerline_precmd() {
-    PS1="$(/usr/local/bin/powerline-go -shell zsh -modules venv,kube,cwd,git,exit -error $? -newline -shorten-gke-names)"
-}
+ZSH_THEME="powerlevel9k/powerlevel9k"
+POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir anaconda virtualenv_joined vcs)
+POWERLEVEL9K_DISABLE_RPROMPT=true
 
-function install_powerline_precmd() {
-  for s in "${precmd_functions[@]}"; do
-    if [ "$s" = "powerline_precmd" ]; then
-      return
-    fi
-  done
-  precmd_functions+=(powerline_precmd)
-}
-
-if [ "$TERM" != "linux" ]; then
-    install_powerline_precmd
-fi
+POWERLEVEL9K_DIR_HOME_FOREGROUND='003'
+POWERLEVEL9K_DIR_HOME_BACKGROUND='000'
+POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND='003'
+POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND='000'
+POWERLEVEL9K_DIR_DEFAULT_FOREGROUND='003'
+POWERLEVEL9K_DIR_DEFAULT_BACKGROUND='000'
+POWERLEVEL9K_DIR_ETC_FOREGROUND='003'
+POWERLEVEL9K_DIR_ETC_BACKGROUND='000'
+POWERLEVEL9K_ANACONDA_FOREGROUND='007'
+POWERLEVEL9K_ANACONDA_BACKGROUND='022'
+POWERLEVEL9K_VIRTUALENV_FOREGROUND='007'
+POWERLEVEL9K_VIRTUALENV_BACKGROUND='022'
+POWERLEVEL9K_KUBECONTEXT_FOREGROUND='007'
+POWERLEVEL9K_KUBECONTEXT_BACKGROUND='017'
 
 #########################
 
@@ -26,8 +28,8 @@ BASE16_SHELL="$HOME/workspace/dotfiles/iterm2/base16-tomorrow.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 export PATH=/usr/local/sbin:$PATH
-# export PATH=$(brew --prefix coreutils)/libexec/bin:$PATH    # Slow
-export PATH=/usr/local/opt/coreutils/libexec/bin:$PATH        # Fast
+# export PATH=$(brew --prefix coreutils)/libexec/bin:$PATH       # Slow
+export PATH=/usr/local/opt/coreutils/libexec/bin:$PATH           # Fast
 # export PATH=$(brew --prefix moreutils)/libexec/gnubin:$PATH    # Slow
 export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH        # Fast
 
@@ -66,7 +68,9 @@ alias la='ls -lAhG'
 
 # Files
 # alias rm='rm -i'
-alias rm="echo Use 'trash', or the full path i.e. '/bin/rm'"
+# alias rm="echo Use 'trash', or the full path i.e. '/bin/rm'"
+alias rm="trash"
+alias del="trash"
 alias cp='cp -i'
 alias mv='mv -i'
 alias mkdir='mkdir -p' # -> Prevents accidentally clobbering files.
@@ -140,7 +144,6 @@ alias localip="sudo ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | gre
 alias untar='tar xvf'
 
 # Replacements
-# alias rm='trash'
 alias ssh='sshrc'
 # alias cat='bat'
 alias ping='prettyping --nolegend'
