@@ -16,11 +16,6 @@ ohmyzsh: ## Download and install oh my zsh
 	bash -c "$$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)";
 .PHONY: ohmyzsh
 
-powerline:  ## Download and install powerline
-	@curl -L https://github.com/justjanne/powerline-go/releases/download/v1.11.0/powerline-go-darwin-amd64 -o /usr/local/bin/powerline-go
-	@chmod +x /usr/local/bin/powerline-go
-.PHONY: powerline
-
 up:  ## Download and install up
 	@curl -L https://github.com/akavel/up/releases/download/v0.3/up-darwin -o /usr/local/bin/up
 	@chmod +x /usr/local/bin/up

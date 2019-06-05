@@ -22,7 +22,7 @@ Docs:
 ```
 make install
 make brew
-make miniconda powerline up
+make miniconda up
 make link
 make gpg
 make vscode
