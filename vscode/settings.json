@@ -69,5 +69,6 @@
     "files.trimTrailingWhitespace": true,
     "files.trimFinalNewlines": true,
     "terminal.external.osxExec": "iTerm2.app",
-    "python.dataScience.sendSelectionToInteractiveWindow": true
+    "python.dataScience.sendSelectionToInteractiveWindow": true,
+    "breadcrumbs.enabled": false
 }
