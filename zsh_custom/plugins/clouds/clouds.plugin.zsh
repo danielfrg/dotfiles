@@ -14,13 +14,13 @@ function read_aws_credentials_key {
   fi
 }
 
-export AWS_ACCESS_KEY_ID=$(read_aws_credentials_key default aws_access_key_id)
-export AWS_SECRET_ACCESS_KEY=$(read_aws_credentials_key default aws_secret_access_key)
-export AWS_DEFAULT_REGION=$(read_aws_credentials_key default region)
+# export AWS_ACCESS_KEY_ID=$(read_aws_credentials_key default aws_access_key_id)
+# export AWS_SECRET_ACCESS_KEY=$(read_aws_credentials_key default aws_secret_access_key)
+# export AWS_DEFAULT_REGION=$(read_aws_credentials_key default region)
 
-export TF_VAR_AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
-export TF_VAR_AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
-export TF_VAR_AWS_REGION=$AWS_DEFAULT_REGION
+# export TF_VAR_AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+# export TF_VAR_AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+# export TF_VAR_AWS_REGION=$AWS_DEFAULT_REGION
 
 ###############################################################################
 # Google Cloud
