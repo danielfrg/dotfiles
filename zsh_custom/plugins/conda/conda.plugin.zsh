@@ -8,7 +8,7 @@ alias workhere='source $PWD/.venv/bin/activate'
 fpath+=$PWD
 compinit conda
 
-export CONDA_PREFIX=base
+# export CONDA_PREFIX=base
 
 # Auto activate conda envs
 # thisdir=${0:a:h}

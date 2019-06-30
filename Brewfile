@@ -8,6 +8,7 @@ brew 'moreutils'
 brew 'findutils'
 brew 'gnu-sed'
 # brew 'gnu-sed', args: ['with-default-names']
+brew 'gnu-tar'
 
 # Fancy CLI stuff
 brew 'zsh'
@@ -27,6 +28,7 @@ brew 'jq'
 brew 'mobile-shell'
 brew 'sshrc'
 brew 'rmtrash'
+brew 'ruby'
 
 # Install download utilities.
 brew 'wget'
@@ -65,7 +67,6 @@ brew 'kubernetes-helm'
 
 # cask 'alfred'
 cask '1password'
-cask 'vlc'
 cask 'google-chrome'
 cask 'google-backup-and-sync'
 cask 'firefox'
@@ -78,6 +79,9 @@ cask 'windscribe'
 cask 'kindle'
 cask 'send-to-kindle'
 cask 'homebrew/cask-drivers/logitech-options'
+cask 'vlc'
+cask 'caption'
+cask '4k-video-downloader'
 # cask 'soundflower'
 # cask 'soundflowerbed'
 # cask 'licecap'

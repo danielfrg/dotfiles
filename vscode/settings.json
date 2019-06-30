@@ -70,5 +70,6 @@
     "files.trimFinalNewlines": true,
     "terminal.external.osxExec": "iTerm2.app",
     "python.dataScience.sendSelectionToInteractiveWindow": true,
-    "breadcrumbs.enabled": false
+    "breadcrumbs.enabled": false,
+    "workbench.startupEditor": "none"
 }

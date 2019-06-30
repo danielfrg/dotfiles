@@ -60,6 +60,10 @@ HISTFILESIZE=2000
 # autojump
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
+# Ruby
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+export PATH=/usr/local/lib/ruby/gems/2.6.0/bin:$PATH
+
 #########################
 # ALIASES
 #########################
