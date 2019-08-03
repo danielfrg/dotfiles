@@ -1,13 +1,20 @@
 # Save with: code --list-extensions
 code --install-extension bungcip.better-toml
+code --install-extension formulahendry.github-actions
 code --install-extension GrapeCity.gc-excelviewer
+code --install-extension Ikuyadeu.r
+code --install-extension LaurentTreguier.rpm-spec
 code --install-extension mauve.terraform
 code --install-extension mikestead.dotenv
+code --install-extension ms-azuretools.vscode-docker
 code --install-extension ms-python.python
+code --install-extension ms-vscode.Go
 code --install-extension ms-vscode.Theme-TomorrowKit
-code --install-extension PeterJausovec.vscode-docker
 code --install-extension PKief.material-icon-theme
 code --install-extension redhat.java
+code --install-extension redhat.vscode-yaml
+code --install-extension ritwickdey.live-sass
+code --install-extension ritwickdey.LiveServer
 code --install-extension searKing.preview-vscode
 code --install-extension tht13.python
 code --install-extension vscodevim.vim

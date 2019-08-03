@@ -104,7 +104,8 @@ alias .....="cd ../../../.."
 # Shortcuts
 alias cdw='cd ~/workspace'
 alias work='cd ~/workspace'
-alias cddl="cd ~/Downloads"
+alias cdr='cd ~/workspace/rstudio'
+alias cddw="cd ~/Downloads"
 
 # Typos
 alias g='git'

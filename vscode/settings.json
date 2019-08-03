@@ -62,7 +62,7 @@
     ],
     "workbench.iconTheme": "material-icon-theme",
     "workbench.colorTheme": "Nord Wave",
-    "git.autofetch": false,
+    "git.autofetch": true,
     "liveSassCompile.settings.generateMap": false,
     "workbench.statusBar.feedback.visible": false,
     "editor.minimap.enabled": false,
