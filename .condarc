@@ -6,5 +6,5 @@ create_default_packages:
   - pylint
 
 channels:
-#  - conda-forge
+  - conda-forge
   - defaults

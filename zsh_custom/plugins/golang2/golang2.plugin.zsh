@@ -24,6 +24,7 @@ goinstalltools() {
     go get -v -u github.com/rogpeppe/godef
     go get -v -u golang.org/x/tools/cmd/goimports
     go get -v -u github.com/ramya-rao-a/go-outline
+    go get -u -v github.com/mdempsky/gocode
     # export PATH=$old_path
     # export GOPATH=$old_go_path
 }

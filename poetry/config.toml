@@ -2,6 +2,7 @@
 
 [settings.virtualenvs]
 in-project = true
+create = false
 
 [repositories]
 # [repositories.pypi]

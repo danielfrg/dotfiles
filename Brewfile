@@ -92,7 +92,7 @@ cask 'java'
 cask 'docker'
 cask 'vagrant'
 cask 'virtualbox'
-cask 'insomnia'
+cask 'postman'p
 cask 'google-cloud-sdk'
 cask 'slack'
 cask 'xquartz'

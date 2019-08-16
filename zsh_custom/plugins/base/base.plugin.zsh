@@ -36,6 +36,7 @@ export PATH=/usr/local/sbin:$PATH
 export PATH=/usr/local/opt/coreutils/libexec/bin:$PATH           # Fast
 # export PATH=$(brew --prefix moreutils)/libexec/gnubin:$PATH    # Slow
 export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH        # Fast
+export PATH=/usr/local/opt/terraform@0.11/bin:$PATH
 
 # Git and GPG
 # export GPG_TTY=$(tty)
