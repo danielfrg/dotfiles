@@ -169,7 +169,7 @@ whoseport() { lsof -i ":$1" | grep LISTEN }
 alias docker-transmission="open http://localhost:9091 && docker run -it -v ~/Downloads:/downloads -p 9091:9091 linuxserver/transmission"
 
 # My apps
-alias dinero='~/workspace/dinero/.venv/bin/dinero'
+alias dinero='/Users/danielfrg/conda/envs/dinero/bin/dinero'
 
 # ===============================================
 # KEEP AT THE END: Stuff that want at startup but not commited

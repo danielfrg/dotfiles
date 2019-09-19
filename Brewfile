@@ -61,6 +61,9 @@ brew 'kubernetes-helm'
 # brew 'kubefwd'
 # brew 'draft'
 
+# Others
+brew 'ffmpeg'
+
 ###################
 # Casks
 ###################

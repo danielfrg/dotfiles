@@ -1,1 +1,1 @@
-Sys.setenv(RETICULATE_PYTHON = "~/conda/envs/spacy/bin/python")
+# Sys.setenv(RETICULATE_PYTHON = "~/conda/envs/py36/bin/python")
