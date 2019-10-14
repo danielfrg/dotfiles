@@ -6,12 +6,12 @@ Add SSH key to `~/.ssh/id_rsa`
 
 ```
 # Add ssh key
+chmod 600 ~/.ssh/*
 ssh-add ~/.ssh/id_rsa
-chmod 600 ~/.ssh/id_rsa
 
 # Clone the repo:
 mkdir -p ~/workspace
-git clone git@github.com:danielfrg/dotfiles.git ~/workspace/dotfiles
+git clone git@github.com:danielfrg/dotfiles.git ~/workspace/dotfiles --recursive
 ```
 
 Docs:
@@ -22,30 +22,28 @@ Docs:
 ```
 make install
 make brew
-make miniconda up
+make anaconda up
 make link
 make gpg
-make vscode
 ```
 
 ## Manual steps
 
-#### iTerm2
-
-In the iTerm2 preferences point to use a file from `~/workspace/dotfiles/iterm2/preferences`
-
-
-### VIM
-
-To install using [https://github.com/junegunn/vim-plug](https://github.com/junegunn/vim-plug): Open vim and run `:PlugInstall`.
-
-### GPG
+#### GPG
 
 Import the gpg keys:
 
 ```
 gpg --import <file>
 ```
+
+#### iTerm2
+
+In the iTerm2 preferences point to use a file from `~/workspace/dotfiles/iterm2/preferences`
+
+#### vim
+
+To install using [https://github.com/junegunn/vim-plug](https://github.com/junegunn/vim-plug): Open vim and run `:PlugInstall`.
 
 ## Old and not used
 

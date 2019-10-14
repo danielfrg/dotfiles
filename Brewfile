@@ -1,6 +1,6 @@
 # Taps
-tap 'caskroom/cask'
-tap 'caskroom/versions'
+tap 'homebrew/cask-versions'
+tap 'danielfrg/formulas'
 
 # Core
 brew 'coreutils'
@@ -68,7 +68,7 @@ brew 'ffmpeg'
 # Casks
 ###################
 
-# cask 'alfred'
+cask 'alfred'
 cask '1password'
 cask 'google-chrome'
 cask 'google-backup-and-sync'
@@ -84,7 +84,7 @@ cask 'send-to-kindle'
 cask 'homebrew/cask-drivers/logitech-options'
 cask 'vlc'
 cask 'caption'
-cask '4k-video-downloader'
+# cask '4k-video-downloader'
 # cask 'soundflower'
 # cask 'soundflowerbed'
 # cask 'licecap'
@@ -92,10 +92,11 @@ cask '4k-video-downloader'
 cask 'iterm2'
 cask 'visual-studio-code'
 cask 'java'
+cask 'adoptopenjdk8'
 cask 'docker'
 cask 'vagrant'
 cask 'virtualbox'
-cask 'postman'p
+cask 'postman'
 cask 'google-cloud-sdk'
 cask 'slack'
 cask 'xquartz'

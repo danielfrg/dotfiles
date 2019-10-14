@@ -21,10 +21,10 @@ up:  ## Download and install up
 	@chmod +x /usr/local/bin/up
 .PHONY: up
 
-miniconda:  ##
-	@curl -L https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -o ~/Downloads/Miniconda3-latest.sh
-	bash ~/Downloads/Miniconda3-latest.sh -b -p ~/anaconda
-.PHONY: miniconda
+anaconda:  ##
+	@curl -L -o ~/Anaconda3-2019.07-MacOSX-x86_64.sh https://repo.anaconda.com/archive/Anaconda3-2019.07-MacOSX-x86_64.sh
+	bash ~/Anaconda*.sh -b -p ~/conda
+.PHONY: anaconda
 
 link: fonts zsh git tmux sshrc vscode vscode-ext python jupyter rstudio vim ## Create symlinks to the all the stuff
 
