@@ -62,6 +62,7 @@ vscode-ext:  ##
 .PHONY: vscode-ext
 
 python:  ##
+	ln -sF $(CURDIR)/.pypirc ~/.pypirc ; \
 	ln -sF $(CURDIR)/.pylintrc ~/.pylintrc ; \
 	ln -sF $(CURDIR)/.condarc ~/.condarc ; \
 	mkdir -p ~/Library/Application\ Support/pypoetry/ ; \

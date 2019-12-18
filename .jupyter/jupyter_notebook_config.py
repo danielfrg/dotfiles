@@ -17,6 +17,7 @@ c.NotebookApp.allow_origin = "*"
 c.NotebookApp.open_browser = False
 c.NotebookApp.tornado_settings = {"debug": True}
 
+c.NotebookApp.token = ""
 c.LabApp.token = ""
 
 # Tornado server settings

@@ -36,6 +36,7 @@ brew 'curl'
 # brew 'curl', args: ['with-openssl']
 brew 'httpie'
 brew 'youtube-dl'
+brew 'wireguard-tools'
 
 # General dev
 brew 'neovim'
