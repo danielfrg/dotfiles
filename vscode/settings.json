@@ -54,11 +54,11 @@
             "extensionName": ".css",
             "savePath": null
         },
-        // Minimilized
-        // {
-        //     "format": "compressed",
-        //     "extensionName": ".min.css"
-        // }
+        // Compressed
+        {
+            "format": "compressed",
+            "extensionName": ".min.css"
+        }
     ],
     "workbench.iconTheme": "material-icon-theme",
     "workbench.colorTheme": "Nord Wave",
