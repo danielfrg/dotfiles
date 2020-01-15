@@ -15,7 +15,7 @@
     "python.formatting.provider": "yapf",
     "workbench.sideBar.location": "left",
     "editor.fontSize": 15,
-    "editor.fontFamily": "DejaVu Sans Mono for Powerline, Hack, Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontFamily": "JetBrains Mono, DejaVu Sans Mono for Powerline, Hack, Menlo, Monaco, 'Courier New', monospace",
     "files.autoSave": "onFocusChange",
     "files.insertFinalNewline": true,
     "vim.easymotion": true,
