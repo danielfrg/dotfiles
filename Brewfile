@@ -69,12 +69,13 @@ brew 'ffmpeg'
 # Casks
 ###################
 
+cask 'brave-browser'
+cask 'google-chrome'
+cask 'firefox'
+cask 'google-backup-and-sync'
+cask 'keyboard-maestro7'
 cask 'notion'
 cask '1password'
-cask 'google-chrome'
-cask 'google-backup-and-sync'
-cask 'firefox'
-cask 'keyboard-maestro7'
 cask 'alfred'
 cask 'clipy'
 cask 'keka'
