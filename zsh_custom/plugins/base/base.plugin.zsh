@@ -1,7 +1,6 @@
 #########################
 # POWERLINE
 
-
 ZSH_THEME="powerlevel9k/powerlevel9k"
 POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir anaconda virtualenv_joined vcs)
@@ -60,6 +59,9 @@ HISTFILESIZE=2000
 
 # autojump
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+
+# direnv
+eval "$(direnv hook zsh)"
 
 # Ruby
 export PATH="/usr/local/opt/ruby/bin:$PATH"
@@ -120,6 +122,7 @@ alias kubect='kubectl'
 alias kubelt='kubectl'
 alias kubeclt='kubectl'
 alias kuebctl='kubectl'
+alias terrafrom='terraform'
 
 # Git
 alias ga='git add'
