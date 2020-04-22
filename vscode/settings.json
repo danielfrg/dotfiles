@@ -72,5 +72,6 @@
     "python.dataScience.sendSelectionToInteractiveWindow": true,
     "breadcrumbs.enabled": false,
     "workbench.startupEditor": "none",
-    "python.dataScience.useNotebookEditor": false
+    "python.dataScience.useNotebookEditor": false,
+    "editor.parameterHints.enabled": false
 }

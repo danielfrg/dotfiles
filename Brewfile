@@ -9,6 +9,7 @@ brew 'findutils'
 brew 'gnu-sed'
 # brew 'gnu-sed', args: ['with-default-names']
 brew 'gnu-tar'
+brew 'grep'
 
 # Fancy CLI stuff
 brew 'zsh'

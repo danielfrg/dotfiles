@@ -93,6 +93,7 @@ alias path='echo -e ${PATH//:/\\n}'
 alias libpath='echo -e ${LD_LIBRARY_PATH//:/\\n}'
 alias grep='grep -i --color=always'
 alias fuck='eval $(thefuck $(fc -ln -1))'
+alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
 
 # Makes a more readable output.
 alias du='du -kh'

@@ -1,8 +1,6 @@
 apm install project-manager
-apt install language-cython
 apm install language-docker
-apm install language-salt
-apm install language-r
+apt install language-cython
 apm install atom-jinja2
 apm install highlight-selected
 apm install vim-mode
