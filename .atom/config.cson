@@ -1,18 +1,27 @@
 "*":
   autosave:
     enabled: true
+  "base16-syntax":
+    scheme: "Google"
   core:
     audioBeep: false
+    closeEmptyWindows: false
     excludeVcsIgnoredPaths: false
+    projectHome: "/Users/danielfrg/workspace"
     telemetryConsent: "no"
     themes: [
-      "one-dark-ui"
-      "base16-tomorrow-dark-theme"
+      "one-light-ui"
+      "base16-syntax"
     ]
+  editor: {}
   "exception-reporting":
     userId: "b2516874-e416-4e1a-9796-d414e7100dc0"
-  "linter-ui-default":
-    showPanel: true
+  "linter-ui-default": {}
+  "one-dark-ui":
+    fontSize: 14
+    stickyHeaders: true
+  "one-light-ui":
+    fontSize: 14
   "spell-check": {}
   "tree-view":
     hideIgnoredNames: true
