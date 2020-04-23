@@ -1,5 +1,18 @@
 "*":
+  autosave:
+    enabled: true
   core:
+    audioBeep: false
+    disabledPackages: [
+      "vim-mode"
+    ]
+    excludeVcsIgnoredPaths: false
     telemetryConsent: "no"
+    themes: [
+      "one-dark-ui"
+      "base16-tomorrow-dark-theme"
+    ]
   "exception-reporting":
     userId: "b2516874-e416-4e1a-9796-d414e7100dc0"
+  "tree-view":
+    hideIgnoredNames: true

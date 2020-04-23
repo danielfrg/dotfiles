@@ -11,3 +11,11 @@
   'left': 'null'
   'up': 'null'
   'down': 'null'
+
+'atom-workspace atom-text-editor:not([mini])':
+  'cmd-[': 'unset!'
+  'cmd-]': 'unset!'
+
+'body':
+  'cmd-[': 'pane:show-previous-item'
+  'cmd-]': 'pane:show-next-item'

@@ -1,12 +1,11 @@
-apm install project-manager
 apm install language-docker
 apt install language-cython
+apt install language-jenkins
 apm install atom-jinja2
 apm install highlight-selected
 apm install vim-mode
 apm install pretty-json
-apm install less-compiler
 apm install tabs-to-spaces
 apm install auto-detect-indentation
-apm install linter-flake8
-apm install python-tools
+apm install linter
+apm install linter-ui-default
