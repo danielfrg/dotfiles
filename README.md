@@ -45,8 +45,6 @@ In the iTerm2 preferences point to use a file from `~/workspace/dotfiles/iterm2/
 
 To install using [https://github.com/junegunn/vim-plug](https://github.com/junegunn/vim-plug): Open vim and run `:PlugInstall`.
 
-## Old and not used
-
 #### atom
 
 ```bash

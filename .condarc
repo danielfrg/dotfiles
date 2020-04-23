@@ -2,8 +2,8 @@ changeps1: False
 
 create_default_packages:
   - pip
-  - ipython
   - pylint
+  - black
 
 channels:
   - conda-forge

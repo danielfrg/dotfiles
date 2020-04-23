@@ -11,7 +11,7 @@ brew 'gnu-sed'
 brew 'gnu-tar'
 brew 'grep'
 
-# Fancy CLI stuff
+# CLI stuff
 brew 'zsh'
 brew 'fzf'
 brew 'bat'
@@ -37,7 +37,6 @@ brew 'curl'
 # brew 'curl', args: ['with-openssl']
 brew 'httpie'
 brew 'youtube-dl'
-brew 'wireguard-tools'
 
 # General dev
 brew 'neovim'
@@ -66,40 +65,39 @@ brew 'kubernetes-helm'
 
 # Others
 brew 'ffmpeg'
+brew 'wireguard-tools'
 
 ###################
 # Casks
 ###################
 
-cask '1password'
 cask 'brave-browser'
-cask 'google-chrome'
+# cask 'google-chrome'
 cask 'firefox'
-cask 'keyboard-maestro7'
 cask 'notion'
-cask 'evernote'
+cask '1password'
+cask 'keyboard-maestro7'
 cask 'alfred'
 cask 'clipy'
 cask 'keka'
 cask 'spotify'
-cask 'silverlight'
 cask 'windscribe'
 cask 'calibre'
-cask 'send-to-kindle'
 cask 'homebrew/cask-drivers/logitech-options'
 cask 'vlc'
 cask 'caption'
+cask 'slack'
 
 cask 'iterm2'
+cask 'atom'
 cask 'visual-studio-code'
 cask 'java'
 cask 'adoptopenjdk8'
 cask 'docker'
-cask 'vagrant'
-cask 'virtualbox'
+# cask 'vagrant'
+# cask 'virtualbox'
 cask 'insomia'
 cask 'google-cloud-sdk'
-cask 'slack'
 cask 'xquartz'
 cask 'ngrok'
 cask 'gpg-suite'

@@ -1,17 +1,3 @@
-'atom-text-editor.vim-mode.insert-mode':
-  'k': 'exit-insert-mode-if-preceded-by-j'
-  'right': 'null'
-  'left': 'null'
-  'up': 'null'
-  'down': 'null'
-
-'atom-text-editor.vim-mode:not(.insert-mode)':
-  '0': 'vim-mode:move-to-first-character-of-line'
-  'right': 'null'
-  'left': 'null'
-  'up': 'null'
-  'down': 'null'
-
 'atom-workspace atom-text-editor:not([mini])':
   'cmd-[': 'unset!'
   'cmd-]': 'unset!'
@@ -19,3 +5,9 @@
 'body':
   'cmd-[': 'pane:show-previous-item'
   'cmd-]': 'pane:show-next-item'
+
+'atom-text-editor.vim-mode-plus.insert-mode':
+  'j k': 'vim-mode-plus:activate-normal-mode' # jk to escape
+
+'atom-text-editor.vim-mode-plus:not(.insert-mode)':
+  '0': 'vim-mode-plus:move-to-first-character-of-line'
