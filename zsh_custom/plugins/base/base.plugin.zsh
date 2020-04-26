@@ -140,6 +140,7 @@ alias grr='git remote rm'
 alias gpu='git pull'
 alias gcl='git clone'
 
+alias atom='atom-nightly'
 # NeoVim
 alias vim="nvim"
 alias vimdiff="nvim -d"

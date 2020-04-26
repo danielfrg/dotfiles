@@ -17,11 +17,15 @@
   "exception-reporting":
     userId: "b2516874-e416-4e1a-9796-d414e7100dc0"
   "linter-ui-default": {}
+  "markdown-preview":
+    breakOnSingleNewline: true
+    useGitHubStyle: true
   "one-dark-ui":
     fontSize: 14
     stickyHeaders: true
   "one-light-ui":
     fontSize: 14
+  "sass-autocompile": {}
   "spell-check": {}
   "tree-view":
     hideIgnoredNames: true

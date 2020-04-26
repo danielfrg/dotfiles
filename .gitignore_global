@@ -1,6 +1,7 @@
 # General
 *~
 .DS_Store
+default.profraw
 
 # JetBrains (IntelliJ, GoLand, WebStorm, etc.)
 /.idea/
@@ -20,4 +21,3 @@
 .env
 .python-version
 .condaenv
-

@@ -49,6 +49,8 @@ brew 'unp'
 brew 'terraform'
 brew 'pandoc'
 brew 'hugo'
+brew 'node'
+brew 'node-sass'
 
 # Languages
 brew 'go'
@@ -60,6 +62,7 @@ brew 'yarn'
 brew 'kubectx'
 brew 'kube-ps1'
 brew 'kubernetes-helm'
+brew 'aws-iam-authenticator'
 # brew 'kubefwd'
 # brew 'draft'
 
