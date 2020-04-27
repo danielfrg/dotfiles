@@ -1,153 +1,128 @@
-set nocompatible
-" ^^^ Trust me!
+" Based on: https://github.com/jessfraz/.vim
 
-"""""""""""""""""""""""""""""""""""""""""""""""
-" Mostly based on: https://github.com/lucasfcosta/dotfiles/blob/master/.config/nvim/init.vim
-"""""""""""""""""""""""""""""""""""""""""""""""
+set nocompatible              " Leave this here trust me
+filetype off                  " required
 
-"""""""""""""""""""""""""""""""""""""""""""""""
-" General
-"""""""""""""""""""""""""""""""""""""""""""""""
+" Enable file type detection.
+" Use the default filetype settings, so that mail gets 'tw' set to 72,
+" 'cindent' is on in C files, etc.
+" Also load indent files, to automatically do language-dependent indenting.
+filetype plugin indent on
 
-set encoding=utf-8          " The encoding displayed
-set fileencoding=utf-8      " The encoding written to file
-syntax on                   " Enable syntax highlight
-set ttyfast                 " Faster redrawing
-set lazyredraw              " Only redraw when necessary
-set cursorline              " Find the current line quickly.
+" ------------------------------------------------------------------------------
+" Settings
 
-"""""""""""""""""""""""""""""""""""""""""""""""
-" Plugins List
-"""""""""""""""""""""""""""""""""""""""""""""""
+set noerrorbells                " No beeps
+set number                      " Show line numbers
+set backspace=indent,eol,start  " Makes backspace key more powerful.
+set showcmd                     " Show me what I'm typing
 
-call plug#begin('~/.vim/plugged')
-
-" neomake
-Plug 'neomake/neomake'
-
-" NERDTree
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-
-" Async FuzzyFind
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
-Plug 'junegunn/fzf.vim'
-
-call plug#end()
-
-"""""""""""""""""""""""""""""""""""""""""""""""
-" Visual Related Configs
-"""""""""""""""""""""""""""""""""""""""""""""""
-
-" 256 colors
-set t_Co=256
-
-" long lines as just one line (have to scroll horizontally)
-set nowrap
-
-" line numbers
-set number
-
-" show the status line all the time
+set noswapfile                  " Don't use swapfile
+set nobackup					          " Don't create annoying backup files
+set nowritebackup
+set splitright                  " Split vertical windows right to the current windows
+set splitbelow                  " Split horizontal windows below to the current windows
+set encoding=utf-8              " Set default encoding to UTF-8
+set autowrite                   " Automatically save before :next, :make etc.
+set autoread                    " Automatically reread changed files without asking me anything
 set laststatus=2
+set hidden
 
-" toggle invisible characters
-set invlist
-set list
-set listchars=tab:¦\ ,trail:⋅,extends:❯,precedes:❮
-" set listchars=tab:¦\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
+set ruler                       " Show the cursor position all the time
+au FocusLost * :wa              " Set vim to save the file on focus out.
 
-" disable scrollbars (real hackers don't use scrollbars)
-" set guioptions-=r
-" set guioptions-=R
-" set guioptions-=l
-" set guioptions-=L
+set fileformats=unix,dos,mac    " Prefer Unix over Windows over OS 9 formats
 
-" status line
-set statusline=%t\ %m\ %r\ [%{strlen(&fenc)?&fenc:'none'},%{&ff}]\ %y%=%c,%l/%L\ %P
+set noshowmode                  " We show the mode with airline or lightline
+set incsearch                   " Shows the match while typing
+set hlsearch                    " Highlight found searches
+set ignorecase                  " Search case insensitive...
+set smartcase                   " ... but not when search pattern contains upper case characters
+set ttyfast
+" set ttyscroll=3               " noop on linux ?
+set lazyredraw          	      " Wait to redraw "
 
-""""""""""""""""""""""""""""""
-" Mappings
-""""""""""""""""""""""""""""""
+" speed up syntax highlighting
+set nocursorcolumn
+set nocursorline
 
-" dont use arrowkeys
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
+syntax sync minlines=256
+set synmaxcol=300
+set re=1
 
-" really, just dont
-inoremap <Up>    <NOP>
-inoremap <Down>  <NOP>
-inoremap <Left>  <NOP>
-inoremap <Right> <NOP>
+" do not hide markdown
+set conceallevel=0
 
-" use 'jk' as Escape
-noremap jk <Esc>
-inoremap jk <Esc>
-map jk <Esc>
-imap jk <Esc>
+" open help vertically
+command! -nargs=* -complete=help Help vertical belowright help <args>
+autocmd FileType help wincmd L
 
-" copy and paste to/from vIM and the clipboard
-nnoremap <C-y> +y
-vnoremap <C-y> +y
-nnoremap <C-p> +P
-vnoremap <C-p> +P
+" Make Vim to handle long lines nicely.
+set wrap
+set textwidth=80
+set formatoptions=qrn1
 
-" access system clipboard
-set clipboard=unnamed
+" Do not use relative numbers to where the cursor is.
+set norelativenumber
 
-" swapfiles location
-set backupdir=/tmp//
-set directory=/tmp//
+" Apply the indentation of the current line to the next line.
+set autoindent
+set smartindent
+set complete-=i
+set showmatch
+set smarttab
 
-" map fzf to ctrl+p
-nnoremap <C-P> :Files<CR>
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
+set nrformats-=octal
+set shiftround
+
+" Time out on key codes but not mappings.
+" Basically this makes terminal Vim work sanely.
+set notimeout
+set ttimeout
+set ttimeoutlen=10
+
+" Better Completion
+set complete=.,w,b,u,t
+set completeopt=longest,menuone
+
+# History
+if &history < 1000
+  set history=50
+endif
+
+# Tab page max
+if &tabpagemax < 50
+  set tabpagemax=50
+endif
+
+" In many terminal emulators the mouse works just fine, thus enable it.
+if has('mouse')
+  set mouse=a
+endif
+
+" If linux then set ttymouse
+let s:uname = system("echo -n \"$(uname)\"")
+if !v:shell_error && s:uname == "Linux" && !has('nvim')
+  set ttymouse=xterm
+endif
+
+" Theme
+syntax enable
+set background=dark
+let base16colorspace=256
+colorscheme base16-default-dark
+set guifont=Inconsolata:h15
+set guioptions-=L
+
+" ------------------------------------------------------------------------------
+" Hotkeys
 
 " Fast saving
 nmap <leader>w :w!<cr>
 
-" Remap VIM 0 to first non-blank character
-map 0 ^
-
-" :W sudo saves the file
-" (useful for handling the permission-denied error)
-command W w !sudo tee % > /dev/null
-
-"""""""""""""""""""""""""""""""""""""""""""""""
-" Indentation
-"""""""""""""""""""""""""""""""""""""""""""""""
-
-" Use spaces instead of tabs
-set expandtab
-
-" Be smart when using tabs ;)
-" :help smarttab
-set smarttab
-
-" 1 tab == 4 spaces
-set shiftwidth=4
-set tabstop=4
-
-" Auto indent
-" Copy the indentation from the previous line when starting a new line
-set ai
-
-" Smart indent
-" Automatically inserts one extra level of indentation in some cases, and works for C-like files
-set si
-
-"""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin Related Configs
-"""""""""""""""""""""""""""""""""""""""""""""""
-
-" Neomake async hooks
-call neomake#configure#automake('w')
-
-" Open NERDTree automatically when vim starts up
-" autocmd vimenter * NERDTree
-" NERDTree
-let NERDTreeShowHidden=1
-map <silent> <C-n> :NERDTreeToggle<CR>
-
-" close NERDTree after a file is opened
-let g:NERDTreeQuitOnOpen=1
+" Just go out in insert mode
+imap jk <ESC>l
