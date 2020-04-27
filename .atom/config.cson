@@ -16,7 +16,8 @@
   editor: {}
   "exception-reporting":
     userId: "b2516874-e416-4e1a-9796-d414e7100dc0"
-  "linter-ui-default": {}
+  "linter-ui-default":
+    showPanel: true
   "markdown-preview":
     breakOnSingleNewline: true
     useGitHubStyle: true
