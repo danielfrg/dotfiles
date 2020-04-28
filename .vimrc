@@ -110,14 +110,6 @@ if !v:shell_error && s:uname == "Linux" && !has('nvim')
   set ttymouse=xterm
 endif
 
-" Theme
-syntax enable
-set background=dark
-let base16colorspace=256
-colorscheme base16-default-dark
-set guifont=Inconsolata:h15
-set guioptions-=L
-
 " ------------------------------------------------------------------------------
 " Hotkeys
 
@@ -126,3 +118,14 @@ nmap <leader>w :w!<cr>
 
 " Just go out in insert mode
 imap jk <ESC>l
+
+
+" ------------------------------------------------------------------------------
+" Theme
+
+syntax enable
+set background=dark
+let base16colorspace=256
+colorscheme base16-default-dark
+set guifont=Inconsolata:h15
+set guioptions-=L

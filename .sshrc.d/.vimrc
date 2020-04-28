@@ -1,114 +1,120 @@
-set nocompatible
-" ^^^ Trust me!
+" Based on: https://github.com/jessfraz/.vim
 
-""""""""""""""""""""""""""""""
-" General
-""""""""""""""""""""""""""""""
+set nocompatible              " Leave this here trust me
+filetype off                  " required
 
-" Set to auto read/write when a file is changed from the outside
-set autoread
-set autowrite
+" Enable file type detection.
+" Use the default filetype settings, so that mail gets 'tw' set to 72,
+" 'cindent' is on in C files, etc.
+" Also load indent files, to automatically do language-dependent indenting.
+filetype plugin indent on
 
-" Color scheme
-" colorscheme base16-railscasts
-" let base16colorspace=256 " Fix for green line numbers
+" ------------------------------------------------------------------------------
+" Settings
 
-" Enable syntax highlighting
-syntax on
+set noerrorbells                " No beeps
+set number                      " Show line numbers
+set backspace=indent,eol,start  " Makes backspace key more powerful.
+set showcmd                     " Show me what I'm typing
 
-" Display line numbers on the left
-set number
-set numberwidth=4
-
-" Show matching brackets when text indicator is over them
-set showmatch
-" How many tenths of a second to blink when matching brackets
-set mat=2
-
-" Use case insensitive search, except when using capital letters
-set ignorecase
-set smartcase
-
-" Makes search act like search in modern browsers
-set incsearch
-
-" When opening a new line and no filetype-specific indenting is enabled, keep
-" the same indent as the line you're currently on. Useful for READMEs, etc.
-set autoindent
-
-" Always display the status line, even if only one window is displayed
+set noswapfile                  " Don't use swapfile
+set nobackup					          " Don't create annoying backup files
+set nowritebackup
+set splitright                  " Split vertical windows right to the current windows
+set splitbelow                  " Split horizontal windows below to the current windows
+set encoding=utf-8              " Set default encoding to UTF-8
+set autowrite                   " Automatically save before :next, :make etc.
+set autoread                    " Automatically reread changed files without asking me anything
 set laststatus=2
+set hidden
 
-" Instead of failing a command because of unsaved changes, instead raise a
-" dialogue asking if you wish to save changed files.
-set confirm
+set ruler                       " Show the cursor position all the time
+au FocusLost * :wa              " Set vim to save the file on focus out.
 
-" Use visual bell instead of beeping when doing something wrong
-set visualbell
+set fileformats=unix,dos,mac    " Prefer Unix over Windows over OS 9 formats
 
-" Enable use of the mouse for all modes
-set mouse=a
+set noshowmode                  " We show the mode with airline or lightline
+set incsearch                   " Shows the match while typing
+set hlsearch                    " Highlight found searches
+set ignorecase                  " Search case insensitive...
+set smartcase                   " ... but not when search pattern contains upper case characters
+set ttyfast
+" set ttyscroll=3               " noop on linux ?
+set lazyredraw          	      " Wait to redraw "
 
-" Indentation settings for using 4 spaces instead of tabs.
-" Do not change 'tabstop' from its default value of 8 with this setup.
-set shiftwidth=4
-set softtabstop=4
-set expandtab
-" Be smart when using tabs ;)
+" speed up syntax highlighting
+set nocursorcolumn
+set nocursorline
+
+syntax sync minlines=256
+set synmaxcol=300
+set re=1
+
+" do not hide markdown
+set conceallevel=0
+
+" open help vertically
+command! -nargs=* -complete=help Help vertical belowright help <args>
+autocmd FileType help wincmd L
+
+" Make Vim to handle long lines nicely.
+set wrap
+set textwidth=80
+set formatoptions=qrn1
+
+" Do not use relative numbers to where the cursor is.
+set norelativenumber
+
+" Apply the indentation of the current line to the next line.
+set autoindent
+set smartindent
+set complete-=i
+set showmatch
 set smarttab
 
-" Turn backup off, since most stuff is in SVN, git et.c anyway...
-set nobackup
-set nowb
-set noswapfile
+set tabstop=4
+set shiftwidth=4
+set expandtab
 
-" Delete trailing white space on save, useful for Python and CoffeeScript
-func! DeleteTrailingWS()
-  exe "normal mz"
-  %s/\s\+$//ge
-  exe "normal `z"
-endfunc
-autocmd BufWrite *.py :call DeleteTrailingWS()
-autocmd BufWrite *.coffee :call DeleteTrailingWS()
+set nrformats-=octal
+set shiftround
 
-""""""""""""""""""""""""""""""
-" Status line
-""""""""""""""""""""""""""""""
+" Time out on key codes but not mappings.
+" Basically this makes terminal Vim work sanely.
+set notimeout
+set ttimeout
+set ttimeoutlen=10
 
-" Always show the status line
-set laststatus=2
+" Better Completion
+set complete=.,w,b,u,t
+set completeopt=longest,menuone
 
-set statusline=%t\ %m\ %r\ [%{strlen(&fenc)?&fenc:'none'},%{&ff}]\ %y%=%c,%l/%L\ %P
+# History
+if &history < 1000
+  set history=50
+endif
 
-""""""""""""""""""""""""""""""
-" Mappings
-""""""""""""""""""""""""""""""
+# Tab page max
+if &tabpagemax < 50
+  set tabpagemax=50
+endif
 
-" HardMode: Disable arrow keys
-nmap <up> <nop>
-nmap <down> <nop>
-nmap <left> <nop>
-nmap <right> <nop>
-imap <up> <nop>
-imap <down> <nop>
-imap <left> <nop>
-imap <right> <nop>
+" In many terminal emulators the mouse works just fine, thus enable it.
+if has('mouse')
+  set mouse=a
+endif
 
-nnoremap <silent> <ESC>OA <nop>
-nnoremap <silent> <ESC>OB <nop>
-nnoremap <silent> <ESC>OC <nop>
-nnoremap <silent> <ESC>OD <nop>
-inoremap <silent> <ESC>OA <nop>
-inoremap <silent> <ESC>OB <nop>
-inoremap <silent> <ESC>OC <nop>
-inoremap <silent> <ESC>OD <nop>
+" If linux then set ttymouse
+let s:uname = system("echo -n \"$(uname)\"")
+if !v:shell_error && s:uname == "Linux" && !has('nvim')
+  set ttymouse=xterm
+endif
+
+" ------------------------------------------------------------------------------
+" Hotkeys
 
 " Fast saving
 nmap <leader>w :w!<cr>
 
-" Remap VIM 0 to first non-blank character
-map 0 ^
-
-" use jk for <esc> and disable <esc>
-inoremap jk <esc>
-inoremap <esc> <nop>
+" Just go out in insert mode
+imap jk <ESC>l
