@@ -3,6 +3,7 @@ apt install language-cython
 apt install language-jenkins
 apm install atom-jinja2
 apm install language-terraform
+apm install language-powershell
 apm install atom-language-r
 apm install linter
 apm install linter-ui-default

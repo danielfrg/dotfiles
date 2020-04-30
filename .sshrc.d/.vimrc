@@ -89,12 +89,12 @@ set ttimeoutlen=10
 set complete=.,w,b,u,t
 set completeopt=longest,menuone
 
-# History
+" History
 if &history < 1000
   set history=50
 endif
 
-# Tab page max
+" Tab page max
 if &tabpagemax < 50
   set tabpagemax=50
 endif
