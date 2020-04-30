@@ -93,7 +93,7 @@ cask 'transmission'
 
 cask 'iterm2'
 cask 'atom'
-cask 'visual-studio-code'
+cask 'github'
 cask 'docker'
 cask 'insomia'
 cask 'gpg-suite'
