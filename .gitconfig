@@ -27,7 +27,7 @@
 	stash-all = stash save --include-untracked
 	update-origin-master = !git fetch upstream && git push origin upstream/master:master
 	pr = "!f() { git fetch upstream +refs/pull/$1/head:pr/$1; } ; f"
-	yolo = !git commit -am \"$(curl -s whatthecommit.com/index.txt)\"
+	yolo = !git commit -am \"$(curl -s whatthecommit.com/index.txt)\" && git push
 	nope = "!f() { git reset HEAD --hard && git clean -fd; } ; f"
   	fuckit = "!f() { git clean -d -x -f; git reset --hard; } ; f"
 

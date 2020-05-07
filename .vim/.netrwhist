@@ -1,3 +1,12 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =1
-let g:netrw_dirhist_1='/Users/danielfrg/workspace/atom-nbviewer'
+let g:netrw_dirhistcnt =3
+let g:netrw_dirhist_3='/Users/danielfrg/workspace/jupyter-flex/.github/workflows'
+let g:netrw_dirhist_2='/Users/danielfrg/workspace/jupyter-flex/.github'
+let g:netrw_dirhist_1='/Users/danielfrg/workspace/jupyter-flex'
+let g:netrw_dirhist_0='/Users/danielfrg/workspace/word2vec/.github/workflows'
+let g:netrw_dirhist_9='/Users/danielfrg/workspace/word2vec/.github'
+let g:netrw_dirhist_8='/Users/danielfrg/workspace/word2vec'
+let g:netrw_dirhist_7='/Users/danielfrg/workspace/s3contents/.github/workflows'
+let g:netrw_dirhist_6='/Users/danielfrg/workspace/s3contents/.github'
+let g:netrw_dirhist_5='/Users/danielfrg/workspace/s3contents'
+let g:netrw_dirhist_4='/Users/danielfrg/workspace/tsne/.github/workflows'

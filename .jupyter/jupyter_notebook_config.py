@@ -28,47 +28,23 @@ c.NotebookApp.tornado_settings = {
     "debug": True  # Auto restart
 }
 
-#######################################
-# s3contents stuff
-#######################################
+# ------------------------------------------------------------------------------
+# s3contents development
 
+# Tell Jupyter to use S3ContentsManager for storage
 # from s3contents import S3ContentsManager
-
 # c.NotebookApp.contents_manager_class = S3ContentsManager
+# c.S3ContentsManager.endpoint_url = "http://localhost:9000"
 # c.S3ContentsManager.access_key_id = "access-key"
 # c.S3ContentsManager.secret_access_key = "secret-key"
-# c.S3ContentsManager.endpoint_url = "http://localhost:9000"
-# c.S3ContentsManager.bucket = "notebooks"
-# c.S3ContentsManager.prefix = "this/is/the/prefix"
+# c.S3ContentsManager.bucket_name = "notebooks"
 
-# s3contents with HybridContentsManager
-# from s3contents import S3ContentsManager
-# from pgcontents.hybridmanager import HybridContentsManager
-# from IPython.html.services.contents.filemanager import FileContentsManager
+# from s3contents import GCSContentsManager
+# c.NotebookApp.contents_manager_class = GCSContentsManager
+# c.GCSContentsManager.project = "continuum-compute"
+# c.GCSContentsManager.token = "~/.config/gcloud/application_default_credentials.json"
+# c.GCSContentsManager.bucket = "gcsfs-test"
+# c.GCSContentsManager.prefix = "this/is/the/prefix"
 
-# c = get_config()
-
-# c.NotebookApp.contents_manager_class = HybridContentsManager
-
-# c.HybridContentsManager.manager_classes = {
-#     # Associate the root directory with a PostgresContentsManager.
-#     # This manager will receive all requests that don"t fall under any of the
-#     # other managers.
-#     "": S3ContentsManager,
-#     # Associate /directory with a FileContentsManager.
-#     "local_directory": FileContentsManager,
-# }
-
-# c.HybridContentsManager.manager_kwargs = {
-#     # Args for root PostgresContentsManager.
-#     "": {
-#         "access_key_id": "access-key",
-#         "secret_access_key": "secret-key",
-#         "endpoint_url": "http://localhost:9000",
-#         "bucket": "notebooks",
-#     },
-#     # Args for the FileContentsManager mapped to /directory
-#     "local_directory": {
-#         "root_dir": "/Users/danielfrg/Downloads",
-#     },
-# }
+# c.NotebookApp.open_browser = False
+# c.NotebookApp.tornado_settings = {"debug": True}
