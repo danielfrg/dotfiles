@@ -1,4 +1,4 @@
-// Place your key bindings in this file to overwrite the defaults
+// Place your key bindings in this file to override the defaults
 [
     {
         "key": "ctrl+tab",
@@ -10,13 +10,11 @@
     },
     {
         "key": "cmd+[",
-        "command": "workbench.action.previousEditor",
-        "when": "editorTextFocus && !editorReadonly"
+        "command": "workbench.action.previousEditor"
     },
     {
         "key": "cmd+]",
-        "command": "workbench.action.nextEditor",
-        "when": "editorTextFocus && !editorReadonly"
+        "command": "workbench.action.nextEditor"
     },
     {
         "key": "cmd+shift+d",
@@ -53,6 +51,4 @@
         "command": "editor.action.insertCursorBelow",
         "when": "editorTextFocus"
    },
-    { "key": "cmd+\\",          "command": "workbench.action.focusActiveEditorGroup", "when": "terminalFocus" },
-    { "key": "cmd+\\",          "command": "workbench.action.terminal.focus", "when": "!terminalFocus" },
 ]

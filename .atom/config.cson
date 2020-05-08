@@ -2,6 +2,7 @@
   autosave:
     enabled: true
   "base16-syntax":
+    matchUserInterfaceTheme: false
     scheme: "Google"
   core:
     audioBeep: false
@@ -14,7 +15,8 @@
       "one-light-ui"
       "base16-syntax"
     ]
-  editor: {}
+  editor:
+    fontSize: 15
   "exception-reporting":
     userId: "b2516874-e416-4e1a-9796-d414e7100dc0"
   "linter-ui-default":
@@ -31,5 +33,6 @@
   "spell-check": {}
   "tree-view":
     hideIgnoredNames: true
+    squashDirectoryNames: true
   welcome:
     showOnStartup: false

@@ -39,8 +39,8 @@ brew 'httpie'
 brew 'youtube-dl'
 
 # General dev
-brew 'neovim'
-brew 'gnupg'
+brew 'gpg2'
+brew 'pinentry-mac'
 brew 'git'
 brew 'hub'
 brew 'tmux'
@@ -51,6 +51,7 @@ brew 'pandoc'
 brew 'hugo'
 brew 'node'
 brew 'node-sass'
+brew 'neovim'
 
 # Languages
 brew 'go'
@@ -92,6 +93,7 @@ cask 'caption'
 cask 'transmission'
 
 cask 'iterm2'
+cask 'visual-studio-code'
 cask 'atom'
 cask 'github'
 cask 'docker'
