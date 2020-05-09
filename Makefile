@@ -1,8 +1,24 @@
+SHELL := bash
+.ONESHELL:
+.SHELLFLAGS := -eu -o pipefail -c
+.DELETE_ON_ERROR:
+MAKEFLAGS += --warn-undefined-variables
+MAKEFLAGS += --no-builtin-rules
+
+PWD := $(shell pwd)
+
+
+.PHONY: help
+help:  ## Show this help menu
+	@grep -E '^[0-9a-zA-Z_-]+:.*?##.*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?##"; OFS="\t\t"}; {printf "\033[36m%-30s\033[0m %s\n", $$1, ($$2==""?"":$$2)}'
+
+
+# ------------------------------------------------------------------------------
+
+
+.PHONY:xcode
 xcode:  ## Install xcode
 	xcode-select --install
-.PHONY:xcode
-
-install: homebrew ohmyzsh
 
 
 .PHONY: homebrew
@@ -13,6 +29,7 @@ homebrew:  ## Install homebrew
 .PHONY: brew
 brew:  ##
 	brew bundle
+
 
 .PHONY: ohmyzsh
 ohmyzsh: ## Download and install oh my zsh
@@ -31,17 +48,19 @@ conda:  ##
 	bash ~/Anaconda*.sh -b -p ~/conda
 
 
-link: fonts zsh git tmux sshrc vscode python jupyter rstudio vim  ## Create symlinks to the all the stuff
-
-
 .PHONY: fonts
 fonts:  ##
-	bash install-fonts.sh
+	./install-fonts.sh
+
+
+link: zsh git tmux sshrc vscode python jupyter r rstudio vim  gpg ## Create symlinks to the all the stuff
 
 
 .PHONY: zsh
 zsh:  ##
 	ln -sf $(CURDIR)/.zshrc ~/.zshrc
+	ln -sf $(CURDIR)/.p10k.zsh ~/.p10k.zsh
+
 
 .PHONY: git
 git:  ##
@@ -117,8 +136,3 @@ gpg:  ##
 	@ln -sf $(CURDIR)/.gnupg/gpg.conf ~/.gnupg/gpg.conf
 	@ln -sf $(CURDIR)/.gnupg/gpg-agent.conf ~/.gnupg/gpg-agent.conf
 	@echo "Manually run 'gpg --import <file>' for the public and private keys"
-
-
-.PHONY: help
-help:
-	@grep -E '^[a-zA-Z_-]+:.*?##.*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?##"; OFS="\t\t"}; {printf "\033[36m%-30s\033[0m %s\n", $$1, ($$2==""?"":$$2)}'

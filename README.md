@@ -1,6 +1,10 @@
 # dotfiles
 
-## Install
+## Install from scratch
+
+```
+xcode-select --install
+```
 
 Add SSH key to `~/.ssh/id_rsa`
 
@@ -11,25 +15,30 @@ ssh-add ~/.ssh/id_rsa
 
 # Clone the repo:
 mkdir -p ~/workspace
-git clone git@github.com:danielfrg/dotfiles.git ~/workspace/dotfiles --recursive
+git clone git@github.com:danielfrg/dotfiles.git ~/workspace/dotfiles --recurse-submodules --remote-submodules
 ```
 
 Docs:
 - [Github ssh keys](https://help.github.com/articles/generating-ssh-keys)
 
-### make
+## Install config
 
 ```
-make install
+make homebrew
+make ohmyzsh
 make brew
-make anaconda up
+make fonts
+make anaconda
+make up
+```
+
+```
 make link
-make gpg
 ```
 
 ## Manual steps
 
-#### GPG
+### GPG
 
 Import the gpg keys:
 
@@ -37,13 +46,11 @@ Import the gpg keys:
 gpg --import <file>
 ```
 
-#### iTerm2
+### iTerm2
 
 In the iTerm2 preferences point to use a file from `~/workspace/dotfiles/iterm2/preferences`
 
-#### vim
-
-To install using [https://github.com/junegunn/vim-plug](https://github.com/junegunn/vim-plug): Open vim and run `:PlugInstall`.
+### Legacy
 
 #### atom
 
