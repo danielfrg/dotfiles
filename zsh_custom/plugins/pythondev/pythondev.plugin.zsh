@@ -8,17 +8,20 @@ alias workhere='source $PWD/.venv/bin/activate'
 fpath+=$PWD
 compinit conda
 
-# export CONDA_PREFIX=base
-
 # Auto activate conda envs
 # thisdir=${0:a:h}
 # source $thisdir/conda_auto_env.sh
 # autoload -U add-zsh-hook
 # add-zsh-hook chpwd conda_auto_env
 
-# Pipenv stuff
-export PIPENV_VENV_IN_PROJECT=true
-export PIPENV_SKIP_LOCK=true
+
+function pyclean() {
+    find . -type f -name '*.py[co]' -delete
+	find . -type d -name __pycache__ -exec rm -rf {} +
+	find . -type d -name .ipynb_checkpoints -exec rm -rf {} +
+}
+
+
 
 # function conda_prompt_info() {
 #     echo "(%{$fg[yellow]%}py%{$reset_color%}:$CONDA_DEFAULT_ENV)"

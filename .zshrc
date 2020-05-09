@@ -12,7 +12,7 @@ ZSH_CUSTOM=~/workspace/dotfiles/zsh_custom
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(base z fzf git imgcat conda golang2 java docker2 k8s clouds)
+plugins=(base z fzf git imgcat dockerdev pythondev golangdev java k8s clouds)
 
 # User configuration
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
