@@ -1,30 +1,38 @@
 // Place your settings in this file to overwrite the default settings
 {
-    "explorer.openEditors.visible": 0,
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "breadcrumbs.enabled": false,
+    "editor.cursorStyle": "line-thin",
+    "editor.foldingHighlight": false,
+    "editor.fontFamily": "JetBrains Mono, Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontLigatures": true,
     "editor.fontSize": 15,
-    "terminal.integrated.fontFamily": "DejaVu Sans Mono for Powerline",
+    "editor.hideCursorInOverviewRuler": true,
+    "editor.minimap.showSlider": "always",
+    "editor.multiCursorModifier": "ctrlCmd",
+    "editor.padding.bottom": 10,
+    "editor.padding.top": 10,
+    "editor.parameterHints.enabled": false,
+    "editor.renderIndentGuides": false,
+    "editor.renderLineHighlight": "gutter",
+    "editor.renderWhitespace": "none",
+    "editor.roundedSelection": false,
+    "editor.rulers": [
+        80
+    ],
+    "editor.scrollBeyondLastLine": false,
+    "explorer.openEditors.visible": 0,
+    "extensions.ignoreRecommendations": true,
     "files.autoSave": "onFocusChange",
     "files.insertFinalNewline": true,
-    "vim.insertModeKeyBindings": [
-        {
-            "before": ["j","k"],
-            "after": ["<Esc>"]
-        }
-    ],
-    "vim.otherModesKeyBindingsNonRecursive": [
-        {
-            "before": [";"],
-            "after": [],
-            "commands": [
-                {
-                    "command": "workbench.action.showCommands",
-                    "args": []
-                }
-            ]
-        }
-    ],
-    "vim.disableAnnoyingNeovimMessage": true,
-    "liveSassCompile.settings.formats":[
+    "files.trimTrailingWhitespace": true,
+    "git.autofetch": true,
+    "liveSassCompile.settings.formats": [
         // This is the default
         // {
         //     "format": "expanded",
@@ -33,67 +41,79 @@
         // },
         // Compressed
         {
-            "format": "compressed",
-            "extensionName": ".min.css"
+            "extensionName": ".min.css",
+            "format": "compressed"
         }
     ],
-    "git.autofetch": true,
     "liveSassCompile.settings.generateMap": true,
+    "prettier.requireConfig": true,
     "python.dataScience.useNotebookEditor": false,
-    "editor.parameterHints.enabled": false,
+    "scm.diffDecorationsGutterWidth": 2,
+    "terminal.integrated.fontFamily": "JetBrains Mono, DejaVu Sans Mono for Powerline",
+    "terminal.integrated.inheritEnv": false,
     "timeline.excludeSources": [],
-    "workbench.fontAliasing": "antialiased",
-    "workbench.colorTheme": "GitHub Plus",
-    "workbench.tree.indent": 22,
-    "editor.cursorStyle": "line-thin",
-    "workbench.iconTheme": "vs-minimal",
-    "breadcrumbs.enabled": false,
+    "vim.disableAnnoyingNeovimMessage": true,
+    "vim.insertModeKeyBindings": [
+        {
+            "after": [
+                "<Esc>"
+            ],
+            "before": [
+                "j",
+                "k"
+            ]
+        }
+    ],
+    "vim.otherModesKeyBindingsNonRecursive": [
+        {
+            "after": [],
+            "before": [
+                ";"
+            ],
+            "commands": [
+                {
+                    "args": [],
+                    "command": "workbench.action.showCommands"
+                }
+            ]
+        }
+    ],
+    "window.nativeTabs": true,
     "window.zoomLevel": 0,
     "workbench.activityBar.visible": false,
-    "editor.renderLineHighlight": "gutter",
-    "scm.diffDecorationsGutterWidth": 2,
-    "editor.foldingHighlight": false,
-    "workbench.editor.highlightModifiedTabs": true,
-    "zenMode.hideTabs": false,
-    "extensions.ignoreRecommendations": true,
-    "window.nativeTabs": true,
-    "workbench.startupEditor": "none",
-    "editor.hideCursorInOverviewRuler": true,
-    "editor.multiCursorModifier": "ctrlCmd",
-    "editor.padding.top": 10,
-    "editor.padding.bottom": 10,
-    "editor.renderWhitespace": "none",
-    "editor.roundedSelection": false,
-    "editor.rulers": [80],
-    "editor.scrollBeyondLastLine": false,
-    "editor.minimap.showSlider": "always",
-    "editor.renderIndentGuides": false,
     "workbench.colorCustomizations": {
         "editor.background": "#FAFAFA",
-		"editor.foreground": "#323334",
-        // Tree/sidebar
+        "editor.foreground": "#323334",
         "sideBar.background": "#F0F0F0",
         "sideBar.foreground": "#323334",
-        // Terminal
-        "terminal.foreground" : "#e4e4e4",
-        "terminal.background":"#1D2021",
-        "terminalCursor.background":"#A89984",
-        "terminalCursor.foreground":"#A89984",
-        "terminal.ansiBlack":"#1D2021",
-        "terminal.ansiBlue":"#0D6678",
-        "terminal.ansiBrightBlack":"#665C54",
-        "terminal.ansiBrightBlue":"#0D6678",
-        "terminal.ansiBrightCyan":"#8BA59B",
-        "terminal.ansiBrightGreen":"#95C085",
-        "terminal.ansiBrightMagenta":"#8F4673",
-        "terminal.ansiBrightRed":"#FB543F",
-        "terminal.ansiBrightWhite":"#FDF4C1",
-        "terminal.ansiBrightYellow":"#FAC03B",
-        "terminal.ansiCyan":"#8BA59B",
-        "terminal.ansiGreen":"#95C085",
-        "terminal.ansiMagenta":"#8F4673",
-        "terminal.ansiRed":"#FB543F",
-        "terminal.ansiWhite":"#A89984",
-        "terminal.ansiYellow":"#FAC03B",
+        "terminal.ansiBlack": "#1D2021",
+        "terminal.ansiBlue": "#0D6678",
+        "terminal.ansiBrightBlack": "#665C54",
+        "terminal.ansiBrightBlue": "#0D6678",
+        "terminal.ansiBrightCyan": "#8BA59B",
+        "terminal.ansiBrightGreen": "#95C085",
+        "terminal.ansiBrightMagenta": "#8F4673",
+        "terminal.ansiBrightRed": "#FB543F",
+        "terminal.ansiBrightWhite": "#FDF4C1",
+        "terminal.ansiBrightYellow": "#FAC03B",
+        "terminal.ansiCyan": "#8BA59B",
+        "terminal.ansiGreen": "#95C085",
+        "terminal.ansiMagenta": "#8F4673",
+        "terminal.ansiRed": "#FB543F",
+        "terminal.ansiWhite": "#A89984",
+        "terminal.ansiYellow": "#FAC03B",
+        "terminal.background": "#1D2021",
+        "terminal.foreground": "#e4e4e4",
+        "terminalCursor.background": "#A89984",
+        "terminalCursor.foreground": "#A89984"
     },
+    "workbench.colorTheme": "GitHub Plus",
+    "workbench.editor.highlightModifiedTabs": true,
+    "workbench.fontAliasing": "antialiased",
+    "workbench.iconTheme": "vs-minimal",
+    "workbench.startupEditor": "none",
+    "workbench.tree.indent": 22,
+    "zenMode.hideTabs": false,
+    "python.dataScience.sendSelectionToInteractiveWindow": true,
+    "editor.formatOnSave": true,
 }
