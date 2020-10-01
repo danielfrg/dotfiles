@@ -6,7 +6,11 @@
     "[jsonc]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
     "breadcrumbs.enabled": false,
+    "editor.formatOnSave": true,
     "editor.cursorStyle": "line-thin",
     "editor.foldingHighlight": false,
     "editor.fontFamily": "JetBrains Mono, Menlo, Monaco, 'Courier New', monospace",
@@ -32,26 +36,21 @@
     "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
     "git.autofetch": true,
-    "liveSassCompile.settings.formats": [
-        // This is the default
-        // {
-        //     "format": "expanded",
-        //     "extensionName": ".css",
-        //     "savePath": null
-        // },
-        // Compressed
-        {
-            "extensionName": ".min.css",
-            "format": "compressed"
-        }
-    ],
-    "liveSassCompile.settings.generateMap": true,
-    "prettier.requireConfig": true,
+    "python.dataScience.sendSelectionToInteractiveWindow": true,
     "python.dataScience.useNotebookEditor": false,
+    "python.formatting.provider": "black",
+    "prettier.requireConfig": true,
     "scm.diffDecorationsGutterWidth": 2,
     "terminal.integrated.fontFamily": "JetBrains Mono, DejaVu Sans Mono for Powerline",
     "terminal.integrated.inheritEnv": false,
     "timeline.excludeSources": [],
+    "search.exclude": {
+        // Run command (cmd+shift+P) "clear editor history" after changing this
+        "**/.git": true,
+        "**/node_modules": true,
+        "**/*.egg-info": true,
+        "**/.pytest_cache": true,
+    },
     "vim.disableAnnoyingNeovimMessage": true,
     "vim.insertModeKeyBindings": [
         {
@@ -80,7 +79,7 @@
     ],
     "window.nativeTabs": true,
     "window.zoomLevel": 0,
-    "workbench.activityBar.visible": false,
+    "workbench.activityBar.visible": true,
     "workbench.colorCustomizations": {
         "editor.background": "#FAFAFA",
         "editor.foreground": "#323334",
@@ -114,6 +113,20 @@
     "workbench.startupEditor": "none",
     "workbench.tree.indent": 22,
     "zenMode.hideTabs": false,
-    "python.dataScience.sendSelectionToInteractiveWindow": true,
-    "editor.formatOnSave": true,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "liveSassCompile.settings.formats": [
+        // This is the default
+        // {
+        //     "format": "expanded",
+        //     "extensionName": ".css",
+        //     "savePath": null
+        // },
+        // Compressed
+        {
+            "extensionName": ".min.css",
+            "format": "compressed"
+        }
+    ],
+    "liveSassCompile.settings.generateMap": false,
+    "python.dataScience.interactiveWindowMode": "perFile",
 }

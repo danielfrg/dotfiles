@@ -35,6 +35,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # ------------------------------------------------------------------------------
 
 export PATH=/usr/local/sbin:$PATH
+export PATH=/usr/local/opt/make/libexec/gnubin:$PATH
 # export PATH=$(brew --prefix coreutils)/libexec/bin:$PATH       # Slow
 export PATH=/usr/local/opt/coreutils/libexec/bin:$PATH           # Fast
 # export PATH=$(brew --prefix moreutils)/libexec/gnubin:$PATH    # Slow
