@@ -81,6 +81,7 @@
     "window.zoomLevel": 0,
     "workbench.activityBar.visible": true,
     "workbench.colorCustomizations": {
+        "statusBar.foreground": "#24292e",
         "editor.background": "#FAFAFA",
         "editor.foreground": "#323334",
         "sideBar.background": "#F0F0F0",
@@ -129,4 +130,5 @@
     ],
     "liveSassCompile.settings.generateMap": false,
     "python.dataScience.interactiveWindowMode": "perFile",
+    "diffEditor.ignoreTrimWhitespace": false,
 }
