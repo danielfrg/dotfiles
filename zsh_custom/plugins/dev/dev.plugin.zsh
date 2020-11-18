@@ -74,33 +74,33 @@ function pyclean() {
 # local tools_dir=~/go
 # export PATH=$tools_dir/bin:$PATH
 
-export GOPATH=~/go
-export PATH=$GOPATH/bin:$PATH
+# export GOPATH=~/go
+# export PATH=$GOPATH/bin:$PATH
 
-gopathhere() {
-    export GOPATH=$(pwd)
-    export PATH=$GOPATH/bin:$PATH
-    export GOBIN=$(pwd)/bin
-    echo GOPATH=$GOPATH
-    echo PATH=$PATH
-    echo GOBIN=$GOBIN
-}
+# gopathhere() {
+#     export GOPATH=$(pwd)
+#     export PATH=$GOPATH/bin:$PATH
+#     export GOBIN=$(pwd)/bin
+#     echo GOPATH=$GOPATH
+#     echo PATH=$PATH
+#     echo GOBIN=$GOBIN
+# }
 
-goinstalltools() {
-    # local old_path=$PATH
-    # local old_go_path=$GOPATH
-    # export GOPATH=$tools_dir
-    go get -v -u golang.org/x/lint/golint
-    go get -v -u github.com/derekparker/delve/cmd/dlv
-    go get -v -u github.com/uudashr/gopkgs/cmd/gopkgs
-    go get -v -u github.com/nsf/gocode
-    go get -v -u github.com/rogpeppe/godef
-    go get -v -u golang.org/x/tools/cmd/goimports
-    go get -v -u github.com/ramya-rao-a/go-outline
-    go get -u -v github.com/mdempsky/gocode
-    # export PATH=$old_path
-    # export GOPATH=$old_go_path
-}
+# goinstalltools() {
+#     # local old_path=$PATH
+#     # local old_go_path=$GOPATH
+#     # export GOPATH=$tools_dir
+#     go get -v -u golang.org/x/lint/golint
+#     go get -v -u github.com/derekparker/delve/cmd/dlv
+#     go get -v -u github.com/uudashr/gopkgs/cmd/gopkgs
+#     go get -v -u github.com/nsf/gocode
+#     go get -v -u github.com/rogpeppe/godef
+#     go get -v -u golang.org/x/tools/cmd/goimports
+#     go get -v -u github.com/ramya-rao-a/go-outline
+#     go get -u -v github.com/mdempsky/gocode
+#     # export PATH=$old_path
+#     # export GOPATH=$old_go_path
+# }
 
 
 # JS ---------------------------------------------------------------------------
@@ -122,3 +122,4 @@ export JRE_HOME=`/usr/libexec/java_home`
 docker-stop-all() { docker stop $(docker ps -a -q) }
 docker-prune() {docker system prune -f }
 docker-clean() { docker-stop-all; docker-prune; }
+docker-rmi-prefix () { docker rmi -f $(docker images --filter=reference='prefix*' --format '{{.Repository}}:{{.Tag}}') }

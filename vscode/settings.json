@@ -36,8 +36,6 @@
     "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
     "git.autofetch": true,
-    "python.dataScience.sendSelectionToInteractiveWindow": true,
-    "python.dataScience.useNotebookEditor": false,
     "python.formatting.provider": "black",
     "prettier.requireConfig": true,
     "scm.diffDecorationsGutterWidth": 2,
@@ -129,6 +127,8 @@
         }
     ],
     "liveSassCompile.settings.generateMap": false,
-    "python.dataScience.interactiveWindowMode": "perFile",
     "diffEditor.ignoreTrimWhitespace": false,
+    "jupyter.sendSelectionToInteractiveWindow": true,
+    "jupyter.useNotebookEditor": false,
+    "jupyter.interactiveWindowMode": "perFile",
 }

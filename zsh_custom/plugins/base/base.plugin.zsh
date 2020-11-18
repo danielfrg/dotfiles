@@ -4,30 +4,7 @@ BASE16_SHELL="$HOME/workspace/dotfiles/iterm2/base16-tomorrow.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 # Theme
-
 ZSH_THEME="powerlevel10k/powerlevel10k"
-
-# POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
-# POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir anaconda virtualenv_joined vcs)
-# POWERLEVEL9K_DISABLE_RPROMPT=true
-# # To print all the colors:
-# # for code ({000..255}) print -P -- "$code: %F{$code}This is how your text would look like%f"
-# POWERLEVEL9K_DIR_HOME_FOREGROUND='232'
-# POWERLEVEL9K_DIR_HOME_BACKGROUND='012'
-# POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND='232'
-# POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND='012'
-# POWERLEVEL9K_DIR_DEFAULT_FOREGROUND='232'
-# POWERLEVEL9K_DIR_DEFAULT_BACKGROUND='012'
-# POWERLEVEL9K_DIR_ETC_FOREGROUND='232'
-# POWERLEVEL9K_DIR_ETC_BACKGROUND='012'
-# POWERLEVEL9K_ANACONDA_LEFT_DELIMITER=""
-# POWERLEVEL9K_ANACONDA_RIGHT_DELIMITER=""
-# POWERLEVEL9K_ANACONDA_FOREGROUND='007'
-# POWERLEVEL9K_ANACONDA_BACKGROUND='022'
-# POWERLEVEL9K_VIRTUALENV_FOREGROUND='007'
-# POWERLEVEL9K_VIRTUALENV_BACKGROUND='022'
-# POWERLEVEL9K_KUBECONTEXT_FOREGROUND='007'
-# POWERLEVEL9K_KUBECONTEXT_BACKGROUND='017'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -113,7 +90,7 @@ alias .....="cd ../../../.."
 # Shortcuts
 alias cdw='cd ~/workspace'
 alias work='cd ~/workspace'
-alias cdr='cd ~/workspace/rstudio'
+alias cda='cd ~/workspace/algorithmia'
 alias cddw="cd ~/Downloads"
 
 # Typos
