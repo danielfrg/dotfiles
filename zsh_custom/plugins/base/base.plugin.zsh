@@ -69,7 +69,7 @@ alias mv='mv -i'
 alias mkdir='mkdir -p' # -> Prevents accidentally clobbering files.
 
 alias h='history'
-# alias j='jobs -l'
+alias j='jobs -l'
 alias which='type -a'
 alias path='echo -e ${PATH//:/\\n}'
 alias libpath='echo -e ${LD_LIBRARY_PATH//:/\\n}'
@@ -138,7 +138,7 @@ alias untar='tar xvf'
 
 # Replacements
 alias ssh='sshrc'
-# alias cat='bat'
+alias cat='bat'
 alias ping='prettyping --nolegend'
 alias top='htop'
 alias preview="fzf --preview 'bat --color \"always\" {}'"
@@ -153,9 +153,6 @@ alias sha256sum="shasum -a 256"
 exportpathhere() { export PATH=$(pwd):$PATH }
 whoseport() { lsof -i ":$1" | grep LISTEN }
 alias docker-transmission="open http://localhost:9091 && docker run -it -v ~/Downloads:/downloads -p 9091:9091 linuxserver/transmission"
-
-# My apps
-alias dinero='/Users/danielfrg/conda/envs/dinero/bin/dinero'
 
 # ===============================================
 # KEEP AT THE END: Stuff that want at startup but not commited
