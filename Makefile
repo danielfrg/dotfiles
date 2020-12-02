@@ -40,7 +40,7 @@ fonts:  ##
 # ------------------------------------------------------------------------------
 
 
-link: zsh git tmux sshrc vscode python jupyter r rstudio vim  gpg ## Create symlinks to the all the stuff
+link: zsh git tmux vscode python jupyter r rstudio vim gpg ## Create symlinks to the all the stuff
 
 
 zsh:  ##
