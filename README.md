@@ -18,18 +18,14 @@ mkdir -p ~/workspace
 git clone git@github.com:danielfrg/dotfiles.git ~/workspace/dotfiles --recurse-submodules --remote-submodules
 ```
 
-Docs:
-- [Github ssh keys](https://help.github.com/articles/generating-ssh-keys)
-
 ## Install config
 
 ```
 make homebrew
-make ohmyzsh
 make brew
-make fonts
-make anaconda
+make ohmyzsh
 make up
+make fonts
 ```
 
 ```

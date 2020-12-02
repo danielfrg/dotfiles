@@ -7,11 +7,10 @@ brew 'coreutils'
 brew 'moreutils'
 brew 'findutils'
 brew 'gnu-sed'
-# brew 'gnu-sed', args: ['with-default-names']
 brew 'gnu-tar'
 brew 'grep'
 
-# CLI stuff
+# CLI tools
 brew 'zsh'
 brew 'fzf'
 brew 'bat'
@@ -29,54 +28,51 @@ brew 'jq'
 brew 'mobile-shell'
 brew 'sshrc'
 brew 'rmtrash'
-brew 'ruby'
 brew 'rsync'
 
 # Install download utilities.
 brew 'wget'
 brew 'curl'
-# brew 'curl', args: ['with-openssl']
 brew 'httpie'
 brew 'youtube-dl'
 
 # General dev
+brew 'git'
+brew 'gh'
 brew 'gpg2'
 brew 'pinentry-mac'
-brew 'git'
-brew 'github/gh/gh'
 brew 'tmux'
 brew 'direnv'
 brew 'unp'
 brew 'terraform'
 brew 'pandoc'
 brew 'hugo'
-brew 'node'
-brew 'node-sass'
 brew 'neovim'
 
-# Languages
-brew 'go'
-brew 'dep'
+# JS
 brew 'node'
 brew 'yarn'
+
+# Go
+# brew 'go'
+# brew 'dep'
 
 # k8s
 brew 'kubectx'
 brew 'kube-ps1'
 brew 'kubernetes-helm'
-brew 'aws-iam-authenticator'
+# brew 'aws-iam-authenticator'
 # brew 'kubefwd'
 # brew 'draft'
 
 # Others
 brew 'ffmpeg'
-brew 'wireguard-tools'
+# brew 'wireguard-tools'
 
 ###################
 # Casks
 ###################
 
-cask 'brave-browser'
 cask 'firefox'
 cask 'notion'
 cask '1password'
@@ -86,23 +82,19 @@ cask 'clipy'
 cask 'keka'
 cask 'calibre'
 cask 'homebrew/cask-drivers/logitech-options'
-cask 'windscribe'
-cask 'slack'
-cask 'spotify'
 cask 'vlc'
-cask 'caption'
 cask 'transmission'
+cask 'windscribe'
 
+# Development
 cask 'iterm2'
 cask 'visual-studio-code'
-cask 'atom'
-cask 'github'
 cask 'docker'
 cask 'insomia'
 cask 'gpg-suite'
-cask 'keybase'
-cask 'google-cloud-sdk'
 cask 'xquartz'
 cask 'ngrok'
 cask 'java'
 cask 'adoptopenjdk8'
+# cask 'google-cloud-sdk'
+cask 'slack'
