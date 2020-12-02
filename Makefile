@@ -33,7 +33,7 @@ up:  ## Download and install up
 	@chmod +x /usr/local/bin/up
 
 
-PHONY: fonts
+.PHONY: fonts
 fonts:  ##
 	./install-fonts.sh
 
