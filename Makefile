@@ -63,13 +63,14 @@ tmux:  ##
 # 	ln -sf $(CURDIR)/.sshrc.d ~/.sshrc.d
 
 
+.PHONY: vscode
 vscode:  ##
 	ln -sf $(CURDIR)/vscode/settings.json ~/Library/Application\ Support/Code/User/settings.json ; \
 	ln -sf $(CURDIR)/vscode/keybindings.json ~/Library/Application\ Support/Code/User/keybindings.json ; \
 	rm -rf ~/Library/Application\ Support/Code/User/snippets && ln -sf $(CURDIR)/vscode/snippets/ ~/Library/Application\ Support/Code/User
 
 
-vscode-ext:  ##
+vscode-extensions:  ##
 	bash $(CURDIR)/vscode/extensions.sh
 
 
@@ -79,8 +80,6 @@ python:  ##
 	ln -sf $(CURDIR)/.pypirc ~/.pypirc ; \
 	ln -sf $(CURDIR)/.pylintrc ~/.pylintrc ; \
 	ln -sf $(CURDIR)/.condarc ~/.condarc ; \
-	mkdir -p ~/Library/Application\ Support/pypoetry/ ; \
-	ln -sf $(CURDIR)/poetry/config.toml ~/Library/Application\ Support/pypoetry/config.toml
 
 
 jupyter:
@@ -90,7 +89,7 @@ jupyter:
 
 
 r:  ##
-	ln -sF $(CURDIR)/.Rprofile ~/.Rprofile
+	ln -sf $(CURDIR)/.Rprofile ~/.Rprofile
 
 
 rstudio:  ##

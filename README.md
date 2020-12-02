@@ -32,6 +32,9 @@ make fonts
 make link
 ```
 
+```
+make vscode-extensions
+
 ## Manual steps
 
 ### GPG
