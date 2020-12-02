@@ -1,8 +1,5 @@
 #!/usr/bin/python
 # encoding: utf-8
-
-# FROM: https://github.com/deanishe/alfred-fuzzy
-
 #
 # Copyright (c) 2017 Dean Jackson <deanishe@deanishe.net>
 #
