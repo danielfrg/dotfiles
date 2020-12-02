@@ -57,9 +57,9 @@ tmux:  ##
 	ln -sf $(CURDIR)/.tmux.conf ~/.tmux.conf
 
 
-sshrc:  ##
-	ln -sf $(CURDIR)/.sshrc ~/.sshrc; \
-	ln -sf $(CURDIR)/.sshrc.d ~/.sshrc.d
+# sshrc:  ##
+# 	ln -sf $(CURDIR)/.sshrc ~/.sshrc; \
+# 	ln -sf $(CURDIR)/.sshrc.d ~/.sshrc.d
 
 
 vscode:  ##

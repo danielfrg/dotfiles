@@ -26,8 +26,6 @@ brew 'autojump'
 brew 'tldr'
 brew 'jq'
 brew 'mobile-shell'
-brew 'sshrc'
-brew 'rmtrash'
 brew 'rsync'
 
 # Install download utilities.
