@@ -45,25 +45,3 @@ gpg --import <file>
 ### iTerm2
 
 In the iTerm2 preferences point to use a file from `~/workspace/dotfiles/iterm2/preferences`
-
-### Legacy
-
-#### atom
-
-```bash
-bash .atom/packages.sh
-
-ln -sf $(pwd)/.atom/projects.cson ~/.atom/projects.cson
-ln -sf $(pwd)/.atom/config.cson ~/.atom/config.cson
-ln -sf $(pwd)/.atom/init.coffee ~/.atom/init.coffee
-ln -sf $(pwd)/.atom/keymap.cson ~/.atom/keymap.cson
-ln -sf $(pwd)/.atom/styles.less ~/.atom/styles.less
-ln -sf $(pwd)/.atom/snippets.cson ~/.atom/snippets.cson
-
-# My packages:
-git clone git@github.com:danielfrg/atom-nbviewer.git ~/workspace/atom-nbviewer
-pushd ~/workspace/atom-nbviewer
-apm install
-popd
-ln -sF ~/workspace/atom-nbviewer ~/.atom/packages/nbviewer
-```
