@@ -91,8 +91,10 @@ cask 'gpg-suite'
 cask 'iterm2'
 cask 'visual-studio-code'
 cask 'docker'
+cask 'slack'
+cask 'zoom'
+
+# No icon
 cask 'xquartz'
 cask 'ngrok'
 cask 'adoptopenjdk8'
-cask 'slack'
-cask 'zoom'
