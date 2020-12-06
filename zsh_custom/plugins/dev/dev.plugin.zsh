@@ -1,3 +1,10 @@
+# DOCKER -----------------------------------------------------------------------
+
+docker-stop-all() { docker stop $(docker ps -a -q) }
+docker-prune() {docker system prune -f }
+docker-clean() { docker-stop-all; docker-prune; }
+docker-rmi-prefix () { docker rmi -f $(docker images --filter=reference='prefix*' --format '{{.Repository}}:{{.Tag}}') }
+
 # PYTHON -----------------------------------------------------------------------
 
 # For Jupyter and Voila bug
@@ -69,6 +76,16 @@ function pyclean() {
 #     source $ANACONDA/bin/deactivate
 # }
 
+# JS ---------------------------------------------------------------------------
+
+alias npmreset="rm -rf node_modules && npm i"
+# alias npmreset="rm -rf node_modules && nvm use && npm i"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+
 # GO ---------------------------------------------------------------------------
 
 # local tools_dir=~/go
@@ -102,13 +119,6 @@ function pyclean() {
 #     # export GOPATH=$old_go_path
 # }
 
-
-# JS ---------------------------------------------------------------------------
-
-alias npmreset="rm -rf node_modules && npm i"
-# alias npmreset="rm -rf node_modules && nvm use && npm i"
-
-
 # JAVA -------------------------------------------------------------------------
 
 export JAVA_HOME=`/usr/libexec/java_home`
@@ -116,10 +126,3 @@ export JRE_HOME=`/usr/libexec/java_home`
 # export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 # export JRE_HOME=`/usr/libexec/java_home -v 1.8`
 
-
-# DOCKER -----------------------------------------------------------------------
-
-docker-stop-all() { docker stop $(docker ps -a -q) }
-docker-prune() {docker system prune -f }
-docker-clean() { docker-stop-all; docker-prune; }
-docker-rmi-prefix () { docker rmi -f $(docker images --filter=reference='prefix*' --format '{{.Repository}}:{{.Tag}}') }

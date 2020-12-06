@@ -71,17 +71,17 @@ brew 'ffmpeg'
 # Casks
 ###################
 
-cask 'firefox'
-cask 'brave-browser'
 cask 'alfred'
 cask 'keyboard-maestro7'
-cask '1password'
+cask 'firefox'
+cask 'brave-browser'
 cask 'notion'
 cask 'clipy'
 cask 'homebrew/cask-drivers/logitech-options'
 cask 'keka'
 cask 'calibre'
 cask 'vlc'
+cask 'obs'
 cask 'transmission'
 cask 'windscribe'
 
