@@ -2,11 +2,8 @@
 
 ## Install from scratch
 
-```
-xcode-select --install
-```
-
-Add SSH key to `~/.ssh/id_rsa`
+1. Install 1password from App Store
+2. Add SSH keys
 
 ```
 # Add ssh key
