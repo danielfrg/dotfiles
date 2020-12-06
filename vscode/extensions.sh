@@ -10,9 +10,6 @@ code --install-extension ms-toolsai.jupyter
 code --install-extension ms-vscode-remote.remote-ssh
 code --install-extension ms-vscode-remote.remote-ssh-edit
 code --install-extension ms-vscode.vscode-typescript-tslint-plugin
-code --install-extension ms-vsliveshare.vsliveshare
-code --install-extension ms-vsliveshare.vsliveshare-audio
-code --install-extension ms-vsliveshare.vsliveshare-pack
 code --install-extension ritwickdey.live-sass
 code --install-extension ritwickdey.LiveServer
 code --install-extension thenikso.github-plus-theme
