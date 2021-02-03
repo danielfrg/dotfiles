@@ -33,7 +33,6 @@
     "explorer.openEditors.visible": 0,
     "extensions.ignoreRecommendations": true,
     "files.autoSave": "onFocusChange",
-    "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
     "git.autofetch": true,
     "python.formatting.provider": "black",
@@ -131,4 +130,5 @@
     "jupyter.sendSelectionToInteractiveWindow": true,
     "jupyter.useNotebookEditor": false,
     "jupyter.interactiveWindowMode": "perFile",
+    "files.insertFinalNewline": true,
 }

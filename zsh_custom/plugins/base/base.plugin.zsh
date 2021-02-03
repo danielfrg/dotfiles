@@ -25,6 +25,9 @@ export PATH=/usr/local/opt/coreutils/libexec/bin:$PATH           # Fast
 # export PATH=$(brew --prefix moreutils)/libexec/gnubin:$PATH    # Slow
 export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH        # Fast
 
+# kegonly brew formulas
+export PATH="/usr/local/opt/curl/bin:$PATH"
+
 # Git and GPG
 # export GPG_TTY=$(tty)
 

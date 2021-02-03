@@ -30,7 +30,7 @@ brew 'rsync'
 
 # Install download utilities.
 brew 'wget'
-brew 'curl'
+brew 'curl-openssl'
 brew 'httpie'
 brew 'youtube-dl'
 

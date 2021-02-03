@@ -31,6 +31,7 @@ make link
 
 ```
 make vscode-extensions
+```
 
 ## Manual steps
 

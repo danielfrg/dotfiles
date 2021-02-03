@@ -33,4 +33,3 @@ source $ZSH/oh-my-zsh.sh
 
 # Looks like: ~ (conda:base) (kube:context) git:(master) X
 # PROMPT=$'%{$fg[cyan]%}%~%{$reset_color%} $(conda_prompt_info) $(kube_ps1) $(git_prompt_info)\n${ret_status} %{$reset_color%}'
-
