@@ -42,10 +42,11 @@ brew 'pinentry-mac'
 brew 'tmux'
 brew 'direnv'
 brew 'unp'
-brew 'terraform'
 brew 'pandoc'
 brew 'hugo'
 brew 'neovim'
+brew 'terraform'
+brew 'packer'
 
 # JS
 brew 'node'
