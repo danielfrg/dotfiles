@@ -131,4 +131,5 @@
     "jupyter.useNotebookEditor": false,
     "jupyter.interactiveWindowMode": "perFile",
     "files.insertFinalNewline": true,
+    "python.languageServer": "Pylance",
 }
