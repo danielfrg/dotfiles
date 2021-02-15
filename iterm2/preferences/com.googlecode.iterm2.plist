@@ -12,6 +12,8 @@
 	<true/>
 	<key>DisableWindowSizeSnap</key>
 	<true/>
+	<key>DoubleReportScrollWheel</key>
+	<true/>
 	<key>EnableDivisionView</key>
 	<true/>
 	<key>EnableProxyIcon</key>
