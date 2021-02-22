@@ -56,13 +56,14 @@ brew 'yarn'
 # brew 'go'
 # brew 'dep'
 
-# k8s
+# docker and k8s
 brew 'kubectx'
 brew 'kube-ps1'
 brew 'kubernetes-helm'
 # brew 'aws-iam-authenticator'
 # brew 'kubefwd'
 # brew 'draft'
+brew 'dive'
 
 # Others
 brew 'ffmpeg'
