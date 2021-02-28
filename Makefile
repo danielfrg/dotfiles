@@ -40,7 +40,7 @@ fonts:  ##
 # ------------------------------------------------------------------------------
 
 
-link: zsh git tmux vscode python jupyter r rstudio vim gpg ## Create symlinks to the all the stuff
+link: zsh git tmux vscode python ipython jupyter vim gpg ## Create symlinks to the all the stuff
 
 
 zsh:  ##
@@ -82,19 +82,16 @@ python:  ##
 	ln -sf $(CURDIR)/.condarc ~/.condarc ; \
 
 
+ipython:
+	mkdir -p ~/.ipython/profile_default/
+	ln -sf $(CURDIR)/.ipython/profile_default/ipython_config.py ~/.ipython/profile_default/ipython_config.py
+	ln -sf /Users/danielfrg/workspace/dotfiles/.ipython/profile_default/ipython_config.py ~/.ipython/profile_default/ipython_config.py
+
+
 jupyter:
 	@mkdir -p ~/.jupyter/
-	ln -sf $(CURDIR)/.jupyter/jupyter_notebook_config.py ~/.jupyter/jupyter_notebook_config.py && \
+	ln -sf $(CURDIR)/.jupyter/jupyter_notebook_config.py ~/.jupyter/jupyter_notebook_config.py
 	ln -sf $(CURDIR)/.jupyter/jupyter_notebook_config.json ~/.jupyter/jupyter_notebook_config.json
-
-
-r:  ##
-	ln -sf $(CURDIR)/.Rprofile ~/.Rprofile
-
-
-rstudio:  ##
-	@mkdir -p ~/.R
-	ln -sf $(CURDIR)/rstudio ~/.R/rstudio
 
 
 vim:  ##
@@ -110,3 +107,13 @@ gpg:  ##
 	@ln -sf $(CURDIR)/.gnupg/gpg.conf ~/.gnupg/gpg.conf
 	@ln -sf $(CURDIR)/.gnupg/gpg-agent.conf ~/.gnupg/gpg-agent.conf
 	@echo "Manually run 'gpg --import <file>' for the public and private keys"
+
+
+# r:  ##
+# 	ln -sf $(CURDIR)/.Rprofile ~/.Rprofile
+
+
+# rstudio:  ##
+# 	@mkdir -p ~/.R
+# 	ln -sf $(CURDIR)/rstudio ~/.R/rstudio
+
