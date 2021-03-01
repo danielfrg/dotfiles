@@ -35,6 +35,7 @@ brew 'httpie'
 brew 'youtube-dl'
 
 # General dev
+brew 'openssl'
 brew 'git'
 brew 'gh'
 brew 'gpg2'
