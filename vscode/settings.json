@@ -75,7 +75,6 @@
         }
     ],
     "window.nativeTabs": true,
-    "window.zoomLevel": 0,
     "workbench.activityBar.visible": true,
     "workbench.colorCustomizations": {
         "statusBar.foreground": "#24292e",
