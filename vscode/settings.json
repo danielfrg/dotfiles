@@ -109,6 +109,12 @@
     "workbench.iconTheme": "vs-minimal",
     "workbench.startupEditor": "none",
     "workbench.tree.indent": 22,
+    "workbench.editorAssociations": [
+        {
+            "viewType": "jupyter.notebook.ipynb",
+            "filenamePattern": "*.ipynb"
+        }
+    ],
     "zenMode.hideTabs": false,
     "javascript.updateImportsOnFileMove.enabled": "always",
     "liveSassCompile.settings.formats": [
@@ -126,6 +132,8 @@
     ],
     "liveSassCompile.settings.generateMap": false,
     "diffEditor.ignoreTrimWhitespace": false,
+    "diffEditor.wordWrap": "on",
+    "jupyter.askForKernelRestart": false,
     "jupyter.sendSelectionToInteractiveWindow": true,
     "jupyter.useNotebookEditor": false,
     "jupyter.interactiveWindowMode": "perFile",
