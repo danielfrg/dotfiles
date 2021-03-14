@@ -132,11 +132,12 @@
     ],
     "liveSassCompile.settings.generateMap": false,
     "diffEditor.ignoreTrimWhitespace": false,
-    "diffEditor.wordWrap": "on",
     "jupyter.askForKernelRestart": false,
     "jupyter.sendSelectionToInteractiveWindow": true,
     "jupyter.useNotebookEditor": false,
     "jupyter.interactiveWindowMode": "perFile",
     "files.insertFinalNewline": true,
     "python.languageServer": "Pylance",
+    "diffEditor.wordWrap": "on",
+    "editor.wordWrap": "on",
 }
