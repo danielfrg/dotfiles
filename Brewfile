@@ -27,8 +27,9 @@ brew 'tldr'
 brew 'jq'
 brew 'mobile-shell'
 brew 'rsync'
+brew 'telnet'
 
-# Install download utilities.
+# Download utilities.
 brew 'wget'
 brew 'curl-openssl'
 brew 'httpie'

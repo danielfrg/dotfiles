@@ -172,8 +172,10 @@ alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo 
 
 # Replacements
 alias cat='bat'
+alias ccat='/bin/cat'
 alias ping='prettyping --nolegend'
 alias top='htop'
+alias ttop='/usr/bin/top'
 alias preview="fzf --preview 'bat --color \"always\" {}'"
 # add support for ctrl+o to open selected file in VS Code
 export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(code {})+abort'"
