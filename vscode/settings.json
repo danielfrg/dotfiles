@@ -140,4 +140,5 @@
     "python.languageServer": "Pylance",
     "diffEditor.wordWrap": "on",
     "editor.wordWrap": "on",
+    "python.analysis.typeCheckingMode": "basic",
 }
