@@ -17,18 +17,21 @@ function rest_call {
     curl -s -u $GITHUB_CREDENTIALS $1 -H "${GITHUB_API_HEADER_ACCEPT}" >> $TMPFILE
 }
 
-# single page result-s (no pagination), have no Link: section, the grep result is empty
-last_page=`curl -s -I -u $GITHUB_CREDENTIALS "https://api.github.com${GITHUB_API_REST}?per_page=200" -H "${GITHUB_API_HEADER_ACCEPT}" | grep '^Link:' | sed -e 's/^Link:.*page=//g' -e 's/>.*$//g'`
+# Replace with https://github.com/garriguv/alfred-repo eventually
+for p in `seq 1 10`; do
+    rest_call "https://api.github.com${GITHUB_API_REST}?per_page=200&page=$p"
+done
 
-# does this result use pagination?
-if [ -z "$last_page" ]; then
-    # no - this result has only one page
-    rest_call "https://api.github.com${GITHUB_API_REST}?per_page=200"
-else
-    # yes - this result is on multiple pages
-    for p in `seq 1 $last_page`; do
-        rest_call "https://api.github.com${GITHUB_API_REST}?per_page=200&page=$p"
-    done
-fi
+# # single page results (no pagination), have no Link: section, the grep result is empty
+# last_page=`curl -s -I -u $GITHUB_CREDENTIALS "https://api.github.com${GITHUB_API_REST}?per_page=200" -H "${GITHUB_API_HEADER_ACCEPT}" | grep '^Link:' | sed -e 's/^Link:.*page=//g' -e 's/>.*$//g'`
+# echo $last_page
+
+# # does this result use pagination?
+# if [ -z "$last_page" ]; then
+#     # no - this result has only one page
+#     rest_call "https://api.github.com${GITHUB_API_REST}?per_page=1000"
+# else
+#     # yes - this result is on multiple pages
+# fi
 
 cat $TMPFILE
