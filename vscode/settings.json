@@ -10,12 +10,20 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "breadcrumbs.enabled": false,
+    "diffEditor.wordWrap": "on",
+    "diffEditor.ignoreTrimWhitespace": false,
+
+    // Editor
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": true
+    },
     "editor.formatOnSave": true,
     "editor.cursorStyle": "line-thin",
     "editor.foldingHighlight": false,
     "editor.fontFamily": "JetBrains Mono, Menlo, Monaco, 'Courier New', monospace",
     "editor.fontLigatures": true,
     "editor.fontSize": 15,
+    "editor.lineHeight": 24,
     "editor.hideCursorInOverviewRuler": true,
     "editor.minimap.showSlider": "always",
     "editor.multiCursorModifier": "ctrlCmd",
@@ -30,17 +38,75 @@
         80
     ],
     "editor.scrollBeyondLastLine": false,
+    "editor.tabSize": 4,
+    "editor.wordWrap": "on",
     "explorer.openEditors.visible": 0,
     "extensions.ignoreRecommendations": true,
+
     "files.autoSave": "onFocusChange",
+    "files.exclude": {
+        "**/node_modules/": true,
+        "**/.git": true,
+        "**/.next": true,
+        "**/.DS_Store": true,
+        "**/package-lock.json": true,
+        "**/yarn.lock": true,
+        "vendor": true,
+        "**/npm-debug.log": true,
+        "**/dist": true,
+        "**/*.bs.js": true
+      },
+      "files.associations": {
+        "*.toml": "toml"
+    },
     "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+
+    // Git
     "git.autofetch": true,
-    "python.formatting.provider": "black",
+    "git.confirmSync": false,
+    "git.ignoreLimitWarning": true,
+    "git.enableSmartCommit": true,
+    "git.ignoreMissingGitWarning": true,
+
+    // JavaScript
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "javascript.validate.enable": false,
+    // TypeScript
+    "typescript.check.npmIsInstalled": false,
+    "typescript.updateImportsOnFileMove.enabled": "never",
+
+    "liveSassCompile.settings.formats": [
+        // This is the default
+        // {
+        //     "format": "expanded",
+        //     "extensionName": ".css",
+        //     "savePath": null
+        // },
+        // Compressed
+        {
+            "extensionName": ".min.css",
+            "format": "compressed"
+        }
+    ],
+
+    "liveSassCompile.settings.generateMap": false,
     "prettier.requireConfig": true,
-    "scm.diffDecorationsGutterWidth": 2,
-    "terminal.integrated.fontFamily": "JetBrains Mono, DejaVu Sans Mono for Powerline",
-    "terminal.integrated.inheritEnv": false,
-    "timeline.excludeSources": [],
+
+    // Python and Jupyter
+    "python.pythonPath": "/Users/danielfrg/conda/bin/python",
+    "python.languageServer": "Pylance",
+    "python.formatting.provider": "black",
+    "python.analysis.typeCheckingMode": "basic",
+    "python.showStartPage": false,
+    "python.linting.pylintArgs": ["--errors-only"],
+    "python.insidersChannel": "off",
+    "jupyter.alwaysTrustNotebooks": true,
+    "jupyter.askForKernelRestart": false,
+    "jupyter.sendSelectionToInteractiveWindow": true,
+    "jupyter.useNotebookEditor": false,
+    "jupyter.interactiveWindowMode": "perFile",
+
     "search.exclude": {
         // Run command (cmd+shift+P) "clear editor history" after changing this
         "**/.git": true,
@@ -48,18 +114,17 @@
         "**/*.egg-info": true,
         "**/.pytest_cache": true,
     },
-    "vim.disableAnnoyingNeovimMessage": true,
-    "vim.insertModeKeyBindings": [
-        {
-            "after": [
-                "<Esc>"
-            ],
-            "before": [
-                "j",
-                "k"
-            ]
-        }
-    ],
+    "scm.diffDecorationsGutterWidth": 2,
+
+    // Terminal
+    "terminal.integrated.copyOnSelection": true,
+    "terminal.integrated.fontSize": 15,
+    "terminal.integrated.fontFamily": "JetBrains Mono, DejaVu Sans Mono for Powerline",
+    "terminal.integrated.inheritEnv": false,
+
+    "timeline.excludeSources": [],
+
+    // VIM
     "vim.otherModesKeyBindingsNonRecursive": [
         {
             "after": [],
@@ -74,34 +139,52 @@
             ]
         }
     ],
+    "vim.disableAnnoyingNeovimMessage": true,
+    "vim.insertModeKeyBindings": [
+        {
+            "after": [
+                "<Esc>"
+            ],
+            "before": [
+                "j",
+                "k"
+            ]
+        }
+    ],
+
+    // Window
     "window.nativeTabs": true,
+    "window.restoreWindows": "all",
+    "window.newWindowDimensions": "maximized",
+
+    // Workbench
     "workbench.activityBar.visible": true,
     "workbench.colorCustomizations": {
-        "statusBar.foreground": "#24292e",
-        "editor.background": "#FAFAFA",
-        "editor.foreground": "#323334",
-        "sideBar.background": "#F0F0F0",
-        "sideBar.foreground": "#323334",
-        "terminal.ansiBlack": "#1D2021",
-        "terminal.ansiBlue": "#0D6678",
-        "terminal.ansiBrightBlack": "#665C54",
-        "terminal.ansiBrightBlue": "#0D6678",
-        "terminal.ansiBrightCyan": "#8BA59B",
-        "terminal.ansiBrightGreen": "#95C085",
-        "terminal.ansiBrightMagenta": "#8F4673",
-        "terminal.ansiBrightRed": "#FB543F",
-        "terminal.ansiBrightWhite": "#FDF4C1",
-        "terminal.ansiBrightYellow": "#FAC03B",
-        "terminal.ansiCyan": "#8BA59B",
-        "terminal.ansiGreen": "#95C085",
-        "terminal.ansiMagenta": "#8F4673",
-        "terminal.ansiRed": "#FB543F",
-        "terminal.ansiWhite": "#A89984",
-        "terminal.ansiYellow": "#FAC03B",
-        "terminal.background": "#1D2021",
-        "terminal.foreground": "#e4e4e4",
-        "terminalCursor.background": "#A89984",
-        "terminalCursor.foreground": "#A89984"
+        // "statusBar.foreground": "#24292e",
+        // "editor.background": "#FAFAFA",
+        // "editor.foreground": "#323334",
+        // "sideBar.background": "#F0F0F0",
+        // "sideBar.foreground": "#323334",
+        // "terminal.ansiBlack": "#1D2021",
+        // "terminal.ansiBlue": "#0D6678",
+        // "terminal.ansiBrightBlack": "#665C54",
+        // "terminal.ansiBrightBlue": "#0D6678",
+        // "terminal.ansiBrightCyan": "#8BA59B",
+        // "terminal.ansiBrightGreen": "#95C085",
+        // "terminal.ansiBrightMagenta": "#8F4673",
+        // "terminal.ansiBrightRed": "#FB543F",
+        // "terminal.ansiBrightWhite": "#FDF4C1",
+        // "terminal.ansiBrightYellow": "#FAC03B",
+        // "terminal.ansiCyan": "#8BA59B",
+        // "terminal.ansiGreen": "#95C085",
+        // "terminal.ansiMagenta": "#8F4673",
+        // "terminal.ansiRed": "#FB543F",
+        // "terminal.ansiWhite": "#A89984",
+        // "terminal.ansiYellow": "#FAC03B",
+        // "terminal.background": "#1D2021",
+        // "terminal.foreground": "#e4e4e4",
+        // "terminalCursor.background": "#A89984",
+        // "terminalCursor.foreground": "#A89984"
     },
     "workbench.colorTheme": "GitHub Plus",
     "workbench.editor.highlightModifiedTabs": true,
@@ -115,31 +198,6 @@
             "filenamePattern": "*.ipynb"
         }
     ],
+
     "zenMode.hideTabs": false,
-    "javascript.updateImportsOnFileMove.enabled": "always",
-    "liveSassCompile.settings.formats": [
-        // This is the default
-        // {
-        //     "format": "expanded",
-        //     "extensionName": ".css",
-        //     "savePath": null
-        // },
-        // Compressed
-        {
-            "extensionName": ".min.css",
-            "format": "compressed"
-        }
-    ],
-    "liveSassCompile.settings.generateMap": false,
-    "diffEditor.ignoreTrimWhitespace": false,
-    "jupyter.askForKernelRestart": false,
-    "jupyter.sendSelectionToInteractiveWindow": true,
-    "jupyter.useNotebookEditor": false,
-    "jupyter.interactiveWindowMode": "perFile",
-    "files.insertFinalNewline": true,
-    "python.languageServer": "Pylance",
-    "diffEditor.wordWrap": "on",
-    "editor.wordWrap": "on",
-    "python.analysis.typeCheckingMode": "basic",
-    "jupyter.alwaysTrustNotebooks": true,
 }
