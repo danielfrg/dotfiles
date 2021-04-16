@@ -45,16 +45,16 @@
 
     "files.autoSave": "onFocusChange",
     "files.exclude": {
-        "**/node_modules/": true,
-        "**/.git": true,
-        "**/.next": true,
         "**/.DS_Store": true,
-        "**/package-lock.json": true,
-        "**/yarn.lock": true,
-        "vendor": true,
-        "**/npm-debug.log": true,
-        "**/dist": true,
-        "**/*.bs.js": true
+        "**/.git": true,
+        // "**/node_modules/": true,
+        // "**/.next": true,
+        // "**/package-lock.json": true,
+        // "**/yarn.lock": true,
+        // "vendor": true,
+        // "**/npm-debug.log": true,
+        // "**/dist": true,
+        // "**/*.bs.js": true
       },
       "files.associations": {
         "*.toml": "toml"
