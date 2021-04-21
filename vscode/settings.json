@@ -15,7 +15,7 @@
 
     // Editor
     "editor.codeActionsOnSave": {
-        "source.organizeImports": true
+        // "source.organizeImports": true
     },
     "editor.formatOnSave": true,
     "editor.cursorStyle": "line-thin",
@@ -74,7 +74,7 @@
     "javascript.validate.enable": false,
     // TypeScript
     "typescript.check.npmIsInstalled": false,
-    "typescript.updateImportsOnFileMove.enabled": "never",
+    "typescript.updateImportsOnFileMove.enabled": "always",
 
     "liveSassCompile.settings.formats": [
         // This is the default
