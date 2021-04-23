@@ -33,6 +33,10 @@ function pyclean() {
 	find . -type d -name .pytest_cache -exec rm -rf {} +
 }
 
+# RUST
+
+export PATH=$HOME/.cargo/bin:$PATH
+
 # JS ---------------------------------------------------------------------------
 
 alias npmreset="rm -rf node_modules && npm i"
