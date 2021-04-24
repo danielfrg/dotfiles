@@ -3,41 +3,82 @@
 	email = daniel@danielfrg.com
 	signingkey = 76A6DF266C37ABB0366348EF8D222CABC39ED32B
 
+[core]
+	# Use custom `.gitignore` and `.gitattributes`
+	excludesfile = ~/.gitignore
+	attributesfile = ~/.gitattributes
+
+	# Treat spaces before tabs and all kinds of trailing whitespace as an error
+	# [default] trailing-space: looks for spaces at the end of a line
+	# [default] space-before-tab: looks for spaces before tabs at the beginning of a line
+	whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+
+	# Make `git rebase` safer on OS X
+	# More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
+	trustctime = false
+	editor = vim
+
+[init]
+	defaultBranch = main
+
+[apply]
+	# Detect whitespace errors when applying a patch
+	whitespace = fix
+
+[gpg]
+	program = /usr/local/bin/gpg
+
+[tag]
+	forceSignAnnotated = true
+
+[commit]
+	gpgsign = true
+
 [push]
 	default = simple
 
-[core]
-	excludesfile = /Users/danielfrg/.gitignore_global
-	quotepath = false
-	abbrev = 7
+[pull]
+	rebase = false
+
+[merge]
+	# Include summaries of merged commits in newly created merge commit messages
+	log = true
+
+[help]
+	# Automatically correct and execute mistyped commands
+	autocorrect = 1
+
 
 [alias]
-    st = status
-	br = branch
-	ci = commit
-    co = checkout
-    gr = grep -i --color -n -E
-    commiti = commit --interactive
-    # diff = diff --color-words
-	rebase = rebase -i
-    log = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-    l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-	prune = fetch --prune
-	undo = reset --soft HEAD^
-	stash-all = stash save --include-untracked
-	update-origin-master = !git fetch upstream && git push origin upstream/master:master
-	pr = "!f() { git fetch upstream +refs/pull/$1/head:pr/$1; } ; f"
+	# View abbreviated SHA, description, and history graph of the latest 20 commits
+	l = log --pretty=oneline -n 20 --graph --abbrev-commit
+
+	# View the current working tree status using the short format
+	s = status -s
+
+	# Show the diff between the latest commit and the current state
+	d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+
+	# Pull in remote changes for the current repository and all its submodules
+	p = !"git pull; git submodule foreach git pull origin master"
+
+	# Clone a repository including all submodules
+	c = clone --recursive
+
+	# Checkout a pull request from origin (of a github repository)
+	pr = !"pr() { git fetch origin pull/$1/head:pr-$1; git checkout pr-$1; }; pr"
+
+	# Switch to a branch, creating it if necessary
+	go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+
+	# Amend the currently staged files to the latest commit
+	amend = commit --amend --reuse-message=HEAD
+
+	co = checkout
 	yolo = !git commit -am \"$(curl -s whatthecommit.com/index.txt)\" && git push
     yoloc = !git commit -am \"$curl -s whatthecommit.com/intex.txt)\"
 	nope = "!f() { git reset HEAD --hard && git clean -fd; } ; f"
   	fuckit = "!f() { git clean -d -x -f; git reset --hard; } ; f"
-
-[pager]
-    diff = diff-so-fancy | less --tabs=1,5 -RFX
-    show = diff-so-fancy | less --tabs=1,5 -RFX
-
-[commit]
-	gpgsign = true
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f
@@ -45,9 +86,54 @@
 	process = git-lfs filter-process
 	required = true
 
-[tag]
-	forceSignAnnotated = true
-[gpg]
-	program = /usr/local/bin/gpg
-[pull]
-	rebase = false
+[color]
+
+	# Use colors in Git commands that are capable of colored output when
+	# outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
+	ui = auto
+
+[color "branch"]
+
+	current = yellow reverse
+	local = yellow
+	remote = green
+
+[color "diff"]
+
+	meta = yellow bold
+	frag = magenta bold # line info
+	old = red # deletions
+	new = green # additions
+
+[color "status"]
+
+	added = yellow
+	changed = green
+	untracked = cyan
+
+
+[url "git@github.com:github"]
+
+	insteadOf = "https://github.com/github"
+	insteadOf = "github:github"
+	insteadOf = "git://github.com/github"
+
+[url "git@github.com:"]
+
+	pushInsteadOf = "https://github.com/"
+	pushInsteadOf = "github:"
+	pushInsteadOf = "git://github.com/"
+
+[url "git://github.com/"]
+
+	insteadOf = "github:"
+
+[url "git@gist.github.com:"]
+
+	insteadOf = "gst:"
+	pushInsteadOf = "gist:"
+	pushInsteadOf = "git://gist.github.com/"
+
+[url "git://gist.github.com/"]
+
+	insteadOf = "gist:"
