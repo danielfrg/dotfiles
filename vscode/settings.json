@@ -17,7 +17,6 @@
     "editor.codeActionsOnSave": {
         // "source.organizeImports": true
     },
-    "editor.formatOnSave": true,
     "editor.cursorStyle": "line-thin",
     "editor.foldingHighlight": false,
     "editor.fontFamily": "JetBrains Mono, Menlo, Monaco, 'Courier New', monospace",
@@ -192,12 +191,9 @@
     "workbench.iconTheme": "vs-minimal",
     "workbench.startupEditor": "none",
     "workbench.tree.indent": 22,
-    "workbench.editorAssociations": [
-        {
-            "viewType": "jupyter.notebook.ipynb",
-            "filenamePattern": "*.ipynb"
-        }
-    ],
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter.notebook.ipynb"
+    },
 
     "zenMode.hideTabs": false,
 }
