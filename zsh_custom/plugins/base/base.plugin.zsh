@@ -115,12 +115,10 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
-
-# Shortcuts
 alias cdc='cd ~/code'
 alias cdg='cd ~/google'
 alias cdd="cd ~/Downloads"
-
+alias ta="tmux attach"
 # Typos
 alias g='git'
 alias it='git'
