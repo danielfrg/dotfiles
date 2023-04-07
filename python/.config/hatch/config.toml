@@ -1,0 +1,39 @@
+mode = "local"
+project = ""
+shell = "zsh"
+
+[dirs]
+project = []
+python = "isolated"
+data = "/Users/danielfrg/Library/Application Support/hatch"
+cache = "/Users/danielfrg/Library/Caches/hatch"
+
+[dirs.env]
+virtual = ".venv"
+
+[projects]
+
+[publish.index]
+repo = "main"
+
+[template]
+name = "Daniel Rodriguez"
+email = "daniel@danielfrg.com"
+
+[template.licenses]
+headers = true
+default = ["Apache-2.0"]
+
+[template.plugins.default]
+tests = true
+ci = true
+src-layout = true
+
+[terminal.styles]
+info = "bold"
+success = "bold cyan"
+error = "bold red"
+warning = "bold yellow"
+waiting = "bold magenta"
+debug = "bold"
+spinner = "simpleDotsScrolling"

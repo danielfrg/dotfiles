@@ -1,0 +1,237 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+$username\
+$hostname\
+$kubernetes\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$docker_context\
+$package\
+$golang\
+$helm\
+$nodejs\
+$python\
+$ruby\
+$terraform\
+$sudo\
+$cmd_duration\
+$line_break\
+$status\
+$shell\
+$character"""
+
+# Inserts a blank line between shell prompts
+add_newline = true
+command_timeout = 1000
+
+# Replace the "❯" symbol in the prompt with "➜"
+[character] # The name of the module we are configuring is "character"
+success_symbol = "[➜](bold green)" # The "success_symbol" segment is being set to "➜" with the color "bold green"
+
+[aws]
+format = '\[[$symbol($profile)(\($region\))(\[$duration\])]($style)\]'
+
+[bun]
+format = '\[[$symbol($version)]($style)\]'
+disabled = true
+
+[c]
+format = '\[[$symbol($version(-$name))]($style)\]'
+disabled = true
+
+[cmake]
+format = '\[[$symbol($version)]($style)\]'
+disabled = true
+
+[cmd_duration]
+format = '\[[⏱ $duration]($style)\]'
+disabled = true
+
+[cobol]
+format = '\[[$symbol($version)]($style)\]'
+disabled = true
+
+[conda]
+format = '\[[$symbol$environment]($style)\]'
+disabled = true
+
+[crystal]
+format = '\[[$symbol($version)]($style)\]'
+disabled = true
+
+[daml]
+format = '\[[$symbol($version)]($style)\]'
+disabled = true
+
+[dart]
+format = '\[[$symbol($version)]($style)\]'
+disabled = true
+
+[deno]
+format = '\[[$symbol($version)]($style)\]'
+disabled = true
+
+[docker_context]
+format = '\[[$symbol$context]($style)\]'
+
+[dotnet]
+format = '\[[$symbol($version)(🎯 $tfm)]($style)\]'
+disabled = true
+
+[elixir]
+format = '\[[$symbol($version \(OTP $otp_version\))]($style)\]'
+disabled = true
+
+[elm]
+format = '\[[$symbol($version)]($style)\]'
+disabled = true
+
+[erlang]
+format = '\[[$symbol($version)]($style)\]'
+disabled = true
+
+[gcloud]
+format = '\[[$symbol$account(@$domain)(\($region\))]($style)\]'
+
+[git_branch]
+format = '\[[$symbol$branch]($style)\]'
+
+[git_status]
+format = '([\[$all_status$ahead_behind\]]($style))'
+
+[golang]
+format = '\[[$symbol($version)]($style)\]'
+
+[haskell]
+format = '\[[$symbol($version)]($style)\]'
+disabled = true
+
+[helm]
+format = '\[[$symbol($version)]($style)\]'
+
+[hg_branch]
+format = '\[[$symbol$branch]($style)\]'
+disabled = true
+
+[java]
+format = '\[[$symbol($version)]($style)\]'
+disabled = true
+
+[julia]
+format = '\[[$symbol($version)]($style)\]'
+disabled = true
+
+[kotlin]
+format = '\[[$symbol($version)]($style)\]'
+disabled = true
+
+[kubernetes]
+format = '\[[$symbol$context( \($namespace\))]($style)\]'
+
+[lua]
+format = '\[[$symbol($version)]($style)\]'
+disabled = true
+
+[memory_usage]
+format = '\[$symbol[$ram( | $swap)]($style)\]'
+disabled = true
+
+[meson]
+format = '\[[$symbol$project]($style)\]'
+disabled = true
+
+[nim]
+format = '\[[$symbol($version)]($style)\]'
+disabled = true
+
+[nix_shell]
+format = '\[[$symbol$state( \($name\))]($style)\]'
+disabled = true
+
+[nodejs]
+format = '\[[$symbol($version)]($style)\]'
+
+[ocaml]
+format = '\[[$symbol($version)(\($switch_indicator$switch_name\))]($style)\]'
+disabled = true
+
+[openstack]
+format = '\[[$symbol$cloud(\($project\))]($style)\]'
+disabled = true
+
+[package]
+format = '\[[$symbol$version]($style)\]'
+disabled = true
+
+[perl]
+format = '\[[$symbol($version)]($style)\]'
+disabled = true
+
+[php]
+format = '\[[$symbol($version)]($style)\]'
+disabled = true
+
+[pulumi]
+format = '\[[$symbol$stack]($style)\]'
+disabled = true
+
+[purescript]
+format = '\[[$symbol($version)]($style)\]'
+disabled = true
+
+[python]
+format = '\[[${symbol}${pyenv_prefix}(${version})(\($virtualenv\))]($style)\]'
+
+[raku]
+format = '\[[$symbol($version-$vm_version)]($style)\]'
+disabled = true
+
+[red]
+format = '\[[$symbol($version)]($style)\]'
+
+[ruby]
+format = '\[[$symbol($version)]($style)\]'
+
+[rust]
+format = '\[[$symbol($version)]($style)\]'
+
+[scala]
+format = '\[[$symbol($version)]($style)\]'
+disabled = true
+
+[spack]
+format = '\[[$symbol$environment]($style)\]'
+disabled = true
+
+[sudo]
+format = '\[[as $symbol]\]'
+
+[swift]
+format = '\[[$symbol($version)]($style)\]'
+disabled = true
+
+[terraform]
+format = '\[[$symbol$workspace]($style)\]'
+
+[time]
+format = '\[[$time]($style)\]'
+
+[username]
+format = '[$user]($style) '
+
+[vagrant]
+format = '\[[$symbol($version)]($style)\]'
+disabled = true
+
+[vlang]
+format = '\[[$symbol($version)]($style)\]'
+disabled = true
+
+[zig]
+format = '\[[$symbol($version)]($style)\]'
+disabled = true

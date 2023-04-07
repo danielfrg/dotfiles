@@ -1,0 +1,9 @@
+[submodule "personal"]
+	path = personal
+	url = https://github.com/danielfrg/dotfiles-personal
+[submodule "zsh_custom/plugins/zsh-autosuggestions"]
+	path = zsh_custom/plugins/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions
+[submodule "zsh_custom/plugins/zsh-syntax-highlighting"]
+	path = zsh_custom/plugins/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting

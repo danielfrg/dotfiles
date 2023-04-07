@@ -1,0 +1,24 @@
+version: "3"
+
+tasks:
+  ohmyzsh:
+    cmds:
+      - sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+  fonts:
+    cmds:
+      - bash install-fonts.sh
+
+  link:
+    cmds:
+      - stow -t $HOME base
+      - stow -t $HOME zsh
+      - stow -t $HOME python
+      - stow -t $HOME nvim
+      - stow -t $HOME bin
+
+  gpg:
+    cmds:
+      - gpg --list-keys
+      - stow -t $HOME gpg
+      - echo "Manually run 'gpg --import <file>' for the public and private keys"
