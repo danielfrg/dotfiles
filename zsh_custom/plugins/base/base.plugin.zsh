@@ -118,6 +118,7 @@ alias .....="cd ../../../.."
 alias cdc='cd ~/code'
 alias cdg='cd ~/google'
 alias cdd="cd ~/Downloads"
+alias t="tmux"
 alias ta="tmux attach"
 # Typos
 alias g='git'

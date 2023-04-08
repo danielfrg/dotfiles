@@ -1,31 +1,16 @@
 # General
 *~
 .DS_Store
-default.profraw
-tmp
 .Trash
+tmp
+default.profraw
 
-# JetBrains (IntelliJ, GoLand, WebStorm, etc.)
-/.idea/
-*.iml
-
-# Emacs
-/.dir-locals.el
-.#*
-
-# Vim
-*.swp
+# Environment
+.env
 
 # Visual Studio Code
 /.vscode/
 
-# Python
-.env
-.python-version
-.condaenv
-
 # Terraform
 local-terraform
 
-# Mutagen
-mutagen.yml*
