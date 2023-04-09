@@ -83,6 +83,9 @@ return require('packer').startup(function(use)
         }
     }
 
+    -- Formaters and Linters
+    use "jose-elias-alvarez/null-ls.nvim"
+
     use {
         "someone-stole-my-name/yaml-companion.nvim",
         requires = {
