@@ -1,3 +1,3 @@
-require("danielfrg.set")
-require("danielfrg.remap")
+require("danielfrg.options")
+require("danielfrg.keymap")
 require("danielfrg.plugins")
