@@ -1,6 +1,5 @@
-local builtin = require("telescope.builtin")
-
 local telescope = require('telescope')
+local builtin = require("telescope.builtin")
 
 telescope.setup {
     pickers = {

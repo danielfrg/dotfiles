@@ -21,7 +21,7 @@ vim.cmd [[
   augroup end
 ]]
 
--- Use a protected call so we don't error out on first use
+-- Use a protected call so we don"t error out on first use
 local status_ok, packer = pcall(require, "packer")
 if not status_ok then
     return
@@ -36,28 +36,28 @@ packer.init {
     },
 }
 
-return require('packer').startup(function(use)
+return require("packer").startup(function(use)
     -- Packer can manage itself
-    use 'wbthomason/packer.nvim'
+    use "wbthomason/packer.nvim"
 
     -- An implementation of the Popup API from vim in Neovim
     use "nvim-lua/popup.nvim"
 
-    use({ 'projekt0n/github-nvim-theme', tag = 'v0.0.7' })
+    use({ "projekt0n/github-nvim-theme", tag = "v0.0.7" })
 
     -- Navigation
     use({
-        'nvim-telescope/telescope.nvim',
+        "nvim-telescope/telescope.nvim",
         tag = "0.1.1",
-        requires = { { 'nvim-lua/plenary.nvim' } }
+        requires = { { "nvim-lua/plenary.nvim" } }
     })
     use("theprimeagen/harpoon")
 
     -- Custom tree navigation
     use {
-        'nvim-tree/nvim-tree.lua',
+        "nvim-tree/nvim-tree.lua",
         requires = {
-            'nvim-tree/nvim-web-devicons', -- optional
+            "nvim-tree/nvim-web-devicons", -- optional
         },
         config = function()
             require("nvim-tree").setup {}
@@ -66,51 +66,37 @@ return require('packer').startup(function(use)
 
     -- Status line
     use {
-        'nvim-lualine/lualine.nvim',
-        requires = { 'nvim-tree/nvim-web-devicons' }
+        "nvim-lualine/lualine.nvim",
+        requires = { "nvim-tree/nvim-web-devicons" }
     }
 
     -- Toggle comments
     use {
-        'numToStr/Comment.nvim',
+        "numToStr/Comment.nvim",
         config = function()
-            require('Comment').setup()
+            require("Comment").setup()
         end
     }
 
-    use("mbbill/undotree")
-    use("tpope/vim-fugitive")
+    -- use("mbbill/undotree")
+    -- use("tpope/vim-fugitive")
 
     -- LSP
-    use {
-        'VonHeikemen/lsp-zero.nvim',
-        branch = 'v1.x',
-        requires = {
-            -- LSP Support
-            { 'neovim/nvim-lspconfig' }, -- Required
-            {
-                -- Optional
-                'williamboman/mason.nvim',
-                run = function()
-                    pcall(vim.cmd, 'MasonUpdate')
-                end,
-            },
-            { 'williamboman/mason-lspconfig.nvim' }, -- Optional
+    use("williamboman/mason.nvim")
+    use("williamboman/mason-lspconfig.nvim")
+    use("neovim/nvim-lspconfig")
 
-            -- Autocompletion
-            { 'hrsh7th/nvim-cmp' },         -- Required
-            { 'hrsh7th/cmp-nvim-lsp' },     -- Required
-            { 'hrsh7th/cmp-buffer' },       -- Optional
-            { 'hrsh7th/cmp-path' },         -- Optional
-            { 'hrsh7th/cmp-cmdline' },         -- Optional
-            { 'saadparwaiz1/cmp_luasnip' }, -- Optional
-            { 'hrsh7th/cmp-nvim-lua' },     -- Optional
+    -- CMP
+    use("hrsh7th/nvim-cmp")
+    use("hrsh7th/cmp-nvim-lsp")
+    use("hrsh7th/cmp-buffer")
+    use("hrsh7th/cmp-path")
+    use("hrsh7th/cmp-cmdline")
+    use("saadparwaiz1/cmp_luasnip")
+    use("hrsh7th/cmp-nvim-lua")
 
-            -- Snippets
-            { 'L3MON4D3/LuaSnip' },             -- Required
-            { 'rafamadriz/friendly-snippets' }, -- Optional
-        }
-    }
+    -- Snippets
+    use("L3MON4D3/LuaSnip")
 
     -- Formaters and Linters
     use "jose-elias-alvarez/null-ls.nvim"
@@ -130,10 +116,10 @@ return require('packer').startup(function(use)
 
     -- Tree sitter
     use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
-    use 'nvim-treesitter/nvim-treesitter-context'
+    use "nvim-treesitter/nvim-treesitter-context"
 
     -- Other
-    use 'github/copilot.vim'
+    use "github/copilot.vim"
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins

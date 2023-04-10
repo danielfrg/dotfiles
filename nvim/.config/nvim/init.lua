@@ -4,3 +4,4 @@ else
     -- Real Neovim
     require("danielfrg")
 end
+
