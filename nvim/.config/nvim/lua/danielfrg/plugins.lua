@@ -125,6 +125,9 @@ return require("packer").startup(function(use)
     -- Autopairs, integrates with both cmp and treesitter
     use "windwp/nvim-autopairs"
 
+    -- TS context aware comment strings
+    use 'JoosepAlviste/nvim-ts-context-commentstring'
+
     -- Other
     use "github/copilot.vim"
 
