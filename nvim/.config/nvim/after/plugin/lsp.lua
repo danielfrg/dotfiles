@@ -38,15 +38,8 @@ local yamlcfg = require("yaml-companion").setup()
 lsp.configure('yamlls', yamlcfg)
 
 -- CMP: Auto completion
-local cmp = require('cmp')
-local cmp_select = { behavior = cmp.SelectBehavior.Select }
-local cmp_mappings = lsp.defaults.cmp_mappings({
-    ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-    ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-    ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-    ["<C-Space>"] = cmp.mapping.complete(),
-})
-
+-- For some reason we need these here for supertab to work.
+local cmp_mappings = {}
 cmp_mappings['<Tab>'] = nil
 cmp_mappings['<S-Tab>'] = nil
 
@@ -57,7 +50,7 @@ lsp.setup_nvim_cmp({
 lsp.on_attach(function(client, bufnr)
     -- Disable formatting for tsserver, we use null-ls (prettier) instead
     if client.name == "tsserver" then
-        client.resolved_capabilities.document_formatting = false
+        client.server_capabilities.document_formatting = false
     end
 
     local opts = { buffer = bufnr, remap = false }
