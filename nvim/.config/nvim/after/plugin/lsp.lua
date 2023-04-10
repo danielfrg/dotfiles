@@ -18,31 +18,6 @@ if not status_ok then
     return
 end
 
--- Lua
-lspconfig.lua_ls.setup({
-    settings = {
-        Lua = {
-            diagnostics = {
-                globals = { 'vim' }
-            }
-        }
-    }
-})
-
--- YAML
-function dump(o)
-    if type(o) == 'table' then
-       local s = '{ '
-       for k,v in pairs(o) do
-          if type(k) ~= 'number' then k = '"'..k..'"' end
-          s = s .. '['..k..'] = ' .. dump(v) .. ','
-       end
-       return s .. '} '
-    else
-       return tostring(o)
-    end
-  end
-
 ------------------------------------------------
 -- Mason Config
 
@@ -105,6 +80,24 @@ mason_lspconfig.setup_handlers({
             capabilities = lsp_capabilities,
         })
     end,
+    -- Lua
+    ["sumneko_lua"] = function ()
+        lspconfig.sumneko_lua.setup {
+            settings = {
+                Lua = {
+                    diagnostics = {
+                        globals = { "vim" }
+                    }
+                }
+            }
+        }
+    end,
+    -- YAML
+    ["yamlls"] = function ()
+        -- TODO: Figure out how to call my lsp_attach from inside plugin on_attach
+        local yamlconfig = require("yaml-companion").setup({})
+        lspconfig["yamlls"].setup(yamlconfig)
+    end
 })
 
 -- This is a fallback for the setup_handlers in case it stops working
@@ -122,12 +115,6 @@ mason_lspconfig.setup_handlers({
 
 --     lspconfig[server_name].setup(opts)
 -- end
-
--- We have to attach this after the setup_handlers because
--- it has a custom on_attach
--- TODO: Figure out how to call my lsp_attach from inside plugin on_attach
-local yamlconfig = require("yaml-companion").setup({})
-lspconfig["yamlls"].setup(yamlconfig)
 
 
 ------------------------------------------------

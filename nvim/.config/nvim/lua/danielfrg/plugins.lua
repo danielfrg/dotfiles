@@ -90,7 +90,7 @@ plugins = {
     "L3MON4D3/LuaSnip",
 
     -- Formaters and Linters
-    "jose-elias-alvarez/null-ls  .nvim",
+    "jose-elias-alvarez/null-ls.nvim",
 
     -- YAML schema template selector and status line
     "someone-stole-my-name/yaml-companion.nvim",
