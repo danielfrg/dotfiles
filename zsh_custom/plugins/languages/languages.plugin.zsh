@@ -5,8 +5,8 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 # eval "$(pyenv init --path)"
 
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+eval "$(pyenv init - --no-rehash zsh)"
+eval "$(pyenv virtualenv-init - --no-rehash zsh)"
 
 alias activatethis='source $PWD/.venv/bin/activate'
 alias workhere='source $PWD/.venv/bin/activate'

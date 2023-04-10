@@ -6,14 +6,14 @@ export PATH=$HOME/.local/bin:$HOME/.local/scripts:$PATH
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
-ZSH_THEME="robbyrussell"
+# ZSH_THEME="robbyrussell"
 DISABLE_AUTO_UPDATE=true
 
 ZSH_CUSTOM=$HOME/code/dotfiles/zsh_custom
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# plugins=(base dev poetry fzf imgcat z zsh-autosuggestions)
+# plugins=(base languages fzf z zsh-autosuggestions zsh-syntax-highlighting)
 plugins=(base languages fzf z zsh-autosuggestions zsh-syntax-highlighting)
 
 # User configuration
