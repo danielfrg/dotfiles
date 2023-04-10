@@ -13,23 +13,45 @@ local servers = {
     'yamlls',
 }
 
+local lspconfig = require('lspconfig')
+
+-- Lua
+lspconfig.lua_ls.setup({
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = { 'vim' }
+            }
+        }
+    }
+})
+
+-- YAML
+local yamlls_cfg = require("yaml-companion").setup({})
+lspconfig.yamlls.setup(yamlls_cfg)
+
+------------------------------------------------
+-- Mason Config
+
+local mason = require("mason")
+local mason_lspconfig = require("mason-lspconfig")
 local settings = {
-	ui = {
-		border = "rounded",
-		icons = {
-			package_installed = "◍",
-			package_pending = "◍",
-			package_uninstalled = "◍",
-		},
-	},
-	log_level = vim.log.levels.INFO,
-	max_concurrent_installers = 4,
+    ui = {
+        border = "rounded",
+        icons = {
+            package_installed = "◍",
+            package_pending = "◍",
+            package_uninstalled = "◍",
+        },
+    },
+    log_level = vim.log.levels.INFO,
+    max_concurrent_installers = 4,
 }
 
-require("mason").setup(settings)
-require("mason-lspconfig").setup({
-	ensure_installed = servers,
-	automatic_installation = true,
+mason.setup(settings)
+mason_lspconfig.setup({
+    ensure_installed = servers,
+    automatic_installation = false,
 })
 
 local lsp_attach = function(client, bufnr)
@@ -38,88 +60,97 @@ local lsp_attach = function(client, bufnr)
         client.server_capabilities.document_formatting = false
     end
 
+    print("h1")
+
     local opts = { buffer = bufnr, remap = false }
-    vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-    vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
-    vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-    vim.keymap.set("n", "gi", function() vim.lsp.buf.implementation() end, opts)
-    vim.keymap.set("n", "gr", function() vim.lsp.buf.references() end, opts)
-    vim.keymap.set("n", "gl", function() vim.diagnostic.open_float() end, opts)
-    vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
-    vim.keymap.set("n", "<leader>lj", function() vim.diagnostic.goto_next() end, opts)
-    vim.keymap.set("n", "<leader>lk", function() vim.diagnostic.goto_prev() end, opts)
-    vim.keymap.set("n", "<leader>la", function() vim.lsp.buf.code_action() end, opts)
-    vim.keymap.set("n", "<leader>lr", function() vim.lsp.buf.rename() end, opts)
-    vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+    -- Default ones from lspconfig
+    vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
+    vim.keymap.set('n', '[d', vim.diagnostic.goto_next)
+    vim.keymap.set('n', ']d', vim.diagnostic.goto_prev)
+    vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
+    -- Extra
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+    vim.keymap.set("n", "gl", vim.diagnostic.open_float, opts)
+    vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
+    vim.keymap.set("n", "<leader>lj", vim.diagnostic.goto_next, opts)
+    vim.keymap.set("n", "<leader>lk", vim.diagnostic.goto_prev, opts)
+    vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, opts)
+    vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts)
+    vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
 end
 
 local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-local lspconfig = require('lspconfig')
+local get_servers = mason_lspconfig.get_installed_servers
 
-require('mason-lspconfig').setup_handlers({
-  function(server_name)
-    lspconfig[server_name].setup({
-      on_attach = lsp_attach,
-      capabilities = lsp_capabilities,
-    })
-  end,
-})
+for _, server_name in ipairs(get_servers()) do
+    opts = {
+		on_attach = lsp_attach,
+        capabilities = lsp_capabilities,
+	}
+
+    -- Attach server specific config if exists
+    local require_ok, conf_opts = pcall(require, "danielfrg.lsp." .. server_name)
+	if require_ok then
+		opts = vim.tbl_deep_extend("force", conf_opts, opts)
+	end
+
+    lspconfig[server_name].setup(opts)
+end
+
+-- mason_lspconfig.setup_handlers({
+--     function(server_name)
+--         lspconfig[server_name].setup({
+--             on_attach = lsp_attach,
+--             capabilities = lsp_capabilities,
+--         })
+--     end,
+-- })
+
+------------------------------------------------
+-- LSP Configs
 
 local signs = {
-  { name = "DiagnosticSignError", text = "" },
-  { name = "DiagnosticSignWarn", text = "" },
-  { name = "DiagnosticSignHint", text = "" },
-  { name = "DiagnosticSignInfo", text = "" },
+    { name = "DiagnosticSignError", text = "" },
+    { name = "DiagnosticSignWarn",  text = "" },
+    { name = "DiagnosticSignHint",  text = "" },
+    { name = "DiagnosticSignInfo",  text = "" },
 }
 
 for _, sign in ipairs(signs) do
-  vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
 end
 
 local config = {
-  -- disable virtual text
-  virtual_text = false,
-  -- show signs
-  signs = {
-    active = signs,
-  },
-  update_in_insert = true,
-  underline = true,
-  severity_sort = true,
-  float = {
-    focusable = false,
-    style = "minimal",
-    border = "rounded",
-    source = "always",
-    header = "",
-    prefix = "",
-  },
+    -- disable virtual text
+    virtual_text = false,
+    -- show signs
+    signs = {
+        active = signs,
+    },
+    update_in_insert = true,
+    underline = true,
+    severity_sort = true,
+    float = {
+        focusable = false,
+        style = "minimal",
+        border = "rounded",
+        source = "always",
+        header = "",
+        prefix = "",
+    },
 }
 
 vim.diagnostic.config(config)
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-  border = "rounded",
+    border = "rounded",
 })
 
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-  border = "rounded",
+    border = "rounded",
 })
-
-------------------------------------------------
--- Lua
-
-lspconfig.lua_ls.setup({
-  settings = {
-    Lua = {
-        diagnostics = {
-            globals = { 'vim' }
-        }
-    }
-}
-})
-
--- YAML
-local cfg = require("yaml-companion").setup({})
-lspconfig["yamlls"].setup(cfg)

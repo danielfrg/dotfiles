@@ -37,6 +37,8 @@ local kind_icons = {
 }
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
+vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
+
 cmp.setup {
   -- Select first item
   preselect = 'item',
@@ -107,11 +109,11 @@ cmp.setup {
     end,
   },
   sources = {
-    { name = "nvim_lsp" },
-    { name = "nvim_lua" },
-    { name = "luasnip" },
-    { name = "buffer" },
-    { name = "path" },
+    { name = "nvim_lua", priority = 8, keyword_length = 1 },
+    { name = "nvim_lsp", priority = 8, keyword_length = 1 },
+    { name = "luasnip", priority = 4, keyword_length = 2},
+    { name = "path", priority = 3 },
+    { name = "buffer", priority = 1, keyword_length = 3 },
   },
   confirm_opts = {
     behavior = cmp.ConfirmBehavior.Replace,

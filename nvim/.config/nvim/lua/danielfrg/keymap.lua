@@ -21,7 +21,7 @@ vim.keymap.set({ "n", "i" }, "<C-c>", "<Esc>l", opts)
 
 -- Open Explorer
 -- vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
-vim.keymap.set("n", "<leader>e", vim.cmd.NvimTreeToggle, opts)
+-- vim.keymap.set("n", "<leader>e", vim.cmd.NvimTreeToggle, opts)
 vim.keymap.set("n", "<leader>pv", vim.cmd.NvimTreeToggle, opts)
 
 -- Move in windows using vim movement keys
