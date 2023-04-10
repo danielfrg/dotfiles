@@ -63,7 +63,7 @@ cmp.setup {
       c = cmp.mapping.close(),
     },
     -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-    ["<CR>"] = cmp.mapping(cmp.mapping.confirm { select = true }, { "i", "c" }),
+    ["<CR>"] = cmp.mapping(cmp.mapping.confirm { select = true }, { "i" }),
     -- Super tab
     -- https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#super-tab-like-mapping
     ["<Tab>"] = cmp.mapping(function(fallback)
@@ -136,11 +136,16 @@ cmp.setup.cmdline({ '/', '?' }, {
 })
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline(':', {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = cmp.config.sources({
-    { name = 'path' }
-  }, {
-    { name = 'cmdline' }
-  })
-})
+-- TODO: Figure out how to not select the first item, its annoying
+-- cmp.setup.cmdline(':', {
+--   preselect = cmp.PreselectMode.None,
+--   completion = {
+--       completeopt = 'menu,menuone,noselect'
+--     },
+--   mapping = cmp.mapping.preset.cmdline(),
+--   sources = cmp.config.sources({
+--     { name = 'path' }
+--   }, {
+--     { name = 'cmdline' }
+--   })
+-- })
