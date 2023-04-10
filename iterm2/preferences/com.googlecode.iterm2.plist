@@ -38,6 +38,8 @@
 	<false/>
 	<key>HotkeyMigratedFromSingleToMulti</key>
 	<true/>
+	<key>IRMemory</key>
+	<integer>4</integer>
 	<key>MaxVertically</key>
 	<false/>
 	<key>New Bookmarks</key>
@@ -1490,6 +1492,8 @@
 		</dict>
 	</array>
 	<key>OpenArrangementAtStartup</key>
+	<false/>
+	<key>OpenBookmark</key>
 	<false/>
 	<key>OpenNoWindowsAtStartup</key>
 	<false/>
