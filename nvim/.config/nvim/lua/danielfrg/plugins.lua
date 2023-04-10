@@ -122,6 +122,9 @@ return require("packer").startup(function(use)
     use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
     use "nvim-treesitter/nvim-treesitter-context"
 
+    -- Autopairs, integrates with both cmp and treesitter
+    use "windwp/nvim-autopairs"
+
     -- Other
     use "github/copilot.vim"
 
