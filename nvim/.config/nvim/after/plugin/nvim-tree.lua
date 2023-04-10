@@ -7,6 +7,11 @@ require("nvim-tree").setup({
         dotfiles = false,
         custom = { "^.git$" }
     },
+    actions = {
+        change_dir = {
+            enable = false
+        }
+    }
 })
 
 -- Open NvimTree on startup

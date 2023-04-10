@@ -40,9 +40,12 @@ return require("packer").startup(function(use)
     -- Packer can manage itself
     use "wbthomason/packer.nvim"
 
+    -- Useful lua functions used ny lots of plugins
+    use "nvim-lua/plenary.nvim"
     -- An implementation of the Popup API from vim in Neovim
     use "nvim-lua/popup.nvim"
 
+    -- Themes
     use({ "projekt0n/github-nvim-theme", tag = "v0.0.7" })
 
     -- Navigation
@@ -51,6 +54,7 @@ return require("packer").startup(function(use)
         tag = "0.1.1",
         requires = { { "nvim-lua/plenary.nvim" } }
     })
+    use 'nvim-telescope/telescope-media-files.nvim'
     use("theprimeagen/harpoon")
 
     -- Custom tree navigation
