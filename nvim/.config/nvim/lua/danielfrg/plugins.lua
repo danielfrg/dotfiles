@@ -57,7 +57,7 @@ return require("packer").startup(function(use)
     use 'nvim-telescope/telescope-media-files.nvim'
     use("theprimeagen/harpoon")
 
-    -- Custom tree navigation
+    -- Tree Nav
     use {
         "nvim-tree/nvim-tree.lua",
         requires = {
@@ -68,11 +68,18 @@ return require("packer").startup(function(use)
         end
     }
 
-    -- Status line
+    -- UI things
     use {
         "nvim-lualine/lualine.nvim",
         requires = { "nvim-tree/nvim-web-devicons" }
     }
+
+    -- Tree sitter (Syntax highlighting)
+    use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
+    use "nvim-treesitter/nvim-treesitter-context"
+
+    -- Autopairs, integrates with both cmp and treesitter
+    use "windwp/nvim-autopairs"
 
     -- Toggle comments
     use {
@@ -82,8 +89,18 @@ return require("packer").startup(function(use)
         end
     }
 
-    -- use("mbbill/undotree")
+    -- TS context aware comment strings
+    use 'JoosepAlviste/nvim-ts-context-commentstring'
+
+    -- Git
+    use "lewis6991/gitsigns.nvim"
     -- use("tpope/vim-fugitive")
+
+    -- Undo tree
+    -- use("mbbill/undotree")
+
+    -- Other
+    use "github/copilot.vim"
 
     -- LSP
     use("williamboman/mason.nvim")
@@ -117,22 +134,6 @@ return require("packer").startup(function(use)
             require("telescope").load_extension("yaml_schema")
         end,
     }
-
-    -- Tree sitter (Syntax highlighting)
-    use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
-    use "nvim-treesitter/nvim-treesitter-context"
-
-    -- Autopairs, integrates with both cmp and treesitter
-    use "windwp/nvim-autopairs"
-
-    -- TS context aware comment strings
-    use 'JoosepAlviste/nvim-ts-context-commentstring'
-
-    -- Git
-    use "lewis6991/gitsigns.nvim"
-
-    -- Other
-    use "github/copilot.vim"
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
