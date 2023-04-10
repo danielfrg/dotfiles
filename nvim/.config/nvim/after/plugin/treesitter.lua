@@ -1,3 +1,14 @@
+installed = {
+    "c",
+    "lua",
+    "javascript",
+    "typescript",
+    "python",
+    "ruby",
+    "vim"
+}
+
+
 local status_ok, configs = pcall(require, "nvim-treesitter.configs")
 if not status_ok then
     return
@@ -6,7 +17,7 @@ end
 configs.setup {
     -- A list of parser names, or "all" (the five listed parsers should always be installed)
     --   ensure_installed = "maintained",
-    ensure_installed = { "c", "lua", "vim", "javascript", "typescript", "python" },
+    ensure_installed = installed,
 
     -- Install parsers synchronously (only applied to `ensure_installed`)
     sync_install = false,

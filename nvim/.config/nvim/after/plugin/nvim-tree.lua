@@ -20,7 +20,6 @@ end
 
 function M.print_node_path()
     local node = api.tree.get_node_under_cursor()
-    print(node.absolute_path)
 end
 
 nvim_tree.setup({

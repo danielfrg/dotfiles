@@ -4,10 +4,10 @@
 
 local servers = {
     'eslint',
-    'lua_ls',
     'jsonls',
+    'lua_ls',
     'pyright',
-    'rust_analyzer',
+    -- 'ruby_ls',
     'svelte',
     'tsserver',
     'yamlls',
@@ -30,8 +30,18 @@ lspconfig.lua_ls.setup({
 })
 
 -- YAML
-local yamlls_cfg = require("yaml-companion").setup({})
-lspconfig.yamlls.setup(yamlls_cfg)
+function dump(o)
+    if type(o) == 'table' then
+       local s = '{ '
+       for k,v in pairs(o) do
+          if type(k) ~= 'number' then k = '"'..k..'"' end
+          s = s .. '['..k..'] = ' .. dump(v) .. ','
+       end
+       return s .. '} '
+    else
+       return tostring(o)
+    end
+  end
 
 ------------------------------------------------
 -- Mason Config
@@ -63,8 +73,6 @@ local lsp_attach = function(client, bufnr)
         client.server_capabilities.document_formatting = false
     end
 
-    print("h1")
-
     local opts = { buffer = bufnr, remap = false }
     -- Default ones from lspconfig
     vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
@@ -90,29 +98,37 @@ local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local get_servers = mason_lspconfig.get_installed_servers
 
-for _, server_name in ipairs(get_servers()) do
-    opts = {
-        on_attach = lsp_attach,
-        capabilities = lsp_capabilities,
-    }
+mason_lspconfig.setup_handlers({
+    function(server_name)
+        lspconfig[server_name].setup({
+            on_attach = lsp_attach,
+            capabilities = lsp_capabilities,
+        })
+    end,
+})
 
-    -- Attach server specific config if exists
-    local require_ok, conf_opts = pcall(require, "danielfrg.lsp." .. server_name)
-    if require_ok then
-        opts = vim.tbl_deep_extend("force", conf_opts, opts)
-    end
+-- This is a fallback for the setup_handlers in case it stops working
+-- for _, server_name in ipairs(get_servers()) do
+--     opts = {
+--         on_attach = lsp_attach,
+--         capabilities = lsp_capabilities,
+--     }
 
-    lspconfig[server_name].setup(opts)
-end
+--     -- Attach server specific config if exists
+--     local require_ok, conf_opts = pcall(require, "danielfrg.lsp." .. server_name)
+--     if require_ok then
+--         opts = vim.tbl_deep_extend("force", conf_opts, opts)
+--     end
 
--- mason_lspconfig.setup_handlers({
---     function(server_name)
---         lspconfig[server_name].setup({
---             on_attach = lsp_attach,
---             capabilities = lsp_capabilities,
---         })
---     end,
--- })
+--     lspconfig[server_name].setup(opts)
+-- end
+
+-- We have to attach this after the setup_handlers because
+-- it has a custom on_attach
+-- TODO: Figure out how to call my lsp_attach from inside plugin on_attach
+local yamlconfig = require("yaml-companion").setup({})
+lspconfig["yamlls"].setup(yamlconfig)
+
 
 ------------------------------------------------
 -- LSP Configs
