@@ -6,7 +6,7 @@ export PATH=$HOME/.local/bin:$HOME/.local/scripts:$PATH
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
-# ZSH_THEME="robbyrussell"
+ZSH_THEME="robbyrussell"
 DISABLE_AUTO_UPDATE=true
 
 ZSH_CUSTOM=$HOME/code/dotfiles/zsh_custom
