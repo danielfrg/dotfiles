@@ -128,6 +128,9 @@ return require("packer").startup(function(use)
     -- TS context aware comment strings
     use 'JoosepAlviste/nvim-ts-context-commentstring'
 
+    -- Git
+    use "lewis6991/gitsigns.nvim"
+
     -- Other
     use "github/copilot.vim"
 
