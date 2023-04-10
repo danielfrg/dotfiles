@@ -1,3 +1,88 @@
+local lsp = require("lsp-zero")
+
+lsp.preset("recommended")
+
+lsp.ensure_installed({
+    'eslint',
+    'lua_ls',
+    'jsonls',
+    'pyright',
+    'rust_analyzer',
+    'svelte',
+    'tsserver',
+    'yamlls',
+})
+
+lsp.set_preferences({
+    suggest_lsp_servers = false,
+    sign_icons = {
+        error = '',
+        warn = "",
+        hint = "",
+        info = ""
+        -- error = 'E',
+        -- warn = 'W',
+        -- hint = 'H',
+        -- info = 'I'
+    }
+})
+
+-- Fix Undefined global 'vim'
+lsp.configure('lua-language-server', {
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = { 'vim' }
+            }
+        }
+    }
+})
+
+-- YAML
+local yamlcfg = require("yaml-companion").setup()
+lsp.configure('yamlls', yamlcfg)
+
+-- CMP: Auto completion
+-- For some reason we need these here for supertab to work.
+local cmp_mappings = {}
+cmp_mappings['<Tab>'] = nil
+cmp_mappings['<S-Tab>'] = nil
+
+lsp.setup_nvim_cmp({
+    mapping = cmp_mappings
+})
+
+lsp.on_attach(function(client, bufnr)
+    -- Disable formatting for tsserver, we use null-ls (prettier) instead
+    if client.name == "tsserver" then
+        client.server_capabilities.document_formatting = false
+    end
+
+    local opts = { buffer = bufnr, remap = false }
+    vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
+    vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
+    vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
+    vim.keymap.set("n", "gi", function() vim.lsp.buf.implementation() end, opts)
+    vim.keymap.set("n", "gr", function() vim.lsp.buf.references() end, opts)
+    vim.keymap.set("n", "gl", function() vim.diagnostic.open_float() end, opts)
+    vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
+    vim.keymap.set("n", "<leader>lj", function() vim.diagnostic.goto_next() end, opts)
+    vim.keymap.set("n", "<leader>lk", function() vim.diagnostic.goto_prev() end, opts)
+    vim.keymap.set("n", "<leader>la", function() vim.lsp.buf.code_action() end, opts)
+    vim.keymap.set("n", "<leader>lr", function() vim.lsp.buf.rename() end, opts)
+    vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+end)
+
+-- (Optional) Configure lua language server for neovim
+lsp.nvim_workspace()
+
+lsp.setup()
+
+vim.diagnostic.config({
+    virtual_text = true
+})
+
+
 local cmp = require('cmp')
 local luasnip = require('luasnip')
 
@@ -39,6 +124,12 @@ local kind_icons = {
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
 cmp.setup {
+  -- Select first item
+  preselect = 'item',
+  completion = {
+    completeopt = 'menu,menuone,noinsert'
+  },
+
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body) -- For `luasnip` users.
@@ -58,20 +149,7 @@ cmp.setup {
       c = cmp.mapping.close(),
     },
     -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
-    -- If something is selected then select it, otherwhise add a newline
-    -- ["<CR>"] = cmp.mapping({
-    --   i = function(fallback)
-    --     print "1111"
-    --     if cmp.visible() and cmp.get_active_entry() then
-    --       cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-    --     else
-    --       fallback()
-    --     end
-    --   end,
-    --   s = cmp.mapping.confirm({ select = true }),
-    --   c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-    -- }),
+    ["<CR>"] = cmp.mapping.confirm { select = true },
     -- Super tab
     -- https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#super-tab-like-mapping
     ["<Tab>"] = cmp.mapping(function(fallback)
@@ -104,10 +182,10 @@ cmp.setup {
     }),
   },
   formatting = {
-    fields = { "kind", "abbr", "menu" },
+    fields = { "abbr", "kind", "menu" },
     format = function(entry, vim_item)
       -- Kind icons
-      vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+      -- vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
       -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
       vim_item.menu = ({
         nvim_lsp = "[LSP]",
