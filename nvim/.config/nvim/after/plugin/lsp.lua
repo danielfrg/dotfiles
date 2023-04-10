@@ -13,7 +13,10 @@ local servers = {
     'yamlls',
 }
 
-local lspconfig = require('lspconfig')
+local status_ok, lspconfig = pcall(require, "lspconfig")
+if not status_ok then
+    return
+end
 
 -- Lua
 lspconfig.lua_ls.setup({
@@ -89,15 +92,15 @@ local get_servers = mason_lspconfig.get_installed_servers
 
 for _, server_name in ipairs(get_servers()) do
     opts = {
-		on_attach = lsp_attach,
+        on_attach = lsp_attach,
         capabilities = lsp_capabilities,
-	}
+    }
 
     -- Attach server specific config if exists
     local require_ok, conf_opts = pcall(require, "danielfrg.lsp." .. server_name)
-	if require_ok then
-		opts = vim.tbl_deep_extend("force", conf_opts, opts)
-	end
+    if require_ok then
+        opts = vim.tbl_deep_extend("force", conf_opts, opts)
+    end
 
     lspconfig[server_name].setup(opts)
 end

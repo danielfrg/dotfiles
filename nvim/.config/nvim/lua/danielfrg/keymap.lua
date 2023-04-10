@@ -121,5 +121,5 @@ vim.keymap.set("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
 
 vim.keymap.set("n", "<leader><leader>", function()
-  vim.cmd("so")
+    vim.cmd("so")
 end)

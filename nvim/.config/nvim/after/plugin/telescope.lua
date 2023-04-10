@@ -1,6 +1,6 @@
 local status_ok, telescope = pcall(require, "telescope")
 if not status_ok then
-  return
+    return
 end
 
 local builtin = require("telescope.builtin")
@@ -15,10 +15,8 @@ telescope.setup {
             i = {
                 ["<C-n>"] = actions.cycle_history_next,
                 ["<C-p>"] = actions.cycle_history_prev,
-
                 ["<C-j>"] = actions.move_selection_next,
                 ["<C-k>"] = actions.move_selection_previous,
-
                 ["<C-c>"] = actions.close,
                 ["<Down>"] = actions.move_selection_next,
                 ["<Up>"] = actions.move_selection_previous,
@@ -77,14 +75,17 @@ local opts = { noremap = true, silent = true }
 -- vim.keymap.set("n", "<leader>pf", builtin.find_files, opts)
 -- vim.keymap.set("n", "<C-p>", builtin.git_files, opts)
 keymap("n", "<C-p>",
-"<cmd>lua require'telescope.builtin'.git_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>",
-opts)
+    "<cmd>lua require'telescope.builtin'.git_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>",
+    opts)
 keymap("n", "<leader>pf",
-"<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>",
-opts)
+    "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>",
+    opts)
 
 vim.keymap.set("n", "<leader>pg", builtin.live_grep, opts)
 vim.keymap.set("n", "<leader>ps", function()
     builtin.grep_string({ search = vim.fn.input("Grep > ") })
 end, opts)
 vim.keymap.set('n', '<leader>vh', builtin.help_tags, opts)
+
+-- Extension
+telescope.load_extension("yaml_schema")

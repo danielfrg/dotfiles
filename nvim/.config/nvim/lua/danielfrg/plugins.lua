@@ -1,64 +1,64 @@
 -- Automatically install packer if not installed
-local install_path = vim.fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    PACKER_BOOTSTRAP = vim.fn.system {
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
         "git",
         "clone",
-        "--depth",
-        "1",
-        "https://github.com/wbthomason/packer.nvim",
-        install_path,
-    }
-    print "Installing packer close and reopen Neovim..."
-    vim.cmd [[packadd packer.nvim]]
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath,
+    })
 end
+vim.opt.rtp:prepend(lazypath)
 
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
-vim.cmd [[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
-  augroup end
-]]
+-- vim.cmd [[
+--   augroup packer_user_config
+--     autocmd!
+--     autocmd BufWritePost plugins.lua source <afile> | PackerSync
+--   augroup end
+-- ]]
 
 -- Use a protected call so we don"t error out on first use
-local status_ok, packer = pcall(require, "packer")
+local status_ok, lazy = pcall(require, "lazy")
 if not status_ok then
     return
 end
 
--- Have packer use a popup window
-packer.init {
-    display = {
-        open_fn = function()
-            return require("packer.util").float { border = "rounded" }
-        end,
-    },
-}
-
-return require("packer").startup(function(use)
-    -- Packer can manage itself
-    use "wbthomason/packer.nvim"
-
+plugins = {
     -- Useful lua functions used ny lots of plugins
-    use "nvim-lua/plenary.nvim"
-    -- An implementation of the Popup API from vim in Neovim
-    use "nvim-lua/popup.nvim"
+    "nvim-lua/plenary.nvim",
 
-    -- Themes
-    use({ "projekt0n/github-nvim-theme", tag = "v0.0.7" })
+    -- -- An implementation of the Popup API from vim in Neovim
+    "nvim-lua/popup.nvim",
 
-    -- Navigation
-    use({
+    -- -- Themes
+    { "projekt0n/github-nvim-theme",     tag = "v0.0.7" },
+
+    -- -- Navigation
+    {
         "nvim-telescope/telescope.nvim",
         tag = "0.1.1",
         requires = { { "nvim-lua/plenary.nvim" } }
-    })
-    use 'nvim-telescope/telescope-media-files.nvim'
-    use("theprimeagen/harpoon")
+    },
+    -- -- use("theprimeagen/harpoon")
 
-    -- Tree Nav
-    use {
+    -- Writting code
+    -- Autopairs, integrates with both cmp and treesitter
+    "windwp/nvim-autopairs",
+    -- Toggle comments
+    {
+        "numToStr/Comment.nvim",
+        config = function()
+            require("Comment").setup()
+        end
+    },
+    -- TS context aware comment strings
+    'JoosepAlviste/nvim-ts-context-commentstring',
+
+    -- UI things
+    {
         "nvim-tree/nvim-tree.lua",
         requires = {
             "nvim-tree/nvim-web-devicons", -- optional
@@ -66,78 +66,51 @@ return require("packer").startup(function(use)
         config = function()
             require("nvim-tree").setup {}
         end
-    }
-
-    -- UI things
-    use {
+    },
+    {
         "nvim-lualine/lualine.nvim",
         requires = { "nvim-tree/nvim-web-devicons" }
-    }
+    },
 
-    -- Tree sitter (Syntax highlighting)
-    use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
-    use "nvim-treesitter/nvim-treesitter-context"
-
-    -- Autopairs, integrates with both cmp and treesitter
-    use "windwp/nvim-autopairs"
-
-    -- Toggle comments
-    use {
-        "numToStr/Comment.nvim",
-        config = function()
-            require("Comment").setup()
-        end
-    }
-
-    -- TS context aware comment strings
-    use 'JoosepAlviste/nvim-ts-context-commentstring'
-
-    -- Git
-    use "lewis6991/gitsigns.nvim"
-    -- use("tpope/vim-fugitive")
-
-    -- Undo tree
-    -- use("mbbill/undotree")
-
-    -- Other
-    use "github/copilot.vim"
-
-    -- LSP
-    use("williamboman/mason.nvim")
-    use("williamboman/mason-lspconfig.nvim")
-    use("neovim/nvim-lspconfig")
+    --     -- LSP
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    "neovim/nvim-lspconfig",
 
     -- CMP
-    use("hrsh7th/nvim-cmp")
-    use("hrsh7th/cmp-nvim-lsp")
-    use("hrsh7th/cmp-buffer")
-    use("hrsh7th/cmp-path")
-    use("hrsh7th/cmp-cmdline")
-    use("saadparwaiz1/cmp_luasnip")
-    use("hrsh7th/cmp-nvim-lua")
+    "hrsh7th/nvim-cmp",
+    "hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/cmp-buffer",
+    "hrsh7th/cmp-path",
+    "hrsh7th/cmp-cmdline",
+    "saadparwaiz1/cmp_luasnip",
+    "hrsh7th/cmp-nvim-lua",
 
     -- Snippets
-    use("L3MON4D3/LuaSnip")
+    "L3MON4D3/LuaSnip",
 
     -- Formaters and Linters
-    use "jose-elias-alvarez/null-ls.nvim"
+    "jose-elias-alvarez/null-ls.nvim",
 
     -- YAML schema template selector and status line
-    use {
-        "someone-stole-my-name/yaml-companion.nvim",
-        requires = {
-            { "neovim/nvim-lspconfig" },
-            { "nvim-lua/plenary.nvim" },
-            { "nvim-telescope/telescope.nvim" },
-        },
-        config = function()
-            require("telescope").load_extension("yaml_schema")
-        end,
-    }
+    "someone-stole-my-name/yaml-companion.nvim",
 
-    -- Automatically set up your configuration after cloning packer.nvim
-    -- Put this at the end after all plugins
-    if PACKER_BOOTSTRAP then
-        require("packer").sync()
-    end
-end)
+
+    -- Tree sitter (Syntax highlighting)
+    { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+    "nvim-treesitter/nvim-treesitter-context",
+
+    --     -- Git
+    "lewis6991/gitsigns.nvim",
+    -- "tpope/vim-fugitive",
+
+    -- Undo tree
+    -- "mbbill/undotree",
+
+    -- Other
+    "github/copilot.vim"
+}
+
+opts = {}
+
+lazy.setup(plugins, opts)
