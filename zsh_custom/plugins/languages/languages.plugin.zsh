@@ -120,9 +120,8 @@ goinstalltools() {
 
 # RUBY -------------------------------------------------------------------------
 
-# export PATH="/usr/local/opt/ruby@2.7/bin:/usr/local/lib/ruby/gems/2.7.0/bin:$PATH"
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-# eval "$(rbenv init - zsh)"
+ eval "$(rbenv init - zsh)"
 
 # AWS --------------------------------------------------------------------------
 

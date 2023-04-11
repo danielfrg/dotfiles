@@ -107,7 +107,20 @@ plugins = {
     -- "mbbill/undotree",
 
     -- Other
-    "github/copilot.vim"
+    "lewis6991/impatient.nvim",
+    "github/copilot.vim",
+    {
+        'goolord/alpha-nvim',
+        config = function()
+            require 'alpha'.setup(require 'alpha.themes.dashboard'.config)
+        end
+    },
+    {
+        "iamcco/markdown-preview.nvim",
+        config = function()
+            vim.fn["mkdp#util#install"]()
+        end
+    }
 }
 
 opts = {}

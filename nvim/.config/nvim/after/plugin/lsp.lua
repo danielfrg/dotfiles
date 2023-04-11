@@ -3,11 +3,13 @@
 -- Based on: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v2.x/doc/md/lsp.md#you-might-not-need-lsp-zero
 
 local servers = {
+    'astro',
     'eslint',
     'jsonls',
     'lua_ls',
+    'marksman',
     'pyright',
-    -- 'ruby_ls',
+    'ruby_ls',
     'svelte',
     'tsserver',
     'yamlls',
@@ -81,8 +83,8 @@ mason_lspconfig.setup_handlers({
         })
     end,
     -- Lua
-    ["sumneko_lua"] = function ()
-        lspconfig.sumneko_lua.setup {
+    ["lua_ls"] = function()
+        lspconfig.lua_ls.setup {
             settings = {
                 Lua = {
                     diagnostics = {
@@ -93,7 +95,7 @@ mason_lspconfig.setup_handlers({
         }
     end,
     -- YAML
-    ["yamlls"] = function ()
+    ["yamlls"] = function()
         -- TODO: Figure out how to call my lsp_attach from inside plugin on_attach
         local yamlconfig = require("yaml-companion").setup({})
         lspconfig["yamlls"].setup(yamlconfig)
