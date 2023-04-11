@@ -30,6 +30,8 @@ plugins = {
     -- Useful lua functions used ny lots of plugins
     "nvim-lua/plenary.nvim",
 
+    "nvim-tree/nvim-web-devicons",
+
     -- -- An implementation of the Popup API from vim in Neovim
     "nvim-lua/popup.nvim",
 
@@ -71,8 +73,18 @@ plugins = {
         "nvim-lualine/lualine.nvim",
         requires = { "nvim-tree/nvim-web-devicons" }
     },
+    {
+    "folke/trouble.nvim",
+  config = function()
+    require("trouble").setup {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    }
+  end
+},
 
-    --     -- LSP
+    -- LSP
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
@@ -99,7 +111,7 @@ plugins = {
     { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
     "nvim-treesitter/nvim-treesitter-context",
 
-    --     -- Git
+    -- Git
     "lewis6991/gitsigns.nvim",
     -- "tpope/vim-fugitive",
 
@@ -107,8 +119,8 @@ plugins = {
     -- "mbbill/undotree",
 
     -- Other
-    "lewis6991/impatient.nvim",
     "github/copilot.vim",
+    "lewis6991/impatient.nvim",
     {
         'goolord/alpha-nvim',
         config = function()

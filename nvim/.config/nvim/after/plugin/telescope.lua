@@ -81,8 +81,8 @@ keymap("n", "<leader>pf",
     "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>",
     opts)
 
-vim.keymap.set("n", "<leader>pg", builtin.live_grep, opts)
-vim.keymap.set("n", "<leader>ps", function()
+vim.keymap.set("n", "<leader>ps", builtin.live_grep, opts)
+vim.keymap.set("n", "<leader>pg", function()
     builtin.grep_string({ search = vim.fn.input("Grep > ") })
 end, opts)
 vim.keymap.set('n', '<leader>vh', builtin.help_tags, opts)

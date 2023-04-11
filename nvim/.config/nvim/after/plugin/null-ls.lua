@@ -12,7 +12,7 @@ local diagnostics = null_ls.builtins.diagnostics
 null_ls.setup({
     sources = {
         formatting.prettier,
-        formatting.black,
+        formatting.black.with({ extra_args = { "--fast" } }),
         -- diagnostics.eslint -- doing this from LSP
     },
 })
