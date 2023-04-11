@@ -1,29 +1,31 @@
--- It's important to do this in order so we keep mason and lspconfig in th
+-- It"s important to do this in order so we keep mason and lspconfig in th
 -- same file
 -- Based on: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v2.x/doc/md/lsp.md#you-might-not-need-lsp-zero
 
 local servers = {
-    'astro',
-    'eslint',
-    'gopls',
-    'jsonls',
-    'html',
-    'lua_ls',
-    'marksman',
-    'pyright',
-    'ruby_ls',
-    'svelte',
-    'tailwindcss',
-    'taplo',  --toml
-    'terraformls',
-    'tsserver',
-    'yamlls',
+    "astro",
+    "eslint",
+    "gopls",
+    "jsonls",
+    "html",
+    "lua_ls",
+    "marksman",
+    "pyright",
+    "ruby_ls",
+    "svelte",
+    "tailwindcss",
+    "taplo",  --toml
+    "terraformls",
+    "tsserver",
+    "yamlls",
 }
 
 local status_ok, lspconfig = pcall(require, "lspconfig")
 if not status_ok then
     return
 end
+
+require('lspconfig.ui.windows').default_options.border = 'rounded'
 
 ------------------------------------------------
 -- Mason Config
@@ -50,33 +52,57 @@ mason_lspconfig.setup({
 })
 
 local lsp_attach = function(client, bufnr)
+    print("LSP attached.")
     -- Disable formatting for tsserver, we use null-ls (prettier) instead
     if client.name == "tsserver" then
         client.server_capabilities.document_formatting = false
     end
 
-    local opts = { buffer = bufnr, remap = false }
+    -- local map = function(mode, keys, func, desc)
+    --     if desc then
+    --         desc = "LSP: " .. desc
+    --     end
+    --     print("Mapping: ", desc)
+
+    --     vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = desc })
+    -- end
+
+    function diagnostic_goto(next, severity)
+        local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+        severity = severity and vim.diagnostic.severity[severity] or nil
+        return function()
+            go({ severity = severity })
+        end
+    end
+
     -- Default ones from lspconfig
-    vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
-    vim.keymap.set('n', '[d', vim.diagnostic.goto_next)
-    vim.keymap.set('n', ']d', vim.diagnostic.goto_prev)
-    vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
-    -- Extra
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-    vim.keymap.set("n", "gl", vim.diagnostic.open_float, opts)
-    vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
-    vim.keymap.set("n", "<leader>lj", vim.diagnostic.goto_next, opts)
-    vim.keymap.set("n", "<leader>lk", vim.diagnostic.goto_prev, opts)
-    vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, opts)
-    vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts)
-    vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr, buffer = bufnr, desc = "LSP: Hover" })
+    -- vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr, desc = "LSP: Goto definition" })
+    vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<cr>", { buffer = bufnr, desc = "LSP: Goto definition" })
+    vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<cr>", { buffer = bufnr, desc = "LSP: Telescope references" })
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = bufnr, desc = "LSP: Goto declaration" })
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { buffer = bufnr, desc = "LSP: Goto implementation" })
+    vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, { buffer = bufnr, desc = "LSP: Goto Type definition" })
+    vim.keymap.set("i", "gk", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "LSP: Signature definition" })
+    vim.keymap.set("n", "[d", vim.diagnostic.goto_next, { buffer = bufnr, desc = "LSP: Next diagnostic" })
+    vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, { buffer = bufnr, desc = "LSP: Prev diagnostic" })
+    vim.keymap.set("n", "[e", diagnostic_goto(true, "ERROR"), { buffer = bufnr, desc = "LSP: Next Error" })
+    vim.keymap.set("n", "]e", diagnostic_goto(false, "ERROR"), { buffer = bufnr, desc = "LSP: Prev Error" })
+    vim.keymap.set("n", "[w", diagnostic_goto(true, "WARN"), { buffer = bufnr, desc = "LSP: Next Warning" })
+    vim.keymap.set("n", "]w", diagnostic_goto(false, "WARN"), { buffer = bufnr, desc = "LSP: Prev Warning" })
+    vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { buffer = bufnr, desc = "LSP: Line diagnostics" })
+    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr, desc = "LSP: Code actions" })
+    vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { buffer = bufnr, desc = "LSP: Rename" })
+    vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, { buffer = bufnr, desc = "LSP: Format File" })
+    -- vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
+
+    -- Create a command `:Format` local to the LSP buffer
+    vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+        vim.lsp.buf.format()
+    end, { desc = 'LSP: Format current buffer' })
 end
 
-local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 local get_servers = mason_lspconfig.get_installed_servers
 
@@ -107,7 +133,7 @@ mason_lspconfig.setup_handlers({
     end
 })
 
--- This is a fallback for the setup_handlers in case it stops working
+-- This is a fallback function for the setup_handlers in case it stops working
 -- for _, server_name in ipairs(get_servers()) do
 --     opts = {
 --         on_attach = lsp_attach,

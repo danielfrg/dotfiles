@@ -1,9 +1,6 @@
-local opts = { noremap = true, silent = true }
-local term_opts = { silent = true }
+-- Mostly based on LazyVim
 
--- Remap space as leader key
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+local U = require("danielfrg.utils")
 
 -- Modes:
 -- n: Normal
@@ -13,113 +10,113 @@ vim.g.maplocalleader = " "
 -- t: Term mode
 -- c: Command mode
 
+-- Disable Space
+U.keymap({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+
 -- Escape options
-vim.keymap.set("i", "<Esc>", "<Esc>l", opts)
-vim.keymap.set("i", "jj", "<Esc>l", opts)
-vim.keymap.set("i", "jk", "<Esc>l", opts)
-vim.keymap.set({ "n", "i" }, "<C-c>", "<Esc>l", opts)
+U.keymap("i", "<Esc>", "<Esc>l")
+U.keymap({ "n", "i" }, "<C-c>", "<Esc>l")
+-- U.keymap("i", "jj", "<Esc>l")
+-- U.keymap("i", "jk", "<Esc>l")
+
+-- save file
+U.keymap({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
+
+-- better up/down: Remap for dealing with word wrap
+-- U.keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+-- U.keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Open Explorer
--- vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
--- vim.keymap.set("n", "<leader>e", vim.cmd.NvimTreeToggle, opts)
-vim.keymap.set("n", "<leader>pv", vim.cmd.NvimTreeToggle, opts)
+-- U.keymap("n", "<leader>pv", vim.cmd.Ex)
+U.keymap("n", "<leader>pv", vim.cmd.NvimTreeToggle, { desc = "Toggle File explorer: [P]roject [V]iew" })
 
--- Move in windows using vim movement keys
--- For C-h see:
+-- Move to window using the <ctrl> hjkl keys
+-- If <C-h> not working see:
 -- https://github.com/neovim/neovim/wiki/FAQ#my-ctrl-h-mapping-doesnt-work
-vim.keymap.set("n", "<C-h>", "<C-w>h", opts)
-vim.keymap.set("n", "<C-j>", "<C-w>j", opts)
-vim.keymap.set("n", "<C-k>", "<C-w>k", opts)
-vim.keymap.set("n", "<C-l>", "<C-w>l", opts)
+U.keymap("n", "<C-h>", "<C-w>h", { desc = "Go to left window" })
+U.keymap("n", "<C-j>", "<C-w>j", { desc = "Go to lower window" })
+U.keymap("n", "<C-k>", "<C-w>k", { desc = "Go to upper window" })
+U.keymap("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
 
--- Resize splits with arrows
--- Disable default hotkeys in Mac Preferences > Keyboard > Shortcuts > App Shortcuts
-vim.keymap.set("n", "<C-Up>", ":resize +2<CR>", opts)
-vim.keymap.set("n", "<C-Down>", ":resize -2<CR>", opts)
-vim.keymap.set("n", "<C-Left>", ":vertical resize -2<CR>", opts)
-vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>", opts)
+-- Resize window using <ctrl> arrow keys
+U.keymap("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
+U.keymap("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
+U.keymap("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
+U.keymap("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
 
 -- Navigate buffers
 -- Edit the alternate (previous) file: <C-^>
-vim.keymap.set("n", "<S-x>", ":e #<CR>", opts)
-vim.keymap.set("n", "<S-l>", ":bnext<CR>", opts)
-vim.keymap.set("n", "<S-h>", ":bprevious<CR>", opts)
+U.keymap("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
+U.keymap("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next buffer" })
+U.keymap("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
+U.keymap("n", "]b", "<cmd>bnext<cr>", { desc = "Next buffer" })
+U.keymap("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Last Buffer" })
+U.keymap("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Last Buffer" })
+U.keymap("n", "<S-x>", ":e #<CR>", { desc = "Switch to Last Buffer" })
+
+-- new file
+U.keymap("n", "<leader>fn", "<cmd>enew<cr>", { desc = "[N]ew [F]ile" })
 
 -- Quickfix movement
-vim.keymap.set("n", "<c-v>", "<cmd>cnext<cr>zz")
-vim.keymap.set("n", "<c-b>", "<cmd>cprev<cr>zz")
+U.keymap("n", "<c-v>", "<cmd>cnext<cr>zz")
+U.keymap("n", "<c-b>", "<cmd>cprev<cr>zz")
 
 -- Location list movement
-vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
-vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
+U.keymap("n", "<leader>k", "<cmd>lnext<CR>zz")
+U.keymap("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 -- Remove search highlights
-vim.keymap.set("n", "<Esc>", ":noh<return><esc>", opts)
-vim.keymap.set("n", "<C-c>", ":noh<return><esc>", opts)
+U.keymap("n", "<Esc>", ":noh<return><esc>")
+U.keymap("n", "<C-c>", ":noh<return><esc>")
 
 -- Copy to system clipboard
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
--- vim.keymap.set("n", "<leader>y", [["+Y]])
+U.keymap({ "n", "v" }, "<leader>y", [["+y]])
+-- U.keymap("n", "<leader>y", [["+Y]])
 
 -- Disable this
-vim.keymap.set("n", "Q", "<nop>")
+U.keymap("n", "Q", "<nop>")
 
 -- Project finder
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+U.keymap("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
--- Format files
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
+-- Insert blank lines
+U.keymap("n", "<leader>o", "m`o<Esc>``")
+U.keymap("n", "<leader>O", "m`O<Esc>``")
 
--- Insert black lines
-vim.keymap.set("n", "<leader>o", "m`o<Esc>``")
-vim.keymap.set("n", "<leader>O", "m`O<Esc>``")
+-- U.keymap("n", "J", "mzJ`z")
+-- U.keymap("n", "<C-d>", "<C-d>zz")
+-- U.keymap("n", "<C-u>", "<C-u>zz")
+-- U.keymap("n", "n", "nzzzv")
+-- U.keymap("n", "N", "Nzzzv")
 
--- vim.keymap.set("n", "J", "mzJ`z")
--- vim.keymap.set("n", "<C-d>", "<C-d>zz")
--- vim.keymap.set("n", "<C-u>", "<C-u>zz")
--- vim.keymap.set("n", "n", "nzzzv")
--- vim.keymap.set("n", "N", "Nzzzv")
+-- U.keymap({ "n", "v" }, "<leader>d", [["_d]])
 
--- vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
+-- U.keymap("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+-- U.keymap("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
--- vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
--- vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
-
--- vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/theprimeagen/packer.lua<CR>");
--- vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>");
+-- U.keymap("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/theprimeagen/packer.lua<CR>");
+-- U.keymap("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>");
 
 
 -- Visual Mode --
 
--- Stay in indent mode
-vim.keymap.set("v", "<", "<gv", opts)
-vim.keymap.set("v", ">", ">gv", opts)
+-- Better intenting
+U.keymap("v", "<", "<gv")
+U.keymap("v", ">", ">gv")
 
 -- Move selected lines up or down
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+U.keymap("v", "J", ":m '>+1<CR>gv=gv")
+U.keymap("v", "K", ":m '<-2<CR>gv=gv")
 
 -- Don't yank when pasting
-vim.keymap.set("v", "p", '"_dP')
+U.keymap("v", "p", '"_dP')
 
 -- greatest remap ever
-vim.keymap.set("x", "<leader>p", [["_dP]])
+U.keymap("x", "<leader>p", [["_dP]])
 
 -- Visual Block --
 -- Move text up and down
-vim.keymap.set("x", "J", ":move '>+1<CR>gv-gv", opts)
-vim.keymap.set("x", "K", ":move '<-2<CR>gv-gv", opts)
-vim.keymap.set("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
-vim.keymap.set("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
-
--- Terminal --
--- Better terminal navigation
-vim.keymap.set("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
-vim.keymap.set("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
-vim.keymap.set("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
-vim.keymap.set("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
-
-
-vim.keymap.set("n", "<leader><leader>", function()
-    vim.cmd("so")
-end)
+U.keymap("x", "J", ":move '>+1<CR>gv-gv")
+U.keymap("x", "K", ":move '<-2<CR>gv-gv")
+U.keymap("x", "<A-j>", ":move '>+1<CR>gv-gv")
+U.keymap("x", "<A-k>", ":move '<-2<CR>gv-gv")

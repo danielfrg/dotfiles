@@ -3,12 +3,18 @@ if not status_ok then
     return
 end
 
+local status_ok, trouble_telescope = pcall(require, "trouble.providers.telescope")
+if not status_ok then
+    return
+end
+
 local builtin = require("telescope.builtin")
 local actions = require("telescope.actions")
+local U = require("danielfrg.utils")
 
 telescope.setup {
     defaults = {
-        -- prompt_prefix = " ",
+        prompt_prefix = " ",
         -- selection_caret = " ",
         path_display = { "smart" },
         mappings = {
@@ -23,7 +29,7 @@ telescope.setup {
                 ["<CR>"] = actions.select_default,
                 ["<C-x>"] = actions.select_horizontal,
                 ["<C-v>"] = actions.select_vertical,
-                ["<C-t>"] = actions.select_tab,
+                -- ["<C-t>"] = actions.select_tab,
                 ["<C-u>"] = actions.preview_scrolling_up,
                 ["<C-d>"] = actions.preview_scrolling_down,
                 ["<PageUp>"] = actions.results_scrolling_up,
@@ -34,13 +40,15 @@ telescope.setup {
                 ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
                 ["<C-l>"] = actions.complete_tag,
                 ["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
+                -- Trouble
+                ["<c-t>"] = trouble_telescope.open_with_trouble,
             },
             n = {
                 ["<esc>"] = actions.close,
                 ["<CR>"] = actions.select_default,
                 ["<C-x>"] = actions.select_horizontal,
                 ["<C-v>"] = actions.select_vertical,
-                ["<C-t>"] = actions.select_tab,
+                -- ["<C-t>"] = actions.select_tab,
                 ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
                 ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
                 ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
@@ -59,6 +67,8 @@ telescope.setup {
                 ["<PageUp>"] = actions.results_scrolling_up,
                 ["<PageDown>"] = actions.results_scrolling_down,
                 ["?"] = actions.which_key,
+                -- Trouble
+                ["<C-t>"] = trouble_telescope.open_with_trouble,
             },
         },
     },
@@ -69,23 +79,40 @@ telescope.setup {
     }
 }
 
-local keymap = vim.api.nvim_set_keymap
-local opts = { noremap = true, silent = true }
+-- Mostly from LazyVim https://www.lazyvim.org/keymaps
+U.keymap('n', '<leader>fb', builtin.buffers, { desc = '[F]ind existing [B]uffers' })
+U.keymap('n', '<leader>?', builtin.oldfiles, { desc = '[?] Find recently opened files' })
 
--- vim.keymap.set("n", "<leader>pf", builtin.find_files, opts)
--- vim.keymap.set("n", "<C-p>", builtin.git_files, opts)
-keymap("n", "<C-p>",
-    "<cmd>lua require'telescope.builtin'.git_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>",
-    opts)
-keymap("n", "<leader>pf",
-    "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>",
-    opts)
+U.keymap('n', '<leader>/', function()
+    builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+      winblend = 10,
+      previewer = false,
+    })
+  end, { desc = '[/] Fuzzily search in current buffer' })
 
-vim.keymap.set("n", "<leader>ps", builtin.live_grep, opts)
-vim.keymap.set("n", "<leader>pg", function()
+
+U.keymap('n', '<leader>ff', function()
+    builtin.find_files(require('telescope.themes').get_dropdown {
+      previewer = false,
+    })
+  end, { desc = '[F]ind File (all)' })
+
+  U.keymap('n', '<C-p>', function()
+    builtin.git_files(require('telescope.themes').get_dropdown {
+      previewer = false,
+    })
+end, { desc = '[F]ind [F]ile (uses gitignore)' })
+
+
+U.keymap("n", "<leader>sf", builtin.live_grep, { desc = 'Live Grep [S]earch [F]ile' })
+U.keymap("n", "<leader>sg", function()
     builtin.grep_string({ search = vim.fn.input("Grep > ") })
-end, opts)
-vim.keymap.set('n', '<leader>vh', builtin.help_tags, opts)
+end, { desc = '[S]earch [G]rep (no live)' })
 
--- Extension
+U.keymap('n', '<leader>sc', builtin.commands, { desc = '[S]earch [C]ommands' })
+U.keymap('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
+
+-- U.keymap('n', '<leader>vh', builtin.help_tags, opts)
+
+-- -- Extensions
 telescope.load_extension("yaml_schema")

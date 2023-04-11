@@ -1,3 +1,7 @@
+-- Remap space as leader key
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 -- disable netrw at the very start of your init.lua (strongly advised)
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
@@ -24,8 +28,13 @@ vim.opt.backup = false
 vim.opt.undofile = true
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 
--- allows neovim to access the system clipboard
--- vim.opt.clipboard = "unnamedplus"
+-- Sync clipboard between OS and Neovim.
+vim.opt.clipboard = "unnamedplus"
+
+-- vim.opt.breakindent = true
+
+-- Case insensitive searching UNLESS /C or capital in search
+vim.opt.ignorecase = true
 
 -- Search
 vim.opt.hlsearch = true

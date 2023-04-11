@@ -12,39 +12,32 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Autocommand that reloads neovim whenever you save the plugins.lua file
--- vim.cmd [[
---   augroup packer_user_config
---     autocmd!
---     autocmd BufWritePost plugins.lua source <afile> | PackerSync
---   augroup end
--- ]]
-
 -- Use a protected call so we don"t error out on first use
 local status_ok, lazy = pcall(require, "lazy")
 if not status_ok then
     return
 end
 
-plugins = {
+local plugins = {
     -- Useful lua functions used ny lots of plugins
     "nvim-lua/plenary.nvim",
 
+    "MunifTanjim/nui.nvim",
     "nvim-tree/nvim-web-devicons",
 
-    -- -- An implementation of the Popup API from vim in Neovim
+    -- An implementation of the Popup API from vim in Neovim
     "nvim-lua/popup.nvim",
 
-    -- -- Themes
+    -- Themes
     { "projekt0n/github-nvim-theme",     tag = "v0.0.7" },
 
-    -- -- Navigation
+    -- Navigation
     {
         "nvim-telescope/telescope.nvim",
         tag = "0.1.1",
         requires = { { "nvim-lua/plenary.nvim" } }
     },
-    -- -- use("theprimeagen/harpoon")
+    -- use("theprimeagen/harpoon")
 
     -- Writting code
     -- Autopairs, integrates with both cmp and treesitter
@@ -60,15 +53,16 @@ plugins = {
     'JoosepAlviste/nvim-ts-context-commentstring',
 
     -- UI things
-    {
-        "nvim-tree/nvim-tree.lua",
-        requires = {
-            "nvim-tree/nvim-web-devicons", -- optional
-        },
-        config = function()
-            require("nvim-tree").setup {}
-        end
-    },
+    {"nvim-neo-tree/neo-tree.nvim"},
+    -- {
+    --     "nvim-tree/nvim-tree.lua",
+    --     requires = {
+    --         "nvim-tree/nvim-web-devicons", -- optional
+    --     },
+    --     config = function()
+    --         require("nvim-tree").setup {}
+    --     end
+    -- },
     {
         "nvim-lualine/lualine.nvim",
         requires = { "nvim-tree/nvim-web-devicons" }
@@ -135,7 +129,7 @@ plugins = {
     }
 }
 
-opts = {
+local opts = {
     ui = {
         -- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
         border = "rounded",
