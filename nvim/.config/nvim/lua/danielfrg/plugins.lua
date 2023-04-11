@@ -29,7 +29,7 @@ local plugins = {
     "nvim-lua/popup.nvim",
 
     -- Themes
-    { "projekt0n/github-nvim-theme",     tag = "v0.0.7" },
+    { "projekt0n/github-nvim-theme", tag = "v0.0.7" },
 
     -- Navigation
     {
@@ -53,30 +53,34 @@ local plugins = {
     'JoosepAlviste/nvim-ts-context-commentstring',
 
     -- UI things
-    {"nvim-neo-tree/neo-tree.nvim"},
-    -- {
-    --     "nvim-tree/nvim-tree.lua",
-    --     requires = {
-    --         "nvim-tree/nvim-web-devicons", -- optional
-    --     },
-    --     config = function()
-    --         require("nvim-tree").setup {}
-    --     end
-    -- },
+    { "nvim-neo-tree/neo-tree.nvim" },
     {
         "nvim-lualine/lualine.nvim",
         requires = { "nvim-tree/nvim-web-devicons" }
     },
     {
-    "folke/trouble.nvim",
-  config = function()
-    require("trouble").setup {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
-    }
-  end
-},
+        "folke/trouble.nvim",
+        config = function()
+            require("trouble").setup {
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+                -- refer to the configuration section below
+            }
+        end
+    },
+
+    {
+        "folke/which-key.nvim",
+        config = function()
+            vim.o.timeout = true
+            vim.o.timeoutlen = 300
+            require("which-key").setup({
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+                -- refer to the configuration section below
+            })
+        end,
+    },
 
     -- LSP
     "williamboman/mason.nvim",

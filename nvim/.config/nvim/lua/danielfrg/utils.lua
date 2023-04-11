@@ -1,5 +1,13 @@
 local M = {}
 
+-- Modes:
+-- n: Normal
+-- i: Insert
+-- v: Visual
+-- x: Visual Block
+-- t: Term mode
+-- c: Command mode
+
 function M.keymap(mode, lhs, rhs, opts)
     opts = opts or {}
     opts.silent = opts.silent ~= false

@@ -22,9 +22,9 @@ require("neo-tree").setup({
 U.keymap("n", "<leader>fe", function()
         command.execute({ toggle = true, position = "float" })
     end,
-    { desc = "[F]ile [E]xplorer" })
+    { desc = "Toggle [F]ile [E]xplorer (float)" })
 
 U.keymap("n", "<leader>pv", function()
         command.execute({ toggle = true, position = "left" })
     end,
-    { desc = "[F]ile [E]xplorer (left)" })
+    { desc = "Toggle [F]ile [E]xplorer (left)" })

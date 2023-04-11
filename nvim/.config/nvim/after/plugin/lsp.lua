@@ -52,20 +52,11 @@ mason_lspconfig.setup({
 })
 
 local lsp_attach = function(client, bufnr)
-    print("LSP attached.")
+    print("LSP attached")
     -- Disable formatting for tsserver, we use null-ls (prettier) instead
     if client.name == "tsserver" then
         client.server_capabilities.document_formatting = false
     end
-
-    -- local map = function(mode, keys, func, desc)
-    --     if desc then
-    --         desc = "LSP: " .. desc
-    --     end
-    --     print("Mapping: ", desc)
-
-    --     vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = desc })
-    -- end
 
     function diagnostic_goto(next, severity)
         local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
@@ -78,22 +69,22 @@ local lsp_attach = function(client, bufnr)
     -- Default ones from lspconfig
     vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr, buffer = bufnr, desc = "LSP: Hover" })
     -- vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr, desc = "LSP: Goto definition" })
-    vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<cr>", { buffer = bufnr, desc = "LSP: Goto definition" })
-    vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<cr>", { buffer = bufnr, desc = "LSP: Telescope references" })
-    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = bufnr, desc = "LSP: Goto declaration" })
-    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { buffer = bufnr, desc = "LSP: Goto implementation" })
-    vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, { buffer = bufnr, desc = "LSP: Goto Type definition" })
+    vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<cr>", { buffer = bufnr, desc = "LSP: Goto [D]efinition" })
+    vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<cr>", { buffer = bufnr, desc = "LSP: Telescope [R]eferences" })
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = bufnr, desc = "LSP: [G]oto [D]eclaration" })
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { buffer = bufnr, desc = "LSP: [G]oto [I]mplementation" })
+    vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, { buffer = bufnr, desc = "LSP: [G]oto [T]ype definition" })
     vim.keymap.set("i", "gk", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "LSP: Signature definition" })
     vim.keymap.set("n", "[d", vim.diagnostic.goto_next, { buffer = bufnr, desc = "LSP: Next diagnostic" })
     vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, { buffer = bufnr, desc = "LSP: Prev diagnostic" })
-    vim.keymap.set("n", "[e", diagnostic_goto(true, "ERROR"), { buffer = bufnr, desc = "LSP: Next Error" })
-    vim.keymap.set("n", "]e", diagnostic_goto(false, "ERROR"), { buffer = bufnr, desc = "LSP: Prev Error" })
-    vim.keymap.set("n", "[w", diagnostic_goto(true, "WARN"), { buffer = bufnr, desc = "LSP: Next Warning" })
-    vim.keymap.set("n", "]w", diagnostic_goto(false, "WARN"), { buffer = bufnr, desc = "LSP: Prev Warning" })
+    vim.keymap.set("n", "[e", diagnostic_goto(true, "ERROR"), { buffer = bufnr, desc = "LSP: Next [E]rror" })
+    vim.keymap.set("n", "]e", diagnostic_goto(false, "ERROR"), { buffer = bufnr, desc = "LSP: Prev [E]rror" })
+    vim.keymap.set("n", "[w", diagnostic_goto(true, "WARN"), { buffer = bufnr, desc = "LSP: Next [W]arning" })
+    vim.keymap.set("n", "]w", diagnostic_goto(false, "WARN"), { buffer = bufnr, desc = "LSP: Prev [W]arning" })
     vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { buffer = bufnr, desc = "LSP: Line diagnostics" })
-    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr, desc = "LSP: Code actions" })
-    vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { buffer = bufnr, desc = "LSP: Rename" })
-    vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, { buffer = bufnr, desc = "LSP: Format File" })
+    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr, desc = "LSP: [C]ode [A]ctions" })
+    vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { buffer = bufnr, desc = "LSP: [R]ename" })
+    vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, { buffer = bufnr, desc = "LSP: [F]ormat File" })
     -- vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
 
     -- Create a command `:Format` local to the LSP buffer
@@ -122,7 +113,9 @@ mason_lspconfig.setup_handlers({
                         globals = { "vim" }
                     }
                 }
-            }
+            },
+            on_attach = lsp_attach,
+            capabilities = lsp_capabilities,
         }
     end,
     -- YAML

@@ -1,14 +1,6 @@
--- Mostly based on LazyVim
-
 local U = require("danielfrg.utils")
 
--- Modes:
--- n: Normal
--- i: Insert
--- v: Visual
--- x: Visual Block
--- t: Term mode
--- c: Command mode
+-- Mostly based on LazyVim
 
 -- Disable Space
 U.keymap({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
@@ -57,31 +49,31 @@ U.keymap("n", "<S-x>", ":e #<CR>", { desc = "Switch to Last Buffer" })
 -- new file
 U.keymap("n", "<leader>fn", "<cmd>enew<cr>", { desc = "[N]ew [F]ile" })
 
--- Quickfix movement
-U.keymap("n", "<c-v>", "<cmd>cnext<cr>zz")
-U.keymap("n", "<c-b>", "<cmd>cprev<cr>zz")
-
 -- Location list movement
-U.keymap("n", "<leader>k", "<cmd>lnext<CR>zz")
-U.keymap("n", "<leader>j", "<cmd>lprev<CR>zz")
+U.keymap("n", "<leader>k", "<cmd>lnext<CR>zz", { desc = "Next Location" })
+U.keymap("n", "<leader>j", "<cmd>lprev<CR>zz", { desc = "Prev Location" })
+
+-- Quickfix movement
+U.keymap("n", "<c-v>", "<cmd>cnext<cr>zz", { desc = "Next Quickfix" })
+U.keymap("n", "<c-b>", "<cmd>cprev<cr>zz", { desc = "Prev Quickfix" })
 
 -- Remove search highlights
 U.keymap("n", "<Esc>", ":noh<return><esc>")
 U.keymap("n", "<C-c>", ":noh<return><esc>")
 
 -- Copy to system clipboard
-U.keymap({ "n", "v" }, "<leader>y", [["+y]])
+U.keymap({ "n", "v" }, "<leader>y", [["+y]], { desc = "Copy to clipboard" })
 -- U.keymap("n", "<leader>y", [["+Y]])
 
 -- Disable this
 U.keymap("n", "Q", "<nop>")
 
 -- Project finder
-U.keymap("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+U.keymap("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>", { desc = "Tmux Project finder" })
 
 -- Insert blank lines
-U.keymap("n", "<leader>o", "m`o<Esc>``")
-U.keymap("n", "<leader>O", "m`O<Esc>``")
+U.keymap("n", "<leader>o", "m`o<Esc>``", { desc = "Insert line below" })
+U.keymap("n", "<leader>O", "m`O<Esc>``", { desc = "Insert line above" })
 
 -- U.keymap("n", "J", "mzJ`z")
 -- U.keymap("n", "<C-d>", "<C-d>zz")
@@ -97,7 +89,7 @@ U.keymap("n", "<leader>O", "m`O<Esc>``")
 -- U.keymap("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/theprimeagen/packer.lua<CR>");
 -- U.keymap("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>");
 
-
+-----------------
 -- Visual Mode --
 
 -- Better intenting
