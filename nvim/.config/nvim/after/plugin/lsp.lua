@@ -5,12 +5,17 @@
 local servers = {
     'astro',
     'eslint',
+    'gopls',
     'jsonls',
+    'html',
     'lua_ls',
     'marksman',
     'pyright',
     'ruby_ls',
     'svelte',
+    'tailwindcss',
+    'taplo',  --toml
+    'terraformls',
     'tsserver',
     'yamlls',
 }

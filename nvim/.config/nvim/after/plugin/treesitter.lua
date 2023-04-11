@@ -1,13 +1,21 @@
 installed = {
-    "c",
-    "lua",
+    "astro",
+    "git_config",
+    "gitignore",
+    "go",
+    "html",
     "javascript",
-    "typescript",
+    "lua",
+    "markdown",
     "python",
     "ruby",
-    "vim"
+    "svelte",
+    "terraform",
+    "toml",
+    "typescript",
+    "vim",
+    "yaml",
 }
-
 
 local status_ok, configs = pcall(require, "nvim-treesitter.configs")
 if not status_ok then

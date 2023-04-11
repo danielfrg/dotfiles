@@ -123,6 +123,11 @@ plugins = {
     }
 }
 
-opts = {}
+opts = {
+    ui = {
+        -- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
+        border = "rounded",
+    }
+}
 
 lazy.setup(plugins, opts)
