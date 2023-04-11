@@ -11,20 +11,28 @@ bindkey "^[el" end-of-line              # Bind this to cmd-(right arrow) = send 
 bindkey "^[dw" delete-word              # Bind this to option(alt)-d = send escape sequence `dw`
 bindkey "^[dwb" backward-delete-word    # Bind this to ctrl-w = send escape sequence `dwb`
 
-# ------------------------------------------------------------------------------
+# # ------------------------------------------------------------------------------
 
 if [[ $(uname) == "Darwin" ]]; then
     # Mac only!
 
     # Switch Homebrew path based on whether we're native or in Rosetta
-    if [ "$(sysctl -n sysctl.proc_translated)" = "1" ]; then
-        local brew_path="/usr/local/homebrew/bin"
-    else
-        local brew_path="/opt/homebrew/bin"
-    fi
-    eval $($brew_path/brew shellenv)
+    # if [ "$(sysctl -n sysctl.proc_translated)" = "1" ]; then
+    #     local brew_path="/usr/local/homebrew/bin"
+    # else
+    #     local brew_path="/opt/homebrew/bin"
+    # fi
 
-    # Homebrew things
+    # eval $($brew_path/brew shellenv)
+    # Do this manually to make it faster
+    export HOMEBREW_PREFIX="/opt/homebrew";
+    export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
+    export HOMEBREW_REPOSITORY="/opt/homebrew";
+    export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}";
+    export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
+    export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
+    # --
+
     export PATH=/usr/local/sbin:$PATH
     export PATH=/usr/local/opt/make/libexec/gnubin:$PATH
     # export PATH=$(brew --prefix coreutils)/libexec/bin:$PATH       # Slow
@@ -182,7 +190,7 @@ alias httpserver="open http://localhost:8000 && python -m http.server 8000"
 alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl"
 
 # autojump
-[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
+# [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
 # add support for ctrl+o to open selected file in VS Code
 export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(code {})+abort'"
