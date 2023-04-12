@@ -1,4 +1,4 @@
-installed = {
+local installed = {
     "astro",
     "git_config",
     "gitignore",

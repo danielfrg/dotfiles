@@ -19,7 +19,7 @@ vim.opt.cursorline = true
 vim.opt.cursorlineopt = 'line,number'
 
 vim.opt.wrap = false
-vim.opt.guicursor = ""
+-- vim.opt.guicursor = ""
 vim.opt.mouse = "a" -- allow the mouse to be used in neovim
 
 vim.opt.swapfile = false
