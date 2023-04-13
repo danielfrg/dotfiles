@@ -79,7 +79,7 @@ telescope.setup {
     }
 }
 
--- Mostly from LazyVim https://www.lazyvim.org/keymaps
+-- Mostly from LazyVim and LunarVim
 U.keymap('n', '<leader>fb', builtin.buffers, { desc = '[F]ind existing [B]uffers' })
 U.keymap('n', '<leader>?', builtin.oldfiles, { desc = '[?] Find recently opened files' })
 

@@ -1,6 +1,6 @@
 local U = require("danielfrg.utils")
 
--- Mostly based on LazyVim
+-- Based on LazyVim and LunarVim
 
 -- Disable Space
 U.keymap({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
@@ -14,15 +14,11 @@ U.keymap({ "n", "i" }, "<C-c>", "<Esc>l")
 -- save file
 U.keymap({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
 
--- better up/down: Remap for dealing with word wrap
--- U.keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
--- U.keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-
 -- Open Explorer
 -- U.keymap("n", "<leader>pv", vim.cmd.Ex)
 U.keymap("n", "<leader>pv", vim.cmd.NvimTreeToggle, { desc = "Toggle File explorer: [P]roject [V]iew" })
 
--- Move to window using the <ctrl> hjkl keys
+-- Move to window using the <ctrl>+<h-j-k-l> keys
 -- If <C-h> not working see:
 -- https://github.com/neovim/neovim/wiki/FAQ#my-ctrl-h-mapping-doesnt-work
 U.keymap("n", "<C-h>", "<C-w>h", { desc = "Go to left window" })
@@ -46,7 +42,7 @@ U.keymap("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Last Buffer" })
 U.keymap("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Last Buffer" })
 U.keymap("n", "<S-x>", ":e #<CR>", { desc = "Switch to Last Buffer" })
 
--- new file
+-- New file
 U.keymap("n", "<leader>fn", "<cmd>enew<cr>", { desc = "[N]ew [F]ile" })
 
 -- Location list movement
