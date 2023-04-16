@@ -24,7 +24,7 @@ zinit light joshskidmore/zsh-fzf-history-search
 # z - autojump
 zinit light agkozak/zsh-z
 
-# ---------------------------
-# Stuff that is not committed
+# ---------------------------------
+# Stuff that is not to be committed
 touch ~/.zshrc.local
 source ~/.zshrc.local
