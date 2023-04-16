@@ -1,16 +1,29 @@
-# Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+# Install Zinit
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
 
-# ZSH Options
-DISABLE_AUTO_UPDATE=true
-ZSH_CUSTOM=$HOME/code/dotfiles/zsh_custom
+# Source files
+for file in "${HOME}/.zsh/base.zsh" \
+            "${HOME}/.local/bin/imagecat.zsh" \
+            "${HOME}/.zsh/languages.zsh"
+do
+    [ -s "${file}" ] && source "${file}"
+done
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(base languages fzf z zsh-autosuggestions zsh-syntax-highlighting imgcat)
+# Base plugins
+zinit light zsh-users/zsh-autosuggestions
+zinit light zdharma-continuum/fast-syntax-highlighting
 
-# User configuration
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-export MANPATH="/usr/local/man:$MANPATH"
+# zsh-fzf-history-search
+zinit ice lucid wait'0'
+zinit light joshskidmore/zsh-fzf-history-search
 
-source $ZSH/oh-my-zsh.sh
+# z - autojump
+zinit light agkozak/zsh-z
+
+# ---------------------------
+# Stuff that is not committed
+touch ~/.zshrc.local
+source ~/.zshrc.local

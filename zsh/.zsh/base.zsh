@@ -1,4 +1,4 @@
-# Color scheme
+# Load color scheme
 BASE16_SHELL="$HOME/code/dotfiles/iterm2/base16-tomorrow.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
@@ -11,7 +11,7 @@ bindkey "^[el" end-of-line              # Bind this to cmd-(right arrow) = send 
 bindkey "^[dw" delete-word              # Bind this to option(alt)-d = send escape sequence `dw`
 bindkey "^[dwb" backward-delete-word    # Bind this to ctrl-w = send escape sequence `dwb`
 
-# # ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 
 if [[ $(uname) == "Darwin" ]]; then
     # Mac only!
@@ -54,11 +54,13 @@ else
     # echo 'Unknown OS!'
 fi
 
-# Local binaries
-export PATH=$HOME/.local/bin:$HOME/.local/scripts:$PATH
 # Binaries inside dotfiles
 export PATH=$HOME/code/dotfiles/bin:$PATH
 
+# Local binaries
+export PATH=$HOME/.local/bin:$HOME/.local/scripts:$PATH
+
+# Prompt
 eval "$(starship init zsh)"
 
 # History
@@ -189,9 +191,6 @@ alias httpserver="open http://localhost:8000 && python -m http.server 8000"
 # Also, clear Apple’s System Logs to improve shell startup speed
 alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl"
 
-# autojump
-# [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
-
 # add support for ctrl+o to open selected file in VS Code
 export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(code {})+abort'"
 
@@ -240,8 +239,3 @@ function dirsize() {
     du $arg .[^.]* *;
   fi;
 }
-
-# ===============================================
-# KEEP AT THE END: Stuff that want at startup but not commited
-touch ~/.zshrc.local
-source ~/.zshrc.local
