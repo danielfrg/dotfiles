@@ -7,7 +7,8 @@ source "${ZINIT_HOME}/zinit.zsh"
 # Source files
 for file in "${HOME}/.zsh/base.zsh" \
             "${HOME}/.local/bin/imagecat.zsh" \
-            "${HOME}/.zsh/languages.zsh"
+            "${HOME}/.zsh/languages.zsh" \
+            "$HOME/code/dotfiles/personal/entrypoint.sh"
 do
     [ -s "${file}" ] && source "${file}"
 done
