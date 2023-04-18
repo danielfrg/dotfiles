@@ -24,6 +24,13 @@ zinit light joshskidmore/zsh-fzf-history-search
 # z - autojump
 zinit light agkozak/zsh-z
 
+zi for \
+    atload"zicompinit; zicdreplay" \
+    blockf \
+    lucid \
+    wait \
+  zsh-users/zsh-completions
+
 # ---------------------------------
 # Stuff that is not to be committed
 touch ~/.zshrc.local
