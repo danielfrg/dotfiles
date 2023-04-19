@@ -13,26 +13,29 @@ do
     [ -s "${file}" ] && source "${file}"
 done
 
-# Base plugins
-zinit light zsh-users/zsh-autosuggestions
-zinit light zdharma-continuum/fast-syntax-highlighting
+# Load this first so fzf-tab works
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zpcompinit
 
-# zsh-fzf-history-search
+zinit ice silent wait
+zinit light zdharma/fast-syntax-highlighting
+
+zinit ice lucid wait
+zinit light Aloxaf/fzf-tab
+
+zinit ice lucid wait:1 atload:_zsh_autosuggest_start
+zinit light zsh-users/zsh-autosuggestions
+
 zinit ice lucid wait'0'
 zinit light joshskidmore/zsh-fzf-history-search
 
+# zinit ice lucid wait
+# zinit light wfxr/forgit
+# forgit_diff=gid
+# forgit_restore=forgit_restore
+
 # z - autojump
-zinit light agkozak/zsh-z
-
-# Tab complete
-zinit light Aloxaf/fzf-tab
-
-zi for \
-    atload"zicompinit; zicdreplay" \
-    blockf \
-    lucid \
-    wait \
-  zsh-users/zsh-completions
+# zinit light agkozak/zsh-z
 
 # ---------------------------------
 # Stuff that is not to be committed
