@@ -24,6 +24,9 @@ zinit light joshskidmore/zsh-fzf-history-search
 # z - autojump
 zinit light agkozak/zsh-z
 
+# Tab complete
+zinit light Aloxaf/fzf-tab
+
 zi for \
     atload"zicompinit; zicdreplay" \
     blockf \
