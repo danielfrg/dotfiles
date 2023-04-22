@@ -49,6 +49,7 @@ if [[ $(uname) == "Darwin" ]]; then
     # Git and GPG config
     export GPG_TTY=$TTY
 
+    alias rm_="/bin/rm"
     alias rm="trash"
 else
     # echo 'Unknown OS!'
@@ -72,6 +73,12 @@ export HISTTIMEFORMAT="[%F %T] "
 setopt EXTENDED_HISTORY
 setopt HIST_FIND_NO_DUPS
 
+# Nix
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi
+# End Nix
+
 #########################
 # ALIASES
 #########################
@@ -82,22 +89,22 @@ alias sudo='sudo '
 # Replacements
 # From: https://jvns.ca/blog/2022/04/12/a-list-of-new-ish--command-line-tools/
 alias cat='bat --style="header"'
-alias ccat='/bin/cat'
+alias cat_='/bin/cat'
 alias df='duf'
-alias ddf='/usr/df'
+alias df_='/usr/df'
 alias grep='rp'
-alias grep='grep -i --color=always'
+alias grep_='/usr/bin/grep -i --color=always'
 alias find='fd -H'
-alias ffind='/usr/bin/find'
+alias find_='/usr/bin/find'
 alias ls='lsd -la'
-alias lls='/bin/ls'
+alias ls_='/bin/ls'
 alias ping='prettyping --nolegend'
-alias pping='/sbin/ping'
+alias ping_='/sbin/ping'
 alias preview="fzf --preview 'bat --color \"always\" {}'"
 alias top='btm'
-alias ttop='/usr/bin/top'
+alias top_='/usr/bin/top'
 alias watch=viddy
-alias wwatch='/opt/homebrew/bin/watch'
+alias watch_='/opt/homebrew/bin/watch'
 
 # Files
 alias l='ls -l'
