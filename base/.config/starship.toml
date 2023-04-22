@@ -4,6 +4,7 @@ format = """
 $username\
 $hostname\
 $directory\
+$git_status\
 $cmd_duration\
 $character"""
 
