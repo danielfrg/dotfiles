@@ -3,7 +3,7 @@
 format = """$all"""
 
 # Inserts a blank line between shell prompts
-add_newline = false
+add_newline = true
 command_timeout = 150
 
 # Replace the "❯" symbol in the prompt with "➜"
