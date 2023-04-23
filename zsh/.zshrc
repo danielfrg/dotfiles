@@ -8,6 +8,15 @@ source "${ZINIT_HOME}/zinit.zsh"
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zpcompinit
 
+# Source files
+for file in "${HOME}/.zsh/base.zsh" \
+            "${HOME}/.local/bin/imagecat.zsh" \
+            "${HOME}/.zsh/languages.zsh" \
+            "${HOME}/.zsh/ssh.zsh" \
+            "$HOME/code/dotfiles/personal/entrypoint.sh"
+do
+    [ -s "${file}" ] && source "${file}"
+done
 
 zinit ice silent wait
 zinit light zdharma/fast-syntax-highlighting
@@ -22,16 +31,6 @@ zinit light zsh-users/zsh-autosuggestions
 
 zinit ice lucid wait'0'
 zinit light joshskidmore/zsh-fzf-history-search
-
-# Source files
-for file in "${HOME}/.zsh/base.zsh" \
-            "${HOME}/.local/bin/imagecat.zsh" \
-            "${HOME}/.zsh/languages.zsh" \
-            "${HOME}/.zsh/ssh.zsh" \
-            "$HOME/code/dotfiles/personal/entrypoint.sh"
-do
-    [ -s "${file}" ] && source "${file}"
-done
 
 # zinit ice lucid wait
 # zinit light wfxr/forgit
