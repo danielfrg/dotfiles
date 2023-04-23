@@ -60,6 +60,9 @@ export PATH=$HOME/code/dotfiles/bin:$PATH
 # Local binaries
 export PATH=$HOME/.local/bin:$HOME/.local/scripts:$PATH
 
+# Cargo binaries
+export PATH=$HOME/.cargo/bin:$PATH
+
 # Prompt
 eval "$(starship init zsh)"
 

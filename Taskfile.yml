@@ -1,9 +1,18 @@
 version: "3"
 
+env:
+  TAG: base
+
 tasks:
-  ohmyzsh:
+  ansible:
+    dir: ansible
     cmds:
-      - sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+      - ansible-playbook local.yml
+
+  ansible:tag:
+    dir: ansible
+    cmds:
+      - ansible-playbook local.yml --tags "{{.TAG}}"
 
   fonts:
     cmds:

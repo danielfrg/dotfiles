@@ -4,7 +4,7 @@ tap 'homebrew/cask'
 tap 'danielfrg/homebrew-formulas'
 tap 'homebrew/cask-fonts'
 
-# Core
+# Tools
 brew 'coreutils'
 brew 'moreutils'
 brew 'findutils'
@@ -67,6 +67,9 @@ brew 'yarn'
 brew 'ruby'
 brew 'ruby-build'
 brew 'rbenv'
+
+# Rust
+brew 'rust'
 
 # docker and k8s
 # brew 'dive'
