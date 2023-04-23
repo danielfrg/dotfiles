@@ -1,0 +1,2 @@
+profile_default/*
+!profile_default/ipython_config.py

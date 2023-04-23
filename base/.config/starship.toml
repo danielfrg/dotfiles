@@ -1,12 +1,6 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
-format = """
-$username\
-$hostname\
-$directory\
-$git_status\
-$cmd_duration\
-$character"""
+format = """$all"""
 
 # Inserts a blank line between shell prompts
 add_newline = false
@@ -16,8 +10,19 @@ command_timeout = 150
 [character] # The name of the module we are configuring is "character"
 success_symbol = "[➜](bold green)" # The "success_symbol" segment is being set to "➜" with the color "bold green"
 
+[username]
+disabled = false
+show_always = true
+
+[hostname]
+ssh_only = true
+format = '[$ssh_symbol](bold blue) on [$hostname](bold red) '
+trim_at = '.companyname.com'
+disabled = false
+
 [aws]
 format = '\[[$symbol($profile)(\($region\))(\[$duration\])]($style)\]'
+disabled = true
 
 [bun]
 format = '\[[$symbol($version)]($style)\]'
@@ -61,6 +66,7 @@ disabled = true
 
 [docker_context]
 format = '\[[$symbol$context]($style)\]'
+disabled = true
 
 [dotnet]
 format = '\[[$symbol($version)(🎯 $tfm)]($style)\]'
@@ -80,15 +86,19 @@ disabled = true
 
 [gcloud]
 format = '\[[$symbol$account(@$domain)(\($region\))]($style)\]'
+disabled = true
 
 [git_branch]
 format = '\[[$symbol$branch]($style)\]'
+disabled = true
 
 [git_status]
 format = '([\[$all_status$ahead_behind\]]($style))'
+# disabled = true
 
 [golang]
 format = '\[[$symbol($version)]($style)\]'
+disabled = true
 
 [haskell]
 format = '\[[$symbol($version)]($style)\]'
@@ -96,6 +106,7 @@ disabled = true
 
 [helm]
 format = '\[[$symbol($version)]($style)\]'
+disabled = true
 
 [hg_branch]
 format = '\[[$symbol$branch]($style)\]'
@@ -138,6 +149,7 @@ disabled = true
 
 [nodejs]
 format = '\[[$symbol($version)]($style)\]'
+disabled = true
 
 [ocaml]
 format = '\[[$symbol($version)(\($switch_indicator$switch_name\))]($style)\]'
@@ -169,6 +181,7 @@ disabled = true
 
 [python]
 format = '\[[${symbol}${pyenv_prefix}(${version})(\($virtualenv\))]($style)\]'
+disabled = true
 
 [raku]
 format = '\[[$symbol($version-$vm_version)]($style)\]'
@@ -176,6 +189,7 @@ disabled = true
 
 [red]
 format = '\[[$symbol($version)]($style)\]'
+disabled = true
 
 [ruby]
 format = '\[[$symbol($version)]($style)\]'
@@ -183,6 +197,7 @@ disabled = true
 
 [rust]
 format = '\[[$symbol($version)]($style)\]'
+disabled = true
 
 [scala]
 format = '\[[$symbol($version)]($style)\]'
@@ -201,12 +216,11 @@ disabled = true
 
 [terraform]
 format = '\[[$symbol$workspace]($style)\]'
+disabled = true
 
 [time]
 format = '\[[$time]($style)\]'
-
-[username]
-format = '[$user]($style) '
+disabled = true
 
 [vagrant]
 format = '\[[$symbol($version)]($style)\]'
