@@ -1,0 +1,13 @@
+/base/.config/karabiner/assets
+/base/.config/karabiner/automatic_backups
+
+/bin/.local/share
+
+/python/.ipython/profile_default/*
+!/python/.ipython/profile_default/ipython_config.py
+
+/nvim/.config/nvim/plugin
+
+/python/.jupyter/lab/
+/python/.jupyter/serverconfig/
+/python/.jupyter/migrated
