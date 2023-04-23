@@ -1,11 +1,11 @@
 # PYTHON -----------------------------------------------------------------------
 
+export PATH="$HOME/.rye/shims:$PATH"
+export HATCH_CONFIG=$HOME/.config/hatch/config.toml
+
 # export PYENV_ROOT="$HOME/.pyenv"
 # export PATH="$PYENV_ROOT/bin:$PATH"
 # export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-
-export PATH="$HOME/.rye/shims:$PATH"
-export HATCH_CONFIG=$HOME/.config/hatch/config.toml
 
 # Copy/Paste directly this to make it faster
 # Default to evaluate if not in MacOS
