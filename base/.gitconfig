@@ -2,6 +2,9 @@
 	name = Daniel Rodriguez
 	email = daniel@danielfrg.com
 
+[include]
+	path = .gitconfig.local
+
 [core]
 	# Use custom `.gitignore` and `.gitattributes`
 	excludesfile = ~/.gitignore_global
@@ -17,6 +20,9 @@
 	trustctime = false
 	editor = vim
 
+	autocrlf = input
+	precomposeunicode = true
+
 [init]
 	defaultBranch = main
 
@@ -27,11 +33,11 @@
 # [gpg]
 # 	program = gpg
 
-[tag]
-	forceSignAnnotated = true
-
 # [commit]
 # 	gpgsign = true
+
+[tag]
+	forceSignAnnotated = true
 
 [push]
 	default = simple
@@ -44,26 +50,34 @@
 	# Include summaries of merged commits in newly created merge commit messages
 	log = true
 
+[diff]
+	algorithm = patience
+
+[submodule]
+	recurse = true
+
 [help]
 	# Automatically correct and execute mistyped commands
 	autocorrect = 1
 
-
 [alias]
+	# View the current working tree status using the short format
+	st = status -sb
+	ci = commit
+	runci = commit --allow-empty -nm 'emity commit to run ci'
+	co = checkout
+	br = branch
+
+	uncommit = reset HEAD^
+
 	# View abbreviated SHA, description, and history graph of the latest 20 commits
 	l = log --pretty=oneline -n 20 --graph --abbrev-commit
-
-	# View the current working tree status using the short format
-	s = status -s
 
 	# Show the diff between the latest commit and the current state
 	d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
 
 	# Pull in remote changes for the current repository and all its submodules
 	p = !"git pull; git submodule foreach git pull origin master"
-
-	# Clone a repository including all submodules
-	c = commit -am
 
 	# Checkout a pull request from origin (of a github repository)
 	pr = !"pr() { git fetch origin pull/$1/head:pr-$1; git checkout pr-$1; }; pr"
@@ -74,72 +88,58 @@
 	# Amend the currently staged files to the latest commit
 	amend = commit --amend --reuse-message=HEAD
 
-	co = checkout
+	rebase-branch = "!f() { git rebase -i $(git merge-base $(git main-branch) HEAD); }; f"
 	yolo = !git commit -am \"$(curl -s whatthecommit.com/index.txt)\" && git push
     yoloc = !git commit -am \"$curl -s whatthecommit.com/intex.txt)\"
 	nope = "!f() { git reset HEAD --hard && git clean -fd; } ; f"
   	fuckit = "!f() { git clean -d -x -f; git reset --hard; } ; f"
 
 [filter "lfs"]
-
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
 
 [color]
-
-	# Use colors in Git commands that are capable of colored output when
-	# outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
 	ui = auto
 
 [color "branch"]
-
-	current = yellow reverse
+	current = red
 	local = yellow
 	remote = green
 
 [color "diff"]
-
-	meta = yellow bold
-	frag = magenta bold # line info
-	old = red # deletions
-	new = green # additions
+	meta = cyan
+	frag = magenta
+	old = red bold
+	new = green bold
 
 [color "status"]
-
 	added = yellow
 	changed = green
 	untracked = cyan
 
 [url "git://github.com/"]
-
 	insteadOf = "github:"
 
 [url "git@gist.github.com:"]
-
 	insteadOf = "gst:"
 	pushInsteadOf = "gist:"
 	pushInsteadOf = "git://gist.github.com/"
 
 [url "git://gist.github.com/"]
-
 	insteadOf = "gist:"
 
 [credential "https://github.com"]
-
 	helper = !/opt/homebrew/bin/gh auth git-credential
 	helper = !/usr/bin/gh auth git-credential
 
 [credential "https://gist.github.com"]
-
 	helper = !/opt/homebrew/bin/gh auth git-credential
 	helper = !/usr/bin/gh auth git-credential
 
 [url "https://github.com/"]
-
 	insteadOf = git@github.com:
 
 [url "https://"]
-
 	insteadOf = git://

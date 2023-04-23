@@ -1,6 +1,6 @@
 # Load color scheme
-BASE16_SHELL="$HOME/code/dotfiles/iterm2/base16-tomorrow.dark.sh"
-[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+# BASE16_SHELL="$HOME/code/dotfiles/iterm2/base16-tomorrow.dark.sh"
+# [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 # This are bind keys so that they can later be mapped into iterm2 key combinations
 # To list all binds run: zle -al
