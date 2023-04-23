@@ -48,12 +48,11 @@ if [[ $(uname) == "Darwin" ]]; then
     };
     # End: pyenv virtualenv-init
 else
-    if ! type pyenv > /dev/null; then
+    if type pyenv > /dev/null; then
         eval "$(pyenv init - --no-rehash zsh)"
         eval "$(pyenv virtualenv-init - --no-rehash zsh)"
     fi
 fi
-
 
 export HATCH_CONFIG=$HOME/.config/hatch/config.toml
 
@@ -64,51 +63,12 @@ function pyclean() {
 	find . -type d -name .pytest_cache -exec rm -rf {} +
 }
 
-# # JS ---------------------------------------------------------------------------
+# JS ---------------------------------------------------------------------------
 
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
 alias npmreset="rm -rf node_modules"
-
-# Kubernetes -------------------------------------------------------------------
-
-alias k='kubectl'
-alias kubecl='kubectl'
-alias kubect='kubectl'
-alias kubelt='kubectl'
-alias kubeclt='kubectl'
-alias kuebctl='kubectl'
-alias kns='kubens'
-alias kctx='kubectx'
-alias terrafrom='terraform'
-alias tf='terraform'
-
-kubedecode() {
-    if [ $# -ne 2 ]
-    then
-        echo "Arguments: secret_name key"
-    else
-        kubectl get secret $1 -o json | jq -r ".[\"data\"][\"$2\"]" | base64 --decode
-    fi
-}
-
-kexec() {
-    if [ $# -ne 1 ]
-    then
-        echo "Arguments: pod_name"
-    else
-        kubectl exec -it $1 -- bash
-    fi
-}
-
-# DOCKER -----------------------------------------------------------------------
-
-docker-stop-all() { docker stop $(docker ps -a -q) }
-docker-prune() { docker system prune -f }
-docker-clean() { docker-stop-all; docker-prune; }
-docker-rmi-prefix () { docker rmi -f $(docker images --filter=reference='prefix*' --format '{{.Repository}}:{{.Tag}}') }
-docker-rmi-all () { docker rmi -f $(docker images --format '{{.ID}}') }
 
 # GO ---------------------------------------------------------------------------
 
@@ -164,46 +124,7 @@ if [[ $(uname) == "Darwin" ]]; then
     }
     # End: rbenv init
 else
-    if ! type pyenv > /dev/null; then
+    if type rbenv > /dev/null; then
         eval "$(rbenv init - --no-rehash zsh)"
     fi
 fi
-
-# JAVA -------------------------------------------------------------------------
-
-# export JAVA_HOME=`/usr/libexec/java_home`
-# export JRE_HOME=`/usr/libexec/java_home`
-# export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
-# export JRE_HOME=`/usr/libexec/java_home -v 1.8`
-
-# AWS --------------------------------------------------------------------------
-
-# AWS Credentials as ENV VARs
-
-# function read_aws_credentials_key {
-#   FILE=~/.aws/credentials
-#   if [ -f $FILE ]; then
-#     section=$1
-#     key=$2
-#     awk -F ' *= *' '{ if ($1 ~ /^\[/) section=$1; else if ($1 !~ /^$/) print $1 section "=" $2 }' $FILE | grep "$2\[$1\]" | sed 's/.*=//'
-#   fi
-# }
-
-# function read_aws_credentials_key {
-#   FILE=~/.aws/credentials
-#   if [ -f $FILE ]; then
-#     section=$1
-#     key=$2
-#     awk -F ' *= *' '{ if ($1 ~ /^\[/) section=$1; else if ($1 !~ /^$/) print $1 section "=" $2 }' $FILE | grep "$2\[$1\]" | sed 's/.*=//'
-#   fi
-# }
-
-# export AWS_ACCESS_KEY_ID=$(read_aws_credentials_key default aws_access_key_id)
-# export AWS_SECRET_ACCESS_KEY=$(read_aws_credentials_key default aws_secret_access_key)
-# export AWS_DEFAULT_REGION=$(read_aws_credentials_key default region)
-
-# export TF_VAR_AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
-# export TF_VAR_AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
-# export TF_VAR_AWS_REGION=$AWS_DEFAULT_REGION
-
-# alias ec2pubips="aws ec2 describe-instances --query 'Reservations[*].Instances[*].{A_PUB:PublicIpAddress, B_PRIV:NetworkInterfaces[0].PrivateDnsName}' --output text"

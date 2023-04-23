@@ -248,3 +248,43 @@ function dirsize() {
     du $arg .[^.]* *;
   fi;
 }
+
+# Kubernetes -------------------------------------------------------------------
+
+alias k='kubectl'
+alias kubecl='kubectl'
+alias kubect='kubectl'
+alias kubelt='kubectl'
+alias kubeclt='kubectl'
+alias kuebctl='kubectl'
+alias kns='kubens'
+alias kctx='kubectx'
+alias terrafrom='terraform'
+alias tf='terraform'
+
+kubedecode() {
+    if [ $# -ne 2 ]
+    then
+        echo "Arguments: secret_name key"
+    else
+        kubectl get secret $1 -o json | jq -r ".[\"data\"][\"$2\"]" | base64 --decode
+    fi
+}
+
+kexec() {
+    if [ $# -ne 1 ]
+    then
+        echo "Arguments: pod_name"
+    else
+        kubectl exec -it $1 -- bash
+    fi
+}
+
+# DOCKER -----------------------------------------------------------------------
+
+docker-stop-all() { docker stop $(docker ps -a -q) }
+docker-prune() { docker system prune -f }
+docker-clean() { docker-stop-all; docker-prune; }
+docker-rmi-prefix () { docker rmi -f $(docker images --filter=reference='prefix*' --format '{{.Repository}}:{{.Tag}}') }
+docker-rmi-all () { docker rmi -f $(docker images --format '{{.ID}}') }
+
