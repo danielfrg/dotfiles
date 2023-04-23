@@ -48,15 +48,17 @@ if [[ $(uname) == "Darwin" ]]; then
     };
     # End: pyenv virtualenv-init
 else
-    eval "$(pyenv init - --no-rehash zsh)"
-    eval "$(pyenv virtualenv-init - --no-rehash zsh)"
+    if ! type pyenv > /dev/null; then
+        eval "$(pyenv init - --no-rehash zsh)"
+        eval "$(pyenv virtualenv-init - --no-rehash zsh)"
+    fi
 fi
 
 
 export HATCH_CONFIG=$HOME/.config/hatch/config.toml
 
 function pyclean() {
-  find . -type f -name '*.py[co]' -delete
+    find . -type f -name '*.py[co]' -delete
 	find . -type d -name __pycache__ -exec rm -rf {} +
 	find . -type d -name .ipynb_checkpoints -exec rm -rf {} +
 	find . -type d -name .pytest_cache -exec rm -rf {} +
@@ -162,7 +164,9 @@ if [[ $(uname) == "Darwin" ]]; then
     }
     # End: rbenv init
 else
-    eval "$(rbenv init - --no-rehash zsh)"
+    if ! type pyenv > /dev/null; then
+        eval "$(rbenv init - --no-rehash zsh)"
+    fi
 fi
 
 # JAVA -------------------------------------------------------------------------

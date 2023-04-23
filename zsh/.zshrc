@@ -8,10 +8,14 @@ source "${ZINIT_HOME}/zinit.zsh"
 for file in "${HOME}/.zsh/base.zsh" \
             "${HOME}/.local/bin/imagecat.zsh" \
             "${HOME}/.zsh/languages.zsh" \
-            "$HOME/code/dotfiles/personal/entrypoint.sh"
+            "$HOME/code/dotfiles-personal/entrypoint.sh"
 do
     [ -s "${file}" ] && source "${file}"
 done
+
+if [ -f $HOME/code/dotfiles-personal/entrypoint.sh ]; then
+    source $HOME/code/dotfiles-personal/entrypoint.sh
+fi
 
 # Load this first so fzf-tab works
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'

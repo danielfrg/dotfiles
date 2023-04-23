@@ -51,6 +51,9 @@ if [[ $(uname) == "Darwin" ]]; then
 
     alias rm_="/bin/rm"
     alias rm="trash"
+
+    # Lock the screen (when going AFK)
+    alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 else
     # echo 'Unknown OS!'
 fi
@@ -86,31 +89,33 @@ fi
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
 
-# Replacements
+# Fancy replacements for common commands
 # From: https://jvns.ca/blog/2022/04/12/a-list-of-new-ish--command-line-tools/
-alias cat='bat --style="header"'
-alias cat_='/bin/cat'
-alias df='duf'
-alias df_='/usr/df'
-alias grep='rp'
-alias grep_='/usr/bin/grep -i --color=always'
-alias find='fd -H'
-alias find_='/usr/bin/find'
-alias ls='lsd -la'
-alias ls_='/bin/ls'
-alias ping='prettyping --nolegend'
-alias ping_='/sbin/ping'
-alias preview="fzf --preview 'bat --color \"always\" {}'"
-alias top='btm'
-alias top_='/usr/bin/top'
-alias watch=viddy
-alias watch_='/opt/homebrew/bin/watch'
+if [[ $(uname) == "Darwin" ]]; then
+    alias cat='bat --style="header"'
+    alias cat_='/bin/cat'
+    alias df='duf'
+    alias df_='/usr/df'
+    alias grep='rp'
+    alias grep_='/usr/bin/grep -i --color=always'
+    alias find='fd -H'
+    alias find_='/usr/bin/find'
+    alias ls='lsd -la'
+    alias ls_='/bin/ls'
+    alias ping='prettyping --nolegend'
+    alias ping_='/sbin/ping'
+    alias top='btm'
+    alias top_='/usr/bin/top'
+    alias watch=viddy
+    alias watch_='/opt/homebrew/bin/watch'
+fi
 
 # Files
 alias l='ls -l'
 alias la='ls -a'
 alias lla='ls -la'
 alias lt='ls --tree'
+alias preview="fzf --preview 'bat --color \"always\" {}'"
 
 # alias rm='rm -i'
 alias cp='cp -i'
@@ -183,9 +188,6 @@ alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.ar
 # Ring the terminal bell, and put a badge on Terminal.app’s Dock icon
 # (useful when executing time-consuming commands)
 alias badge="tput bel"
-
-# Lock the screen (when going AFK)
-alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 
 # One of @janmoesen’s ProTip™s
 for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
