@@ -94,7 +94,7 @@ format = 'on [git:$branch](bold blue)'
 # disabled = true
 
 [git_status]
-format = ' ([$all_status$ahead_behind]($style))'
+format = ' ([$all_status$ahead_behind](bold green))'
 # format = '([\[$all_status$ahead_behind\]]($style))'
 # disabled = true
 
