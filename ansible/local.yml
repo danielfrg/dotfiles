@@ -1,0 +1,8 @@
+- hosts: localhost
+  connection: local
+
+  vars:
+    home_dir: "{{ lookup('env', 'HOME') }}"
+
+  roles:
+    - role: common

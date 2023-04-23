@@ -1,0 +1,14 @@
+---
+
+- name: Ensure ~/tools directory exists
+  file:
+    dest: "{{ home_dir }}/tools"
+    state: directory
+
+- name: Clone mitsuhiko/rye
+  git:
+    repo: https://github.com/mitsuhiko/rye.git
+    dest: "{{ home_dir }}/tools/rye"
+
+- name: Install rye
+  shell: cargo install --git https://github.com/mitsuhiko/rye rye
