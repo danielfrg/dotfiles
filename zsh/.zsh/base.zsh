@@ -1,7 +1,3 @@
-# Load color scheme
-# BASE16_SHELL="$HOME/code/dotfiles/iterm2/base16-tomorrow.dark.sh"
-# [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
-
 # This are bind keys so that they can later be mapped into iterm2 key combinations
 # To list all binds run: zle -al
 bindkey "^[fw" forward-word             # Bind this to ctrl-(left arrow) = send escape sequence `w`
@@ -96,7 +92,7 @@ if [[ $(uname) == "Darwin" ]]; then
     alias cat_='/bin/cat'
     alias df='duf'
     alias df_='/usr/df'
-    alias grep='rp'
+    alias grep='rg'
     alias grep_='/usr/bin/grep -i --color=always'
     alias find='fd -H'
     alias find_='/usr/bin/find'
@@ -111,8 +107,9 @@ if [[ $(uname) == "Darwin" ]]; then
 fi
 
 # Files
-alias l='ls -l'
-alias la='ls -a'
+alias l='ls -la'
+alias ls='ls -la'
+alias la='ls -la'
 alias lla='ls -la'
 alias lt='ls --tree'
 alias preview="fzf --preview 'bat --color \"always\" {}'"
@@ -216,16 +213,6 @@ function mkd() {
   mkdir -p "$@" && cd "$_";
 }
 
-function clipvideo() {
-  if [ $# -ne 2 ]
-    then
-        echo "Arguments: <input> <start> <end> <output>"
-    else
-        grep -rnw $1 -e $2
-    fi
-    ffmpeg -i  $1 -ss $2 -to $3 -c:v copy -c:a copy $4
-}
-
 function search() {
   if [ $# -ne 2 ]
     then
@@ -247,6 +234,16 @@ function dirsize() {
   else
     du $arg .[^.]* *;
   fi;
+}
+
+function clipvideo() {
+  if [ $# -ne 2 ]
+    then
+        echo "Arguments: <input> <start> <end> <output>"
+    else
+        grep -rnw $1 -e $2
+    fi
+    ffmpeg -i  $1 -ss $2 -to $3 -c:v copy -c:a copy $4
 }
 
 # Kubernetes -------------------------------------------------------------------
