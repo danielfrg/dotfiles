@@ -13,13 +13,14 @@ do
     [ -s "${file}" ] && source "${file}"
 done
 
+# Init completions first
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zpcompinit
+
+# This include some tab completion so we do it after
 if [ -f $HOME/code/dotfiles-personal/entrypoint.sh ]; then
     source $HOME/code/dotfiles-personal/entrypoint.sh
 fi
-
-# Load this first so fzf-tab works
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-zpcompinit
 
 zinit ice silent wait
 zinit light zdharma/fast-syntax-highlighting
