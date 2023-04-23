@@ -24,8 +24,10 @@ zpcompinit
 zinit ice silent wait
 zinit light zdharma/fast-syntax-highlighting
 
-zinit ice lucid wait
-zinit light Aloxaf/fzf-tab
+if type fzf > /dev/null; then
+    zinit ice lucid wait
+    zinit light Aloxaf/fzf-tab
+fi
 
 zinit ice lucid wait:1 atload:_zsh_autosuggest_start
 zinit light zsh-users/zsh-autosuggestions
