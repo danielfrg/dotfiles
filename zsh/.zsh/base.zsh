@@ -10,7 +10,7 @@ bindkey "^[dwb" backward-delete-word    # Bind this to ctrl-w = send escape sequ
 # ------------------------------------------------------------------------------
 
 if [[ $(uname) == "Darwin" ]]; then
-    # Mac only!
+    # Mac only
 
     # Switch Homebrew path based on whether we're native or in Rosetta
     # if [ "$(sysctl -n sysctl.proc_translated)" = "1" ]; then
@@ -19,15 +19,15 @@ if [[ $(uname) == "Darwin" ]]; then
     #     local brew_path="/opt/homebrew/bin"
     # fi
 
-    # eval $($brew_path/brew shellenv)
     # Do this manually to make it faster
+    # Start: eval $($brew_path/brew shellenv)
     export HOMEBREW_PREFIX="/opt/homebrew";
     export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
     export HOMEBREW_REPOSITORY="/opt/homebrew";
     export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}";
     export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
     export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
-    # --
+    # End manual brew path
 
     export PATH=/usr/local/sbin:$PATH
     export PATH=/usr/local/opt/make/libexec/gnubin:$PATH
@@ -84,27 +84,6 @@ fi
 
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
-
-# Fancy replacements for common commands
-# From: https://jvns.ca/blog/2022/04/12/a-list-of-new-ish--command-line-tools/
-if [[ $(uname) == "Darwin" ]]; then
-    alias cat='bat --style="header"'
-    alias cat_='/bin/cat'
-    alias df='duf'
-    alias df_='/usr/df'
-    alias grep='rg'
-    alias grep_='/usr/bin/grep -i --color=always'
-    alias find='fd -H'
-    alias find_='/usr/bin/find'
-    alias ls='lsd -la'
-    alias ls_='/bin/ls'
-    alias ping='prettyping --nolegend'
-    alias ping_='/sbin/ping'
-    alias top='btm'
-    alias top_='/usr/bin/top'
-    alias watch=viddy
-    alias watch_='/opt/homebrew/bin/watch'
-fi
 
 # Files
 alias l='ls -la'
@@ -173,6 +152,27 @@ alias v="nvim"
 alias vi="nvim"
 alias vim="nvim"
 alias vimdiff="nvim -d"
+
+# Fancy replacements for common commands
+# From: https://jvns.ca/blog/2022/04/12/a-list-of-new-ish--command-line-tools/
+if [[ $(uname) == "Darwin" ]]; then
+    alias cat='bat --style="header"'
+    alias cat_='/bin/cat'
+    alias df='duf'
+    alias df_='/usr/df'
+    alias grep='rg'
+    alias grep_='/usr/bin/grep -i --color=always'
+    alias find='fd -H'
+    alias find_='/usr/bin/find'
+    alias ls='lsd -la'
+    alias ls_='/bin/ls'
+    alias ping='prettyping --nolegend'
+    alias ping_='/sbin/ping'
+    alias top='btm'
+    alias top_='/usr/bin/top'
+    alias watch=viddy
+    alias watch_='/opt/homebrew/bin/watch'
+fi
 
 # IP addresses
 alias publicip="dig +short myip.opendns.com @resolver1.opendns.com"
