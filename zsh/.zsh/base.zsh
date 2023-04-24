@@ -121,6 +121,7 @@ alias cdg='cd ~/google'
 alias cdd="cd ~/Downloads"
 alias t="tmux"
 alias ta="tmux attach"
+
 # Typos
 alias g='git'
 alias it='git'
@@ -148,6 +149,10 @@ alias gu='git commit -am "update"'
 
 # untar
 alias untar='tar xvf'
+
+# GNU tools
+alias sed_="/usr/bin/sed"
+alias sed="gsed"
 
 # NeoVim
 alias c="nvim"
