@@ -173,7 +173,7 @@ if [[ $(uname) == "Darwin" ]]; then
     alias grep_='/usr/bin/grep -i --color=always'
     alias find='fd -H'
     alias find_='/usr/bin/find'
-    alias ls='lsd -la'
+    alias ls='exa -la --icons --group-directories-first'
     alias ls_='/bin/ls'
     alias ping='prettyping --nolegend'
     alias ping_='/sbin/ping'

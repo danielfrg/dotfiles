@@ -28,7 +28,7 @@ function colorssh() {
     fi
     ssh $*
 }
-compdef _ssh tabc=ssh
+# compdef _ssh tabc=ssh
 
 # creates an alias to ssh
 # when execute ssh from the terminal it calls to colorssh function
