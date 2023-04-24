@@ -24,17 +24,14 @@ if [[ $(uname) == "Darwin" ]]; then
     export HOMEBREW_PREFIX="/opt/homebrew";
     export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
     export HOMEBREW_REPOSITORY="/opt/homebrew";
-    export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}";
-    export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
-    export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
+    export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin${PATH+:$PATH}";
+    export MANPATH="$HOMEBREW_PREFIX/share/man${MANPATH+:$MANPATH}:";
+    export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}";
     # End manual brew path
 
-    export PATH=/usr/local/sbin:$PATH
-    export PATH=/usr/local/opt/make/libexec/gnubin:$PATH
-    # export PATH=$(brew --prefix coreutils)/libexec/bin:$PATH       # Slow
-    export PATH=/usr/local/opt/coreutils/libexec/bin:$PATH           # Fast
-    # export PATH=$(brew --prefix moreutils)/libexec/gnubin:$PATH    # Slow
-    export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH        # Fast
+    # GNU tools
+    export PATH=$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH
+    export PATH=$HOMEBREW_PREFIX/opt/fastutils/libexec/gnubin:$PATH
 
     # kegonly brew formulas
     export PATH="/usr/local/opt/curl/bin:$PATH"
