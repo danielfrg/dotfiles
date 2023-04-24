@@ -155,6 +155,7 @@ alias sed_="/usr/bin/sed"
 alias sed="gsed"
 
 # NeoVim
+alias vim_="/usr/bin/vim"
 alias c="nvim"
 alias v="nvim"
 alias vi="nvim"
