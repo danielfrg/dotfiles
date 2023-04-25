@@ -51,9 +51,6 @@ else
     # echo 'Unknown OS!'
 fi
 
-# Binaries inside dotfiles
-export PATH=$HOME/code/dotfiles/bin:$PATH
-
 # Local binaries
 export PATH=$HOME/.local/bin:$HOME/.local/scripts:$PATH
 
@@ -71,12 +68,6 @@ setopt INC_APPEND_HISTORY
 export HISTTIMEFORMAT="[%F %T] "
 setopt EXTENDED_HISTORY
 setopt HIST_FIND_NO_DUPS
-
-# Nix
-if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
-  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
-fi
-# End Nix
 
 #########################
 # ALIASES
@@ -123,6 +114,7 @@ alias ta="tmux attach"
 alias g='git'
 alias it='git'
 alias gi='git'
+alias gti='git'
 alias tit='git'
 alias sl='ls'
 
