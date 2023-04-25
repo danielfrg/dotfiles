@@ -30,6 +30,7 @@ local plugins = {
 
     -- Themes
     { "projekt0n/github-nvim-theme", tag = "v0.0.7" },
+    { "folke/tokyonight.nvim" },
 
     -- Navigation
     {
