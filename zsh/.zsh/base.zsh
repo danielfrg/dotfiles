@@ -83,6 +83,9 @@ alias la='ls -la'
 alias lla='ls -la'
 alias lt='ls --tree'
 alias preview="fzf --preview 'bat --color \"always\" {}'"
+alias cl="clear"
+alias kk="clear"
+alias kl="clear"
 
 # alias rm='rm -i'
 alias cp='cp -i'
