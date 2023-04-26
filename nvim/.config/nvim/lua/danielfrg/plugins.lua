@@ -24,6 +24,8 @@ local plugins = {
 
     "MunifTanjim/nui.nvim",
     "nvim-tree/nvim-web-devicons",
+    
+    "christoomey/vim-tmux-navigator",
 
     -- An implementation of the Popup API from vim in Neovim
     "nvim-lua/popup.nvim",
