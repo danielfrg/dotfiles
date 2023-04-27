@@ -24,7 +24,7 @@ local plugins = {
 
     "MunifTanjim/nui.nvim",
     "nvim-tree/nvim-web-devicons",
-    
+
     "christoomey/vim-tmux-navigator",
 
     -- An implementation of the Popup API from vim in Neovim
@@ -40,6 +40,8 @@ local plugins = {
         tag = "0.1.1",
         requires = { { "nvim-lua/plenary.nvim" } }
     },
+
+    'justinmk/vim-sneak',
     -- use("theprimeagen/harpoon")
 
     -- Writting code
