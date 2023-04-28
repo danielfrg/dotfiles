@@ -11,8 +11,11 @@ default.profraw
 # Visual Studio Code
 /.vscode/
 
-# Terraform
-local-terraform
+# Python
+.python-version
 
 # Ruby
 .rbenv-gemsets
+
+# Terraform
+local-terraform
