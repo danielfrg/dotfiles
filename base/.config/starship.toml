@@ -1,6 +1,6 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
-format = """$all"""
+format = """$all$my_python$my_py_venv$my_rbenv_gemset"""
 
 # Inserts a blank line between shell prompts
 add_newline = true
@@ -9,6 +9,28 @@ command_timeout = 150
 # Replace the "❯" symbol in the prompt with "➜"
 [character] # The name of the module we are configuring is "character"
 success_symbol = "[➜](bold green)" # The "success_symbol" segment is being set to "➜" with the color "bold green"
+
+[custom.my_python]
+disabled = false
+command = 'cat .python-version'
+detect_files = ['.python-version']
+symbol = "🐍 "
+style = 'bold green'
+
+[custom.my_py_venv]
+disabled = false
+command = "echo $VIRTUAL_ENV | awk -F/ '{ print $NF }'"
+when = ''' test "$VIRTUAL_ENV" '''
+format = '\[[$output]($style)\]'
+style = 'bold green'
+
+[custom.my_rbenv_gemset]
+disabled = false
+command = 'cat .rbenv-gemsets'
+detect_files = ['.rbenv-gemsets']
+symbol = '🔺 '
+style = 'bold red'
+
 
 [username]
 disabled = false
