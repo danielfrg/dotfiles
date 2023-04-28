@@ -14,10 +14,10 @@ tasks:
     cmds:
       - ansible-playbook local.yml --tags "laptop"
 
-  ansible:workstation:
+  ansible:cloudtop:
     dir: ansible
     cmds:
-      - ansible-playbook local.yml --tags "workstation" --ask-become-pass
+      - ansible-playbook remote.yml --limit cloudtop --ask-become-pass
 
   ansible:tag:
     dir: ansible

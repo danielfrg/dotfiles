@@ -1,0 +1,11 @@
+- hosts: remote
+
+  vars:
+    setup_user: danielfrg
+
+  roles:
+    - role: common
+      tags: ["always", "common"]
+
+    - role: workstation
+      tags: ["always", "workstation"]

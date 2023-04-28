@@ -1,0 +1,13 @@
+---
+
+- name: Ensure ~/code directory exists
+  file:
+    dest: "{{ ansible_env.HOME }}/code"
+    state: directory
+
+- name: Clone repo
+  ansible.builtin.git:
+    repo: git@github.com:danielfrg/dotfiles.git
+    dest: "{{ ansible_env.HOME }}/code/dotfiles"
+    recursive: yes
+    accept_hostkey: yes

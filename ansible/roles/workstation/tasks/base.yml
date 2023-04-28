@@ -1,0 +1,7 @@
+---
+
+- name: Change shell to zsh
+  become: true
+  user:
+    name: "{{ setup_user }}"
+    shell: /usr/bin/zsh

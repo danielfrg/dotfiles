@@ -1,4 +1,4 @@
-- hosts: localhost
+- hosts: laptop
   connection: local
 
   vars:
@@ -9,7 +9,4 @@
       tags: ["always", "common"]
 
     - role: laptop
-      tags: ["never", "laptop"]
-
-    - role: workstation
-      tags: ["never", "workstation"]
+      tags: ["always", "laptop"]
