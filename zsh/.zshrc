@@ -25,10 +25,14 @@ zinit wait lucid light-mode for \
 if type fzf > /dev/null; then
     zinit ice lucid wait'1'
     zinit light Aloxaf/fzf-tab
-fi
 
-zinit ice lucid wait'1'
-zinit light joshskidmore/zsh-fzf-history-search
+    if ! type atuin > /dev/null; then
+        echo
+        echo "fzf-tab is not compatible with atuin. Installing fzf-history-search instead."
+        zinit ice lucid wait'1'
+        zinit light joshskidmore/zsh-fzf-history-search
+    fi
+fi
 
 # ---------------------------------
 # Stuff that is not to be committed

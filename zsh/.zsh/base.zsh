@@ -60,7 +60,7 @@ export PATH=$HOME/.cargo/bin:$PATH
 # Prompt
 eval "$(starship init zsh)"
 
-# History
+# History base
 export HISTSIZE=1000000000
 export HISTFILESIZE=1000000000
 export HISTCONTROL=ignoredups:ignorespace
@@ -68,6 +68,15 @@ setopt INC_APPEND_HISTORY
 export HISTTIMEFORMAT="[%F %T] "
 setopt EXTENDED_HISTORY
 setopt HIST_FIND_NO_DUPS
+
+# History Atuin
+
+local FOUND_ATUIN=$+commands[atuin]
+
+if [[ $FOUND_ATUIN -eq 1 ]]; then
+  source <(atuin init zsh --disable-up-arrow)
+fi
+
 
 #########################
 # ALIASES
