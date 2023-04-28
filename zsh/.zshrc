@@ -23,13 +23,11 @@ zinit wait lucid light-mode for \
       zsh-users/zsh-completions
 
 if type fzf > /dev/null; then
-    zinit ice lucid wait'1'
+    zinit ice lucid wait'0'
     zinit light Aloxaf/fzf-tab
 
     if ! type atuin > /dev/null; then
-        echo
-        echo "fzf-tab is not compatible with atuin. Installing fzf-history-search instead."
-        zinit ice lucid wait'1'
+        zinit ice lucid wait'0'
         zinit light joshskidmore/zsh-fzf-history-search
     fi
 fi
