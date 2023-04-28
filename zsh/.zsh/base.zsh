@@ -166,9 +166,7 @@ alias vimdiff="nvim -d"
 # Fancy replacements for common commands
 # From: https://jvns.ca/blog/2022/04/12/a-list-of-new-ish--command-line-tools/
 
-local FOUND_EXA=$+commands[exa]
-
-if [[ $FOUND_EXA -eq 1 ]]; then
+if [[ $+commands[exa] -eq 1 ]]; then
   alias ls='exa -la --icons --group-directories-first'
   alias ls_='/bin/ls'
 fi
