@@ -1,14 +1,18 @@
 ---
 
 - name: Install packages (apt)
+  become: true
   ansible.builtin.apt:
     pkg:
     - zsh
     - fzf
 
 
-- name: Install packages (snap)
-  community.general.snap:
-    name:
-      - task
-    classic: true
+- name: Check if Task installed
+  stat: 
+    path: "{{ home_dir }}/.local/bin/task" 
+  register: task_check 
+
+- name: Install Task
+  command: sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b ~/.local/bin
+  when: not task_check.stat.exists

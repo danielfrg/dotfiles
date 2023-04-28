@@ -17,7 +17,7 @@ tasks:
   ansible:workstation:
     dir: ansible
     cmds:
-      - ansible-playbook local.yml --tags "workstation"
+      - ansible-playbook local.yml --tags "workstation" --ask-become-pass
 
   ansible:tag:
     dir: ansible
