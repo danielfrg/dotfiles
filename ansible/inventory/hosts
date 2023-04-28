@@ -1,7 +1,9 @@
 [local]
 laptop
 
+[homelab]
+jarvis
+
 [remote]
-homelab
 cloudtop
 

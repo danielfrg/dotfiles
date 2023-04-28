@@ -1,11 +1,17 @@
 ---
 
+- name: Install deps (apt-update)
+  become: true
+  ansible.builtin.apt:
+    update_cache: yes
+  ignore_errors: true
+
 - name: Install deps (apt)
   become: true
   ansible.builtin.apt:
     name: "{{ item }}"
     state: present
-    update_cache: yes
+    # update_cache: yes
   with_items:
     - exa
     - fzf
@@ -15,6 +21,7 @@
     - snapd
     - stow
     - zsh
+  ignore_errors: true
 
 - name: Install dotfiles deps (snap classic)
   become: true

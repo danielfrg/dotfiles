@@ -14,6 +14,11 @@ tasks:
     cmds:
       - ansible-playbook local.yml --tags "laptop"
 
+  ansible:homelab:
+    dir: ansible
+    cmds:
+      - ansible-playbook remote.yml --limit homelab
+
   ansible:cloudtop:
     dir: ansible
     cmds:

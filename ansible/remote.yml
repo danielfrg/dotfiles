@@ -1,4 +1,4 @@
-- hosts: remote
+- hosts: homelab,remote
 
   vars:
     setup_user: danielfrg
