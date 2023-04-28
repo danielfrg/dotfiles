@@ -1,0 +1,14 @@
+---
+
+- name: Install packages (apt)
+  ansible.builtin.apt:
+    pkg:
+    - zsh
+    - fzf
+
+
+- name: Install packages (snap)
+  community.general.snap:
+    name:
+      - task
+    classic: true

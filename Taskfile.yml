@@ -4,10 +4,20 @@ env:
   TAG: base
 
 tasks:
+
   ansible:
+    cmds:
+      - task: ansible:laptop
+
+  ansible:laptop:
     dir: ansible
     cmds:
-      - ansible-playbook local.yml
+      - ansible-playbook local.yml --tags "laptop"
+
+  ansible:workstation:
+    dir: ansible
+    cmds:
+      - ansible-playbook local.yml --tags "workstation"
 
   ansible:tag:
     dir: ansible

@@ -6,3 +6,10 @@
 
   roles:
     - role: common
+      tags: ["always", "common"]
+
+    - role: laptop
+      tags: ["never", "laptop"]
+
+    - role: workstation
+      tags: ["never", "workstation"]
