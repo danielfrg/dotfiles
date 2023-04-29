@@ -14,7 +14,7 @@ success_symbol = "[➜](bold green)" # The "success_symbol" segment is being set
 disabled = false
 command = 'cat .python-version'
 detect_files = ['.python-version']
-symbol = "🐍 "
+symbol = " 🐍 "
 style = 'bold green'
 
 [custom.my_py_venv]
@@ -116,8 +116,8 @@ format = 'on [git:$branch](bold blue)'
 # disabled = true
 
 [git_status]
-format = ' ([$all_status$ahead_behind](bold green))'
-# format = '([\[$all_status$ahead_behind\]]($style))'
+format = '([\[$all_status$ahead_behind\]]($style))'
+style = "blue bold"
 # disabled = true
 
 [golang]
