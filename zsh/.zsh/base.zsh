@@ -157,10 +157,19 @@ alias sed="gsed"
 
 # NeoVim
 alias vim_="/usr/bin/vim"
-alias c="nvim"
+nvim() {
+    if [[ $@ == "." ]]; then
+        command nvim
+    else
+        command nvim "$@"
+    fi
+}
 alias v="nvim"
 alias vi="nvim"
 alias vim="nvim"
+alias "vim ."="nvim"
+alias c="nvim"
+
 alias vimdiff="nvim -d"
 
 # Fancy replacements for common commands

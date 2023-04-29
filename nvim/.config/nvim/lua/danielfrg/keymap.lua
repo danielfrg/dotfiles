@@ -11,12 +11,17 @@ U.keymap({ "n", "i" }, "<C-c>", "<Esc>l")
 -- U.keymap("i", "jj", "<Esc>l")
 -- U.keymap("i", "jk", "<Esc>l")
 
--- save file
+-- Save file
 U.keymap({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
+--  Save and close buffer
+U.keymap({ "n" }, "QQ", "<cmd>w|Bdelete<cr>", { desc = "Save file and close" })
+
+vim.cmd("command Wd write|Bdelete")
+vim.cmd("command W write")
+vim.cmd("command Q qa")
 
 -- Open Explorer
 -- U.keymap("n", "<leader>pv", vim.cmd.Ex)
-U.keymap("n", "<leader>pv", vim.cmd.NvimTreeToggle, { desc = "Toggle File explorer: [P]roject [V]iew" })
 
 -- Move to window using the <ctrl>+<h-j-k-l> keys
 -- If <C-h> not working see:
@@ -43,7 +48,7 @@ U.keymap("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Last Buffer" })
 U.keymap("n", "<S-x>", ":e #<CR>", { desc = "Switch to Last Buffer" })
 
 -- New file
-U.keymap("n", "<leader>fn", "<cmd>enew<cr>", { desc = "[N]ew [F]ile" })
+U.keymap("n", "<leader>fn", "<cmd>enew<cr>", { desc = "[F]ile [N]ew" })
 
 -- Location list movement
 U.keymap("n", "<leader>k", "<cmd>lnext<CR>zz", { desc = "Next Location" })
@@ -70,20 +75,6 @@ U.keymap("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>", { desc = "
 -- Insert blank lines
 U.keymap("n", "<leader>o", "m`o<Esc>``", { desc = "Insert line below" })
 U.keymap("n", "<leader>O", "m`O<Esc>``", { desc = "Insert line above" })
-
--- U.keymap("n", "J", "mzJ`z")
--- U.keymap("n", "<C-d>", "<C-d>zz")
--- U.keymap("n", "<C-u>", "<C-u>zz")
--- U.keymap("n", "n", "nzzzv")
--- U.keymap("n", "N", "Nzzzv")
-
--- U.keymap({ "n", "v" }, "<leader>d", [["_d]])
-
--- U.keymap("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
--- U.keymap("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
-
--- U.keymap("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/theprimeagen/packer.lua<CR>");
--- U.keymap("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>");
 
 -----------------
 -- Visual Mode --

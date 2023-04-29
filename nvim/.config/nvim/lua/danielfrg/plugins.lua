@@ -12,6 +12,8 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+
+
 -- Use a protected call so we don"t error out on first use
 local status_ok, lazy = pcall(require, "lazy")
 if not status_ok then
@@ -20,31 +22,26 @@ end
 
 local plugins = {
     -- Useful lua functions used ny lots of plugins
-    "nvim-lua/plenary.nvim",
+    "nvim-lua/plenary.nvim",       -- Utils
+    "MunifTanjim/nui.nvim",        -- UI components
+    "nvim-tree/nvim-web-devicons", -- Icons
 
-    "MunifTanjim/nui.nvim",
-    "nvim-tree/nvim-web-devicons",
-
-    "christoomey/vim-tmux-navigator",
-
-    -- An implementation of the Popup API from vim in Neovim
-    "nvim-lua/popup.nvim",
-
-    -- Themes
+    -- THEMES
     { "projekt0n/github-nvim-theme", tag = "v0.0.7" },
     { "folke/tokyonight.nvim" },
+    { "catppuccin/nvim",             name = "catppuccin" },
 
-    -- Navigation
+    -- NAVIGATION
     {
         "nvim-telescope/telescope.nvim",
         tag = "0.1.1",
         requires = { { "nvim-lua/plenary.nvim" } }
     },
+    "christoomey/vim-tmux-navigator",
+    -- "theprimeagen/harpoon",
+    -- "justinmk/vim-sneak",
 
-    'justinmk/vim-sneak',
-    -- use("theprimeagen/harpoon")
-
-    -- Writting code
+    -- CODE
     -- Autopairs, integrates with both cmp and treesitter
     "windwp/nvim-autopairs",
     -- Toggle comments
@@ -57,7 +54,7 @@ local plugins = {
     -- TS context aware comment strings
     'JoosepAlviste/nvim-ts-context-commentstring',
 
-    -- UI things
+    -- UI components
     { "nvim-neo-tree/neo-tree.nvim" },
     {
         "nvim-lualine/lualine.nvim",
@@ -74,6 +71,10 @@ local plugins = {
         end
     },
 
+    -- An implementation of the Popup API from vim in Neovim
+    "nvim-lua/popup.nvim",
+
+    -- Which key
     {
         "folke/which-key.nvim",
         config = function()
@@ -124,6 +125,7 @@ local plugins = {
     -- Other
     "github/copilot.vim",
     "lewis6991/impatient.nvim",
+    "famiu/bufdelete.nvim",
     {
         'goolord/alpha-nvim',
         config = function()

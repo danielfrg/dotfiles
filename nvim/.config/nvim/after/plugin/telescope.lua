@@ -85,29 +85,30 @@ U.keymap('n', '<leader>?', builtin.oldfiles, { desc = '[?] Find recently opened 
 
 U.keymap('n', '<leader>/', function()
     builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-      winblend = 10,
-      previewer = false,
+        winblend = 10,
+        previewer = false,
     })
-  end, { desc = '[/] Fuzzily search in current buffer' })
+end, { desc = '[/] Fuzzily search in current buffer' })
 
-
-U.keymap('n', '<leader>ff', function()
-    builtin.find_files(require('telescope.themes').get_dropdown {
-      previewer = false,
-    })
-  end, { desc = '[F]ind File (all)' })
-
-  U.keymap('n', '<C-p>', function()
+U.keymap('n', '<C-p>', function()
     builtin.git_files(require('telescope.themes').get_dropdown {
-      previewer = false,
+        previewer = false,
     })
-end, { desc = '[F]ind [F]ile (uses gitignore)' })
-
-
-U.keymap("n", "<leader>sf", builtin.live_grep, { desc = 'Live Grep [S]earch [F]ile' })
-U.keymap("n", "<leader>sg", function()
-    builtin.grep_string({ search = vim.fn.input("Grep > ") })
-end, { desc = '[S]earch [G]rep (no live)' })
+end, { desc = '[S]earch [F]ile (uses gitignore)' })
+U.keymap("n", "<leader>sg", builtin.live_grep, { desc = '[S]earch [G]rep' })
+-- U.keymap('n', '<leader>sf"', function()
+--     builtin.live_grep(require('telescope.themes').get_dropdown {
+--         previewer = false,
+--     })
+-- end, { desc = '[S]earch [F]iles - Live Grep' })
+U.keymap('n', '<leader>sa', function()
+    builtin.find_files(require('telescope.themes').get_dropdown {
+        previewer = false,
+    })
+end, { desc = '[S]earch [A]ll Files (ignore git)' })
+-- U.keymap("n", "<leader>sg", function()
+--     builtin.grep_string({ search = vim.fn.input("Grep > ") })
+-- end, { desc = '[S]earch [G]rep (no live)' })
 
 U.keymap('n', '<leader>sc', builtin.commands, { desc = '[S]earch [C]ommands' })
 U.keymap('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
