@@ -17,6 +17,7 @@ U.keymap({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file
 U.keymap({ "n" }, "QQ", "<cmd>w|Bdelete<cr>", { desc = "Save file and close" })
 
 vim.cmd("command Wd write|Bdelete")
+vim.cmd("command D Bdelete")
 vim.cmd("command W write")
 vim.cmd("command Q qa")
 
