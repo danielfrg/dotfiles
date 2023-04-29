@@ -6,5 +6,8 @@ if vim.g.vscode then
     require("danielfrg.vscode")
 else
     -- Regular Neovim
+    if vim.g.neovide then
+        require("danielfrg.neovide")
+    end
     require("danielfrg.plugins")
 end
