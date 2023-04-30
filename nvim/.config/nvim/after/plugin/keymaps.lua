@@ -18,7 +18,7 @@ U.keymap("n", "]b", "<cmd>bnext<cr>", { desc = "Next buffer" })
 U.keymap("n", "<leader>b", "<cmd>e #<cr>", { desc = "Switch to Last Buffer" })
 U.keymap("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Last Buffer" })
 U.keymap("n", "<S-x>", ":e #<CR>", { desc = "Switch to Last Buffer" })
-U.keymap("n", "<leader>c", "<cmd>BDelete<cr>", { desc = "Close buffer" })
+U.keymap("n", "<leader>c", "<cmd>Bdelete<cr>", { desc = "Close buffer" })
 
 -- Save file
 U.keymap({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
