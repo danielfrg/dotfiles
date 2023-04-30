@@ -150,9 +150,22 @@ if not status_ok then
 end
 
 U.keymap("n", "<leader>e", function()
-    neotree.execute({ toggle = true, position = "float" })
-end,
-{ desc = "Toggle File [E]xplorer" })
+        neotree.execute({ toggle = true, position = "float" })
+    end,
+    { desc = "Toggle File [E]xplorer" })
+
+-- Comment
+local status_ok, comment = pcall(require, "Comment.api")
+if not status_ok then
+    return
+end
+
+U.keymap("n", "<leader>/", function()
+        comment.toggle.linewise.count(vim.v.count > 0 and vim.v.count or 1)
+    end,
+    { desc = "Toggle comment line" })
+
+U.keymap("v", "<leader>/", "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>", { desc = "Toggle comment line" })
 
 --------------------------------------------------------------------------------
 -- Trouble

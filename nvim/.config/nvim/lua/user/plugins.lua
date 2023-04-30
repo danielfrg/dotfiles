@@ -42,13 +42,8 @@ local plugins = {
     -- CODE
     -- Autopairs, integrates with both cmp and treesitter
     "windwp/nvim-autopairs",
-    -- Toggle comments
-    {
-        "numToStr/Comment.nvim",
-        config = function()
-            require("Comment").setup()
-        end
-    },
+    -- Commens
+    "numToStr/Comment.nvim",
     -- TS context aware comment strings
     "JoosepAlviste/nvim-ts-context-commentstring",
 
