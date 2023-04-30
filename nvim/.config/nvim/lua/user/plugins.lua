@@ -34,10 +34,10 @@ local plugins = {
         requires = { { "nvim-lua/plenary.nvim" } }
     },
     "mrjones2014/smart-splits.nvim",
-    -- "christoomey/vim-tmux-navigator",
     "ggandor/leap.nvim",
-    -- "theprimeagen/harpoon",
     -- "justinmk/vim-sneak",
+    -- "theprimeagen/harpoon",
+    -- "christoomey/vim-tmux-navigator",
 
     -- CODE
     -- Autopairs, integrates with both cmp and treesitter
@@ -46,6 +46,7 @@ local plugins = {
     "numToStr/Comment.nvim",
     -- TS context aware comment strings
     "JoosepAlviste/nvim-ts-context-commentstring",
+    "lukas-reineke/indent-blankline.nvim",
 
     -- Better indent
     "NMAC427/guess-indent.nvim",
@@ -81,6 +82,7 @@ local plugins = {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
+    "j-hui/fidget.nvim",
 
     -- CMP
     "hrsh7th/nvim-cmp",

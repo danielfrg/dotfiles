@@ -21,17 +21,18 @@ U.keymap("n", "<S-x>", ":e #<CR>", { desc = "Switch to Last Buffer" })
 U.keymap("n", "<leader>c", "<cmd>Bdelete<cr>", { desc = "Close buffer" })
 
 -- Save file
-U.keymap({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
+U.keymap({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w!<cr><esc>", { desc = "Save file" })
 
 --  Save and close buffer
-U.keymap({ "n" }, "QQ", "<cmd>w|Bdelete<cr>", { desc = "Save file and close" })
+U.keymap("n", "QQ", "<cmd>write!|Bdelete!<cr>", { desc = "Save file and close buffer" })
+U.keymap("n", "<C-w>", "<cmd>write!|Bdelete<cr>", { desc = "Save file and close buffer" })
+U.keymap("n", "<C-q>", "<cmd>Bdelete!<cr>", { desc = "Force quit" })
 
--- Commands to save and close buffer
-vim.cmd("command Wd write|Bdelete")
-vim.cmd("command WD write|Bdelete")
-vim.cmd("command D Bdelete")
-vim.cmd("command W write")
-vim.cmd("command Q qa")
+vim.cmd("command Wd write!|Bdelete!")
+vim.cmd("command WD write!|Bdelete!")
+vim.cmd("command D Bdelete!")
+vim.cmd("command W write!")
+vim.cmd("command Q qa!")
 
 --------------------------------------------------------------------------------
 -- Telescope
@@ -89,6 +90,9 @@ local status_ok, smart_splits = pcall(require, "smart-splits")
 if not status_ok then
     return
 end
+
+U.keymap("n", "|", "<cmd>vsplit<cr>", { desc = "Vertical Split" })
+U.keymap("n", "\\", "<cmd>split<cr>", { desc = "Horizontal Split" })
 
 U.keymap("n", "<C-h>", function() smart_splits.move_cursor_left() end, { desc = "Move to left split" })
 U.keymap("n", "<C-j>", function() smart_splits.move_cursor_down() end, { desc = "Move to below split" })
@@ -165,7 +169,8 @@ U.keymap("n", "<leader>/", function()
     end,
     { desc = "Toggle comment line" })
 
-U.keymap("v", "<leader>/", "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>", { desc = "Toggle comment line" })
+U.keymap("v", "<leader>/", "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>",
+    { desc = "Toggle comment line" })
 
 --------------------------------------------------------------------------------
 -- Trouble
