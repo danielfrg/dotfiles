@@ -45,7 +45,7 @@ U.keymap("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
 U.keymap("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 U.keymap("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
 U.keymap("n", "]b", "<cmd>bnext<cr>", { desc = "Next buffer" })
-U.keymap("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Last Buffer" })
+U.keymap("n", "<leader>b", "<cmd>e #<cr>", { desc = "Switch to Last Buffer" })
 U.keymap("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Last Buffer" })
 U.keymap("n", "<S-x>", ":e #<CR>", { desc = "Switch to Last Buffer" })
 

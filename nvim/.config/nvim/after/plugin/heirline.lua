@@ -1,4 +1,4 @@
--- Based on how AstroVim looks but mostly uses the Herline Cookbook
+-- Based on how AstroVim looks but mostly uses the Heirline Cookbook
 -- https://github.com/AstroNvim/AstroNvim/blob/main/lua/plugins/heirline.lua
 -- https://github.com/rebelot/heirline.nvim/blob/master/cookbook.md
 
@@ -10,10 +10,12 @@ end
 local conditions = require("heirline.conditions")
 local utils = require("heirline.utils")
 
+local yaml_companion = require("yaml-companion")
+
 local colors = {
     none = "NONE",
     fg = "#abb2bf",
-    bg = "#1e222a",
+    bg = "#181825",
     dark_bg = "#2c323c",
     blue = "#61afef",
     green = "#98c379",
@@ -28,6 +30,8 @@ local colors = {
     white = "#c9c9c9",
     yellow = "#e5c07b",
     bright_yellow = "#ebae34",
+    bright_bg = utils.get_highlight("Folded").bg,
+    bright_fg = utils.get_highlight("Folded").fg,
 }
 
 local mode_names = {
@@ -68,12 +72,12 @@ local mode_names = {
 }
 
 local mode_colors = {
-    n = { colors["blue"], "white" },
-    i = { colors["green"], "white" },
-    v = { colors["yellow"], "white" },
-    V = { colors["yellow"], "white" },
-    ["\22"] = { colors["yellow"], "white" },
-    c = { colors["orange"], "white" },
+    n = { "blue", "white" },
+    i = { "green", "white" },
+    v = { "yellow", "black" },
+    V = { "yellow", "black" },
+    ["\22"] = { "yellow", "black" },
+    c = { "orange", "black" },
     s = { "purple", "white" },
     S = { "purple", "white" },
     ["\19"] = { "purple", "white" },
@@ -85,6 +89,26 @@ local mode_colors = {
 
 local M = { utils = {} }
 
+-- From AstroVim Heirline Utils
+function M.utils.null_ls_providers(filetype)
+    local registered = {}
+    -- try to load null-ls
+    local sources_avail, sources = pcall(require, "null-ls.sources")
+    if sources_avail then
+        -- get the available sources of a given filetype
+        for _, source in ipairs(sources.get_available(filetype)) do
+            -- get each source name
+            for method in pairs(source.methods) do
+                registered[method] = registered[method] or {}
+                table.insert(registered[method], source.name)
+            end
+        end
+    end
+    -- return the found null-ls sources
+    return registered
+end
+
+-- From AstroVim Heirline Utils
 function M.utils.null_ls_sources(filetype, method)
     local methods_avail, methods = pcall(require, "null-ls.methods")
     return methods_avail and M.utils.null_ls_providers(filetype)[methods.internal[method]] or {}
@@ -213,7 +237,7 @@ local GitBranch = {
     provider = function(self)
         return " " .. self.status_dict.head
     end,
-    hl = { fg = colors["blue"], bold = false }
+    hl = { bg = "bg", fg = colors["blue"] }
 }
 
 local GitDiff = {
@@ -229,22 +253,23 @@ local GitDiff = {
             local count = self.status_dict.added or 0
             return count > 0 and (" " .. count)
         end,
-        hl = { fg = colors["green"] },
+        hl = { bg = "bg", fg = colors["green"] },
     },
     {
         provider = function(self)
             local count = self.status_dict.removed or 0
             return count > 0 and (" " .. count)
         end,
-        hl = { fg = colors["red"] },
+        hl = { bg = "bg", fg = colors["red"] },
     },
     {
         provider = function(self)
             local count = self.status_dict.changed or 0
             return count > 0 and (" " .. count)
         end,
-        hl = { fg = colors["orange"] },
+        hl = { bg = "bg", fg = colors["orange"] },
     },
+    Space
 }
 
 local Diagnostics = {
@@ -272,36 +297,53 @@ local Diagnostics = {
         provider = function(self)
             return self.errors > 0 and (self.error_icon .. self.errors .. " ")
         end,
-        hl = "DiagnosticError",
+        hl = { bg = "bg", fg = "red" },
     },
     {
         provider = function(self)
             return self.warnings > 0 and (self.warn_icon .. self.warnings .. " ")
         end,
-        hl = "DiagnosticWarn",
+        hl = { bg = "bg", fg = "orange" },
     },
     {
         provider = function(self)
             return self.info > 0 and (self.info_icon .. self.info .. " ")
         end,
-        hl = "DiagnosticInfo",
+        hl = { bg = "bg", fg = "blue" },
     },
     {
         provider = function(self)
             return self.hints > 0 and (self.hint_icon .. self.hints)
         end,
-        hl = "DiagnosticHint",
+        hl = { bg = "bg", fg = "yellow" },
     },
+    Space
+}
+
+local YAMLSchema = {
+    condition = conditions.lsp_attached,
+    update    = { 'LspAttach', 'LspDetach', "BufEnter" },
+    provider  = function(self)
+        local schema = yaml_companion.get_buf_schema(0)
+        if schema.result[1].name == "none" then
+            return ""
+        end
+        return " Schema: " .. schema.result[1].name .. " "
+    end,
+    on_click = {
+        callback = function()
+            vim.cmd("Telescope yaml_schema")
+        end,
+        name = "heirline_yaml_shema_callback",
+    },
+    hl        = { bg = "bg", fg = "white" },
 }
 
 local LSPActive = {
     condition = conditions.lsp_attached,
     update    = { 'LspAttach', 'LspDetach', "BufEnter" },
 
-    -- You can keep it simple,
-    -- provider = " [LSP]",
-
-    -- Or complicate things a bit and get the servers names
+    -- Get the name of the servers attached to the current buffer
     provider  = function(self)
         local buf_client_names = {}
         for _, client in pairs(vim.lsp.get_active_clients { bufnr = self and self.bufnr or 0 }) do
@@ -320,15 +362,144 @@ local LSPActive = {
         local str = table.concat(buf_client_names, ", ")
         return "  " .. str .. ""
     end,
-    hl        = { fg = "white", bold = false },
+    hl        = { bg = "bg", fg = "white" },
 }
 
 local StatusLine = {
-    ViMode, Space, FileNameBlock,
+    ViMode, Space,
     Align,
-    LSPActive, Space, Diagnostics, Space, GitDiff, Space, ViModeBGColor
+    YAMLSchema, LSPActive, Space, Diagnostics, GitDiff, ViModeBGColor
 }
+
+
+local TablineBufNumber = {
+    provider = function(self)
+        return tostring(self.bufnr) .. ". "
+    end,
+    hl = "Comment",
+}
+
+-- we redefine the filename component, as we probably only want the tail and not the relative path
+local TablineFileName = {
+    provider = function(self)
+        -- self.filename will be defined later, just keep looking at the example!
+        local filename = self.filename
+        filename = filename == "" and "[No Name]" or vim.fn.fnamemodify(filename, ":t")
+        return filename
+    end,
+    hl = function(self)
+        return { bold = self.is_active or self.is_visible, fg = "white" }
+    end,
+}
+
+-- this looks exactly like the FileFlags component that we saw in
+-- #crash-course-part-ii-filename-and-friends, but we are indexing the bufnr explicitly
+-- also, we are adding a nice icon for terminal buffers.
+local TablineFileFlags = {
+    {
+        condition = function(self)
+            return vim.api.nvim_buf_get_option(self.bufnr, "modified")
+        end,
+        provider = "[+]",
+        hl = { fg = "green" },
+    },
+    {
+        condition = function(self)
+            return not vim.api.nvim_buf_get_option(self.bufnr, "modifiable")
+                or vim.api.nvim_buf_get_option(self.bufnr, "readonly")
+        end,
+        provider = function(self)
+            if vim.api.nvim_buf_get_option(self.bufnr, "buftype") == "terminal" then
+                return "  "
+            else
+                return ""
+            end
+        end,
+        hl = { fg = "orange" },
+    },
+}
+
+-- Here the filename block finally comes together
+local TablineFileNameBlock = {
+    init = function(self)
+        self.filename = vim.api.nvim_buf_get_name(self.bufnr)
+    end,
+    hl = function(self)
+        if self.is_active then
+            return "TabLineSel"
+            -- why not?
+            -- elseif not vim.api.nvim_buf_is_loaded(self.bufnr) then
+            --     return { fg = "gray" }
+        else
+            return "TabLine"
+        end
+    end,
+    on_click = {
+        callback = function(_, minwid, _, button)
+            if (button == "m") then -- close on mouse middle click
+                vim.schedule(function()
+                    vim.api.nvim_buf_delete(minwid, { force = false })
+                end)
+            else
+                vim.api.nvim_win_set_buf(0, minwid)
+            end
+        end,
+        minwid = function(self)
+            return self.bufnr
+        end,
+        name = "heirline_tabline_buffer_callback",
+    },
+    -- TablineBufNumber,
+    Space,
+    FileIcon,
+    TablineFileName,
+    TablineFileFlags,
+}
+
+-- a nice "x" button to close the buffer
+local TablineCloseButton = {
+    condition = function(self)
+        return not vim.api.nvim_buf_get_option(self.bufnr, "modified")
+    end,
+    { provider = " " },
+    {
+        provider = "",
+        hl = { fg = "gray" },
+        on_click = {
+            callback = function(_, minwid)
+                vim.schedule(function()
+                    vim.api.nvim_buf_delete(minwid, { force = false })
+                    vim.cmd.redrawtabline()
+                end)
+            end,
+            minwid = function(self)
+                return self.bufnr
+            end,
+            name = "heirline_tabline_close_buffer_callback",
+        },
+    },
+}
+
+-- The final touch: Space between the tabs
+local TablineBufferBlock = utils.surround({ "", " " }, function(self)
+    if self.is_active then
+        return utils.get_highlight("TabLineSel").bg
+    else
+        return utils.get_highlight("TabLine").bg
+    end
+end, { TablineFileNameBlock, TablineCloseButton, Space, })
+
+-- Create the list of buffers
+local BufferLine = utils.make_buflist(
+    TablineBufferBlock,
+    { provider = "", hl = { fg = "white" } }, -- left truncation
+    { provider = "", hl = { fg = "white" } } -- right trunctation
+)
 
 heirline.setup({
     statusline = StatusLine,
+    tabline = BufferLine,
+    opts = {
+        colors = colors,
+    }
 })

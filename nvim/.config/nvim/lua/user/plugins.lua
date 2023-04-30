@@ -55,11 +55,8 @@ local plugins = {
 
     -- UI components
     { "nvim-neo-tree/neo-tree.nvim" },
-    -- {
-    --     "nvim-lualine/lualine.nvim",
-    --     requires = { "nvim-tree/nvim-web-devicons" }
-    -- },
-    "rebelot/heirline.nvim",  -- Status line
+    { 'akinsho/bufferline.nvim',      version = "*",           dependencies = 'nvim-tree/nvim-web-devicons' },
+    "rebelot/heirline.nvim", -- Status line
     {
         "folke/trouble.nvim",
         config = function()
