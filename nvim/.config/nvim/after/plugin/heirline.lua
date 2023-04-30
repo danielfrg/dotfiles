@@ -12,26 +12,27 @@ local utils = require("heirline.utils")
 
 local yaml_companion = require("yaml-companion")
 
+local status_ok, astrotheme = pcall(require, "astrotheme")
+if not status_ok then
+    return
+end
+
+local U = require("user.utils")
+
 local colors = {
-    none = "NONE",
-    fg = "#abb2bf",
-    bg = "#181825",
-    dark_bg = "#2c323c",
-    blue = "#61afef",
-    green = "#98c379",
-    grey = "#5c6370",
-    bright_grey = "#777d86",
-    dark_grey = "#5c5c5c",
-    orange = "#ff9640",
-    purple = "#c678dd",
-    bright_purple = "#a9a1e1",
-    red = "#e06c75",
-    bright_red = "#ec5f67",
-    white = "#c9c9c9",
-    yellow = "#e5c07b",
-    bright_yellow = "#ebae34",
-    bright_bg = utils.get_highlight("Folded").bg,
-    bright_fg = utils.get_highlight("Folded").fg,
+    bg = utils.get_highlight("StatusLine").bg,
+    fg = utils.get_highlight("StatusLine").fg,
+    red = utils.get_highlight("DiagnosticError").fg,
+    green = utils.get_highlight("String").fg,
+    blue = utils.get_highlight("Function").fg,
+    gray = utils.get_highlight("NonText").fg,
+    orange = utils.get_highlight("Constant").fg,
+    purple = utils.get_highlight("Statement").fg,
+    cyan = utils.get_highlight("Special").fg,
+    tab_fg = utils.get_highlight("TabLine").fg,
+    tab_bg = "None",
+    tab_active_fg = utils.get_highlight("TabLineSel").fg,
+    tab_active_bg = utils.get_highlight("TabLineSel").bg,
 }
 
 local mode_names = {
@@ -115,7 +116,8 @@ function M.utils.null_ls_sources(filetype, method)
 end
 
 local Align = { provider = "%=" }
-local Space = { provider = " " }
+local StatusSpace = { provider = " "}
+local TabLineSpace = { provider = " ", hl = { bg = "none" } }
 
 local ViMode = {
     -- get vim current mode, this information will be required by the provider
@@ -148,7 +150,7 @@ local ViModeBGColor = {
         self.mode = vim.fn.mode(1) -- :h mode()
     end,
     provider = function(self)
-        return " "
+        return "  "
     end,
 
     hl = function(self)
@@ -182,7 +184,7 @@ local FileIcon = {
         return self.icon and (self.icon .. " ")
     end,
     hl = function(self)
-        return { fg = self.icon_color }
+        return { bg = "none", fg = self.icon_color }
     end
 }
 
@@ -220,7 +222,7 @@ local FileFlags = {
     },
 }
 
--- -- let's add the children to our FileNameBlock component
+-- Add the children to our FileNameBlock component
 FileNameBlock = utils.insert(FileNameBlock,
     FileIcon,
     FileName,
@@ -237,7 +239,7 @@ local GitBranch = {
     provider = function(self)
         return " " .. self.status_dict.head
     end,
-    hl = { bg = "bg", fg = colors["blue"] }
+    hl = { bg = "bg", fg = "blue" }
 }
 
 local GitDiff = {
@@ -253,23 +255,31 @@ local GitDiff = {
             local count = self.status_dict.added or 0
             return count > 0 and (" " .. count)
         end,
-        hl = { bg = "bg", fg = colors["green"] },
+        hl = { bg = "bg", fg = "green" },
     },
     {
         provider = function(self)
             local count = self.status_dict.removed or 0
             return count > 0 and (" " .. count)
         end,
-        hl = { bg = "bg", fg = colors["red"] },
+        hl = { bg = "bg", fg = "red" },
     },
     {
         provider = function(self)
             local count = self.status_dict.changed or 0
             return count > 0 and (" " .. count)
         end,
-        hl = { bg = "bg", fg = colors["orange"] },
+        hl = { bg = "bg", fg = "orange" },
     },
-    Space
+    {
+        provider = function(self)
+            local count = self.status_dict.added or 0
+            count = count + (self.status_dict.removed or 0)
+            count = count + (self.status_dict.changed or 0)
+            return count > 0 and StatusSpace
+        end,
+        hl = { bg = "bg", fg = "orange" },
+    },
 }
 
 local Diagnostics = {
@@ -317,7 +327,7 @@ local Diagnostics = {
         end,
         hl = { bg = "bg", fg = "yellow" },
     },
-    Space
+    -- StatusSpace
 }
 
 local YAMLSchema = {
@@ -328,7 +338,7 @@ local YAMLSchema = {
         if schema.result[1].name == "none" then
             return ""
         end
-        return " Schema: " .. schema.result[1].name .. " "
+        return " Schema: " .. schema.result[1].name
     end,
     on_click = {
         callback = function()
@@ -337,6 +347,7 @@ local YAMLSchema = {
         name = "heirline_yaml_shema_callback",
     },
     hl        = { bg = "bg", fg = "white" },
+    StatusSpace
 }
 
 local LSPActive = {
@@ -363,14 +374,17 @@ local LSPActive = {
         return "  " .. str .. ""
     end,
     hl        = { bg = "bg", fg = "white" },
+    StatusSpace
 }
 
 local StatusLine = {
-    ViMode, Space,
+    ViMode,
     Align,
-    YAMLSchema, LSPActive, Space, Diagnostics, GitDiff, ViModeBGColor
+    YAMLSchema, LSPActive, Diagnostics, GitDiff, ViModeBGColor
 }
 
+--------------------------------------------------------------------------------
+-- TabLine
 
 local TablineBufNumber = {
     provider = function(self)
@@ -388,20 +402,17 @@ local TablineFileName = {
         return filename
     end,
     hl = function(self)
-        return { bold = self.is_active or self.is_visible, fg = "white" }
+        return { bg = "tab_bg", fg = "" .. (self.is_active and "white" or "grey"), bold = self.is_active or self.is_visible }
     end,
 }
 
--- this looks exactly like the FileFlags component that we saw in
--- #crash-course-part-ii-filename-and-friends, but we are indexing the bufnr explicitly
--- also, we are adding a nice icon for terminal buffers.
 local TablineFileFlags = {
     {
         condition = function(self)
             return vim.api.nvim_buf_get_option(self.bufnr, "modified")
         end,
         provider = "[+]",
-        hl = { fg = "green" },
+        hl = { bg = "tab_bg", fg = "green" },
     },
     {
         condition = function(self)
@@ -415,7 +426,7 @@ local TablineFileFlags = {
                 return ""
             end
         end,
-        hl = { fg = "orange" },
+        hl = { bg = "tab_bg", fg = "orange" },
     },
 }
 
@@ -427,9 +438,6 @@ local TablineFileNameBlock = {
     hl = function(self)
         if self.is_active then
             return "TabLineSel"
-            -- why not?
-            -- elseif not vim.api.nvim_buf_is_loaded(self.bufnr) then
-            --     return { fg = "gray" }
         else
             return "TabLine"
         end
@@ -450,7 +458,6 @@ local TablineFileNameBlock = {
         name = "heirline_tabline_buffer_callback",
     },
     -- TablineBufNumber,
-    Space,
     FileIcon,
     TablineFileName,
     TablineFileFlags,
@@ -461,10 +468,9 @@ local TablineCloseButton = {
     condition = function(self)
         return not vim.api.nvim_buf_get_option(self.bufnr, "modified")
     end,
-    { provider = " " },
     {
-        provider = "",
-        hl = { fg = "gray" },
+        provider = "  ",
+        hl = { bg = "tab_bg", fg = "grey" },
         on_click = {
             callback = function(_, minwid)
                 vim.schedule(function()
@@ -487,7 +493,7 @@ local TablineBufferBlock = utils.surround({ "", " " }, function(self)
     else
         return utils.get_highlight("TabLine").bg
     end
-end, { TablineFileNameBlock, TablineCloseButton, Space, })
+end, { TabLineSpace, TabLineSpace, TabLineSpace, TablineFileNameBlock, TabLineSpace, TablineCloseButton, TabLineSpace })
 
 -- Create the list of buffers
 local BufferLine = utils.make_buflist(

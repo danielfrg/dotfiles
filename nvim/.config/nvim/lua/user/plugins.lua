@@ -34,6 +34,7 @@ local plugins = {
         requires = { { "nvim-lua/plenary.nvim" } }
     },
     "christoomey/vim-tmux-navigator",
+    "ggandor/lightspeed.nvim",
     -- "theprimeagen/harpoon",
     -- "justinmk/vim-sneak",
 
@@ -48,14 +49,14 @@ local plugins = {
         end
     },
     -- TS context aware comment strings
-    'JoosepAlviste/nvim-ts-context-commentstring',
+    "JoosepAlviste/nvim-ts-context-commentstring",
 
     -- Better indent
     "NMAC427/guess-indent.nvim",
 
     -- UI components
     { "nvim-neo-tree/neo-tree.nvim" },
-    { 'akinsho/bufferline.nvim',      version = "*",           dependencies = 'nvim-tree/nvim-web-devicons' },
+    { "akinsho/bufferline.nvim",      version = "*",           dependencies = "nvim-tree/nvim-web-devicons" },
     "rebelot/heirline.nvim", -- Status line
     {
         "folke/trouble.nvim",
@@ -99,14 +100,14 @@ local plugins = {
     "saadparwaiz1/cmp_luasnip",
     "hrsh7th/cmp-nvim-lua",
 
-    -- Snippets
-    "L3MON4D3/LuaSnip",
-
     -- Formaters and Linters
     "jose-elias-alvarez/null-ls.nvim",
 
     -- YAML schema template selector and status line
     "someone-stole-my-name/yaml-companion.nvim",
+
+    -- Snippets
+    "L3MON4D3/LuaSnip",
 
     -- Tree sitter (Syntax highlighting)
     { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
@@ -118,6 +119,7 @@ local plugins = {
 
     -- THEMES
     { "projekt0n/github-nvim-theme",     tag = "v0.0.7" },
+    { "AstroNvim/astrotheme" },
     { "folke/tokyonight.nvim" },
     { "catppuccin/nvim",                 name = "catppuccin" },
 
@@ -129,9 +131,9 @@ local plugins = {
     "lewis6991/impatient.nvim",
     "famiu/bufdelete.nvim",
     {
-        'goolord/alpha-nvim',
+        "goolord/alpha-nvim",
         config = function()
-            require 'alpha'.setup(require 'alpha.themes.dashboard'.config)
+            require "alpha".setup(require "alpha.themes.dashboard".config)
         end
     },
     {
