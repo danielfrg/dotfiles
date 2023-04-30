@@ -33,8 +33,9 @@ local plugins = {
         tag = "0.1.1",
         requires = { { "nvim-lua/plenary.nvim" } }
     },
-    "christoomey/vim-tmux-navigator",
-    "ggandor/lightspeed.nvim",
+    "mrjones2014/smart-splits.nvim",
+    -- "christoomey/vim-tmux-navigator",
+    "ggandor/leap.nvim",
     -- "theprimeagen/harpoon",
     -- "justinmk/vim-sneak",
 
@@ -78,11 +79,6 @@ local plugins = {
         config = function()
             vim.o.timeout = true
             vim.o.timeoutlen = 300
-            require("which-key").setup({
-                -- your configuration comes here
-                -- or leave it empty to use the default settings
-                -- refer to the configuration section below
-            })
         end,
     },
 

@@ -1,5 +1,5 @@
 require("user.options")
-require("user.keymap")
+-- require("user.keymap")
 
 if vim.g.vscode then
     -- VSCode

@@ -111,7 +111,24 @@ alias du='du -kh'
 # alias df='df -kTh'
 
 # Navigation
-bindkey -s ^f "tmux-sessionizer\n"
+
+project_switcher() {
+  selected=$(find_ ~/code ~/code/danielfrg ~/code/inmatura ~/google -mindepth 1 -maxdepth 1 -type d | fzf)
+
+  if [[ -z $selected ]]; then
+      exit 0
+  fi
+
+  selected_name=$(basename "$selected" | tr . _)
+
+  echo "cd $selected"
+  cd $selected
+}
+
+ zle -N project_switcher{,}
+bindkey ^f project_switcher
+bindkey -s ^t "tmux-sessionizer\n"
+
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
@@ -161,9 +178,9 @@ alias nvim_="/opt/homebrew/bin/nvim"
 
 nvim() {
     if [[ $@ == "." ]]; then
-        command neovide
+        command nvim
     else
-        command neovide "$@"
+        command nvim "$@"
     fi
 }
 alias v="nvim"

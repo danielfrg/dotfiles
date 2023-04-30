@@ -1,4 +1,4 @@
--- Open alpha when there are no buffers
+-- Open Alpha when there are no buffers
 vim.api.nvim_create_augroup("alpha_on_empty", { clear = true })
 vim.api.nvim_create_autocmd("User", {
     pattern = "BDeletePost*",

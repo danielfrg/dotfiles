@@ -8,9 +8,9 @@ if not status_ok then
     return
 end
 
+local themes = require('telescope.themes')
 local builtin = require("telescope.builtin")
 local actions = require("telescope.actions")
-local U = require("user.utils")
 
 telescope.setup {
     defaults = {
@@ -79,41 +79,5 @@ telescope.setup {
     }
 }
 
--- Mostly from LazyVim and LunarVim
-U.keymap('n', '<leader>fb', builtin.buffers, { desc = '[F]ind existing [B]uffers' })
-U.keymap('n', '<leader>?', builtin.oldfiles, { desc = '[?] Find recently opened files' })
-
-U.keymap('n', '<leader>/', function()
-    builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-        winblend = 10,
-        previewer = false,
-    })
-end, { desc = '[/] Fuzzily search in current buffer' })
-
-U.keymap('n', '<C-p>', function()
-    builtin.git_files(require('telescope.themes').get_dropdown {
-        previewer = false,
-    })
-end, { desc = '[S]earch [F]ile (uses gitignore)' })
-U.keymap("n", "<leader>sg", builtin.live_grep, { desc = '[S]earch [G]rep' })
--- U.keymap('n', '<leader>sf"', function()
---     builtin.live_grep(require('telescope.themes').get_dropdown {
---         previewer = false,
---     })
--- end, { desc = '[S]earch [F]iles - Live Grep' })
-U.keymap('n', '<leader>sa', function()
-    builtin.find_files(require('telescope.themes').get_dropdown {
-        previewer = false,
-    })
-end, { desc = '[S]earch [A]ll Files (ignore git)' })
--- U.keymap("n", "<leader>sg", function()
---     builtin.grep_string({ search = vim.fn.input("Grep > ") })
--- end, { desc = '[S]earch [G]rep (no live)' })
-
-U.keymap('n', '<leader>sc', builtin.commands, { desc = '[S]earch [C]ommands' })
-U.keymap('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-
--- U.keymap('n', '<leader>vh', builtin.help_tags, opts)
-
--- -- Extensions
+-- Extensions
 telescope.load_extension("yaml_schema")

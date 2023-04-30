@@ -3,4 +3,4 @@ if not status_ok then
     return
 end
 
-guess_indent.setup {}
+guess_indent.setup({})

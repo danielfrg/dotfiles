@@ -3,9 +3,6 @@ if not status_ok then
     return
 end
 
-local command = require("neo-tree.command")
-local U = require("user.utils")
-
 require("neo-tree").setup({
     window = {
         position = "float",
@@ -23,13 +20,3 @@ require("neo-tree").setup({
         hijack_netrw_behavior = "disabled"
     }
 })
-
-U.keymap("n", "<leader>fe", function()
-        command.execute({ toggle = true, position = "float" })
-    end,
-    { desc = "Toggle [F]ile [E]xplorer" })
-
-U.keymap("n", "<leader>pv", function()
-        command.execute({ toggle = true, position = "float" })
-    end,
-    { desc = "Toggle [F]ile [E]xplorer" })
