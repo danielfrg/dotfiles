@@ -4,7 +4,7 @@ if not status_ok then
 end
 
 local command = require("neo-tree.command")
-local U = require("danielfrg.utils")
+local U = require("user.utils")
 
 require("neo-tree").setup({
     window = {

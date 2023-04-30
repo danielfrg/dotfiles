@@ -10,7 +10,7 @@ end
 
 local builtin = require("telescope.builtin")
 local actions = require("telescope.actions")
-local U = require("danielfrg.utils")
+local U = require("user.utils")
 
 telescope.setup {
     defaults = {

@@ -1,4 +1,4 @@
--- Automatically install packer if not installed
+-- Automatically install lazy.nvim if not installed
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
@@ -12,8 +12,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-
-
 -- Use a protected call so we don"t error out on first use
 local status_ok, lazy = pcall(require, "lazy")
 if not status_ok then
@@ -26,10 +24,8 @@ local plugins = {
     "MunifTanjim/nui.nvim",        -- UI components
     "nvim-tree/nvim-web-devicons", -- Icons
 
-    -- THEMES
-    { "projekt0n/github-nvim-theme", tag = "v0.0.7" },
-    { "folke/tokyonight.nvim" },
-    { "catppuccin/nvim",             name = "catppuccin" },
+    -- CORE
+    { "max397574/better-escape.nvim", event = "InsertCharPre", opts = { timeout = 300 } },
 
     -- NAVIGATION
     {
@@ -54,12 +50,16 @@ local plugins = {
     -- TS context aware comment strings
     'JoosepAlviste/nvim-ts-context-commentstring',
 
+    -- Better indent
+    "NMAC427/guess-indent.nvim",
+
     -- UI components
     { "nvim-neo-tree/neo-tree.nvim" },
-    {
-        "nvim-lualine/lualine.nvim",
-        requires = { "nvim-tree/nvim-web-devicons" }
-    },
+    -- {
+    --     "nvim-lualine/lualine.nvim",
+    --     requires = { "nvim-tree/nvim-web-devicons" }
+    -- },
+    "rebelot/heirline.nvim",  -- Status line
     {
         "folke/trouble.nvim",
         config = function()
@@ -118,6 +118,11 @@ local plugins = {
     -- Git
     "lewis6991/gitsigns.nvim",
     -- "tpope/vim-fugitive",
+
+    -- THEMES
+    { "projekt0n/github-nvim-theme",     tag = "v0.0.7" },
+    { "folke/tokyonight.nvim" },
+    { "catppuccin/nvim",                 name = "catppuccin" },
 
     -- Undo tree
     -- "mbbill/undotree",

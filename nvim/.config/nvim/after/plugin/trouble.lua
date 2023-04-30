@@ -3,7 +3,7 @@ if not status_ok then
     return
 end
 
-local U = require("danielfrg.utils")
+local U = require("user.utils")
 
 U.keymap("n", "<leader>xx", "<cmd>TroubleToggle<cr>", { desc = "Toggle Trouble" })
 U.keymap("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", { desc = "Workspace Trouble" })

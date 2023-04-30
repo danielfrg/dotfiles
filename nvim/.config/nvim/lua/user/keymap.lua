@@ -1,4 +1,4 @@
-local U = require("danielfrg.utils")
+local U = require("user.utils")
 
 -- Based on LazyVim and LunarVim
 
@@ -17,6 +17,7 @@ U.keymap({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file
 U.keymap({ "n" }, "QQ", "<cmd>w|Bdelete<cr>", { desc = "Save file and close" })
 
 vim.cmd("command Wd write|Bdelete")
+vim.cmd("command WD write|Bdelete")
 vim.cmd("command D Bdelete")
 vim.cmd("command W write")
 vim.cmd("command Q qa")
