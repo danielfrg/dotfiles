@@ -2,6 +2,7 @@ version: "3"
 
 env:
   TAG: base
+  dir: nvim
 
 tasks:
 
@@ -40,6 +41,10 @@ tasks:
       - stow -t $HOME python
       - stow -t $HOME nvim
       - stow -t $HOME bin
+
+  unstow:
+    cmds:
+      - stow -t $HOME -D nvim
 
   gpg:
     cmds:
