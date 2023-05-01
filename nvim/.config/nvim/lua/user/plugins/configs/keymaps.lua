@@ -25,8 +25,8 @@ U.keymap({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w!<cr><esc>", { desc = "Save fil
 
 --  Save and close buffer
 U.keymap("n", "QQ", "<cmd>write!|Bdelete!<cr>", { desc = "Save file and close buffer" })
-U.keymap("n", "<C-w>", "<cmd>write!|Bdelete<cr>", { desc = "Save file and close buffer" })
-U.keymap("n", "<C-q>", "<cmd>Bdelete!<cr>", { desc = "Force quit" })
+U.keymap("n", "<C-w>", "<cmd>wq!<cr>", { desc = "Save file and close buffer" })
+U.keymap("n", "<C-q>", "<cmd>q!<cr>", { desc = "Force quit" })
 
 vim.cmd("command Wd write!|Bdelete!")
 vim.cmd("command WD write!|Bdelete!")
@@ -39,15 +39,13 @@ vim.cmd("command Q qa!")
 -- Combination of AstroVim and LunarVim
 
 local status_ok, telescope = pcall(require, "telescope")
-if not status_ok then
-    return
-end
+if not status_ok then return end
 
 local themes = require('telescope.themes')
 local builtin = require("telescope.builtin")
 
 U.keymap('n', '<C-p>', function()
-        builtin.git_files(themes.get_dropdown { previewer = false, })
+        builtin.find_files(themes.get_dropdown { previewer = false, })
     end,
     { desc = '[F]ind [F]ile (git)' })
 
@@ -87,9 +85,7 @@ end, { desc = '[/] Fuzzily search in current buffer' })
 -- Split management
 
 local status_ok, smart_splits = pcall(require, "smart-splits")
-if not status_ok then
-    return
-end
+if not status_ok then return end
 
 U.keymap("n", "|", "<cmd>vsplit<cr>", { desc = "Vertical Split" })
 U.keymap("n", "\\", "<cmd>split<cr>", { desc = "Horizontal Split" })
@@ -120,21 +116,6 @@ U.keymap("n", "<C-Right>", function() smart_splits.resize_right() end, { desc = 
 -- U.keymap("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
 
 --------------------------------------------------------------------------------
--- UFO: Folding
-
--- local status_ok, ufo = pcall(require, "ufo")
--- if not status_ok then
---     return
--- end
-
--- U.keymap("n", "zR", function() ufo.openAllFolds() end, { desc = "Open all folds" })
--- U.keymap("n", "zM", function() ufo.closeAllFolds() end, { desc = "Close all folds" })
--- U.keymap("n", "zr", function() ufo.openFoldsExceptKinds() end, { desc = "Fold less" })
--- U.keymap("n", "zm", function() ufo.closeFoldsWith() end, { desc = "Fold more" })
--- U.keymap("n", "zp", function() ufo.peekFoldedLinesUnderCursor() end, { desc = "Peek fold" })
-
-
---------------------------------------------------------------------------------
 -- Others
 
 -- New file
@@ -158,22 +139,12 @@ U.keymap("n", "Q", "<nop>")
 -- Project finder
 U.keymap("n", "<C-t>", "<cmd>silent !tmux neww tmux-sessionizer<CR>", { desc = "Tmux Project finder" })
 
--- Open explorer
-local status_ok, neotree = pcall(require, "neo-tree.command")
-if not status_ok then
-    return
-end
-
-U.keymap("n", "<leader>e", function()
-        neotree.execute({ toggle = true, position = "float" })
-    end,
-    { desc = "Toggle File [E]xplorer" })
+-- Explorer
+U.keymap("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle File [E]xplorer" })
 
 -- Comment
 local status_ok, comment = pcall(require, "Comment.api")
-if not status_ok then
-    return
-end
+if not status_ok then return end
 
 U.keymap("n", "<leader>/", function()
         comment.toggle.linewise.count(vim.v.count > 0 and vim.v.count or 1)

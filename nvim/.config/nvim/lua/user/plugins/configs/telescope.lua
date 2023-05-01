@@ -1,12 +1,8 @@
 local status_ok, telescope = pcall(require, "telescope")
-if not status_ok then
-    return
-end
+if not status_ok then return end
 
 local status_ok, trouble_telescope = pcall(require, "trouble.providers.telescope")
-if not status_ok then
-    return
-end
+if not status_ok then return end
 
 local themes = require('telescope.themes')
 local builtin = require("telescope.builtin")

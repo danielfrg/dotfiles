@@ -111,7 +111,6 @@ alias du='du -kh'
 # alias df='df -kTh'
 
 # Navigation
-
 project_switcher() {
   selected=$(find_ ~/code ~/code/danielfrg ~/code/inmatura ~/google -mindepth 1 -maxdepth 1 -type d | fzf)
 
@@ -133,8 +132,7 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
-alias cdc='cd ~/code'
-alias cdg='cd ~/google'
+alias cdc='project_switcher'
 alias cdd="cd ~/Downloads"
 alias t="tmux"
 alias ta="tmux attach"

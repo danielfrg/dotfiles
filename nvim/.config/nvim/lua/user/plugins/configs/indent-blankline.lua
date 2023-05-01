@@ -1,12 +1,10 @@
 local status_ok, blankline = pcall(require, "indent_blankline")
-if not status_ok then
-    return
-end
+if not status_ok then return end
 
 vim.cmd [[highlight IndentBlanklineNoCurrent guifg=#3B4048 gui=nocombine ]]
 vim.cmd [[highlight IndentBlanklineContext guifg=#8995A7 gui=nocombine ]]
 
-blankline.setup {
+blankline.setup({
     char = "▏",
     context_char = "▏",
     use_treesitter = true,
@@ -27,4 +25,4 @@ blankline.setup {
     },
     char_highlight_list = { "IndentBlanklineNoCurrent" },
     context_highlight_list = { "IndentBlanklineContext" }
-}
+})

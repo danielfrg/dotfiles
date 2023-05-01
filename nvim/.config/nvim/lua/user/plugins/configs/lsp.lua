@@ -21,9 +21,7 @@ local servers = {
 }
 
 local status_ok, lspconfig = pcall(require, "lspconfig")
-if not status_ok then
-    return
-end
+if not status_ok then return end
 
 require('lspconfig.ui.windows').default_options.border = 'rounded'
 
@@ -34,7 +32,7 @@ local mason = require("mason")
 local mason_lspconfig = require("mason-lspconfig")
 local settings = {
     ui = {
-        border = "rounded",
+        -- border = "rounded",
         icons = {
             package_installed = "◍",
             package_pending = "◍",
@@ -54,7 +52,6 @@ mason_lspconfig.setup({
 local U = require("user.utils")
 
 local lsp_attach = function(client, bufnr)
-    print("LSP attached")
     -- Disable formatting for tsserver, we use null-ls (prettier) instead
     if client.name == "tsserver" then
         client.server_capabilities.document_formatting = false
@@ -105,7 +102,10 @@ local lsp_attach = function(client, bufnr)
     end, { desc = 'LSP: Format current buffer' })
 end
 
-local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
+local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if not status_ok then return end
+
+local lsp_capabilities = cmp_nvim_lsp.default_capabilities()
 
 mason_lspconfig.setup_handlers({
     function(server_name)

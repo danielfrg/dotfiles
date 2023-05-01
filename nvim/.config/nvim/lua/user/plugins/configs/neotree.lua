@@ -1,9 +1,7 @@
 local status_ok, neotree = pcall(require, "neo-tree")
-if not status_ok then
-    return
-end
+if not status_ok then return end
 
-require("neo-tree").setup({
+neotree.setup({
     window = {
         position = "float",
     },

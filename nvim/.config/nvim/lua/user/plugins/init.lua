@@ -14,30 +14,26 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Use a protected call so we don"t error out on first use
 local status_ok, lazy = pcall(require, "lazy")
-if not status_ok then
-    return
-end
+if not status_ok then return end
 
 local plugins = {
     -- Useful lua functions used ny lots of plugins
     "nvim-lua/plenary.nvim",       -- Utils
-    "MunifTanjim/nui.nvim",        -- UI components
     "nvim-tree/nvim-web-devicons", -- Icons
+    "MunifTanjim/nui.nvim",        -- UI components
 
     -- CORE
-    { "max397574/better-escape.nvim", event = "InsertCharPre", opts = { timeout = 300 } },
+    { "max397574/better-escape.nvim",    event = "InsertCharPre", opts = { timeout = 300 } },
 
     -- NAVIGATION
+    "mrjones2014/smart-splits.nvim",
     {
         "nvim-telescope/telescope.nvim",
         tag = "0.1.1",
         requires = { { "nvim-lua/plenary.nvim" } }
     },
-    "mrjones2014/smart-splits.nvim",
+    "theprimeagen/harpoon",
     "ggandor/leap.nvim",
-    -- "justinmk/vim-sneak",
-    -- "theprimeagen/harpoon",
-    -- "christoomey/vim-tmux-navigator",
 
     -- CODE
     -- Autopairs, integrates with both cmp and treesitter
@@ -46,31 +42,27 @@ local plugins = {
     "numToStr/Comment.nvim",
     -- TS context aware comment strings
     "JoosepAlviste/nvim-ts-context-commentstring",
+    -- Indent indicators
     "lukas-reineke/indent-blankline.nvim",
     -- Better indent
     "NMAC427/guess-indent.nvim",
-    -- Folds
-    -- { 'kevinhwang91/nvim-ufo',es = 'kevinhwang91/promise-async' },
 
     -- UI components
-    { "nvim-neo-tree/neo-tree.nvim" },
+    -- { "nvim-neo-tree/neo-tree.nvim" },
+    {
+        "nvim-tree/nvim-tree.lua",
+        version = "*",
+        dependencies = {
+            "nvim-tree/nvim-web-devicons",
+        }
+    },
     {
         "akinsho/bufferline.nvim",
         version = "*",
         dependencies = "nvim-tree/nvim-web-devicons"
     },
-    "rebelot/heirline.nvim", -- Status line
-    {
-        "folke/trouble.nvim",
-        config = function()
-            require("trouble").setup {
-                -- your configuration comes here
-                -- or leave it empty to use the default settings
-                -- refer to the configuration section below
-            }
-        end
-    },
-
+    "nvim-lualine/lualine.nvim",
+    "folke/trouble.nvim",
     -- An implementation of the Popup API from vim in Neovim
     "nvim-lua/popup.nvim",
 
@@ -89,7 +81,13 @@ local plugins = {
     "neovim/nvim-lspconfig",
     "j-hui/fidget.nvim",
 
-    -- CMP
+    -- LSP: Other formaters and Linters
+    "jose-elias-alvarez/null-ls.nvim",
+
+    -- LSP: YAML schema template selector and status line
+    "someone-stole-my-name/yaml-companion.nvim",
+
+    -- LSP: Completition
     "hrsh7th/nvim-cmp",
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-buffer",
@@ -98,14 +96,11 @@ local plugins = {
     "saadparwaiz1/cmp_luasnip",
     "hrsh7th/cmp-nvim-lua",
 
-    -- Formaters and Linters
-    "jose-elias-alvarez/null-ls.nvim",
-
-    -- YAML schema template selector and status line
-    "someone-stole-my-name/yaml-companion.nvim",
-
     -- Snippets
-    "L3MON4D3/LuaSnip",
+    {
+        "L3MON4D3/LuaSnip",
+        dependencies = { "rafamadriz/friendly-snippets" },
+    },
 
     -- Tree sitter (Syntax highlighting)
     { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
@@ -113,27 +108,18 @@ local plugins = {
 
     -- Git
     "lewis6991/gitsigns.nvim",
-    -- "tpope/vim-fugitive",
 
     -- THEMES
-    { "projekt0n/github-nvim-theme",     tag = "v0.0.7" },
-    { "AstroNvim/astrotheme" },
+    { "catppuccin/nvim",      name = "catppuccin", dependencies = "nvim-lualine/lualine.nvim" },
     { "folke/tokyonight.nvim" },
-    { "catppuccin/nvim",                 name = "catppuccin" },
-
-    -- Undo tree
-    -- "mbbill/undotree",
+    -- { "projekt0n/github-nvim-theme",     tag = "v0.0.7" },
+    -- { "AstroNvim/astrotheme" },
 
     -- Other
     "github/copilot.vim",
-    "lewis6991/impatient.nvim",
     "famiu/bufdelete.nvim",
-    {
-        "goolord/alpha-nvim",
-        config = function()
-            require "alpha".setup(require "alpha.themes.dashboard".config)
-        end
-    },
+    "lewis6991/impatient.nvim",
+    "goolord/alpha-nvim",
     {
         "iamcco/markdown-preview.nvim",
         config = function()
@@ -144,9 +130,39 @@ local plugins = {
 
 local opts = {
     ui = {
-        -- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
-        border = "rounded",
+        -- border = "rounded",
     }
 }
 
 lazy.setup(plugins, opts)
+
+
+--------------------------------------------------------------------------------
+-- Load configs
+
+-- Load this first for other plugins to use
+require("user.plugins.configs.colorscheme")
+
+require("user.plugins.configs.alpha")
+require("user.plugins.configs.autocmd")
+require("user.plugins.configs.autopairs")
+require("user.plugins.configs.bufferline")
+require("user.plugins.configs.cmp")
+require("user.plugins.configs.comment")
+require("user.plugins.configs.fidget")
+require("user.plugins.configs.gitsigns")
+require("user.plugins.configs.guess-indent")
+require("user.plugins.configs.harpoon")
+require("user.plugins.configs.impatient")
+require("user.plugins.configs.indent-blankline")
+require("user.plugins.configs.keymaps")
+require("user.plugins.configs.leap")
+require("user.plugins.configs.lsp")
+require("user.plugins.configs.lualine")
+require("user.plugins.configs.nvim-tree")
+-- require("user.plugins.configs.neotree")
+require("user.plugins.configs.null-ls")
+require("user.plugins.configs.telescope")
+require("user.plugins.configs.treesitter")
+require("user.plugins.configs.trouble")
+require("user.plugins.configs.which-key")

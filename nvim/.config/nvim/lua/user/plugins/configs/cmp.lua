@@ -1,12 +1,8 @@
 local status_ok, cmp = pcall(require, "cmp")
-if not status_ok then
-    return
-end
+if not status_ok then return end
 
 local status_ok, luasnip = pcall(require, "luasnip")
-if not status_ok then
-    return
-end
+if not status_ok then return end
 
 local has_words_before = function()
     unpack = unpack or table.unpack

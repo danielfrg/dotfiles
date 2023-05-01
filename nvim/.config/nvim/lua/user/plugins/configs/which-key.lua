@@ -1,14 +1,12 @@
 local status_ok, wk = pcall(require, "which-key")
-if not status_ok then
-  return
-end
+if not status_ok then return end
 
 wk.setup({
   icons = {
     group = "", -- remove the symbol prepended to a group
   },
   window = {
-    border = "single"
+    -- border = "single"
   }
 })
 

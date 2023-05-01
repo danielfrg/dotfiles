@@ -1,13 +1,11 @@
 require("user.options")
--- require("user.keymap")
 
 if vim.g.vscode then
-    -- VSCode
-    require("user.vscode")
+    require("user.editors.vscode")
 else
-    -- Regular Neovim
     if vim.g.neovide then
-        require("user.neovide")
+        require("user.editors.neovide")
     end
+
     require("user.plugins")
 end
