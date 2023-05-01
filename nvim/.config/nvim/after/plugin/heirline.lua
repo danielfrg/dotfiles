@@ -314,7 +314,7 @@ local Diagnostics = {
     },
     {
         provider = function(self)
-            return self.hints > 0 and (self.hint_icon .. self.hints)
+            return self.hints > 0 and (self.hint_icon .. self.hints .. " ")
         end,
         hl = { bg = "bg", fg = "yellow" },
     },

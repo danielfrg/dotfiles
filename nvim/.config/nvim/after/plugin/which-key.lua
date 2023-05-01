@@ -16,6 +16,5 @@ wk.setup({
 wk.register({
   f = { name = "󰍉 Find" },
   l = { name = " LSP" },
-  g = { name = " Go To and Git" },
   x = { name = " Trouble" },
 }, { prefix = "<leader>" })

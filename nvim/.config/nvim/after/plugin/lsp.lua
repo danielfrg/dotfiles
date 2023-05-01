@@ -80,6 +80,8 @@ local lsp_attach = function(client, bufnr)
     U.keymap("n", "<leader>lf", vim.lsp.buf.format, { buffer = bufnr, desc = "LSP: [F]ormat Buffer" })
     U.keymap("n", "<leader>lr", vim.lsp.buf.rename, { buffer = bufnr, desc = "LSP: [R]ename" })
 
+    U.keymap("n", "gl", function() vim.diagnostic.open_float(0) end, { desc = "Show line diagnostics" })
+
     -- GoTos
     U.keymap("n", "gd", "<cmd>Telescope lsp_definitions<cr>", { buffer = bufnr, desc = "LSP: [G]o to [d]efinition" })
     U.keymap("n", "gD", vim.lsp.buf.declaration, { buffer = bufnr, desc = "LSP: [G]o to [D]eclaration" })
@@ -177,7 +179,7 @@ local config = {
     underline = true,
     severity_sort = true,
     float = {
-        focusable = false,
+        focusable = true,
         style = "minimal",
         border = "rounded",
         source = "always",
