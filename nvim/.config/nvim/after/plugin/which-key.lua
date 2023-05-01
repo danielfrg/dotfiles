@@ -5,7 +5,7 @@ end
 
 wk.setup({
   icons = {
-    group = "",     -- symbol prepended to a group
+    group = "", -- remove the symbol prepended to a group
   },
   window = {
     border = "single"
@@ -16,5 +16,6 @@ wk.setup({
 wk.register({
   f = { name = "󰍉 Find" },
   l = { name = " LSP" },
-  g = { name = " Git and GoTo" },
+  g = { name = " Go To and Git" },
+  x = { name = " Trouble" },
 }, { prefix = "<leader>" })

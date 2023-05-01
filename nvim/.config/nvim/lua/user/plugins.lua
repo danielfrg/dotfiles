@@ -42,18 +42,23 @@ local plugins = {
     -- CODE
     -- Autopairs, integrates with both cmp and treesitter
     "windwp/nvim-autopairs",
-    -- Commens
+    -- Comment
     "numToStr/Comment.nvim",
     -- TS context aware comment strings
     "JoosepAlviste/nvim-ts-context-commentstring",
     "lukas-reineke/indent-blankline.nvim",
-
     -- Better indent
     "NMAC427/guess-indent.nvim",
+    -- Folds
+    -- { 'kevinhwang91/nvim-ufo',es = 'kevinhwang91/promise-async' },
 
     -- UI components
     { "nvim-neo-tree/neo-tree.nvim" },
-    { "akinsho/bufferline.nvim",      version = "*",           dependencies = "nvim-tree/nvim-web-devicons" },
+    {
+        "akinsho/bufferline.nvim",
+        version = "*",
+        dependencies = "nvim-tree/nvim-web-devicons"
+    },
     "rebelot/heirline.nvim", -- Status line
     {
         "folke/trouble.nvim",

@@ -120,6 +120,21 @@ U.keymap("n", "<C-Right>", function() smart_splits.resize_right() end, { desc = 
 -- U.keymap("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
 
 --------------------------------------------------------------------------------
+-- UFO: Folding
+
+local status_ok, ufo = pcall(require, "ufo")
+if not status_ok then
+    return
+end
+
+U.keymap("n", "zR", function() ufo.openAllFolds() end, { desc = "Open all folds" })
+U.keymap("n", "zM", function() ufo.closeAllFolds() end, { desc = "Close all folds" })
+U.keymap("n", "zr", function() ufo.openFoldsExceptKinds() end, { desc = "Fold less" })
+U.keymap("n", "zm", function() ufo.closeFoldsWith() end, { desc = "Fold more" })
+U.keymap("n", "zp", function() ufo.peekFoldedLinesUnderCursor() end, { desc = "Peek fold" })
+
+
+--------------------------------------------------------------------------------
 -- Others
 
 -- New file
@@ -142,10 +157,6 @@ U.keymap("n", "Q", "<nop>")
 
 -- Project finder
 U.keymap("n", "<C-t>", "<cmd>silent !tmux neww tmux-sessionizer<CR>", { desc = "Tmux Project finder" })
-
--- Insert blank lines
-U.keymap("n", "<leader>o", "m`o<Esc>``", { desc = "Insert line below" })
-U.keymap("n", "<leader>O", "m`O<Esc>``", { desc = "Insert line above" })
 
 -- Open explorer
 local status_ok, neotree = pcall(require, "neo-tree.command")
