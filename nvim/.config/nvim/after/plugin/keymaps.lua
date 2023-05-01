@@ -122,16 +122,16 @@ U.keymap("n", "<C-Right>", function() smart_splits.resize_right() end, { desc = 
 --------------------------------------------------------------------------------
 -- UFO: Folding
 
-local status_ok, ufo = pcall(require, "ufo")
-if not status_ok then
-    return
-end
+-- local status_ok, ufo = pcall(require, "ufo")
+-- if not status_ok then
+--     return
+-- end
 
-U.keymap("n", "zR", function() ufo.openAllFolds() end, { desc = "Open all folds" })
-U.keymap("n", "zM", function() ufo.closeAllFolds() end, { desc = "Close all folds" })
-U.keymap("n", "zr", function() ufo.openFoldsExceptKinds() end, { desc = "Fold less" })
-U.keymap("n", "zm", function() ufo.closeFoldsWith() end, { desc = "Fold more" })
-U.keymap("n", "zp", function() ufo.peekFoldedLinesUnderCursor() end, { desc = "Peek fold" })
+-- U.keymap("n", "zR", function() ufo.openAllFolds() end, { desc = "Open all folds" })
+-- U.keymap("n", "zM", function() ufo.closeAllFolds() end, { desc = "Close all folds" })
+-- U.keymap("n", "zr", function() ufo.openFoldsExceptKinds() end, { desc = "Fold less" })
+-- U.keymap("n", "zm", function() ufo.closeFoldsWith() end, { desc = "Fold more" })
+-- U.keymap("n", "zp", function() ufo.peekFoldedLinesUnderCursor() end, { desc = "Peek fold" })
 
 
 --------------------------------------------------------------------------------
