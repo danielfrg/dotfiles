@@ -40,3 +40,7 @@ keymap('n', '<leader>xd', notify 'workbench.actions.view.problems', opts)
 -- UI
 keymap('n', '<leader>e', notify 'workbench.action.toggleSidebarVisibility', opts)
 -- keymap('n', '<leader>tp', notify 'workbench.action.togglePanel', opts)
+
+-- Leap
+keymap('n', 's', notify 'leap.find', opts)
+

@@ -100,12 +100,7 @@ lualine.setup({
     },
     sections = {
         lualine_a = { "mode" },
-        lualine_b = {
-            {
-                "",
-                draw_empty = true,
-            }
-        },
+        lualine_b = {},
         lualine_c = {
             { "filename" },
             {
@@ -135,11 +130,8 @@ lualine.setup({
     },
     tabline = {
         lualine_a = {{
-
             "buffers",
-            -- section_separators = { left = "", right = "" },
-        }
-        },
+        }},
         lualine_b = {},
         lualine_c = {},
         lualine_x = {},
