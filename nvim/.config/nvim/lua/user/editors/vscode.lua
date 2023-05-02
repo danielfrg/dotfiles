@@ -46,6 +46,12 @@ keymap('n', '<C-j>', notify 'vscode-harpoon.gotoEditor2', opts)
 keymap('n', '<C-k>', notify 'vscode-harpoon.gotoEditor3', opts)
 keymap('n', '<C-l>', notify 'vscode-harpoon.gotoEditor4', opts)
 
+-- Marks (Bookmarks)
+keymap('n', 'mm', notify 'bookmarks.toggle', opts)
+keymap('n', '\'\'', notify 'bookmarks.jumpToPrevious', opts)
+keymap('n', 'mp', notify 'bookmarks.jumpToPrevious', opts)
+keymap('n', 'mn', notify 'bookmarks.jumpToNext', opts)
+
 -- Trouble (Problems)
 keymap('n', '<leader>xd', notify 'workbench.actions.view.problems', opts)
 
