@@ -34,6 +34,9 @@ vim.cmd("command D Bdelete!")
 vim.cmd("command W write!")
 vim.cmd("command Q qa!")
 
+-- Disable this
+U.keymap("n", "<S-j>", "<Nop>")
+
 --------------------------------------------------------------------------------
 -- Telescope
 -- Combination of AstroVim and LunarVim

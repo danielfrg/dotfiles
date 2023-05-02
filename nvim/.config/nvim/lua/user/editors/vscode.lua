@@ -1,5 +1,4 @@
 local keymap = vim.api.nvim_set_keymap
-
 local function notify(cmd)
     return string.format("<cmd>call VSCodeNotify('%s')<CR>", cmd)
 end
@@ -10,7 +9,10 @@ end
 
 local opts = { silent = true }
 
--- Keymaps
+-- Remove this
+keymap('n', '<S-j>', "<Nop>", opts)
+
+-- Buffers
 keymap('n', '<leader>b', notify 'extension.goto-previous-buffer', opts)
 keymap('n', '<leader>`', notify 'extension.goto-previous-buffer', opts)
 keymap('n', '<S-x>', notify 'extension.goto-previous-buffer', opts)
@@ -30,9 +32,10 @@ keymap('n', 'gt', notify 'editor.action.goToTypeDefinition', opts)
 keymap("n", "[d", notify 'editor.action.marker.next', opts)
 keymap("n", "]d", notify 'editor.action.marker.prev', opts)
 
--- Telescope: search/find related keymaps
-keymap('n', '<leader>fg', notify 'workbench.action.findInFiles', opts)
-keymap('n', '<leader>ff', notify 'workbench.action.quickOpen', opts)
+-- Telescope(ish)
+keymap('n', '<C-p>', notify 'workbench.action.quickOpen', opts)
+keymap('n', '<leader>ff', notify 'find-it-faster.findFiles', opts)
+keymap('n', '<leader>fg', notify 'find-it-faster.findWithinFiles', opts)
 keymap('n', '<leader>fc', notify 'workbench.action.showCommands', opts)
 
 -- Harpoon
@@ -43,8 +46,7 @@ keymap('n', '<C-j>', notify 'vscode-harpoon.gotoEditor2', opts)
 keymap('n', '<C-k>', notify 'vscode-harpoon.gotoEditor3', opts)
 keymap('n', '<C-l>', notify 'vscode-harpoon.gotoEditor4', opts)
 
-
--- Trouble / Problems
+-- Trouble (Problems)
 keymap('n', '<leader>xd', notify 'workbench.actions.view.problems', opts)
 
 -- UI
