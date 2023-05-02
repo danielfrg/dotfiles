@@ -4,7 +4,8 @@ if not status_ok then return end
 local U = require("user.utils")
 
 local sep_icons = {
-    default = { left = "", right = " " },
+    default = { left = "", right = " " },
+    triange = { left = "", right = " " },
     round = { left = "", right = "" },
     block = { left = "█", right = "█" },
     arrow = { left = "", right = "" },
@@ -133,7 +134,12 @@ lualine.setup({
         -- lualine_z = {}
     },
     tabline = {
-        lualine_a = { "buffers" },
+        lualine_a = {{
+
+            "buffers",
+            -- section_separators = { left = "", right = "" },
+        }
+        },
         lualine_b = {},
         lualine_c = {},
         lualine_x = {},

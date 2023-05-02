@@ -56,15 +56,13 @@ local plugins = {
             "nvim-tree/nvim-web-devicons",
         }
     },
-    {
-        "akinsho/bufferline.nvim",
-        version = "*",
-        dependencies = "nvim-tree/nvim-web-devicons"
-    },
+    -- {
+    --     "akinsho/bufferline.nvim",
+    --     version = "*",
+    --     dependencies = "nvim-tree/nvim-web-devicons"
+    -- },
     "nvim-lualine/lualine.nvim",
     "folke/trouble.nvim",
-    -- An implementation of the Popup API from vim in Neovim
-    "nvim-lua/popup.nvim",
 
     -- Which key
     {
@@ -148,7 +146,7 @@ require("user.plugins.configs.colorscheme")
 require("user.plugins.configs.alpha")
 require("user.plugins.configs.autocmd")
 require("user.plugins.configs.autopairs")
-require("user.plugins.configs.bufferline")
+-- require("user.plugins.configs.bufferline")  -- Just using status line
 require("user.plugins.configs.cmp")
 require("user.plugins.configs.comment")
 require("user.plugins.configs.fidget")
