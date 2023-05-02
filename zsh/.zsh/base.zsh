@@ -77,7 +77,6 @@ if [[ $FOUND_ATUIN -eq 1 ]]; then
   source <(atuin init zsh --disable-up-arrow)
 fi
 
-
 #########################
 # ALIASES
 #########################

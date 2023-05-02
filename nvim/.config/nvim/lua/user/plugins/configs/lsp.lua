@@ -12,6 +12,7 @@ local servers = {
     "marksman",
     "pyright",
     "ruby_ls",
+    "rust_analyzer",
     "svelte",
     "tailwindcss",
     "taplo",  --toml

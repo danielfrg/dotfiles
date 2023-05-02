@@ -70,9 +70,6 @@ brew 'ruby'
 brew 'ruby-build'
 brew 'rbenv'
 
-# Rust
-brew 'rust'
-
 # docker and k8s
 # brew 'dive'
 brew 'kubectl'
