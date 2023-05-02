@@ -31,8 +31,8 @@ keymap("n", "]d", notify 'editor.action.marker.prev', opts)
 
 -- Telescope: search/find related keymaps
 keymap('n', '<leader>fg', notify 'workbench.action.findInFiles', opts) -- Fuzzy search
-keymap('n', '<leader>fc', notify 'workbench.action.showCommands', opts) -- Find commands
 keymap('n', '<leader>ff', notify 'workbench.action.quickOpen', opts) -- Find files
+keymap('n', '<leader>fc', notify 'workbench.action.showCommands', opts) -- Find commands
 
 -- Trouble / Problems
 keymap('n', '<leader>xd', notify 'workbench.actions.view.problems', opts)
