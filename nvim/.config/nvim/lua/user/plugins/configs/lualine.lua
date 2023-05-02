@@ -3,7 +3,6 @@ if not status_ok then return end
 
 local U = require("user.utils")
 
--- NVChad
 local sep_icons = {
     default = { left = "", right = " " },
     round = { left = "", right = "" },
@@ -21,7 +20,7 @@ local M = {}
 
 -- From AstroVim Heirline (lualine) utils
 function lsp_clients()
-    -- local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
+    -- local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
     local buf_client_names = {}
     local clients = vim.lsp.get_active_clients()
 
@@ -95,11 +94,11 @@ lualine.setup({
     options = {
         -- theme = "catppuccin",
         icons_enabled = true,
-        component_separators = { left = '', right = '' },
+        component_separators = { left = "", right = "" },
         section_separators = { left = sep_icons.default.right, right = sep_icons.default.left },
     },
     sections = {
-        lualine_a = { 'mode' },
+        lualine_a = { "mode" },
         lualine_b = {
             {
                 "",
@@ -107,11 +106,12 @@ lualine.setup({
             }
         },
         lualine_c = {
+            { "filename" },
             {
                 "diff",
                 colored = false,
-                color = { fg = '#6F737B' },
-                symbols = { added = git_icons.added, modified = git_icons.modified, removed = git_icons.removed },
+                color = { fg = "#6F737B" },
+                -- symbols = { added = git_icons.added, modified = git_icons.modified, removed = git_icons.removed },
             },
             {
                 "diagnostics"
@@ -120,16 +120,24 @@ lualine.setup({
         lualine_x = {
             {
                 yaml_schema,
-                icon = ' ',
-                color = { fg = '#6F737B' },
+                icon = " ",
+                color = { fg = "#6F737B" },
             },
             {
                 lsp_clients,
-                icon = ' ',
-                color = { fg = '#6F737B' },
+                icon = " ",
+                color = { fg = "#6F737B" },
             }
         },
         lualine_y = {},
         -- lualine_z = {}
     },
+    tabline = {
+        lualine_a = { "buffers" },
+        lualine_b = {},
+        lualine_c = {},
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = {}
+    }
 })

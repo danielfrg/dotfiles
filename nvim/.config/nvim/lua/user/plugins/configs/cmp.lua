@@ -40,13 +40,13 @@ local kind_icons = {
 }
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
-vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
+vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
 cmp.setup {
     -- Select first item
-    preselect = 'item',
+    preselect = "item",
     completion = {
-        completeopt = 'menu,menuone,noinsert'
+        completeopt = "menu,menuone,noinsert"
     },
 
     snippet = {
@@ -99,7 +99,7 @@ cmp.setup {
         format = function(entry, vim_item)
             -- Kind icons
             -- vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-            -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+            -- vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
             vim_item.menu = ({
                 nvim_lsp = "[LSP]",
                 nvim_lua = "[NVIM_LUA]",
@@ -131,25 +131,25 @@ cmp.setup {
     },
 }
 
--- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline({ '/', '?' }, {
+-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won"t work anymore).
+cmp.setup.cmdline({ "/", "?" }, {
     mapping = cmp.mapping.preset.cmdline(),
     sources = {
-        { name = 'buffer' }
+        { name = "buffer" }
     }
 })
 
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+-- Use cmdline & path source for ":" (if you enabled `native_menu`, this won"t work anymore).
 -- TODO: Figure out how to not select the first item, its annoying
--- cmp.setup.cmdline(':', {
+-- cmp.setup.cmdline(":", {
 --   preselect = cmp.PreselectMode.None,
 --   completion = {
---       completeopt = 'menu,menuone,noselect'
+--       completeopt = "menu,menuone,noselect"
 --     },
 --   mapping = cmp.mapping.preset.cmdline(),
 --   sources = cmp.config.sources({
---     { name = 'path' }
+--     { name = "path" }
 --   }, {
---     { name = 'cmdline' }
+--     { name = "cmdline" }
 --   })
 -- })

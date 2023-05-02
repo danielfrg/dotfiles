@@ -18,12 +18,12 @@ if not status_ok then return end
 
 local plugins = {
     -- Useful lua functions used ny lots of plugins
-    "nvim-lua/plenary.nvim",       -- Utils
-    "nvim-tree/nvim-web-devicons", -- Icons
-    "MunifTanjim/nui.nvim",        -- UI components
+    { "nvim-lua/plenary.nvim",       lazy = true },
+    { "nvim-tree/nvim-web-devicons", lazy = true },
+    { "dstein64/vim-startuptime",    cmd = "StartupTime" },
 
     -- CORE
-    { "max397574/better-escape.nvim",    event = "InsertCharPre", opts = { timeout = 300 } },
+    -- { "max397574/better-escape.nvim",    event = "InsertCharPre", opts = { timeout = 300 } },
 
     -- NAVIGATION
     "mrjones2014/smart-splits.nvim",
@@ -75,7 +75,8 @@ local plugins = {
         end,
     },
 
-    -- LSP
+    --------------------------------------------
+    -- LSP, Diagnostics, Snippets, Completion --
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
@@ -112,6 +113,7 @@ local plugins = {
     -- THEMES
     { "catppuccin/nvim",      name = "catppuccin", dependencies = "nvim-lualine/lualine.nvim" },
     { "folke/tokyonight.nvim" },
+    { "rebelot/kanagawa.nvim" },
     -- { "projekt0n/github-nvim-theme",     tag = "v0.0.7" },
     -- { "AstroNvim/astrotheme" },
 
@@ -155,7 +157,6 @@ require("user.plugins.configs.guess-indent")
 require("user.plugins.configs.harpoon")
 require("user.plugins.configs.impatient")
 require("user.plugins.configs.indent-blankline")
-require("user.plugins.configs.keymaps")
 require("user.plugins.configs.leap")
 require("user.plugins.configs.lsp")
 require("user.plugins.configs.lualine")

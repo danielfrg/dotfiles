@@ -8,4 +8,5 @@ else
     end
 
     require("user.plugins")
+    require("user.keymaps")
 end

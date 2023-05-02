@@ -23,7 +23,7 @@ local servers = {
 local status_ok, lspconfig = pcall(require, "lspconfig")
 if not status_ok then return end
 
-require('lspconfig.ui.windows').default_options.border = 'rounded'
+require("lspconfig.ui.windows").default_options.border = "rounded"
 
 ------------------------------------------------
 -- Mason Config
@@ -97,9 +97,9 @@ local lsp_attach = function(client, bufnr)
     U.keymap("n", "]w", diagnostic_goto(false, "WARN"), { buffer = bufnr, desc = "LSP: Prev [W]arning" })
 
     -- Create a command `:Format` local to the LSP buffer
-    vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+    vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
         vim.lsp.buf.format()
-    end, { desc = 'LSP: Format current buffer' })
+    end, { desc = "LSP: Format current buffer" })
 end
 
 local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")

@@ -41,45 +41,45 @@ vim.cmd("command Q qa!")
 local status_ok, telescope = pcall(require, "telescope")
 if not status_ok then return end
 
-local themes = require('telescope.themes')
+local themes = require("telescope.themes")
 local builtin = require("telescope.builtin")
 
-U.keymap('n', '<C-p>', function()
+U.keymap("n", "<C-p>", function()
         builtin.find_files(themes.get_dropdown { previewer = false, })
     end,
-    { desc = '[F]ind [F]ile (git)' })
+    { desc = "[F]ind [F]ile (git)" })
 
-U.keymap('n', '<leader>ff', function()
+U.keymap("n", "<leader>ff", function()
         builtin.find_files()
     end,
-    { desc = '[F]ind [F]iles' })
+    { desc = "[F]ind [F]iles" })
 
-U.keymap('n', '<leader>fF', function()
+U.keymap("n", "<leader>fF", function()
         builtin.find_files({ hidden = true, no_ignore = true })
     end,
-    { desc = '[F]ind [F]iles (include hidden)' })
+    { desc = "[F]ind [F]iles (include hidden)" })
 
-U.keymap("n", "<leader>fg", builtin.live_grep, { desc = '[F]ind [G]rep' })
+U.keymap("n", "<leader>fg", builtin.live_grep, { desc = "[F]ind [G]rep" })
 U.keymap("n", "<leader>fG", function()
         require("telescope.builtin").live_grep {
             additional_args = function(args) return vim.list_extend(args, { "--hidden", "--no-ignore" }) end,
         }
     end,
-    { desc = '[F]ind [G]rep (include hidden)' })
+    { desc = "[F]ind [G]rep (include hidden)" })
 
-U.keymap('n', '<leader>fo', builtin.oldfiles, { desc = '[F]ind history' })
-U.keymap('n', '<leader>fh', builtin.oldfiles, { desc = '[F]ind history' })
-U.keymap('n', '<leader>fb', builtin.buffers, { desc = '[F]ind existing [B]uffers' })
-U.keymap('n', '<leader>fc', builtin.grep_string, { desc = '[F]ind word at [c]ursor' })
-U.keymap('n', '<leader>fC', builtin.commands, { desc = '[F]ind [C]ommands' })
-U.keymap('n', '<leader>fk', builtin.keymaps, { desc = '[F]ind [K]eymaps' })
+U.keymap("n", "<leader>fo", builtin.oldfiles, { desc = "[F]ind history" })
+U.keymap("n", "<leader>fh", builtin.oldfiles, { desc = "[F]ind history" })
+U.keymap("n", "<leader>fb", builtin.buffers, { desc = "[F]ind existing [B]uffers" })
+U.keymap("n", "<leader>fc", builtin.grep_string, { desc = "[F]ind word at [c]ursor" })
+U.keymap("n", "<leader>fC", builtin.commands, { desc = "[F]ind [C]ommands" })
+U.keymap("n", "<leader>fk", builtin.keymaps, { desc = "[F]ind [K]eymaps" })
 
-U.keymap('n', '<leader>/', function()
+U.keymap("n", "<leader>/", function()
     builtin.current_buffer_fuzzy_find(themes.get_dropdown {
         winblend = 10,
         previewer = false,
     })
-end, { desc = '[/] Fuzzily search in current buffer' })
+end, { desc = "[/] Fuzzily search in current buffer" })
 
 --------------------------------------------------------------------------------
 -- Split management
@@ -90,10 +90,11 @@ if not status_ok then return end
 U.keymap("n", "|", "<cmd>vsplit<cr>", { desc = "Vertical Split" })
 U.keymap("n", "\\", "<cmd>split<cr>", { desc = "Horizontal Split" })
 
-U.keymap("n", "<C-h>", function() smart_splits.move_cursor_left() end, { desc = "Move to left split" })
-U.keymap("n", "<C-j>", function() smart_splits.move_cursor_down() end, { desc = "Move to below split" })
-U.keymap("n", "<C-k>", function() smart_splits.move_cursor_up() end, { desc = "Move to above split" })
-U.keymap("n", "<C-l>", function() smart_splits.move_cursor_right() end, { desc = "Move to right split" })
+-- One line above to give harpoon the middle row
+U.keymap("n", "<C-y>", function() smart_splits.move_cursor_left() end, { desc = "Move to left split" })
+U.keymap("n", "<C-u>", function() smart_splits.move_cursor_down() end, { desc = "Move to below split" })
+U.keymap("n", "<C-i>", function() smart_splits.move_cursor_up() end, { desc = "Move to above split" })
+U.keymap("n", "<C-o>", function() smart_splits.move_cursor_right() end, { desc = "Move to right split" })
 U.keymap("n", "<C-Up>", function() smart_splits.resize_up() end, { desc = "Resize split up" })
 U.keymap("n", "<C-Down>", function() smart_splits.resize_down() end, { desc = "Resize split down" })
 U.keymap("n", "<C-Left>", function() smart_splits.resize_left() end, { desc = "Resize split left" })
@@ -122,8 +123,8 @@ U.keymap("n", "<C-Right>", function() smart_splits.resize_right() end, { desc = 
 U.keymap("n", "<leader>n", "<cmd>enew<cr>", { desc = "[N]ew file" })
 
 -- Location list movement
-U.keymap("n", "<leader>k", "<cmd>lnext<CR>zz", { desc = "Next Location" })
-U.keymap("n", "<leader>j", "<cmd>lprev<CR>zz", { desc = "Prev Location" })
+-- U.keymap("n", "<leader>k", "<cmd>lnext<CR>zz", { desc = "Next Location" })
+-- U.keymap("n", "<leader>j", "<cmd>lprev<CR>zz", { desc = "Prev Location" })
 
 -- Quickfix movement
 U.keymap("n", "<c-v>", "<cmd>cnext<cr>zz", { desc = "Next Quickfix" })

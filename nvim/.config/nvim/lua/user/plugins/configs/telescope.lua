@@ -4,7 +4,7 @@ if not status_ok then return end
 local status_ok, trouble_telescope = pcall(require, "trouble.providers.telescope")
 if not status_ok then return end
 
-local themes = require('telescope.themes')
+local themes = require("telescope.themes")
 local builtin = require("telescope.builtin")
 local actions = require("telescope.actions")
 
