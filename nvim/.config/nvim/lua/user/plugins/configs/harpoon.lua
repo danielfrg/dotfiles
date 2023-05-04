@@ -15,3 +15,7 @@ U.keymap("n", "<C-h>", function() ui.nav_file(1) end, { desc = "Harpoon: Nav to 
 U.keymap("n", "<C-j>", function() ui.nav_file(2) end, { desc = "Harpoon: Nav to 2" })
 U.keymap("n", "<C-k>", function() ui.nav_file(3) end, { desc = "Harpoon: Nav to 3" })
 U.keymap("n", "<C-l>", function() ui.nav_file(4) end, { desc = "Harpoon: Nav to 4" })
+U.keymap("i", "<C-h>", function() ui.nav_file(1) end, { desc = "Harpoon: Nav to 1" })
+U.keymap("i", "<C-j>", function() ui.nav_file(2) end, { desc = "Harpoon: Nav to 2" })
+U.keymap("i", "<C-k>", function() ui.nav_file(3) end, { desc = "Harpoon: Nav to 3" })
+U.keymap("i", "<C-l>", function() ui.nav_file(4) end, { desc = "Harpoon: Nav to 4" })
