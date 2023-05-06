@@ -323,4 +323,3 @@ docker-prune() { docker system prune -f }
 docker-clean() { docker-stop-all; docker-prune; }
 docker-rmi-prefix () { docker rmi -f $(docker images --filter=reference='prefix*' --format '{{.Repository}}:{{.Tag}}') }
 docker-rmi-all () { docker rmi -f $(docker images --format '{{.ID}}') }
-
