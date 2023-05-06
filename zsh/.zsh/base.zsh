@@ -123,7 +123,7 @@ project_switcher() {
   cd $selected
 }
 
- zle -N project_switcher{,}
+zle -N project_switcher{,}
 bindkey ^f project_switcher
 bindkey -s ^t "tmux-sessionizer\n"
 
