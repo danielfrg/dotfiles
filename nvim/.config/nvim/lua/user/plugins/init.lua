@@ -36,6 +36,7 @@ local plugins = {
     "ggandor/leap.nvim",
 
     -- CODE
+    "kylechui/nvim-surround",
     -- Autopairs, integrates with both cmp and treesitter
     "windwp/nvim-autopairs",
     -- Comment
@@ -159,6 +160,7 @@ require("user.plugins.configs.leap")
 require("user.plugins.configs.lsp")
 require("user.plugins.configs.lualine")
 require("user.plugins.configs.nvim-tree")
+require("user.plugins.configs.nvim-surround")
 -- require("user.plugins.configs.neotree")
 require("user.plugins.configs.null-ls")
 require("user.plugins.configs.telescope")
