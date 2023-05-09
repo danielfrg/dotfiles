@@ -5,3 +5,8 @@
   user:
     name: "{{ setup_user }}"
     shell: /usr/bin/zsh
+
+- name: Change shell to zsh
+  become: true
+  ansible.builtin.command: |
+    chsh -s /usr/bin/zsh {{ setup_user }}
