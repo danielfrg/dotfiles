@@ -9,6 +9,13 @@
     "profiles": [
         {
             "complex_modifications": {
+                "parameters": {
+                    "basic.simultaneous_threshold_milliseconds": 50,
+                    "basic.to_delayed_action_delay_milliseconds": 500,
+                    "basic.to_if_alone_timeout_milliseconds": 1000,
+                    "basic.to_if_held_down_threshold_milliseconds": 500,
+                    "mouse_motion_to_scroll.speed": 100
+                },
                 "rules": [
                     {
                         "manipulators": [
@@ -236,7 +243,7 @@
                     },
                     "to": [
                         {
-                            "consumer_key_code": "display_brightness_decrement"
+                            "key_code": "f1"
                         }
                     ]
                 },
@@ -246,7 +253,7 @@
                     },
                     "to": [
                         {
-                            "consumer_key_code": "display_brightness_increment"
+                            "key_code": "f2"
                         }
                     ]
                 },
@@ -256,7 +263,7 @@
                     },
                     "to": [
                         {
-                            "apple_vendor_keyboard_key_code": "mission_control"
+                            "key_code": "f3"
                         }
                     ]
                 },
@@ -266,7 +273,7 @@
                     },
                     "to": [
                         {
-                            "apple_vendor_keyboard_key_code": "spotlight"
+                            "key_code": "f4"
                         }
                     ]
                 },
@@ -276,7 +283,7 @@
                     },
                     "to": [
                         {
-                            "consumer_key_code": "dictation"
+                            "key_code": "f5"
                         }
                     ]
                 },
@@ -296,7 +303,7 @@
                     },
                     "to": [
                         {
-                            "consumer_key_code": "rewind"
+                            "key_code": "f7"
                         }
                     ]
                 },
@@ -306,7 +313,7 @@
                     },
                     "to": [
                         {
-                            "consumer_key_code": "play_or_pause"
+                            "key_code": "f8"
                         }
                     ]
                 },
@@ -316,7 +323,7 @@
                     },
                     "to": [
                         {
-                            "consumer_key_code": "fast_forward"
+                            "key_code": "f9"
                         }
                     ]
                 },
@@ -326,7 +333,7 @@
                     },
                     "to": [
                         {
-                            "consumer_key_code": "mute"
+                            "key_code": "f10"
                         }
                     ]
                 },
@@ -336,7 +343,7 @@
                     },
                     "to": [
                         {
-                            "consumer_key_code": "volume_decrement"
+                            "key_code": "f11"
                         }
                     ]
                 },
@@ -346,7 +353,7 @@
                     },
                     "to": [
                         {
-                            "consumer_key_code": "volume_increment"
+                            "key_code": "f12"
                         }
                     ]
                 }
