@@ -1,14 +1,14 @@
 # tabc <profile name> do the profile change
 function tabc() {
-  NAME=$1; if [ -z "$NAME" ]; then NAME="Default"; fi
+  NAME=$1; if [ -z "$NAME" ]; then NAME="Terminal"; fi
   # if you have trouble with this, change
-  # "Default" to the name of your default theme
+  # "Terminal" to the name of your default theme
   echo -e "\033]50;SetProfile=$NAME\a"
 }
 
-# reset the terminal profile to Default  when exit from the ssh session
+# reset the terminal profile to Terminal  when exit from the ssh session
 function tab-reset() {
-    NAME="Default"
+    NAME="Terminal"
     echo -e "\033]50;SetProfile=$NAME\a"
 }
 
