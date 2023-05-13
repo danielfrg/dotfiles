@@ -126,7 +126,8 @@ local plugins = {
         config = function()
             vim.fn["mkdp#util#install"]()
         end
-    }
+    },
+    'ThePrimeagen/vim-be-good',
 }
 
 local opts = {
