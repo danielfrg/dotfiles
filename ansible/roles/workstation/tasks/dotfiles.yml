@@ -1,11 +1,10 @@
 ---
-
 - name: Ensure ~/code directory exists
   file:
     dest: "{{ ansible_env.HOME }}/code"
     state: directory
 
-- name: Clone repo
+- name: Clone dotfiles repo
   ansible.builtin.git:
     repo: git@github.com:danielfrg/dotfiles.git
     dest: "{{ ansible_env.HOME }}/code/dotfiles"

@@ -1,5 +1,4 @@
 ---
-
 - name: Install deps (apt-update)
   become: true
   ansible.builtin.apt:
@@ -36,3 +35,5 @@
     name:
       - starship
     channel: latest/edge
+
+- ansible.builtin.include_tasks: atuin.yml

@@ -1,0 +1,23 @@
+---
+- name: Check for autin
+  shell: command -v atuin >/dev/null 2>&1
+  register: installed
+  ignore_errors: true
+
+- name: Download atuin installer
+  get_url:
+    url: https://setup.atuin.sh
+    dest: /tmp/atuin-installer.sh
+    mode: "u+rwx"
+  when: installed.rc != 0
+  register: download
+
+- name: Install atuin
+  shell: /tmp/atuin-installer.sh
+  when: download.changed
+  become: true
+
+- name: Remove the atuin-installer.sh
+  file:
+    path: /tmp/atuin-installer.sh
+    state: absent

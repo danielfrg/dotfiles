@@ -1,5 +1,4 @@
 ---
-
 - ansible.builtin.include_tasks: packages.yml
   tags:
     - always

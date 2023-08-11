@@ -110,7 +110,7 @@ local plugins = {
     "lewis6991/gitsigns.nvim",
 
     -- THEMES
-    { "catppuccin/nvim",      name = "catppuccin", dependencies = "nvim-lualine/lualine.nvim" },
+    { "catppuccin/nvim",                 name = "catppuccin", dependencies = "nvim-lualine/lualine.nvim" },
     { "folke/tokyonight.nvim" },
     { "rebelot/kanagawa.nvim" },
     -- { "projekt0n/github-nvim-theme",     tag = "v0.0.7" },
@@ -148,6 +148,7 @@ require("user.plugins.configs.colorscheme")
 require("user.plugins.configs.alpha")
 require("user.plugins.configs.autocmd")
 require("user.plugins.configs.autopairs")
+require("user.plugins.configs.autotag")
 -- require("user.plugins.configs.bufferline")  -- Just using status line
 require("user.plugins.configs.cmp")
 require("user.plugins.configs.comment")
