@@ -1,4 +1,7 @@
+vim.opt.colorcolumn = ""
+
 local keymap = vim.api.nvim_set_keymap
+
 local function notify(cmd)
     return string.format("<cmd>call VSCodeNotify('%s')<CR>", cmd)
 end
@@ -65,4 +68,3 @@ keymap('n', '<leader>e', notify 'workbench.action.toggleSidebarVisibility', opts
 
 -- Leap
 keymap('n', 's', notify 'leap.find', opts)
-

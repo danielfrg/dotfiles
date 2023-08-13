@@ -12,13 +12,13 @@ dashboard.section.header.val = {
     [[       ╚═════╝  ╚═════╝  ╚═════╝  ╚═════╝ ╚══════╝╚══════╝ ]],
 }
 dashboard.section.buttons.val = {
-    dashboard.button("f", "  Find file",
+    dashboard.button("f", "  Find file",
         ":lua require'telescope.builtin'.git_files(require('telescope.themes').get_dropdown({ previewer = false })) <CR>"),
     dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
-    dashboard.button("r", "  Recently used files", ":Telescope oldfiles <CR>"),
-    dashboard.button("t", "  Find text", ":Telescope live_grep <CR>"),
+    dashboard.button("r", "󰙰  Recently used files", ":Telescope oldfiles <CR>"),
+    dashboard.button("t", "  Find text", ":Telescope live_grep <CR>"),
     -- dashboard.button("c", "  Configuration", ":e ~/.config/nvim/init.lua <CR>"),
-    dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
+    dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
 }
 
 local function footer()
@@ -33,4 +33,3 @@ dashboard.section.buttons.opts.hl = "Keyword"
 
 dashboard.opts.opts.noautocmd = true
 alpha.setup(dashboard.opts)
-
