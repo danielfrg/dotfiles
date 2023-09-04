@@ -3,6 +3,14 @@ local plugins = {
     "williamboman/mason.nvim",
     opts = {
       ensure_installed = {
+        -- Python
+        "black",
+        "mypy",
+        "pyright",
+        "python-lsp-server",
+        "ruff",
+        "ruff-lsp",
+        -- Javascript
         "eslint-lsp",
         "prettier",
         "typescript-language-server"
@@ -28,6 +36,13 @@ local plugins = {
     event = "VeryLazy",
     opts = function()
       return require "custom.configs.formatter"
+    end
+  },
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    ft = { "python" },
+    opts = function()
+      return require "custom.configs.null-ls"
     end
   }
 }
