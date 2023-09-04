@@ -5,7 +5,6 @@ env:
   dir: nvim
 
 tasks:
-
   ansible:
     cmds:
       - task: ansible:laptop
@@ -37,10 +36,11 @@ tasks:
   link:
     cmds:
       - stow -t $HOME base
-      - stow -t $HOME zsh
-      - stow -t $HOME python
-      - stow -t $HOME nvim
       - stow -t $HOME bin
+      - stow -t $HOME js
+      - stow -t $HOME nvim
+      - stow -t $HOME python
+      - stow -t $HOME zsh
 
   unstow:
     cmds:
