@@ -6,10 +6,7 @@
 /python/.ipython/profile_default/*
 !/python/.ipython/profile_default/ipython_config.py
 
-/nvim/.config/nvim/plugin
-
 /python/.jupyter/lab/
 /python/.jupyter/serverconfig/
 /python/.jupyter/migrated
 
-/nvim/.config/nvim/.git
