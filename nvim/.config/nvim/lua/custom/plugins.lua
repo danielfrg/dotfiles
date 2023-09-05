@@ -13,7 +13,9 @@ local plugins = {
         -- Javascript
         "eslint-lsp",
         "prettier",
-        "typescript-language-server"
+        "typescript-language-server",
+        -- Go
+        "gopls"
       }
     }
   },
@@ -40,11 +42,22 @@ local plugins = {
   },
   {
     "jose-elias-alvarez/null-ls.nvim",
-    ft = { "python" },
+    ft = { "python", "go" },
     opts = function()
       return require "custom.configs.null-ls"
     end
-  }
+  },
+  {
+    "olexsmir/gopher.nvim",
+    ft = { "go" },
+    config = function(_, opts)
+      require("gopher").setup(opts)
+      require("core.utils").load_mappings("gopher")
+    end,
+    build = function()
+      vim.cmd [[silent! GoInstallDeps]]
+    end,
+  },
 }
 
 return plugins

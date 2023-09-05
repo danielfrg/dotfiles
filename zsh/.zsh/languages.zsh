@@ -86,13 +86,8 @@ goinstalltools() {
     # local old_go_path=$GOPATH
     # export GOPATH=$tools_dir
     go get -v -u golang.org/x/lint/golint
-    go get -v -u github.com/derekparker/delve/cmd/dlv
-    go get -v -u github.com/uudashr/gopkgs/cmd/gopkgs
-    go get -v -u github.com/nsf/gocode
-    go get -v -u github.com/rogpeppe/godef
-    go get -v -u golang.org/x/tools/cmd/goimports
-    go get -v -u github.com/ramya-rao-a/go-outline
-    go get -u -v github.com/mdempsky/gocode
+    go install -v github.com/incu6us/goimports-reviser/v3@latest
+    go install github.com/segmentio/golines@latest
     # export PATH=$old_path
     # export GOPATH=$old_go_path
 }
