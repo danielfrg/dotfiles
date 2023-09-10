@@ -1,5 +1,6 @@
 local M = {}
 
+
 M.abc = {
     n = {
         ["<C-s>"] = { "<cmd>w!<cr><esc>", "Save file" },
@@ -16,6 +17,11 @@ M.abc = {
         ["<leader>`"] = { "<cmd>e #<cr>", "Switch to Last Buffer" },
         ["<S-x>"] = { ":e #<CR>", "Switch to Last Buffer" },
         ["<leader>c"] = { "<cmd>Bdelete<cr>", "Close buffer" },
+        -- Tmux navigation
+        ["<C-h>"] = { "<cmd> TmuxNavigateLeft<CR>", "window left" },
+        ["<C-l>"] = { "<cmd> TmuxNavigateRight<CR>", "window right" },
+        ["<C-j>"] = { "<cmd> TmuxNavigateDown<CR>", "window down" },
+        ["<C-k>"] = { "<cmd> TmuxNavigateUp<CR>", "window up" },
     },
     i = {
         ["<Esc>"] = { "<Esc>l" },

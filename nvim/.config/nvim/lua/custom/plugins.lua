@@ -98,6 +98,10 @@ local plugins = {
         "Toggle Flash Search"
       },
     },
+  },
+  {
+    "christoomey/vim-tmux-navigator",
+    lazy = false
   }
 }
 

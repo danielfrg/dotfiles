@@ -1,14 +1,21 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
-format = """$all$my_python$my_py_venv$my_rbenv_gemset"""
+format = """
+$all\
+$my_python$my_py_venv$my_rbenv_gemset
+"""
+
+right_format = """$time"""
 
 # Inserts a blank line between shell prompts
 add_newline = true
 command_timeout = 150
 
 # Replace the "❯" symbol in the prompt with "➜"
-[character] # The name of the module we are configuring is "character"
-success_symbol = "[➜](bold green)" # The "success_symbol" segment is being set to "➜" with the color "bold green"
+# The name of the module we are configuring is "character"
+[character]
+# The "success_symbol" segment is being set to "➜" with the color "bold green"
+success_symbol = "[➜](bold green)"
 
 [custom.my_python]
 disabled = false
@@ -30,7 +37,6 @@ command = 'cat .rbenv-gemsets'
 detect_files = ['.rbenv-gemsets']
 symbol = '🔺 '
 style = 'bold red'
-
 
 [username]
 disabled = false
@@ -243,8 +249,10 @@ format = '\[[$symbol$workspace]($style)\]'
 disabled = true
 
 [time]
-format = '\[[$time]($style)\]'
-disabled = true
+# format = '\[[$time]($style)\]'
+format = '[$time]($style)'
+style = 'dimmed yellow'
+disabled = false
 
 [vagrant]
 format = '\[[$symbol($version)]($style)\]'
