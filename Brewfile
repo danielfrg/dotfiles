@@ -63,7 +63,7 @@ brew 'node'
 brew 'yarn'
 
 # Go
-# brew 'go'
+brew 'go'
 
 # Ruby
 brew 'ruby'
@@ -90,9 +90,10 @@ brew 'ansible'
 
 # cask 'chromedriver'
 cask 'alacritty'
+cask 'brave-browser'
 cask 'cleanshot'
 cask 'discord'
-cask 'elgato-stream-deck'
+# cask 'elgato-stream-deck'
 cask 'firefox'
 cask 'font-hack-nerd-font'
 cask 'google-chrome'
@@ -113,7 +114,5 @@ cask 'vlc'
 # Development
 # cask 'docker'
 # cask 'gpg-suite'
-cask 'iterm2'
 cask 'rapidapi'
-cask 'postman'
 cask 'visual-studio-code'

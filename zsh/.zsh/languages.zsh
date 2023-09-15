@@ -74,6 +74,9 @@ export VOLTA_FEATURE_PNPM=1
 
 alias npmreset="rm -rf node_modules"
 
+alias npm_="/Users/danielfrg/.volta/bin/npm"
+alias npm=pnpm
+
 # GO ---------------------------------------------------------------------------
 
 export GOPATH=~/go
