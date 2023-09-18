@@ -124,8 +124,9 @@ project_switcher() {
 }
 
 zle -N project_switcher{,}
-bindkey ^f project_switcher
-bindkey -s ^t "tmux-sessionizer\n"
+bindkey -s ^f "tmux-sessionizer\n"
+
+# bindkey -s ^t "tmux-sessionizer\n"
 
 alias ..="cd .."
 alias ...="cd ../.."
