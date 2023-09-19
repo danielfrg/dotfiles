@@ -1,5 +1,4 @@
 ---
-
 - name: Ensure ~/.tmux/plugins directory exists
   file:
     dest: "{{ ansible_env.HOME }}/.config/tmux"
