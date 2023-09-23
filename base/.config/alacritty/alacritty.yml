@@ -95,6 +95,11 @@ mouse_bindings:
   - { mouse: Middle, action: PasteSelection }
 
 key_bindings:
+  # Move between words
+  - { key: Right, mods: Alt, chars: "\x1BF" }
+  - { key: Left, mods: Alt, chars: "\x1BB" }
+  # Support for Alt+key (option as meta)
+  # https://github.com/alacritty/alacritty/issues/62#issuecomment-347552058
   - { key: A, mods: Alt, chars: "\x1ba" }
   - { key: B, mods: Alt, chars: "\x1bb" }
   - { key: C, mods: Alt, chars: "\x1bc" }

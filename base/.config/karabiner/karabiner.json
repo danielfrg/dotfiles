@@ -20,7 +20,7 @@
           {
             "manipulators": [
               {
-                "description": "CapsLock to Hyper / Escape.",
+                "description": "CapsLock to Hyper / Escape",
                 "from": {
                   "key_code": "caps_lock"
                 },
