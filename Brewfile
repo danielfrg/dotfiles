@@ -92,6 +92,7 @@ brew 'ansible'
 
 # cask 'chromedriver'
 cask 'alacritty'
+cask 'bartender'
 cask 'brave-browser'
 cask 'cleanshot'
 cask 'discord'
