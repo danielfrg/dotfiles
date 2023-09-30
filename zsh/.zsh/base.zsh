@@ -290,6 +290,13 @@ function clipvideo() {
 # Kubernetes -------------------------------------------------------------------
 
 alias k='kubectl'
+alias kgp="kubectl get pod"
+k_delete_deployment_pods() {
+  if [ -n "$1" ]
+  then
+    kubectl delete pod $(kubectl get pods -l app=$1 -o jsonpath="{.items[*].metadata.name}")
+  fi
+}
 alias kubecl='kubectl'
 alias kubect='kubectl'
 alias kubelt='kubectl'

@@ -95,6 +95,8 @@ mouse_bindings:
   - { mouse: Middle, action: PasteSelection }
 
 key_bindings:
+  - { key: Space, mods: Shift|Control, action: "ToggleViMode" }
+  - { key: F, mods: Command, action: "SearchBackward" }
   # Move between words
   - { key: Right, mods: Alt, chars: "\x1BF" }
   - { key: Left, mods: Alt, chars: "\x1BB" }
