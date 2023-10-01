@@ -62,11 +62,13 @@
 
 [alias]
 	# View the current working tree status using the short format
+	c = commit
+	cm = commit
+	s = status -sb
 	st = status -sb
-	ci = commit
-	runci = commit --allow-empty -nm 'emity commit to run ci'
 	co = checkout
 	br = branch
+	runci = commit --allow-empty -nm 'Empty commit to run ci'
 
 	uncommit = reset HEAD^
 
