@@ -146,24 +146,6 @@ alias gti='git'
 alias tit='git'
 alias sl='ls'
 
-# Git
-alias ga='git add'
-alias gp='git push'
-alias gl='git log'
-alias gs='git status'
-alias gd='git diff'
-alias gm='git commit -m'
-alias gma='git commit -am'
-alias gb='git branch'
-alias gc='git checkout'
-alias gra='git remote add'
-alias grr='git remote rm'
-alias gpu='git pull'
-alias gcl='git clone'
-alias gitwip='git commit -am "wip"'
-alias gw='git commit -am "wip"'
-alias gu='git commit -am "update"'
-
 # untar
 alias untar='tar xvf'
 
@@ -187,7 +169,6 @@ alias vi="nvim"
 alias vim="nvim"
 alias "vim ."="nvim"
 alias c="nvim"
-
 alias vimdiff="nvim -d"
 
 # Fancy replacements for common commands
@@ -291,12 +272,6 @@ function clipvideo() {
 
 alias k='kubectl'
 alias kgp="kubectl get pod"
-k_delete_deployment_pods() {
-  if [ -n "$1" ]
-  then
-    kubectl delete pod $(kubectl get pods -l app=$1 -o jsonpath="{.items[*].metadata.name}")
-  fi
-}
 alias kubecl='kubectl'
 alias kubect='kubectl'
 alias kubelt='kubectl'
@@ -306,6 +281,13 @@ alias kns='kubens'
 alias kctx='kubectx'
 alias terrafrom='terraform'
 alias tf='terraform'
+
+k_delete_deployment_pods() {
+  if [ -n "$1" ]
+  then
+    kubectl delete pod $(kubectl get pods -l app=$1 -o jsonpath="{.items[*].metadata.name}")
+  fi
+}
 
 kubedecode() {
     if [ $# -ne 2 ]
