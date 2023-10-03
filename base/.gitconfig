@@ -68,8 +68,8 @@
 	st = status -sb
 	co = checkout
 	br = branch
-	cu = commit -m 'Update'
-	wip = commit -m 'WIP'
+	cu = commit -am 'Update'
+	wip = commit -am 'WIP'
 	runci = commit --allow-empty -nm 'Empty commit to run ci'
 
 	uncommit = reset HEAD^
