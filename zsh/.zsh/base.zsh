@@ -282,6 +282,13 @@ alias kctx='kubectx'
 alias terrafrom='terraform'
 alias tf='terraform'
 
+k_logs_deploy() {
+  if [ -n "$1" ]
+  then
+    kubectl logs $(kubectl get pods -l app=$1 -o jsonpath="{.items[*].metadata.name}")
+  fi
+}
+
 k_delete_deployment_pods() {
   if [ -n "$1" ]
   then
