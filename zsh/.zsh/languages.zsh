@@ -76,6 +76,15 @@ alias npmreset="rm -rf node_modules"
 
 alias npm_="/Users/danielfrg/.volta/bin/npm"
 alias npm=pnpm
+alias npx=pnpx
+
+# pnpm
+export PNPM_HOME="/Users/danielfrg/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
 
 # GO ---------------------------------------------------------------------------
 
