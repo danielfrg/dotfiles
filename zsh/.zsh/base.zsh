@@ -35,6 +35,7 @@ if [[ $(uname) == "Darwin" ]]; then
 
     # kegonly brew formulas
     export PATH="/usr/local/opt/curl/bin:$PATH"
+    export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
     # Completitions
     FPATH="/opt/homebrew/share/zsh/site-functions:${FPATH}"
@@ -85,10 +86,9 @@ fi
 alias sudo='sudo '
 
 # Files
-alias l='ls -la'
-alias ls='ls -la'
+alias l='ls'
+alias ll='ls -la'
 alias la='ls -la'
-alias lla='ls -la'
 alias lt='ls --tree'
 alias preview="fzf --preview 'bat --color \"always\" {}'"
 alias cl="clear"
@@ -175,7 +175,7 @@ alias vimdiff="nvim -d"
 # From: https://jvns.ca/blog/2022/04/12/a-list-of-new-ish--command-line-tools/
 
 if [[ $+commands[exa] -eq 1 ]]; then
-  alias ls='exa -la --icons --group-directories-first'
+  alias ls='exa --icons --group-directories-first'
   alias ls_='/bin/ls'
 fi
 
