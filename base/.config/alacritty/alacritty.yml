@@ -29,6 +29,9 @@ window:
     x: 10
     y: 10
 
+  # Spread additional padding evenly around the terminal content.
+  dynamic_padding: false
+
   # Window decorations
   # Setting this to false will result in window without borders and title bar.
   decorations: full
@@ -218,6 +221,7 @@ cursor.style: Block
 live_config_reload: true
 #
 #
+#####
 # catppuccin like theme
 # colors:
 #   # Default colors

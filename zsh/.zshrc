@@ -1,8 +1,8 @@
-# Install Zinit
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
-[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-source "${ZINIT_HOME}/zinit.zsh"
+# Install/init znap
+ZNAP_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/znap/znap.zsh"
+[[ -r $ZNAP_HOME ]] ||
+    git clone --depth 1 https://github.com/marlonrichert/zsh-snap.git $ZNAP_HOME
+source $ZNAP_HOME/znap.zsh
 
 # Source files
 for file in "${HOME}/.zsh/base.zsh" \
@@ -14,22 +14,17 @@ do
     [ -s "${file}" ] && source "${file}"
 done
 
-zinit wait lucid light-mode for \
-  atinit"zicompinit; zicdreplay" \
-      zdharma-continuum/fast-syntax-highlighting \
-  atload"_zsh_autosuggest_start" \
-      zsh-users/zsh-autosuggestions \
-  blockf atpull'zinit creinstall -q .' \
-      zsh-users/zsh-completions
+znap eval starship 'starship init zsh --print-full-init'
+znap prompt
 
-if type fzf > /dev/null; then
-    zinit ice lucid wait'0'
-    zinit light Aloxaf/fzf-tab
+znap source zsh-users/zsh-completions
+znap source zsh-users/zsh-autosuggestions
+znap source zsh-users/zsh-syntax-highlighting
+znap source ajeetdsouza/zoxide
+znap source Aloxaf/fzf-tab
 
-    if ! type atuin > /dev/null; then
-        zinit ice lucid wait'0'
-        zinit light joshskidmore/zsh-fzf-history-search
-    fi
+if ! type atuin > /dev/null; then
+    znap source joshskidmore/zsh-fzf-history-search
 fi
 
 # ---------------------------------

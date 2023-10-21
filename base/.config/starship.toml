@@ -51,6 +51,8 @@ disabled = false
 [aws]
 format = '\[[$symbol($profile)(\($region\))(\[$duration\])]($style)\]'
 disabled = true
+symbol = "  "
+
 
 [bun]
 format = '\[[$symbol($version)]($style)\]'
@@ -75,6 +77,7 @@ disabled = true
 [conda]
 format = '\[[$symbol$environment]($style)\]'
 disabled = true
+symbol = " "
 
 [crystal]
 format = '\[[$symbol($version)]($style)\]'
@@ -115,9 +118,11 @@ disabled = true
 [gcloud]
 format = '\[[$symbol$account(@$domain)(\($region\))]($style)\]'
 disabled = true
+symbol = "  "
 
 [git_branch]
 format = 'on [git:$branch](bold blue)'
+symbol = " "
 # format = '\[[$symbol$branch]($style)\]'
 # disabled = true
 
@@ -180,6 +185,7 @@ disabled = true
 [nodejs]
 format = '\[[$symbol($version)]($style)\]'
 disabled = true
+symbol = " "
 
 [ocaml]
 format = '\[[$symbol($version)(\($switch_indicator$switch_name\))]($style)\]'
@@ -212,6 +218,7 @@ disabled = true
 [python]
 format = '\[[${symbol}${pyenv_prefix}(${version})(\($virtualenv\))]($style)\]'
 disabled = true
+symbol = " "
 
 [raku]
 format = '\[[$symbol($version-$vm_version)]($style)\]'

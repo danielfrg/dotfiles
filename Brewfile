@@ -54,6 +54,7 @@ brew 'watch'
 brew 'wget'
 brew 'zsh'
 brew 'youtube-dl'
+brew 'zoxide'
 
 # Python
 brew 'pyenv'

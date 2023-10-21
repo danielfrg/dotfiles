@@ -61,6 +61,9 @@ export PATH=$HOME/.cargo/bin:$PATH
 # Prompt
 eval "$(starship init zsh)"
 
+# Zoxide
+# eval "$(zoxide init zsh)"
+
 # History base
 export HISTSIZE=1000000000
 export HISTFILESIZE=1000000000
@@ -71,9 +74,7 @@ setopt EXTENDED_HISTORY
 setopt HIST_FIND_NO_DUPS
 
 # History Atuin
-
 local FOUND_ATUIN=$+commands[atuin]
-
 if [[ $FOUND_ATUIN -eq 1 ]]; then
   source <(atuin init zsh --disable-up-arrow)
 fi
@@ -84,6 +85,8 @@ fi
 
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
+
+alias cd='z'
 
 # Files
 alias l='ls'
