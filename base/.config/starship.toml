@@ -1,8 +1,19 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-$all\
-$my_python$my_py_venv$my_rbenv_gemset
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$cmd_duration\
+${custom.python_version}\
+${custom.py_venv}\
+${custom.rbenv_gemset}\
+$kubernetes\
+$line_break\
+$character
 """
 
 right_format = """$time"""
@@ -11,48 +22,85 @@ right_format = """$time"""
 add_newline = true
 command_timeout = 150
 
-# Replace the "❯" symbol in the prompt with "➜"
-# The name of the module we are configuring is "character"
 [character]
-# The "success_symbol" segment is being set to "➜" with the color "bold green"
-success_symbol = "[➜](bold green)"
-
-[custom.my_python]
-disabled = false
-command = 'cat .python-version'
-detect_files = ['.python-version']
-symbol = " 🐍 "
-style = 'bold green'
-
-[custom.my_py_venv]
-disabled = false
-command = "echo $VIRTUAL_ENV | awk -F/ '{ print $NF }'"
-when = ''' test "$VIRTUAL_ENV" '''
-format = '\[[$output]($style)\]'
-style = 'bold green'
-
-[custom.my_rbenv_gemset]
-disabled = false
-command = 'cat .rbenv-gemsets'
-detect_files = ['.rbenv-gemsets']
-symbol = '🔺 '
-style = 'bold red'
+# success_symbol = "[➜](bold green)"
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](red)"
+vimcmd_symbol = "[❮](green)"
 
 [username]
-disabled = false
+style_user = 'yellow'
 show_always = true
 
 [hostname]
 ssh_only = true
 format = '[$ssh_symbol](bold blue) on [$hostname](bold red) '
 trim_at = '.companyname.com'
-disabled = false
+
+[directory]
+style = "blue"
+
+[git_branch]
+format = "[$branch]($style)"
+style = "white"
+
+[git_status]
+style = "white"
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+style = "bright-black"
+
+[cmd_duration]
+format = '\[[⏱ $duration]($style)\]'
+style = "yellow"
+
+[time]
+# format = '\[[$time]($style)\]'
+format = '[$time]($style)'
+style = 'dimmed yellow'
+
+[python]
+format = "[$virtualenv]($style) "
+style = "bright-black"
+
+[golang]
+format = '\[[$symbol($version)]($style)\]'
+
+[kubernetes]
+format = '\[[$symbol$context( \($namespace\))]($style)\]'
+
+[nodejs]
+format = '\[[$symbol($version)]($style)\]'
+symbol = " "
+
+[custom.foo]
+command = 'echo foo'
+
+[custom.python_version]
+command = 'cat .python-version'
+detect_files = ['.python-version']
+symbol = "  "
+style = 'bold green'
+
+[custom.py_venv]
+command = "echo $VIRTUAL_ENV | awk -F/ '{ print $NF }'"
+when = ''' test "$VIRTUAL_ENV" '''
+format = '\[[$output]($style)\]'
+style = 'bold green'
+
+[custom.rbenv_gemset]
+command = 'cat .rbenv-gemsets'
+detect_files = ['.rbenv-gemsets']
+symbol = '🔺 '
+style = 'bold red'
+
+#####
 
 [aws]
 format = '\[[$symbol($profile)(\($region\))(\[$duration\])]($style)\]'
 disabled = true
 symbol = "  "
-
 
 [bun]
 format = '\[[$symbol($version)]($style)\]'
@@ -64,10 +112,6 @@ disabled = true
 
 [cmake]
 format = '\[[$symbol($version)]($style)\]'
-disabled = true
-
-[cmd_duration]
-format = '\[[⏱ $duration]($style)\]'
 disabled = true
 
 [cobol]
@@ -120,21 +164,6 @@ format = '\[[$symbol$account(@$domain)(\($region\))]($style)\]'
 disabled = true
 symbol = "  "
 
-[git_branch]
-format = 'on [git:$branch](bold blue)'
-symbol = " "
-# format = '\[[$symbol$branch]($style)\]'
-# disabled = true
-
-[git_status]
-format = '([\[$all_status$ahead_behind\]]($style))'
-style = "blue bold"
-# disabled = true
-
-[golang]
-format = '\[[$symbol($version)]($style)\]'
-disabled = true
-
 [haskell]
 format = '\[[$symbol($version)]($style)\]'
 disabled = true
@@ -159,9 +188,6 @@ disabled = true
 format = '\[[$symbol($version)]($style)\]'
 disabled = true
 
-[kubernetes]
-format = '\[[$symbol$context( \($namespace\))]($style)\]'
-
 [lua]
 format = '\[[$symbol($version)]($style)\]'
 disabled = true
@@ -181,11 +207,6 @@ disabled = true
 [nix_shell]
 format = '\[[$symbol$state( \($name\))]($style)\]'
 disabled = true
-
-[nodejs]
-format = '\[[$symbol($version)]($style)\]'
-disabled = true
-symbol = " "
 
 [ocaml]
 format = '\[[$symbol($version)(\($switch_indicator$switch_name\))]($style)\]'
@@ -214,11 +235,6 @@ disabled = true
 [purescript]
 format = '\[[$symbol($version)]($style)\]'
 disabled = true
-
-[python]
-format = '\[[${symbol}${pyenv_prefix}(${version})(\($virtualenv\))]($style)\]'
-disabled = true
-symbol = " "
 
 [raku]
 format = '\[[$symbol($version-$vm_version)]($style)\]'
@@ -252,14 +268,7 @@ format = '\[[$symbol($version)]($style)\]'
 disabled = true
 
 [terraform]
-format = '\[[$symbol$workspace]($style)\]'
 disabled = true
-
-[time]
-# format = '\[[$time]($style)\]'
-format = '[$time]($style)'
-style = 'dimmed yellow'
-disabled = false
 
 [vagrant]
 format = '\[[$symbol($version)]($style)\]'
