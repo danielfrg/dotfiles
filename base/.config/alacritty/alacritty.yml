@@ -10,7 +10,7 @@ font:
     style: Regular
   bold:
     family: FiraCode Nerd Font
-    style: Bold
+    style: Regular
 
   # Point size of the font
   size: 16.0

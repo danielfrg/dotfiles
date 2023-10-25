@@ -7,7 +7,6 @@ $directory\
 $git_branch\
 $git_state\
 $git_status\
-$cmd_duration\
 ${custom.python_version}\
 ${custom.py_venv}\
 ${custom.rbenv_gemset}\
@@ -16,7 +15,7 @@ $line_break\
 $character
 """
 
-right_format = """$time"""
+right_format = """$cmd_duration$time"""
 
 # Inserts a blank line between shell prompts
 add_newline = true
@@ -51,15 +50,6 @@ style = "white"
 format = '\([$state( $progress_current/$progress_total)]($style)\) '
 style = "bright-black"
 
-[cmd_duration]
-format = '\[[⏱ $duration]($style)\]'
-style = "yellow"
-
-[time]
-# format = '\[[$time]($style)\]'
-format = '[$time]($style)'
-style = 'dimmed yellow'
-
 [python]
 format = "[$virtualenv]($style) "
 style = "bright-black"
@@ -81,26 +71,36 @@ command = 'echo foo'
 command = 'cat .python-version'
 detect_files = ['.python-version']
 symbol = "  "
-style = 'bold green'
+style = 'green'
 
 [custom.py_venv]
 command = "echo $VIRTUAL_ENV | awk -F/ '{ print $NF }'"
 when = ''' test "$VIRTUAL_ENV" '''
 format = '\[[$output]($style)\]'
-style = 'bold green'
+style = 'green'
 
 [custom.rbenv_gemset]
 command = 'cat .rbenv-gemsets'
 detect_files = ['.rbenv-gemsets']
 symbol = '🔺 '
-style = 'bold red'
+style = 'red'
+
+[cmd_duration]
+format = '[\[⏱ $duration\]]($style)'
+style = "yellow"
+
+[time]
+disabled = false
+# format = '\[[$time]($style)\]'
+format = '[$time]($style)'
+style = 'dimmed yellow'
+time_format = '%R'
 
 #####
 
 [aws]
 format = '\[[$symbol($profile)(\($region\))(\[$duration\])]($style)\]'
 disabled = true
-symbol = "  "
 
 [bun]
 format = '\[[$symbol($version)]($style)\]'
@@ -121,7 +121,6 @@ disabled = true
 [conda]
 format = '\[[$symbol$environment]($style)\]'
 disabled = true
-symbol = " "
 
 [crystal]
 format = '\[[$symbol($version)]($style)\]'
@@ -162,7 +161,6 @@ disabled = true
 [gcloud]
 format = '\[[$symbol$account(@$domain)(\($region\))]($style)\]'
 disabled = true
-symbol = "  "
 
 [haskell]
 format = '\[[$symbol($version)]($style)\]'
