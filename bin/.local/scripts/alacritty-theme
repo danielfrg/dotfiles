@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+CONFIG_PATH=~/.config/alacritty/alacritty.yml
+
+
+if [ $# -eq 1 ]
+then
+    THEME=$1
+else
+    THEME=catppuccin
+fi
+
+sed -i -e "s|themes/themes/.*|themes/themes/$THEME.yaml|" $CONFIG_PATH

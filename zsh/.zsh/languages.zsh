@@ -86,6 +86,10 @@ alias npm_="/Users/danielfrg/.volta/bin/npm"
 alias npm=pnpm
 alias npx=pnpx
 
+export DISABLE_OPENCOLLECTIVE=1
+export ADBLOCK=1
+
+
 # pnpm
 export PNPM_HOME="/Users/danielfrg/Library/pnpm"
 case ":$PATH:" in
