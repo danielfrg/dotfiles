@@ -2,7 +2,6 @@
 
 CONFIG_PATH=~/.config/alacritty/alacritty.yml
 
-
 if [ $# -eq 1 ]
 then
     THEME=$1

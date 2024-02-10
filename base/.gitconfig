@@ -147,3 +147,5 @@
 
 # [url "https://"]
 # 	insteadOf = git://
+[status]
+	submoduleSummary = true
