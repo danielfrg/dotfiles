@@ -66,87 +66,6 @@
                 "type": "basic"
               }
             ]
-          },
-          {
-            "description": "Hyper + HJKL",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "h",
-                  "modifiers": {
-                    "mandatory": [
-                      "right_command",
-                      "right_control",
-                      "right_shift",
-                      "right_option"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "left_arrow"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "from": {
-                  "key_code": "k",
-                  "modifiers": {
-                    "mandatory": [
-                      "right_command",
-                      "right_control",
-                      "right_shift",
-                      "right_option"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "up_arrow"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "from": {
-                  "key_code": "j",
-                  "modifiers": {
-                    "mandatory": [
-                      "right_command",
-                      "right_control",
-                      "right_shift",
-                      "right_option"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "down_arrow"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "from": {
-                  "key_code": "l",
-                  "modifiers": {
-                    "mandatory": [
-                      "right_command",
-                      "right_control",
-                      "right_shift",
-                      "right_option"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "right_arrow"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
           }
         ]
       },
@@ -154,7 +73,9 @@
         {
           "disable_built_in_keyboard_if_exists": false,
           "fn_function_keys": [],
+          "game_pad_swap_sticks": false,
           "identifiers": {
+            "is_game_pad": false,
             "is_keyboard": true,
             "is_pointing_device": false,
             "product_id": 866,
@@ -162,6 +83,12 @@
           },
           "ignore": false,
           "manipulate_caps_lock_led": true,
+          "mouse_flip_horizontal_wheel": false,
+          "mouse_flip_vertical_wheel": false,
+          "mouse_flip_x": false,
+          "mouse_flip_y": false,
+          "mouse_swap_wheels": false,
+          "mouse_swap_xy": false,
           "simple_modifications": [],
           "treat_as_built_in_keyboard": false
         },
@@ -269,7 +196,9 @@
               ]
             }
           ],
+          "game_pad_swap_sticks": false,
           "identifiers": {
+            "is_game_pad": false,
             "is_keyboard": true,
             "is_pointing_device": false,
             "product_id": 834,
@@ -277,13 +206,21 @@
           },
           "ignore": false,
           "manipulate_caps_lock_led": true,
+          "mouse_flip_horizontal_wheel": false,
+          "mouse_flip_vertical_wheel": false,
+          "mouse_flip_x": false,
+          "mouse_flip_y": false,
+          "mouse_swap_wheels": false,
+          "mouse_swap_xy": false,
           "simple_modifications": [],
           "treat_as_built_in_keyboard": false
         },
         {
           "disable_built_in_keyboard_if_exists": false,
           "fn_function_keys": [],
+          "game_pad_swap_sticks": false,
           "identifiers": {
+            "is_game_pad": false,
             "is_keyboard": false,
             "is_pointing_device": true,
             "product_id": 834,
@@ -291,13 +228,21 @@
           },
           "ignore": true,
           "manipulate_caps_lock_led": false,
+          "mouse_flip_horizontal_wheel": false,
+          "mouse_flip_vertical_wheel": false,
+          "mouse_flip_x": false,
+          "mouse_flip_y": false,
+          "mouse_swap_wheels": false,
+          "mouse_swap_xy": false,
           "simple_modifications": [],
           "treat_as_built_in_keyboard": false
         },
         {
           "disable_built_in_keyboard_if_exists": false,
           "fn_function_keys": [],
+          "game_pad_swap_sticks": false,
           "identifiers": {
+            "is_game_pad": false,
             "is_keyboard": true,
             "is_pointing_device": false,
             "product_id": 591,
@@ -305,13 +250,21 @@
           },
           "ignore": false,
           "manipulate_caps_lock_led": true,
+          "mouse_flip_horizontal_wheel": false,
+          "mouse_flip_vertical_wheel": false,
+          "mouse_flip_x": false,
+          "mouse_flip_y": false,
+          "mouse_swap_wheels": false,
+          "mouse_swap_xy": false,
           "simple_modifications": [],
           "treat_as_built_in_keyboard": false
         },
         {
           "disable_built_in_keyboard_if_exists": false,
           "fn_function_keys": [],
+          "game_pad_swap_sticks": false,
           "identifiers": {
+            "is_game_pad": false,
             "is_keyboard": true,
             "is_pointing_device": true,
             "product_id": 45091,
@@ -319,6 +272,12 @@
           },
           "ignore": true,
           "manipulate_caps_lock_led": true,
+          "mouse_flip_horizontal_wheel": false,
+          "mouse_flip_vertical_wheel": false,
+          "mouse_flip_x": false,
+          "mouse_flip_y": false,
+          "mouse_swap_wheels": false,
+          "mouse_swap_xy": false,
           "simple_modifications": [],
           "treat_as_built_in_keyboard": false
         },
@@ -446,7 +405,9 @@
               ]
             }
           ],
+          "game_pad_swap_sticks": false,
           "identifiers": {
+            "is_game_pad": false,
             "is_keyboard": true,
             "is_pointing_device": true,
             "product_id": 45913,
@@ -454,13 +415,21 @@
           },
           "ignore": false,
           "manipulate_caps_lock_led": false,
+          "mouse_flip_horizontal_wheel": false,
+          "mouse_flip_vertical_wheel": false,
+          "mouse_flip_x": false,
+          "mouse_flip_y": false,
+          "mouse_swap_wheels": false,
+          "mouse_swap_xy": false,
           "simple_modifications": [],
           "treat_as_built_in_keyboard": false
         },
         {
           "disable_built_in_keyboard_if_exists": false,
           "fn_function_keys": [],
+          "game_pad_swap_sticks": false,
           "identifiers": {
+            "is_game_pad": false,
             "is_keyboard": false,
             "is_pointing_device": true,
             "product_id": 2094,
@@ -468,13 +437,21 @@
           },
           "ignore": true,
           "manipulate_caps_lock_led": false,
+          "mouse_flip_horizontal_wheel": false,
+          "mouse_flip_vertical_wheel": false,
+          "mouse_flip_x": false,
+          "mouse_flip_y": false,
+          "mouse_swap_wheels": false,
+          "mouse_swap_xy": false,
           "simple_modifications": [],
           "treat_as_built_in_keyboard": false
         },
         {
           "disable_built_in_keyboard_if_exists": false,
           "fn_function_keys": [],
+          "game_pad_swap_sticks": false,
           "identifiers": {
+            "is_game_pad": false,
             "is_keyboard": true,
             "is_pointing_device": false,
             "product_id": 49948,
@@ -482,6 +459,12 @@
           },
           "ignore": false,
           "manipulate_caps_lock_led": true,
+          "mouse_flip_horizontal_wheel": false,
+          "mouse_flip_vertical_wheel": false,
+          "mouse_flip_x": false,
+          "mouse_flip_y": false,
+          "mouse_swap_wheels": false,
+          "mouse_swap_xy": false,
           "simple_modifications": [
             {
               "from": {
@@ -504,6 +487,28 @@
               ]
             }
           ],
+          "treat_as_built_in_keyboard": false
+        },
+        {
+          "disable_built_in_keyboard_if_exists": false,
+          "fn_function_keys": [],
+          "game_pad_swap_sticks": false,
+          "identifiers": {
+            "is_game_pad": false,
+            "is_keyboard": true,
+            "is_pointing_device": false,
+            "product_id": 34050,
+            "vendor_id": 2652
+          },
+          "ignore": false,
+          "manipulate_caps_lock_led": true,
+          "mouse_flip_horizontal_wheel": false,
+          "mouse_flip_vertical_wheel": false,
+          "mouse_flip_x": false,
+          "mouse_flip_y": false,
+          "mouse_swap_wheels": false,
+          "mouse_swap_xy": false,
+          "simple_modifications": [],
           "treat_as_built_in_keyboard": false
         }
       ],

@@ -62,6 +62,9 @@ brew 'zsh'
 brew 'youtube-dl'
 brew 'zoxide'
 
+brew 'koekeishiya/formulae/yabai'
+brew 'koekeishiya/formulae/skhd'
+
 # Python
 brew 'pyenv'
 brew 'pyenv-virtualenv'
