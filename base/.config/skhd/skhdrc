@@ -144,46 +144,49 @@
 # toggle sticky(+float), picture-in-picture
 # alt - p : yabai -m window --toggle sticky --toggle pip
 
+###########################################################
+# My configs
 
 # change window focus within space
-fn - j : yabai -m window --focus south
-fn - k : yabai -m window --focus north
-fn - h : yabai -m window --focus west
-fn - l : yabai -m window --focus east
+hyper - j : yabai -m window --focus south
+hyper - k : yabai -m window --focus north
+hyper - h : yabai -m window --focus west
+hyper - l : yabai -m window --focus east
+
 
 # rotate tree
-fn - r : yabai -m space --rotate 90
+hyper - r : yabai -m space --rotate 90
 
 # toggle window fullscreen zoom
-fn - f : yabai -m window --toggle zoom-fullscreen
+hyper - f : yabai -m window --toggle zoom-fullscreen
 
 # flip along y-axis
-fn - y : yabai -m space --mirror y-axis
+hyper - y : yabai -m space --mirror y-axis
 
 # flip along x-axis
-fn - x : yabai -m space --mirror x-axis
+hyper - x : yabai -m space --mirror x-axis
 
 # float / unfloat window and center on screen
-fn - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
+hyper - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
 
 # balance out tree of windows (resize to occupy same area)
-fn - e : yabai -m space --balance
+hyper - e : yabai -m space --balance
 
 # fast focus desktop
-fn - z : yabai -m space --focus recent
+hyper - z : yabai -m space --focus recent
+
+# send window to space and follow focus
+hyper - n : yabai -m window --space next; yabai -m space --focus next
+hyper - p : yabai -m window --space prev; yabai -m space --focus prev
 
 # swap windows
-fn + alt - j : yabai -m window --swap south
-fn + alt - k : yabai -m window --swap north
-fn + alt - h : yabai -m window --swap west
-fn + alt - l : yabai -m window --swap east
+ctrl + alt - j : yabai -m window --swap south
+ctrl + alt - k : yabai -m window --swap north
+ctrl + alt - h : yabai -m window --swap west
+ctrl + alt - l : yabai -m window --swap east
 
 # move window and split
-fn + ctrl - j : yabai -m window --warp south
-fn + ctrl - k : yabai -m window --warp north
-fn + ctrl - h : yabai -m window --warp west
-fn + ctrl - l : yabai -m window --warp east
-
-# send window to monitor and follow focus
-fn - n : yabai -m window --space next; yabai -m space --focus next
-fn - p : yabai -m window --space prev; yabai -m space --focus prev
+# ctrl + ctrl - j : yabai -m window --warp south
+# ctrl + ctrl - k : yabai -m window --warp north
+# ctrl + ctrl - h : yabai -m window --warp west
+# ctrl  + ctrl - l : yabai -m window --warp east
