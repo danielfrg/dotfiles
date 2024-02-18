@@ -190,3 +190,10 @@ ctrl + alt - l : yabai -m window --swap east
 # ctrl + ctrl - k : yabai -m window --warp north
 # ctrl + ctrl - h : yabai -m window --warp west
 # ctrl  + ctrl - l : yabai -m window --warp east
+
+# Apps
+
+hyper - w : osascript -e 'tell app "Arc" to activate'
+hyper - q : osascript -e 'tell app "Alacritty" to activate'
+hyper - v : osascript -e 'tell app "Visual Studio Code" to activate'
+hyper - c : osascript -e 'tell app "Google Chrome" to activate'
