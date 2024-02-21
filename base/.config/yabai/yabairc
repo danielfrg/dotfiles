@@ -45,9 +45,9 @@ yabai -m config                                 \
     mouse_drop_action            swap
 
 # disable specific apps
+yabai -m rule --add app="^Finder$" manage=off
 yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add app="^Calculator$" manage=off
-yabai -m rule --add app="^QuickTime Player$" manage=off
 yabai -m rule --add app="^Things$" manage=off
 yabai -m rule --add app="^Keyboard Maestro$" manage=off
 yabai -m rule --add app="^1Password$" manage=off
