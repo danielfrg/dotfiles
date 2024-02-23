@@ -5,8 +5,5 @@
     home_dir: "{{ lookup('env', 'HOME') }}"
 
   roles:
-    - role: common
-      tags: ["always", "common"]
-
     - role: laptop
       tags: ["always", "laptop"]

@@ -19,10 +19,10 @@ tasks:
     cmds:
       - ansible-playbook remote.yml --limit homelab
 
-  ansible:cloudtop:
+  ansible:rpi:
     dir: ansible
     cmds:
-      - ansible-playbook remote.yml --limit cloudtop --ask-become-pass
+      - ansible-playbook remote.yml --limit rpi # --ask-become-pass
 
   ansible:tag:
     dir: ansible

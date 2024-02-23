@@ -1,11 +1,8 @@
-- hosts: homelab,remote
+- hosts: homelab,rpi
 
   vars:
     setup_user: danielfrg
 
   roles:
-    - role: common
-      tags: ["always", "common"]
-
-    - role: workstation
-      tags: ["always", "workstation"]
+    - role: dotfiles
+      tags: ["always", "dotfiles"]

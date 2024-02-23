@@ -1,0 +1,24 @@
+---
+- ansible.builtin.include_tasks: packages.yml
+  tags:
+    - always
+
+- ansible.builtin.include_tasks: repo.yml
+  tags:
+    - always
+
+- name: Change shell to zsh
+  become: true
+  user:
+    name: "{{ setup_user }}"
+    shell: /usr/bin/zsh
+
+- name: Stow files
+  ansible.builtin.command: task link
+  args:
+    chdir: /home/{{ setup_user }}/code/dotfiles
+
+- name: Remove .tmux.conf
+  file:
+    path: /home/{{ setup_user }}/.tmux.conf
+    state: absent

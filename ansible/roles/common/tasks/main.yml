@@ -1,8 +1,0 @@
----
-- ansible.builtin.include_tasks: tmux.yml
-  args:
-    apply:
-      tags:
-        - tmux
-  tags:
-    - always
