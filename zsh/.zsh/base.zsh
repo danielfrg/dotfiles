@@ -46,6 +46,9 @@ if [[ $(uname) == "Darwin" ]]; then
     alias rm_="/bin/rm"
     alias rm="trash"
 
+    # zoxide only on laptop
+    alias cd='z'
+
     # Lock the screen (when going AFK)
     alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 else
@@ -85,8 +88,6 @@ fi
 
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
-
-alias cd='z'
 
 # Files
 alias l='ls'
