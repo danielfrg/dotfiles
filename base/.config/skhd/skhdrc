@@ -153,7 +153,6 @@ hyper - k : yabai -m window --focus north
 hyper - h : yabai -m window --focus west
 hyper - l : yabai -m window --focus east
 
-
 # rotate tree
 hyper - r : yabai -m space --rotate 90
 
@@ -170,10 +169,10 @@ hyper - x : yabai -m space --mirror x-axis
 hyper - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
 
 # balance out tree of windows (resize to occupy same area)
-hyper - e : yabai -m space --balance
+hyper - z : yabai -m space --balance
 
 # fast focus desktop
-hyper - z : yabai -m space --focus recent
+# hyper - z : yabai -m space --focus recent
 
 # send window to space and follow focus
 hyper - n : yabai -m window --space next; yabai -m space --focus next
