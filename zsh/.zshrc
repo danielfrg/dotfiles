@@ -4,6 +4,8 @@ ZNAP_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/znap/znap.zsh"
     git clone --depth 1 https://github.com/marlonrichert/zsh-snap.git $ZNAP_HOME
 source $ZNAP_HOME/znap.zsh
 
+znap source olivierverdier/zsh-git-prompt
+
 # Source files
 for file in "${HOME}/.zsh/base.zsh" \
             "${HOME}/.local/bin/imagecat.zsh" \
@@ -16,8 +18,6 @@ done
 
 znap prompt
 
-znap source ohmyzsh/ohmyzsh \
-    'lib/git.zsh' plugins/git
 znap source zsh-users/zsh-completions
 znap source zsh-users/zsh-autosuggestions
 znap source zsh-users/zsh-syntax-highlighting
@@ -30,5 +30,6 @@ fi
 
 # ---------------------------------
 # Stuff that is not to be committed
+
 touch ~/.zshrc.local
 source ~/.zshrc.local
