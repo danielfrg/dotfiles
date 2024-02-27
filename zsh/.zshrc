@@ -8,6 +8,7 @@ znap source olivierverdier/zsh-git-prompt
 
 # Source files
 for file in "${HOME}/.zsh/base.zsh" \
+            "${HOME}/.zsh/prompt.zsh" \
             "${HOME}/.local/bin/imagecat.zsh" \
             "${HOME}/.zsh/languages.zsh" \
             "${HOME}/.zsh/ssh.zsh" \
