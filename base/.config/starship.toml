@@ -7,9 +7,7 @@ $directory\
 $git_branch\
 $git_state\
 $git_status\
-${custom.python_version}\
-${custom.py_venv}\
-${custom.rbenv_gemset}\
+${custom.virtual_env_prompt_info}\
 $kubernetes\
 $line_break\
 $character
@@ -18,7 +16,7 @@ $character
 right_format = """$cmd_duration$time"""
 
 # Inserts a blank line between shell prompts
-add_newline = true
+add_newline = false
 command_timeout = 150
 
 [character]
@@ -73,9 +71,26 @@ detect_files = ['.python-version']
 symbol = "  "
 style = 'green'
 
-[custom.py_venv]
-command = "echo $VIRTUAL_ENV | awk -F/ '{ print $NF }'"
-when = ''' test "$VIRTUAL_ENV" '''
+# [custom.virtual_env_prompt_info_2]
+# command = "echo $VIRTUAL_ENV | awk -F/ '{ print $NF }'"
+# when = ''' test "$VIRTUAL_ENV" '''
+# format = '\[[$output]($style)\]'
+# style = 'red'
+
+# [custom.virtual_env_prompt_info]
+# command = "echo ${VIRTUAL_ENV:h} | awk -F/ '{ print $NF }'"
+# when = ''' [[ "${VIRTUAL_ENV}" == *".venv" ]]'''
+# format = '\[[$output]($style)\]'
+# style = 'green'
+
+[custom.git_status]
+
+[custom.virtual_env_prompt_info]
+command = "echo $PY_VENV"
+# command = "echo $MYID"
+# command = "cat /tmp/.zsh_tmp_prompt_$MYID"
+when = true
+# when = ''' [[ "${VIRTUAL_ENV}" == *".venv" ]]'''
 format = '\[[$output]($style)\]'
 style = 'green'
 

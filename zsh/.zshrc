@@ -14,9 +14,10 @@ do
     [ -s "${file}" ] && source "${file}"
 done
 
-znap eval starship 'starship init zsh --print-full-init'
 znap prompt
 
+znap source ohmyzsh/ohmyzsh \
+    'lib/git.zsh' plugins/git
 znap source zsh-users/zsh-completions
 znap source zsh-users/zsh-autosuggestions
 znap source zsh-users/zsh-syntax-highlighting

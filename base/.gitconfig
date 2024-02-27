@@ -149,3 +149,10 @@
 # 	insteadOf = git://
 [status]
 	submoduleSummary = true
+[maintenance]
+	repo = /Users/danielfrg/.local/share/znap/znap.zsh
+	repo = /Users/danielfrg/.local/share/znap/Aloxaf/fzf-tab
+	repo = /Users/danielfrg/.local/share/znap/ajeetdsouza/zoxide
+	repo = /Users/danielfrg/.local/share/znap/zsh-users/zsh-autosuggestions
+	repo = /Users/danielfrg/.local/share/znap/zsh-users/zsh-completions
+	repo = /Users/danielfrg/.local/share/znap/zsh-users/zsh-syntax-highlighting

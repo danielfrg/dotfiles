@@ -62,10 +62,89 @@ export PATH=$HOME/.local/bin:$HOME/.local/scripts:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
 
 # Prompt
-eval "$(starship init zsh)"
 
-# Zoxide
-# eval "$(zoxide init zsh)"
+# Start precmd functions
+typeset -a precmd_functions
+autoload -U colors && colors
+
+ZSH_THEME_GIT_PROMPT_PREFIX="on %{$fg[blue]%}git%{$reset_color%}:"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[green]%}+"
+ZSH_THEME_GIT_PROMPT_BRANCH=""
+ZSH_THEME_GIT_PROMPT_SEPARATOR=""
+ZSH_THEME_GIT_PROMPT_CLEAN=""
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[green]?%G%}"
+ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[cyan]%}%{+%G%}"
+
+ZSH_THEME_VIRTUALENV_PREFIX="%{$fg[green]%}  "
+ZSH_THEME_VIRTUALENV_SUFFIX="%{$reset_color%}"
+
+# This is the basic prompt that is always printed.  It will be
+# enclosed to make it newline.
+# USER=asdf
+# SSH_CLIENT=1
+_USER_PROMPT=$(if [[ $USER != "danielfrg" ]]; then echo '%F{magenta}%n%f at '; else echo ""; fi)
+_HOST_PROMPT=$(if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then echo '%F{yellow}%m%f at '; else echo ""; fi)
+_BASE_PROMPT=$_USER_PROMPT$_HOST_PROMPT'%F{blue}%~%f'
+
+# This is the base prompt that is rendered sync.  It should be
+# fast to render as a result.  The extra whitespace before the
+# newline is necessary to avoid some rendering bugs.
+PROMPT=$'\n'$_BASE_PROMPT$' \n$ '
+RPROMPT='%*'
+
+_MITSUHIKO_ASYNC_PROMPT=0
+_MITSUHIKO_ASYNC_PROMPT_FN="/tmp/.zsh_tmp_prompt_$$"
+
+function _mitsuhiko_precmd() {
+  _mitsuhiko_rv=$?
+
+  function async_prompt() {
+    # echo -n $(virtualenv_prompt_info) > $_MITSUHIKO_ASYNC_PROMPT_FN
+    # export PY_VENV=$(virtualenv_prompt_info)
+
+    echo -n $'\n'$_BASE_PROMPT$' '$(git_prompt_info)$(virtualenv_prompt_info) > $_MITSUHIKO_ASYNC_PROMPT_FN
+    if [[ x$_mitsuhiko_rv != x0 ]]; then
+      echo -n " exited %{$fg[red]%}$_mitsuhiko_rv%{$reset_color%}" >> $_MITSUHIKO_ASYNC_PROMPT_FN
+    fi
+    echo -n $' \n$ ' >> $_MITSUHIKO_ASYNC_PROMPT_FN
+
+    # signal parent
+    kill -s USR1 $$
+  }
+
+  # If we still have a prompt async process we kill it to make sure
+  # we do not backlog with useless prompt things.  This also makes
+  # sure that we do not have prompts interleave in the tempfile.
+  if [[ "${_MITSUHIKO_ASYNC_PROMPT}" != 0 ]]; then
+    kill -s HUP $_MITSUHIKO_ASYNC_PROMPT >/dev/null 2>&1 || :
+  fi
+
+  # start background computation
+  async_prompt &!
+  _MITSUHIKO_ASYNC_PROMPT=$!
+}
+
+# This is the trap for the signal that updates our prompt and
+# redraws it.  We intentionally do not delete the tempfile here
+# so that we can reuse the last prompt for successive commands
+function _mitsuhiko_trapusr1() {
+  PROMPT="$(cat $_MITSUHIKO_ASYNC_PROMPT_FN)"
+  _MITSUHIKO_ASYNC_PROMPT=0
+  zle && zle reset-prompt
+}
+
+# Make sure we clean up our tempfile on exit
+function _mitsuhiko_zshexit() {
+  /bin/rm -f $_MITSUHIKO_ASYNC_PROMPT_FN
+}
+
+# Hook our precmd and zshexit functions and USR1 trap
+precmd_functions+=(_mitsuhiko_precmd)
+zshexit_functions+=(_mitsuhiko_zshexit)
+trap '_mitsuhiko_trapusr1' USR1
+# -----------------
+
 
 # History base
 export HISTSIZE=1000000000
