@@ -2,7 +2,7 @@
 typeset -a precmd_functions
 autoload -U colors && colors
 
-ZSH_THEME_GIT_PROMPT_PREFIX="on %{$fg[blue]%}git%{$reset_color%}:"
+ZSH_THEME_GIT_PROMPT_PREFIX="on %{$fg[yellow]%}git%{$reset_color%}:"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[green]%}+"
 ZSH_THEME_GIT_PROMPT_BRANCH=""
@@ -18,9 +18,9 @@ ZSH_THEME_VIRTUALENV_SUFFIX="%{$reset_color%}"
 # enclosed to make it newline.
 # USER=asdf
 # SSH_CLIENT=1
-_USER_PROMPT=$(if [[ $USER != "danielfrg" ]]; then echo '%F{magenta}%n%f at '; else echo ""; fi)
-_HOST_PROMPT=$(if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then echo '%F{yellow}%m%f at '; else echo ""; fi)
-_BASE_PROMPT=$_USER_PROMPT$_HOST_PROMPT'%F{blue}%~%f'
+_USER_PROMPT=$(if [[ $USER != "danielfrg" ]]; then echo ' as %{$fg[magenta]%}%n%{$reset_color%} '; else echo ""; fi)
+_HOST_PROMPT=$(if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then echo '🌐 %{$fg[yellow]%}%m%{$reset_color%}'; else echo ""; fi)
+_BASE_PROMPT='%{$fg[blue]%}%~%{$reset_color%}% '$_USER_PROMPT$_HOST_PROMPT
 
 # This is the base prompt that is rendered sync.  It should be
 # fast to render as a result.  The extra whitespace before the
