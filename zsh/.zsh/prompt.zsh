@@ -2,7 +2,7 @@
 typeset -a precmd_functions
 autoload -U colors && colors
 
-ZSH_THEME_GIT_PROMPT_PREFIX="on %{$fg[yellow]%}git%{$reset_color%}:"
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[yellow]%}git%{$reset_color%}:"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[green]%}+"
 ZSH_THEME_GIT_PROMPT_BRANCH=""

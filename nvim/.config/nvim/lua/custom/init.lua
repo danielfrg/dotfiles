@@ -27,7 +27,7 @@ vim.opt.undofile = true
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 
 -- Sync clipboard between OS and Neovim.
-vim.opt.clipboard = "unnamedplus"
+-- vim.opt.clipboard = "unnamedplus"
 
 -- vim.opt.breakindent = true
 
@@ -55,3 +55,7 @@ vim.opt.splitright = true
 
 -- so that `` is visible in markdown files
 vim.opt.conceallevel = 0
+
+-- suppress ruff lsp warning:
+-- https://github.com/nvimtools/none-ls.nvim/discussions/81
+vim.g.nonels_suppress_issue58 = true

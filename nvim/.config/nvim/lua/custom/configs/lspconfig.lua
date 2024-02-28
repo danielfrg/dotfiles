@@ -5,17 +5,39 @@ local capabilities = config.capabilities
 local lspconfig = require("lspconfig")
 local util = require("lspconfig.util")
 
-lspconfig.pyright.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
+lspconfig.pyright.setup({
     filetypes = { "python" },
-}
+    capabilities = capabilities,
+    settings = {
+        pyright = {
+            -- Using Ruff's import organizer
+            disableOrganizeImports = true,
+        },
+        python = {
+            analysis = {
+                -- Ignore all files for analysis to exclusively use Ruff for linting
+                ignore = { '*' },
+            },
+        },
+    },
+})
 
--- lspconfig.ruff_lsp.setup {
---     on_attach = on_attach,
---     capabilities = capabilities,
---     filetypes = { "python" },
--- }
+lspconfig.ruff_lsp.setup {
+    filetypes = { "python" },
+    init_options = {
+        settings = {
+            -- Any extra CLI arguments for `ruff` go here.
+            args = {},
+        }
+    },
+    -- on_attach = on_attach,
+    on_attach = function(client, bufnr)
+        if client.name == 'ruff_lsp' then
+            -- Disable hover in favor of Pyright
+            client.server_capabilities.hoverProvider = false
+        end
+    end
+}
 
 lspconfig.tsserver.setup {
     on_attach = on_attach,

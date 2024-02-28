@@ -2,21 +2,30 @@
 
 Install brew:
 
+```terminal
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
 Install brew bundle:
 
-```bash
+```terminal
 brew bundle
 ```
 
-Install:
+NVChad:
 
-```bash
-task ohmyzsh
-task fonts
+```terminal
+git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim
 ```
 
 Link files to home directory using on `stow`:
 
-```bash
+```terminal
 task link
+```
+
+Fonts:
+
+```terminal
+task fonts
 ```
