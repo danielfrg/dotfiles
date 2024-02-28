@@ -57,6 +57,10 @@ local plugins = {
         opts = {},
     },
     {
+        "mbbill/undotree",
+        lazy = false,
+    },
+    {
         "folke/flash.nvim",
         cond = vim.g.vscode,
         event = "VeryLazy",

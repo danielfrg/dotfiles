@@ -26,7 +26,6 @@ M.abc = {
 
         ["<leader>r"] = { "[[:%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>]])" },
 
-
         -- better move page up and down (keep cursor in the middle)
         ["<C-d>"] = { "<C-d>zz" },
         ["<C-u>"] = { "<C-u>zz" },
@@ -102,6 +101,12 @@ M.harpoon = {
             end,
             "Go to file 2"
         },
+    }
+}
+
+M.plugins = {
+    n = {
+        ["<leader>u"] = { "<cmd>UndotreeToggle<CR>"}
     }
 }
 
