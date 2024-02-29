@@ -61,3 +61,14 @@ vim.opt.conceallevel = 0
 -- suppress ruff lsp warning:
 -- https://github.com/nvimtools/none-ls.nvim/discussions/81
 vim.g.nonels_suppress_issue58 = true
+
+
+vim.api.nvim_create_autocmd("VimEnter", {
+    callback = function()
+        if vim.fn.argv(0) == "" then
+            require("telescope.builtin").find_files({
+                hidden = true,
+            })
+        end
+    end,
+})
