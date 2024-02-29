@@ -1,26 +1,11 @@
+local overrides = require("custom.configs.overrides")
+
+---@type NvPluginSpec[]
 local plugins = {
+    -- Overwrite nvchad plugins
     {
         "williamboman/mason.nvim",
-        opts = {
-            ensure_installed = {
-                -- Python
-                -- "black",
-                "mypy",
-                "pyright",
-                -- "python-lsp-server",
-                "ruff",
-                "ruff-lsp",
-                -- Javascript
-                "eslint-lsp",
-                "prettier",
-                "typescript-language-server",
-                "tailwindcss-language-server",
-                "html-lsp",
-                -- Other
-                "terraform-ls",
-            }
-
-        }
+        opts = overrides.mason,
     },
     {
         "neovim/nvim-lspconfig",
@@ -30,19 +15,20 @@ local plugins = {
         end,
     },
     {
-        "mfussenegger/nvim-lint",
-        event = "VeryLazy",
-        config = function()
-            require "custom.configs.lint"
-        end,
+        "nvim-tree/nvim-tree.lua",
+        opts = overrides.nvimtree,
     },
     {
-        "mhartington/formatter.nvim",
-        event = "VeryLazy",
-        opts = function()
-            return require "custom.configs.formatter"
-        end
+        "nvim-treesitter/nvim-treesitter",
+        opts = overrides.treesitter,
     },
+    {
+        "nvim-telescope/telescope.nvim",
+        opts = overrides.telescope,
+    },
+
+    -- Other plugins
+
     {
         "nvimtools/none-ls.nvim",
         ft = { "python", "go" },
@@ -51,10 +37,18 @@ local plugins = {
         end
     },
     {
-        "nvim-treesitter/nvim-treesitter",
-        opts = {
-            ensure_installed = { "html", "css", "bash", "python" },
-        },
+        "mfussenegger/nvim-lint",
+        event = "VeryLazy",
+        config = function()
+            require "custom.configs.lint"
+        end,
+    },
+    {
+        "stevearc/conform.nvim",
+        event = "BufWritePre",
+        config = function()
+            require "custom.configs.conform"
+        end,
     },
     {
         "ThePrimeagen/harpoon",
@@ -111,32 +105,6 @@ local plugins = {
         "christoomey/vim-tmux-navigator",
         lazy = false
     },
-    -- Copied from NVChad and changed to point to cusotm configs
-    {
-        "nvim-tree/nvim-tree.lua",
-        cmd = { "NvimTreeToggle", "NvimTreeFocus" },
-        init = function()
-            require("core.utils").load_mappings "nvimtree"
-        end,
-        opts = function()
-            return require "custom.configs.nvimtree"
-        end,
-        config = function(_, opts)
-            dofile(vim.g.base46_cache .. "nvimtree")
-            require("nvim-tree").setup(opts)
-        end,
-    },
-    -- {
-    --     "olexsmir/gopher.nvim",
-    --     ft = { "go" },
-    --     config = function(_, opts)
-    --         require("gopher").setup(opts)
-    --         require("core.utils").load_mappings("gopher")
-    --     end,
-    --     build = function()
-    --         vim.cmd [[silent! GoInstallDeps]]
-    --     end,
-    -- },
 }
 
 return plugins

@@ -45,6 +45,9 @@ M.abc = {
         ["<C-l>"] = { "<cmd> TmuxNavigateRight<CR>", "window right" },
         ["<C-j>"] = { "<cmd> TmuxNavigateDown<CR>", "window down" },
         ["<C-k>"] = { "<cmd> TmuxNavigateUp<CR>", "window up" },
+
+        -- Telescope
+        ["<leader>ff"] = { "<cmd> Telescope find_files hidden=true<CR>", "Find files" },
     },
     i = {
         ["<Esc>"] = { "<Esc>l" },
@@ -107,7 +110,7 @@ M.harpoon = {
 
 M.plugins = {
     n = {
-        ["<leader>u"] = { "<cmd>UndotreeToggle<CR>"}
+        ["<leader>u"] = { "<cmd>UndotreeToggle<CR>" }
     }
 }
 
