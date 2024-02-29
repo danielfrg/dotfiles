@@ -19,7 +19,7 @@ ZSH_THEME_VIRTUALENV_SUFFIX="%{$reset_color%}"
 # USER=asdf
 # SSH_CLIENT=1
 _USER_PROMPT=$(if [[ $USER != "danielfrg" ]]; then echo ' as %{$fg[magenta]%}%n%{$reset_color%} '; else echo ""; fi)
-_HOST_PROMPT=$(if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then echo '🌐 %{$fg[yellow]%}%m%{$reset_color%}'; else echo ""; fi)
+_HOST_PROMPT=$(if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then echo ' 🌐 %{$fg[yellow]%}%m%{$reset_color%}'; else echo ""; fi)
 _BASE_PROMPT='%{$fg[blue]%}%~%{$reset_color%}% '$_USER_PROMPT$_HOST_PROMPT
 
 # This is the base prompt that is rendered sync.  It should be
