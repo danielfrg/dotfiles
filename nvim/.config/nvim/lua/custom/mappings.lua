@@ -3,8 +3,9 @@ local M = {}
 M.abc = {
     n = {
         ["<C-s>"] = { "<cmd>w!<cr><esc>", "Save file" },
-        ["<leader>s"] = { "<cmd>w!<cr><esc>", "[S]ave file" },
-        ["<leader>n"] = { "<cmd>enew<cr>", "[N]ew file" },
+        ["<leader>s"] = { "<cmd>w!<cr><esc>", "Save file" },
+        ["<leader>n"] = { "<cmd>enew<cr>", "New file" },
+        ["<leader>e"] = { "<cmd> NvimTreeToggle<CR>" },
 
         -- Remove search highlights
         ["<Esc>"] = { ":noh<return><esc>" },
@@ -24,7 +25,7 @@ M.abc = {
         ["n"] = { "nzzzv" },
         ["N"] = { "Nzzzv" },
 
-        ["<leader>r"] = { "[[:%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>]])" },
+        ["<leader>rr"] = { ":%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>", "Replace current word" },
 
         -- better move page up and down (keep cursor in the middle)
         ["<C-d>"] = { "<C-d>zz" },

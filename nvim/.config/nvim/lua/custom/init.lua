@@ -26,8 +26,10 @@ vim.opt.backup = false
 vim.opt.undofile = true
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 
--- Sync clipboard between OS and Neovim.
--- vim.opt.clipboard = "unnamedplus"
+-- unsync clipboard between OS and Neovim
+vim.opt.clipboard = ""
+-- Do this to sync them
+-- vim.opt.clipboard = "unnamed"
 
 -- vim.opt.breakindent = true
 

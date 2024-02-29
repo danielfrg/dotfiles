@@ -51,6 +51,12 @@ local plugins = {
         end
     },
     {
+        "nvim-treesitter/nvim-treesitter",
+        opts = {
+            ensure_installed = { "html", "css", "bash", "python" },
+        },
+    },
+    {
         "ThePrimeagen/harpoon",
         branch = "harpoon2",
         event = "VeryLazy",
@@ -105,7 +111,21 @@ local plugins = {
         "christoomey/vim-tmux-navigator",
         lazy = false
     },
-    { "nvim-lua/plenary.nvim" },
+    -- Copied from NVChad and changed to point to cusotm configs
+    {
+        "nvim-tree/nvim-tree.lua",
+        cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+        init = function()
+            require("core.utils").load_mappings "nvimtree"
+        end,
+        opts = function()
+            return require "custom.configs.nvimtree"
+        end,
+        config = function(_, opts)
+            dofile(vim.g.base46_cache .. "nvimtree")
+            require("nvim-tree").setup(opts)
+        end,
+    },
     -- {
     --     "olexsmir/gopher.nvim",
     --     ft = { "go" },
