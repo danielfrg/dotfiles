@@ -9,6 +9,8 @@ local options = {
         css = { "prettier" },
         html = { "prettier" },
 
+        terraform = { "terraform_fmt" },
+
         ["_"] = { "trim_whitespace" },
     },
 

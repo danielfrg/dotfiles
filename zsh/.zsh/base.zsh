@@ -1,12 +1,12 @@
 # This are bind keys so that they can later be mapped into iterm2 key combinations
 # To list all binds run: zle -al
-bindkey "^[fw" forward-word             # Bind this to ctrl-(left arrow) = send escape sequence `w`
-bindkey "^[bw" backward-word            # Bind this to ctrl-(right arrow) = send escape sequence `b`
-bindkey "^[bl" beginning-of-line        # Bind this to cmd-(left arrow) = send escape sequence `bl`
-bindkey "^[el" end-of-line              # Bind this to cmd-(right arrow) = send escape sequence `el`
-bindkey "^[dw" delete-word              # Bind this to option(alt)-d = send escape sequence `dw`
-bindkey "^[dwb" backward-delete-word    # Bind this to ctrl-w = send escape sequence `dwb`
-
+# bindkey "^[fw" forward-word             # Bind this to ctrl-(left arrow) = send escape sequence `w`
+# bindkey "^[bw" backward-word            # Bind this to ctrl-(right arrow) = send escape sequence `b`
+# bindkey "^[bl" beginning-of-line        # Bind this to cmd-(left arrow) = send escape sequence `bl`
+# bindkey "^[el" end-of-line              # Bind this to cmd-(right arrow) = send escape sequence `el`
+# bindkey "^[dw" delete-word              # Bind this to option(alt)-d = send escape sequence `dw`
+# bindkey "^[dwb" backward-delete-word    # Bind this to ctrl-w = send escape sequence `dwb`
+#
 # ------------------------------------------------------------------------------
 
 if [[ $(uname) == "Darwin" ]]; then
@@ -54,6 +54,8 @@ if [[ $(uname) == "Darwin" ]]; then
 else
     # echo 'Unknown OS!'
 fi
+
+export XDG_CONFIG_HOME=$HOME/.config
 
 # Local binaries
 export PATH=$HOME/.local/bin:$HOME/.local/scripts:$PATH
@@ -122,6 +124,7 @@ project_switcher() {
 }
 
 zle -N project_switcher{,}
+# ctrl-f for tmux-sessionizer
 bindkey -s ^f "tmux-sessionizer\n"
 
 # bindkey -s ^t "tmux-sessionizer\n"
@@ -190,9 +193,12 @@ if [[ $(uname) == "Darwin" ]]; then
     alias ping_='/sbin/ping'
     alias top='btm'
     alias top_='/usr/bin/top'
-    alias watch=viddy
-    alias watch_='/opt/homebrew/bin/watch'
+    # aliases are not working correctly
+    # alias watch=viddy
+    # alias watch_='/opt/homebrew/bin/watch'
 fi
+
+alias watch="watch "
 
 # IP addresses
 alias publicip="dig +short myip.opendns.com @resolver1.opendns.com"

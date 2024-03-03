@@ -44,6 +44,32 @@
             ]
           },
           {
+            "manipulators": [
+              {
+                "description": "Esc to Hyper / Escape",
+                "from": {
+                  "key_code": "escape"
+                },
+                "to": [
+                  {
+                    "key_code": "right_shift",
+                    "modifiers": [
+                      "right_command",
+                      "right_control",
+                      "right_option"
+                    ]
+                  }
+                ],
+                "to_if_alone": [
+                  {
+                    "key_code": "escape"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
             "description": "Hyper + space = backspace",
             "manipulators": [
               {
