@@ -53,7 +53,7 @@ local plugins = {
     {
         "ThePrimeagen/harpoon",
         branch = "harpoon2",
-        event = "VeryLazy",
+        lazy = false,
         opts = {},
     },
     {

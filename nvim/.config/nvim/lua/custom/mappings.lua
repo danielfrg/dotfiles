@@ -32,11 +32,11 @@ M.abc = {
         ["<C-u>"] = { "<C-u>zz" },
 
         -- yank to system clipboard
-        ["<leader>y"] = { "\"+y" },
-        ["<leader>Y"] = { "\"+Y" },
+        ["<leader>y"] = { "\"+y", "Yank to clipboard" },
+        ["<leader>Y"] = { "\"+Y", "Yank to clipboard" },
 
         -- Delete to void
-        ["<leader>d"] = { "\"_d" },
+        ["<leader>d"] = { "\"_d", "Delete to void" },
 
         -- tmux sessionizer
         ["<C-f>"] = { "<cmd> silent !tmux neww tmux-sessionizer<CR>" },
@@ -71,39 +71,59 @@ M.harpoon = {
     n = {
         ["<leader>a"] = {
             function()
-                require("harpoon.mark").add_file()
+                local harpoon = require "harpoon"
+                harpoon:list():append()
             end,
-            "Mark file"
+            "Add file to harpoon",
         },
         ["<C-e>"] = {
             function()
-                require('harpoon.ui').toggle_quick_menu()
+                local harpoon = require "harpoon"
+                harpoon.ui:toggle_quick_menu(harpoon:list())
             end,
             "Toggle UI"
         },
         ["<C-y>"] = {
             function()
-                require('harpoon.ui').nav_file(1)
+                local harpoon = require "harpoon"
+                harpoon:list():select(1)
             end,
             "Go to file 1"
         },
         ["<C-u>"] = {
             function()
-                require('harpoon.ui').nav_file(2)
+                local harpoon = require "harpoon"
+                harpoon:list():select(2)
             end,
             "Go to file 2"
         },
         ["<C-i>"] = {
             function()
-                require('harpoon.ui').nav_file(3)
+                local harpoon = require "harpoon"
+                harpoon:list():select(3)
             end,
             "Go to file 2"
         },
         ["<C-o>"] = {
             function()
-                require('harpoon.ui').nav_file(4)
+                local harpoon = require "harpoon"
+                harpoon:list():select(4)
             end,
             "Go to file 2"
+        },
+        ["<C-S-P>"] = {
+            function()
+                local harpoon = require "harpoon"
+                harpoon:list():prev()
+            end,
+            "Go to previous file"
+        },
+        ["<C-S-N>"] = {
+            function()
+                local harpoon = require "harpoon"
+                harpoon:list():next()
+            end,
+            "Go to file next file"
         },
     }
 }

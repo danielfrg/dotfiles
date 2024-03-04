@@ -1,3 +1,6 @@
+-- require "commands"
+-- require "autocmds"
+
 -- Remap space as leader key
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -62,13 +65,14 @@ vim.opt.conceallevel = 0
 -- https://github.com/nvimtools/none-ls.nvim/discussions/81
 vim.g.nonels_suppress_issue58 = true
 
+vim.opt.title = true
 
-vim.api.nvim_create_autocmd("VimEnter", {
-    callback = function()
-        if vim.fn.argv(0) == "" then
-            require("telescope.builtin").find_files({
-                hidden = true,
-            })
-        end
-    end,
-})
+if vim.g.neovide then
+    vim.o.guifont = "JetbrainsMono Nerd Font:h10"
+
+    vim.g.neovide_refresh_rate = 75
+    vim.g.neovide_cursor_vfx_mode = "railgun"
+
+    vim.keymap.set("i", "<c-s-v>", "<c-r>+")
+    vim.keymap.set("i", "<c-r>", "<c-s-v>")
+end

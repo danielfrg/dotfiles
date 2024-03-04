@@ -157,6 +157,7 @@ alias sed="gsed"
 # NeoVim
 alias vim_="/usr/bin/vim"
 alias nvim_="/opt/homebrew/bin/nvim"
+alias neovide='/Applications/Neovide.app/Contents/MacOS/neovide'
 
 nvim() {
     if [[ $@ == "." ]]; then
