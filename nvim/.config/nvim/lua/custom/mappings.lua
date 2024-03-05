@@ -48,6 +48,10 @@ M.abc = {
 
         -- Telescope
         ["<leader>ff"] = { "<cmd> Telescope find_files hidden=true<CR>", "Find files" },
+
+        -- LazyGit
+        ["<leader>gg"] = { "<cmd>LazyGit<CR>", "Lazygit (root dir)" },
+
     },
     i = {
         ["<Esc>"] = { "<Esc>l" },

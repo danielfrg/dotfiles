@@ -29,6 +29,21 @@ local plugins = {
 
     -- Other plugins
 
+
+    {
+        "kdheepak/lazygit.nvim",
+        cmd = {
+            "LazyGit",
+            "LazyGitConfig",
+            "LazyGitCurrentFile",
+            "LazyGitFilter",
+            "LazyGitFilterCurrentFile",
+        },
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+        },
+    },
+
     {
         "nvimtools/none-ls.nvim",
         ft = { "python", "go" },
