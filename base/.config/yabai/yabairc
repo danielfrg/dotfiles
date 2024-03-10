@@ -51,5 +51,6 @@ yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^Things$" manage=off
 yabai -m rule --add app="^Keyboard Maestro$" manage=off
 yabai -m rule --add app="^1Password$" manage=off
+yabai -m rule --add app="^Archive Utility$" manage=off
 
 echo "yabai configuration loaded.."

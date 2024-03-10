@@ -35,40 +35,41 @@ M.abc = {
         ["<leader>y"] = { "\"+y", "Yank to clipboard" },
         ["<leader>Y"] = { "\"+Y", "Yank to clipboard" },
 
-        -- Delete to void
+        -- paste without changing current register
+        ["<leader>p"] = { "\"*p", "Paste from clipboard" },
+
+        -- delete to void
         ["<leader>d"] = { "\"_d", "Delete to void" },
 
-        -- tmux sessionizer
-        ["<C-f>"] = { "<cmd> silent !tmux neww tmux-sessionizer<CR>" },
         -- tmux navigation
         ["<C-h>"] = { "<cmd> TmuxNavigateLeft<CR>", "window left" },
         ["<C-l>"] = { "<cmd> TmuxNavigateRight<CR>", "window right" },
         ["<C-j>"] = { "<cmd> TmuxNavigateDown<CR>", "window down" },
         ["<C-k>"] = { "<cmd> TmuxNavigateUp<CR>", "window up" },
 
+        -- tmux sessionizer
+        ["<C-f>"] = { "<cmd> silent !tmux neww tmux-sessionizer<CR>" },
+
         -- Telescope
         ["<leader>ff"] = { "<cmd> Telescope find_files hidden=true<CR>", "Find files" },
 
         -- LazyGit
         ["<leader>gg"] = { "<cmd>LazyGit<CR>", "Lazygit (root dir)" },
-
     },
     i = {
         ["<Esc>"] = { "<Esc>l" },
     },
     v = {
         -- Move up or down selected lines
-        ["J"] = { ":m '>+1<CR>gv=gv" },
-        ["K"] = { ":m '<-2<CR>gv=gv" },
+        ["J"] = { ":m '>+1<CR>gv=gv", "Move lines up" },
+        ["K"] = { ":m '<-2<CR>gv=gv", "Move lines down" },
+
         -- yank to system clipboard
-        ["<leader>y"] = { "\"+y" },
-        -- Delete to void
-        ["<leader>d"] = { "\"_d" },
+        ["<leader>y"] = { "\"+y", "Yank to clipboard" },
+
+        -- delete to void
+        ["<leader>d"] = { "\"_d", "Delete to void" },
     },
-    x = {
-        -- paste without changing current register
-        ["<leader>p"] = { "\"_dP" }
-    }
 }
 
 M.harpoon = {

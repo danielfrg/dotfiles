@@ -548,26 +548,15 @@
             "product_id": 24926,
             "vendor_id": 7504
           },
-          "ignore": false,
-          "manipulate_caps_lock_led": true,
+          "ignore": true,
+          "manipulate_caps_lock_led": false,
           "mouse_flip_horizontal_wheel": false,
           "mouse_flip_vertical_wheel": false,
           "mouse_flip_x": false,
           "mouse_flip_y": false,
           "mouse_swap_wheels": false,
           "mouse_swap_xy": false,
-          "simple_modifications": [
-            {
-              "from": {
-                "key_code": "delete_forward"
-              },
-              "to": [
-                {
-                  "key_code": "left_command"
-                }
-              ]
-            }
-          ],
+          "simple_modifications": [],
           "treat_as_built_in_keyboard": false
         }
       ],
