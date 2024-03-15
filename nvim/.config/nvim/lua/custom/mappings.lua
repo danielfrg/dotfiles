@@ -88,28 +88,28 @@ M.harpoon = {
             end,
             "Toggle UI"
         },
-        ["<C-y>"] = {
+        ["<C-u>"] = {
             function()
                 local harpoon = require "harpoon"
                 harpoon:list():select(1)
             end,
             "Go to file 1"
         },
-        ["<C-u>"] = {
+        ["<C-i>"] = {
             function()
                 local harpoon = require "harpoon"
                 harpoon:list():select(2)
             end,
             "Go to file 2"
         },
-        ["<C-i>"] = {
+        ["<C-o>"] = {
             function()
                 local harpoon = require "harpoon"
                 harpoon:list():select(3)
             end,
             "Go to file 2"
         },
-        ["<C-o>"] = {
+        ["<C-p>"] = {
             function()
                 local harpoon = require "harpoon"
                 harpoon:list():select(4)
