@@ -92,110 +92,12 @@
                 "type": "basic"
               }
             ]
-          },
-          {
-            "description": "Hyper + hjkl = arrows",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "h",
-                  "modifiers": {
-                    "mandatory": [
-                      "right_shift",
-                      "right_command",
-                      "right_control",
-                      "right_option"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "left_arrow"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "Hyper + hjkl = arrows",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "j",
-                  "modifiers": {
-                    "mandatory": [
-                      "right_shift",
-                      "right_command",
-                      "right_control",
-                      "right_option"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "down_arrow"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "Hyper + hjkl = arrows",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "k",
-                  "modifiers": {
-                    "mandatory": [
-                      "right_shift",
-                      "right_command",
-                      "right_control",
-                      "right_option"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "up_arrow"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "Hyper + hjkl = arrows",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "l",
-                  "modifiers": {
-                    "mandatory": [
-                      "right_shift",
-                      "right_command",
-                      "right_control",
-                      "right_option"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "right_arrow"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
           }
         ]
       },
       "devices": [
         {
-          "disable_built_in_keyboard_if_exists": false,
-          "fn_function_keys": [],
-          "game_pad_swap_sticks": false,
+          "mouse_swap_xy": false,
           "identifiers": {
             "is_game_pad": false,
             "is_keyboard": true,
@@ -203,19 +105,28 @@
             "product_id": 866,
             "vendor_id": 10730
           },
+          "fn_function_keys": [],
           "ignore": false,
-          "manipulate_caps_lock_led": true,
-          "mouse_flip_horizontal_wheel": false,
+          "disable_built_in_keyboard_if_exists": false,
           "mouse_flip_vertical_wheel": false,
-          "mouse_flip_x": false,
+          "game_pad_swap_sticks": false,
+          "mouse_flip_horizontal_wheel": false,
+          "manipulate_caps_lock_led": true,
           "mouse_flip_y": false,
           "mouse_swap_wheels": false,
-          "mouse_swap_xy": false,
           "simple_modifications": [],
-          "treat_as_built_in_keyboard": false
+          "treat_as_built_in_keyboard": false,
+          "mouse_flip_x": false
         },
         {
-          "disable_built_in_keyboard_if_exists": false,
+          "mouse_swap_xy": false,
+          "identifiers": {
+            "is_game_pad": false,
+            "is_keyboard": true,
+            "is_pointing_device": false,
+            "product_id": 834,
+            "vendor_id": 1452
+          },
           "fn_function_keys": [
             {
               "from": {
@@ -318,29 +229,20 @@
               ]
             }
           ],
-          "game_pad_swap_sticks": false,
-          "identifiers": {
-            "is_game_pad": false,
-            "is_keyboard": true,
-            "is_pointing_device": false,
-            "product_id": 834,
-            "vendor_id": 1452
-          },
           "ignore": false,
-          "manipulate_caps_lock_led": true,
-          "mouse_flip_horizontal_wheel": false,
+          "disable_built_in_keyboard_if_exists": false,
           "mouse_flip_vertical_wheel": false,
-          "mouse_flip_x": false,
+          "game_pad_swap_sticks": false,
+          "mouse_flip_horizontal_wheel": false,
+          "manipulate_caps_lock_led": true,
           "mouse_flip_y": false,
           "mouse_swap_wheels": false,
-          "mouse_swap_xy": false,
           "simple_modifications": [],
-          "treat_as_built_in_keyboard": false
+          "treat_as_built_in_keyboard": false,
+          "mouse_flip_x": false
         },
         {
-          "disable_built_in_keyboard_if_exists": false,
-          "fn_function_keys": [],
-          "game_pad_swap_sticks": false,
+          "mouse_swap_xy": false,
           "identifiers": {
             "is_game_pad": false,
             "is_keyboard": false,
@@ -348,21 +250,21 @@
             "product_id": 834,
             "vendor_id": 1452
           },
+          "fn_function_keys": [],
           "ignore": true,
-          "manipulate_caps_lock_led": false,
-          "mouse_flip_horizontal_wheel": false,
+          "disable_built_in_keyboard_if_exists": false,
           "mouse_flip_vertical_wheel": false,
-          "mouse_flip_x": false,
+          "game_pad_swap_sticks": false,
+          "mouse_flip_horizontal_wheel": false,
+          "manipulate_caps_lock_led": false,
           "mouse_flip_y": false,
           "mouse_swap_wheels": false,
-          "mouse_swap_xy": false,
           "simple_modifications": [],
-          "treat_as_built_in_keyboard": false
+          "treat_as_built_in_keyboard": false,
+          "mouse_flip_x": false
         },
         {
-          "disable_built_in_keyboard_if_exists": false,
-          "fn_function_keys": [],
-          "game_pad_swap_sticks": false,
+          "mouse_swap_xy": false,
           "identifiers": {
             "is_game_pad": false,
             "is_keyboard": true,
@@ -370,21 +272,21 @@
             "product_id": 591,
             "vendor_id": 1452
           },
+          "fn_function_keys": [],
           "ignore": false,
-          "manipulate_caps_lock_led": true,
-          "mouse_flip_horizontal_wheel": false,
+          "disable_built_in_keyboard_if_exists": false,
           "mouse_flip_vertical_wheel": false,
-          "mouse_flip_x": false,
+          "game_pad_swap_sticks": false,
+          "mouse_flip_horizontal_wheel": false,
+          "manipulate_caps_lock_led": true,
           "mouse_flip_y": false,
           "mouse_swap_wheels": false,
-          "mouse_swap_xy": false,
           "simple_modifications": [],
-          "treat_as_built_in_keyboard": false
+          "treat_as_built_in_keyboard": false,
+          "mouse_flip_x": false
         },
         {
-          "disable_built_in_keyboard_if_exists": false,
-          "fn_function_keys": [],
-          "game_pad_swap_sticks": false,
+          "mouse_swap_xy": false,
           "identifiers": {
             "is_game_pad": false,
             "is_keyboard": true,
@@ -392,19 +294,28 @@
             "product_id": 45091,
             "vendor_id": 1133
           },
+          "fn_function_keys": [],
           "ignore": true,
-          "manipulate_caps_lock_led": true,
-          "mouse_flip_horizontal_wheel": false,
+          "disable_built_in_keyboard_if_exists": false,
           "mouse_flip_vertical_wheel": false,
-          "mouse_flip_x": false,
+          "game_pad_swap_sticks": false,
+          "mouse_flip_horizontal_wheel": false,
+          "manipulate_caps_lock_led": true,
           "mouse_flip_y": false,
           "mouse_swap_wheels": false,
-          "mouse_swap_xy": false,
           "simple_modifications": [],
-          "treat_as_built_in_keyboard": false
+          "treat_as_built_in_keyboard": false,
+          "mouse_flip_x": false
         },
         {
-          "disable_built_in_keyboard_if_exists": false,
+          "mouse_swap_xy": false,
+          "identifiers": {
+            "is_game_pad": false,
+            "is_keyboard": true,
+            "is_pointing_device": true,
+            "product_id": 45913,
+            "vendor_id": 1133
+          },
           "fn_function_keys": [
             {
               "from": {
@@ -527,29 +438,20 @@
               ]
             }
           ],
-          "game_pad_swap_sticks": false,
-          "identifiers": {
-            "is_game_pad": false,
-            "is_keyboard": true,
-            "is_pointing_device": true,
-            "product_id": 45913,
-            "vendor_id": 1133
-          },
           "ignore": false,
-          "manipulate_caps_lock_led": false,
-          "mouse_flip_horizontal_wheel": false,
+          "disable_built_in_keyboard_if_exists": false,
           "mouse_flip_vertical_wheel": false,
-          "mouse_flip_x": false,
+          "game_pad_swap_sticks": false,
+          "mouse_flip_horizontal_wheel": false,
+          "manipulate_caps_lock_led": false,
           "mouse_flip_y": false,
           "mouse_swap_wheels": false,
-          "mouse_swap_xy": false,
           "simple_modifications": [],
-          "treat_as_built_in_keyboard": false
+          "treat_as_built_in_keyboard": false,
+          "mouse_flip_x": false
         },
         {
-          "disable_built_in_keyboard_if_exists": false,
-          "fn_function_keys": [],
-          "game_pad_swap_sticks": false,
+          "mouse_swap_xy": false,
           "identifiers": {
             "is_game_pad": false,
             "is_keyboard": false,
@@ -557,21 +459,21 @@
             "product_id": 2094,
             "vendor_id": 1118
           },
+          "fn_function_keys": [],
           "ignore": true,
-          "manipulate_caps_lock_led": false,
-          "mouse_flip_horizontal_wheel": false,
+          "disable_built_in_keyboard_if_exists": false,
           "mouse_flip_vertical_wheel": false,
-          "mouse_flip_x": false,
+          "game_pad_swap_sticks": false,
+          "mouse_flip_horizontal_wheel": false,
+          "manipulate_caps_lock_led": false,
           "mouse_flip_y": false,
           "mouse_swap_wheels": false,
-          "mouse_swap_xy": false,
           "simple_modifications": [],
-          "treat_as_built_in_keyboard": false
+          "treat_as_built_in_keyboard": false,
+          "mouse_flip_x": false
         },
         {
-          "disable_built_in_keyboard_if_exists": false,
-          "fn_function_keys": [],
-          "game_pad_swap_sticks": false,
+          "mouse_swap_xy": false,
           "identifiers": {
             "is_game_pad": false,
             "is_keyboard": true,
@@ -579,14 +481,15 @@
             "product_id": 49948,
             "vendor_id": 1133
           },
+          "fn_function_keys": [],
           "ignore": false,
-          "manipulate_caps_lock_led": true,
-          "mouse_flip_horizontal_wheel": false,
+          "disable_built_in_keyboard_if_exists": false,
           "mouse_flip_vertical_wheel": false,
-          "mouse_flip_x": false,
+          "game_pad_swap_sticks": false,
+          "mouse_flip_horizontal_wheel": false,
+          "manipulate_caps_lock_led": true,
           "mouse_flip_y": false,
           "mouse_swap_wheels": false,
-          "mouse_swap_xy": false,
           "simple_modifications": [
             {
               "from": {
@@ -609,12 +512,11 @@
               ]
             }
           ],
-          "treat_as_built_in_keyboard": false
+          "treat_as_built_in_keyboard": false,
+          "mouse_flip_x": false
         },
         {
-          "disable_built_in_keyboard_if_exists": false,
-          "fn_function_keys": [],
-          "game_pad_swap_sticks": false,
+          "mouse_swap_xy": false,
           "identifiers": {
             "is_game_pad": false,
             "is_keyboard": true,
@@ -622,21 +524,21 @@
             "product_id": 34050,
             "vendor_id": 2652
           },
+          "fn_function_keys": [],
           "ignore": false,
-          "manipulate_caps_lock_led": true,
-          "mouse_flip_horizontal_wheel": false,
+          "disable_built_in_keyboard_if_exists": false,
           "mouse_flip_vertical_wheel": false,
-          "mouse_flip_x": false,
+          "game_pad_swap_sticks": false,
+          "mouse_flip_horizontal_wheel": false,
+          "manipulate_caps_lock_led": true,
           "mouse_flip_y": false,
           "mouse_swap_wheels": false,
-          "mouse_swap_xy": false,
           "simple_modifications": [],
-          "treat_as_built_in_keyboard": false
+          "treat_as_built_in_keyboard": false,
+          "mouse_flip_x": false
         },
         {
-          "disable_built_in_keyboard_if_exists": false,
-          "fn_function_keys": [],
-          "game_pad_swap_sticks": false,
+          "mouse_swap_xy": false,
           "identifiers": {
             "is_game_pad": false,
             "is_keyboard": true,
@@ -644,16 +546,18 @@
             "product_id": 24926,
             "vendor_id": 7504
           },
+          "fn_function_keys": [],
           "ignore": true,
-          "manipulate_caps_lock_led": false,
-          "mouse_flip_horizontal_wheel": false,
+          "disable_built_in_keyboard_if_exists": false,
           "mouse_flip_vertical_wheel": false,
-          "mouse_flip_x": false,
+          "game_pad_swap_sticks": false,
+          "mouse_flip_horizontal_wheel": false,
+          "manipulate_caps_lock_led": false,
           "mouse_flip_y": false,
           "mouse_swap_wheels": false,
-          "mouse_swap_xy": false,
           "simple_modifications": [],
-          "treat_as_built_in_keyboard": false
+          "treat_as_built_in_keyboard": false,
+          "mouse_flip_x": false
         }
       ],
       "fn_function_keys": [
@@ -779,6 +683,368 @@
         }
       ],
       "name": "Default profile",
+      "parameters": {
+        "delay_milliseconds_before_open_device": 1000
+      },
+      "selected": false,
+      "simple_modifications": [],
+      "virtual_hid_keyboard": {
+        "country_code": 0,
+        "indicate_sticky_modifier_keys_state": true,
+        "mouse_key_xy_scale": 100
+      }
+    },
+    {
+      "complex_modifications": {
+        "parameters": {
+          "basic.simultaneous_threshold_milliseconds": 200,
+          "basic.to_delayed_action_delay_milliseconds": 500,
+          "basic.to_if_alone_timeout_milliseconds": 1000,
+          "basic.to_if_held_down_threshold_milliseconds": 500
+        },
+        "rules": [
+          {
+            "description": "Change CapsLock to HYPER/esc",
+            "manipulators": [
+              {
+                "to_if_alone": [
+                  {
+                    "key_code": "escape"
+                  }
+                ],
+                "from": {
+                  "key_code": "caps_lock"
+                },
+                "to": [
+                  {
+                    "key_code": "left_shift",
+                    "modifiers": ["left_command", "left_control", "left_option"]
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "HYPER + space = backspace",
+            "manipulators": [
+              {
+                "from": {
+                  "key_code": "spacebar",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_command",
+                      "left_control",
+                      "left_option",
+                      "left_shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "delete_or_backspace"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "HYPER + HJKL = arrows",
+            "manipulators": [
+              {
+                "from": {
+                  "key_code": "h",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_command",
+                      "left_control",
+                      "left_option",
+                      "left_shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "left_arrow"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "from": {
+                  "key_code": "j",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_command",
+                      "left_control",
+                      "left_option",
+                      "left_shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "down_arrow"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "from": {
+                  "key_code": "k",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_command",
+                      "left_control",
+                      "left_option",
+                      "left_shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "up_arrow"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "from": {
+                  "key_code": "l",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_command",
+                      "left_control",
+                      "left_option",
+                      "left_shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "right_arrow"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          }
+        ]
+      },
+      "devices": [
+        {
+          "mouse_swap_xy": false,
+          "identifiers": {
+            "is_game_pad": false,
+            "is_keyboard": true,
+            "is_pointing_device": false,
+            "product_id": 834,
+            "vendor_id": 1452
+          },
+          "fn_function_keys": [],
+          "ignore": false,
+          "disable_built_in_keyboard_if_exists": false,
+          "mouse_flip_vertical_wheel": false,
+          "game_pad_swap_sticks": false,
+          "mouse_flip_horizontal_wheel": false,
+          "manipulate_caps_lock_led": true,
+          "mouse_flip_y": false,
+          "mouse_swap_wheels": false,
+          "simple_modifications": [],
+          "treat_as_built_in_keyboard": false,
+          "mouse_flip_x": false
+        },
+        {
+          "mouse_swap_xy": false,
+          "identifiers": {
+            "is_game_pad": false,
+            "is_keyboard": false,
+            "is_pointing_device": true,
+            "product_id": 834,
+            "vendor_id": 1452
+          },
+          "fn_function_keys": [],
+          "ignore": true,
+          "disable_built_in_keyboard_if_exists": false,
+          "mouse_flip_vertical_wheel": false,
+          "game_pad_swap_sticks": false,
+          "mouse_flip_horizontal_wheel": false,
+          "manipulate_caps_lock_led": false,
+          "mouse_flip_y": false,
+          "mouse_swap_wheels": false,
+          "simple_modifications": [],
+          "treat_as_built_in_keyboard": false,
+          "mouse_flip_x": false
+        },
+        {
+          "mouse_swap_xy": false,
+          "identifiers": {
+            "is_game_pad": false,
+            "is_keyboard": true,
+            "is_pointing_device": true,
+            "product_id": 45913,
+            "vendor_id": 1133
+          },
+          "fn_function_keys": [],
+          "ignore": false,
+          "disable_built_in_keyboard_if_exists": false,
+          "mouse_flip_vertical_wheel": false,
+          "game_pad_swap_sticks": false,
+          "mouse_flip_horizontal_wheel": false,
+          "manipulate_caps_lock_led": true,
+          "mouse_flip_y": false,
+          "mouse_swap_wheels": false,
+          "simple_modifications": [],
+          "treat_as_built_in_keyboard": false,
+          "mouse_flip_x": false
+        },
+        {
+          "mouse_swap_xy": false,
+          "identifiers": {
+            "is_game_pad": false,
+            "is_keyboard": true,
+            "is_pointing_device": true,
+            "product_id": 45091,
+            "vendor_id": 1133
+          },
+          "fn_function_keys": [],
+          "ignore": true,
+          "disable_built_in_keyboard_if_exists": false,
+          "mouse_flip_vertical_wheel": false,
+          "game_pad_swap_sticks": false,
+          "mouse_flip_horizontal_wheel": false,
+          "manipulate_caps_lock_led": true,
+          "mouse_flip_y": false,
+          "mouse_swap_wheels": false,
+          "simple_modifications": [],
+          "treat_as_built_in_keyboard": false,
+          "mouse_flip_x": false
+        }
+      ],
+      "fn_function_keys": [
+        {
+          "from": {
+            "key_code": "f1"
+          },
+          "to": [
+            {
+              "consumer_key_code": "display_brightness_decrement"
+            }
+          ]
+        },
+        {
+          "from": {
+            "key_code": "f2"
+          },
+          "to": [
+            {
+              "consumer_key_code": "display_brightness_increment"
+            }
+          ]
+        },
+        {
+          "from": {
+            "key_code": "f3"
+          },
+          "to": [
+            {
+              "apple_vendor_keyboard_key_code": "mission_control"
+            }
+          ]
+        },
+        {
+          "from": {
+            "key_code": "f4"
+          },
+          "to": [
+            {
+              "apple_vendor_keyboard_key_code": "spotlight"
+            }
+          ]
+        },
+        {
+          "from": {
+            "key_code": "f5"
+          },
+          "to": [
+            {
+              "consumer_key_code": "dictation"
+            }
+          ]
+        },
+        {
+          "from": {
+            "key_code": "f6"
+          },
+          "to": [
+            {
+              "key_code": "f6"
+            }
+          ]
+        },
+        {
+          "from": {
+            "key_code": "f7"
+          },
+          "to": [
+            {
+              "consumer_key_code": "rewind"
+            }
+          ]
+        },
+        {
+          "from": {
+            "key_code": "f8"
+          },
+          "to": [
+            {
+              "consumer_key_code": "play_or_pause"
+            }
+          ]
+        },
+        {
+          "from": {
+            "key_code": "f9"
+          },
+          "to": [
+            {
+              "consumer_key_code": "fast_forward"
+            }
+          ]
+        },
+        {
+          "from": {
+            "key_code": "f10"
+          },
+          "to": [
+            {
+              "consumer_key_code": "mute"
+            }
+          ]
+        },
+        {
+          "from": {
+            "key_code": "f11"
+          },
+          "to": [
+            {
+              "consumer_key_code": "volume_decrement"
+            }
+          ]
+        },
+        {
+          "from": {
+            "key_code": "f12"
+          },
+          "to": [
+            {
+              "consumer_key_code": "volume_increment"
+            }
+          ]
+        }
+      ],
+      "name": "Goku",
       "parameters": {
         "delay_milliseconds_before_open_device": 1000
       },

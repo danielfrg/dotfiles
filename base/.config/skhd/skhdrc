@@ -148,10 +148,10 @@
 # My configs
 
 # change window focus within space
-hyper - j : yabai -m window --focus south
-hyper - k : yabai -m window --focus north
-hyper - h : yabai -m window --focus west
-hyper - l : yabai -m window --focus east
+ctrl + alt - j : yabai -m window --focus south
+ctrl + alt - k : yabai -m window --focus north
+ctrl + alt - h : yabai -m window --focus west
+ctrl + alt - l : yabai -m window --focus east
 
 # rotate tree
 hyper - r : yabai -m space --rotate 90
