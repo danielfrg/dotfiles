@@ -1,0 +1,71 @@
+;; edn spec https://github.com/edn-format/edn
+{
+;;;; define things
+
+ :profiles {
+    :Goku {:default true
+           :sim 200
+           :delay 500
+           :alone 1000
+           :held 500
+    }
+  }
+
+ :applications {:vim-mode-disabled-application ["^com\\.apple\\.Terminal$",
+                                                "^com\\.googlecode\\.iterm2$",
+                                                "^co\\.zeit\\.hyperterm$",
+                                                "^co\\.zeit\\.hyper$",
+                                                "^io\\.alacritty$",
+                                                "^net\\.kovidgoyal\\.kitty$",
+                                                "^org\\.vim\\.",
+                                                "^com\\.qvacua\\.VimR$"
+  ]}
+
+;; layers are basically "hyper" keys
+;; press this in combination with something else and depending on your rule, make things happen
+:layers {
+    ; Don't use a layer for the hyper key becase I use the modified keys on apps like keyboard maestro and skhd
+    ; :hyper-mode {:key :caps_lock :alone {:key :escape}} ;; make the caps_lock key the hyper key
+} ;; layers
+
+:simlayers {:vi-mode {:key :d}
+             :vi-visual-mode {:key :v :condi :!vim-mode-disabled-application}}
+
+ :main [
+    {:des "Change CapsLock to HYPER/esc"
+     :rules [[:caps_lock :!COTleft_shift nil {:alone [:escape]}]]}
+
+    {:des "HYPER + space = backspace"
+     :rules [[:!!spacebar :delete_or_backspace]]}
+
+    {:des "HYPER + HJKL = arrows"
+     :rules [
+        [:!!h :left_arrow]
+        [:!!j :down_arrow]
+        [:!!k :up_arrow]
+        [:!!l :right_arrow]
+    ]}
+
+    ; {:des "Vi Mode [D as Trigger Key]"
+    ;      :rules [[:##j :down_arrow :vi-mode]
+    ;              [:##k :up_arrow :vi-mode]
+    ;              [:##h :left_arrow :vi-mode]
+    ;              [:##l :right_arrow :vi-mode]
+    ;              [:##b :!Oleft_arrow :vi-mode]
+    ;              [:##w :!Oright_arrow :vi-mode]
+    ;              [:##0 :!Ta :vi-mode]
+    ;              [:##4 :!Te :vi-mode]]}
+
+    ; {:des "Hyper Mode - Navigation [VI style]"
+    ;      :rules [:hyper-mode
+    ;              [:j :down_arrow]
+    ;              [:k :up_arrow]
+    ;              [:h :left_arrow]
+    ;              [:l :right_arrow]
+    ;              [:b :!Oleft_arrow]
+    ;              [:w :!Oright_arrow]
+    ;              [:u :home]
+    ;              [:i :end]
+    ; ]}
+ ]
+}

@@ -42,10 +42,10 @@ M.abc = {
         ["<leader>d"] = { "\"_d", "Delete to void" },
 
         -- tmux navigation
-        ["<C-h>"] = { "<cmd> TmuxNavigateLeft<CR>", "window left" },
-        ["<C-l>"] = { "<cmd> TmuxNavigateRight<CR>", "window right" },
-        ["<C-j>"] = { "<cmd> TmuxNavigateDown<CR>", "window down" },
-        ["<C-k>"] = { "<cmd> TmuxNavigateUp<CR>", "window up" },
+        -- ["<C-h>"] = { "<cmd> TmuxNavigateLeft<CR>", "window left" },
+        -- ["<C-l>"] = { "<cmd> TmuxNavigateRight<CR>", "window right" },
+        -- ["<C-j>"] = { "<cmd> TmuxNavigateDown<CR>", "window down" },
+        -- ["<C-k>"] = { "<cmd> TmuxNavigateUp<CR>", "window up" },
 
         -- tmux sessionizer
         ["<C-f>"] = { "<cmd> silent !tmux neww tmux-sessionizer<CR>" },
@@ -88,33 +88,33 @@ M.harpoon = {
             end,
             "Toggle UI"
         },
-        ["<C-u>"] = {
+        ["<C-h>"] = {
             function()
                 local harpoon = require "harpoon"
                 harpoon:list():select(1)
             end,
             "Go to file 1"
         },
-        ["<C-i>"] = {
+        ["<C-j>"] = {
             function()
                 local harpoon = require "harpoon"
                 harpoon:list():select(2)
             end,
             "Go to file 2"
         },
-        ["<C-o>"] = {
+        ["<C-k>"] = {
             function()
                 local harpoon = require "harpoon"
                 harpoon:list():select(3)
             end,
-            "Go to file 2"
+            "Go to file 3"
         },
-        ["<C-p>"] = {
+        ["<C-l>"] = {
             function()
                 local harpoon = require "harpoon"
                 harpoon:list():select(4)
             end,
-            "Go to file 2"
+            "Go to file 4"
         },
         ["<C-S-P>"] = {
             function()
