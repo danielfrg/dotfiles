@@ -1,7 +1,4 @@
---type conform.options
 local options = {
-    lsp_fallback = true,
-
     formatters_by_ft = {
         python = { "ruff_format" },
 
@@ -10,6 +7,8 @@ local options = {
         html = { "prettier" },
 
         terraform = { "terraform_fmt" },
+
+        lua = { "stylua" },
 
         ["_"] = { "trim_whitespace" },
     },
