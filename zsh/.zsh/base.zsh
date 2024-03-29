@@ -127,7 +127,10 @@ zle -N project_switcher{,}
 # ctrl-f for tmux-sessionizer
 bindkey -s ^f "tmux-sessionizer\n"
 
-# bindkey -s ^t "tmux-sessionizer\n"
+# tmuxifier
+export PATH="$HOME/.tmuxifier/bin:$PATH"
+export TMUXIFIER_LAYOUT_PATH="$HOME/code/dotfiles/tmuxifier/layouts"
+eval "$(tmuxifier init -)"
 
 alias ..="cd .."
 alias ...="cd ../.."
