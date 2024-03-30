@@ -1,12 +1,13 @@
 return {
     {
         "tpope/vim-fugitive",
-        event = "User FilePost",
+        event = "VeryLazy",
     },
 
-    "tpope/vim-surround",
-
-    { "nvim-tree/nvim-web-devicons", lazy = true },
+    {
+        "tpope/vim-surround",
+        event = "User FilePost",
+    },
 
     {
         "famiu/bufdelete.nvim",
@@ -32,6 +33,6 @@ return {
 
     {
         "ThePrimeagen/vim-be-good",
-        lazy = false
+        event = "VeryLazy",
     },
 }

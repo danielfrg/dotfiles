@@ -1,3 +1,5 @@
+-- Overwrite the nvchad defaults
+
 return {
     "nvim-treesitter/nvim-treesitter",
     opts = {
