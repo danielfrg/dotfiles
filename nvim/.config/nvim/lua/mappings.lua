@@ -31,21 +31,24 @@ map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-u>", "<C-u>zz")
 
 -- yank to system clipboard
-map("n", "<leader>y", "\"+y", { desc = "Yank to clipboard" })
-map("n", "<leader>Y", "\"+Y", { desc = "Yank to clipboard" })
+map("n", "<leader>y", '"+y', { desc = "Yank to clipboard" })
+map("n", "<leader>Y", '"+Y', { desc = "Yank to clipboard" })
 
 -- paste without changing current register
-map("n", "<leader>p", "\"*p", { desc = "Paste from clipboard" })
+map("n", "<leader>p", '"*p', { desc = "Paste from clipboard" })
+
+map("v", ">", ">gv", { desc = "Indent up" })
+map("v", "<", "<gv", { desc = "Indent down" })
 
 -- Move up or down selected lines
 map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move lines up" })
 map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move lines down" })
 
 -- yank to system clipboard
-map("v", "<leader>y", "\"+y", { desc = "Yank to clipboard" })
+map("v", "<leader>y", '"+y', { desc = "Yank to clipboard" })
 
 -- delete to void
-map("v", "<leader>d", "\"_d", { desc = "Delete to void" })
+map("v", "<leader>d", '"_d', { desc = "Delete to void" })
 
 -- buffers
 map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
@@ -55,6 +58,7 @@ map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Last Buffer" })
 map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Last Buffer" })
 map("n", "<S-x>", "<cmd>e #<cr>", { desc = "Switch to Last Buffer" })
+map("n", "<leader>x", "<cmd>Bdelete<cr>", { desc = "Close buffer" })
 map("n", "<leader>c", "<cmd>Bdelete<cr>", { desc = "Close buffer" })
 
 -- tmux navigation
@@ -76,10 +80,11 @@ map("n", "<leader>cl", "<cmd>Lazy<cr>", { desc = "Lazy" })
 -- conform
 nomap("n", "<leader>fm")
 map("n", "<leader>cf", function()
-    require("conform").format { lsp_fallback = true }
+  require("conform").format { lsp_fallback = true }
 end, { desc = "Format Files" })
 
 -- telescope - find
+map("n", "<leader><space>", "<cmd>Telescope find_files hidden=true<CR>", { desc = "Telescope Find files" })
 map("n", "<leader>ff", "<cmd>Telescope find_files hidden=true<CR>", { desc = "Telescope Find files" })
 map("n", "<leader>:", "<cmd>Telescope command_history<cr>", { desc = "Command History" })
 map("n", "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", { desc = "Buffers" })
@@ -105,61 +110,45 @@ nomap("n", "<leader>gt")
 map("n", "<leader>gs", "<cmd>Telescope git_status<CR>", { desc = "Telescope Git Status" })
 
 -- Harpoon
-map("n", "<leader>a",
-    function()
-        local harpoon = require "harpoon"
-        harpoon:list():append()
-    end,
-    { desc = "Add file to harpoon", })
+map("n", "<leader>a", function()
+  local harpoon = require "harpoon"
+  harpoon:list():append()
+end, { desc = "Add file to harpoon" })
 
-map("n", "<C-e>",
-    function()
-        local harpoon = require "harpoon"
-        harpoon.ui:toggle_quick_menu(harpoon:list())
-    end,
-    { desc = "Toggle UI" })
+map("n", "<C-e>", function()
+  local harpoon = require "harpoon"
+  harpoon.ui:toggle_quick_menu(harpoon:list())
+end, { desc = "Toggle UI" })
 
-map("n", "<C-h>",
-    function()
-        local harpoon = require "harpoon"
-        harpoon:list():select(1)
-    end,
-    { desc = "Go to file 1" })
+map("n", "<C-h>", function()
+  local harpoon = require "harpoon"
+  harpoon:list():select(1)
+end, { desc = "Go to file 1" })
 
-map("n", "<C-j>",
-    function()
-        local harpoon = require "harpoon"
-        harpoon:list():select(2)
-    end,
-    { desc = "Go to file 2" })
+map("n", "<C-j>", function()
+  local harpoon = require "harpoon"
+  harpoon:list():select(2)
+end, { desc = "Go to file 2" })
 
-map("n", "<C-k>",
-    function()
-        local harpoon = require "harpoon"
-        harpoon:list():select(3)
-    end,
-    { desc = "Go to file 3" })
+map("n", "<C-k>", function()
+  local harpoon = require "harpoon"
+  harpoon:list():select(3)
+end, { desc = "Go to file 3" })
 
-map("n", "<C-l>",
-    function()
-        local harpoon = require "harpoon"
-        harpoon:list():select(4)
-    end,
-    { desc = "Go to file 4" })
+map("n", "<C-l>", function()
+  local harpoon = require "harpoon"
+  harpoon:list():select(4)
+end, { desc = "Go to file 4" })
 
-map("n", "<C-S-P>",
-    function()
-        local harpoon = require "harpoon"
-        harpoon:list():prev()
-    end,
-    { desc = "Go to previous file" })
+map("n", "<C-S-P>", function()
+  local harpoon = require "harpoon"
+  harpoon:list():prev()
+end, { desc = "Go to previous file" })
 
-map("n", "<C-S-N>",
-    function()
-        local harpoon = require "harpoon"
-        harpoon:list():next()
-    end,
-    { desc = "Go to file next file" })
+map("n", "<C-S-N>", function()
+  local harpoon = require "harpoon"
+  harpoon:list():next()
+end, { desc = "Go to file next file" })
 
 -- tmux sessionizer
 map("n", "<C-f>", "<cmd> silent !tmux neww tmux-sessionizer<CR>")

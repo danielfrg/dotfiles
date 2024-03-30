@@ -21,5 +21,6 @@ return {
             --   "python"
             -- },
         },
+        highlight = { enable = true },
     },
 }

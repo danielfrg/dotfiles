@@ -6,21 +6,28 @@ return {
 
     "tpope/vim-surround",
 
+    { "nvim-tree/nvim-web-devicons", lazy = true },
+
+    {
+        "famiu/bufdelete.nvim",
+        event = "VeryLazy"
+    },
+
     {
         "christoomey/vim-tmux-navigator",
-        lazy = false
+        event = "VeryLazy"
     },
 
     {
         "ThePrimeagen/harpoon",
         branch = "harpoon2",
-        lazy = false,
+        event = "VeryLazy",
         opts = {},
     },
 
     {
         "mbbill/undotree",
-        lazy = false,
+        event = "VeryLazy",
     },
 
     {

@@ -7,10 +7,11 @@ local M = {}
 M.ui = {
     -- theme = "onedark",
     theme = 'catppuccin',
-    nvdash = {
-        load_on_startup = true,
-        header = { "                                 " }
-    },
+
+    -- nvdash = {
+    --     load_on_startup = true,
+    --     header = { "                                 " }
+    -- },
 
     -- hl_override = {
     -- 	Comment = { italic = true },
