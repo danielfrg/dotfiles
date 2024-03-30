@@ -63,26 +63,11 @@ map("n", "<leader>c", "<cmd>Bdelete<cr>", { desc = "Close buffer" })
 -- map("n", "<C-j>", "<cmd> TmuxNavigateDown<CR>", { desc = "window down"})
 -- map("n", "<C-k>", "<cmd> TmuxNavigateUp<CR>", { desc = "window up"})
 
+-- tmux sessionizer
+map("n", "<C-f>", "<cmd> silent !tmux neww tmux-sessionizer<CR>")
+
 --------------------------------------------------------------------------------
 -- PLUGINS
 
--- LSP
--- See other maps in lspconfig.lua
--- nomap("n", "<leader>q")
-
--- -- Lazy
--- map("n", "<leader>cl", "<cmd>Lazy<cr>", { desc = "Lazy" })
-
--- -- conform
--- -- nomap("n", "<leader>fm")
--- map("n", "<leader>cf", function()
---   require("conform").format { lsp_fallback = true }
--- end, { desc = "Format Files" })
-
-
--- -- git
--- map("n", "<leader>gg", "<cmd>LazyGit<CR>", { desc = "Lazygit (root dir)" })
--- -- nomap("n", "<leader>cm")
--- map("n", "<leader>gc", "<cmd>Telescope git_commits<CR>", { desc = "Telescope Git commits" })
--- -- nomap("n", "<leader>gt")
--- map("n", "<leader>gs", "<cmd>Telescope git_status<CR>", { desc = "Telescope Git Status" })
+-- undotree
+map("n", "<leader>u", "<cmd>UndotreeToggle<CR>", { desc = "Open undotree" })

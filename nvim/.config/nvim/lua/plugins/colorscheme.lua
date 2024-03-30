@@ -14,13 +14,20 @@ return {
 
     config = function()
       require('kanagawa').setup({
-        compile = true,  -- enable compiling the colorscheme
+        compile = true, -- enable compiling the colorscheme
 
-        theme = "wave",  -- Load "wave" theme when 'background' option is not set
-        background = {   -- map the value of 'background' option to a theme
-          dark = "wave", -- try "dragon" !
-          light = "lotus"
-        },
+        theme = "wave", -- Load "wave" theme when 'background' option is not set
+        keywordStyle = { italic = true },
+
+        colors = {
+          theme = {
+            all = {
+              ui = {
+                bg_gutter = "none"
+              }
+            }
+          }
+        }
       })
 
       vim.cmd([[colorscheme kanagawa-wave]])

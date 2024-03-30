@@ -35,8 +35,8 @@ return {
             },
 
             buffer_visible = {
-                fg = '#ff0000',
-                bg = '#ff0000',
+                fg = '#DCD7BB',
+                bg = '#363646',
             },
             buffer_selected = {
                 fg = '#DCD7BB',
@@ -47,8 +47,25 @@ return {
                 fg = '#7B7970',
                 bg = '#16161E',
             },
+            close_button_visible = {
+                fg = '#7B7970',
+                bg = '#16161E',
+            },
             close_button_selected = {
                 fg = '#DCD7BB',
+                bg = '#363646',
+            },
+
+            modified = {
+                -- fg = '#7B7970',
+                bg = '#16161E',
+            },
+            modified_visible = {
+                -- fg = '#7B7970',
+                bg = '#16161E',
+            },
+            modified_selected = {
+                -- fg = '#DCD7BB',
                 bg = '#363646',
             },
 
@@ -56,6 +73,8 @@ return {
                 fg = '#16161E',
                 bg = '#16161E',
             },
+
+
         }
     },
 
