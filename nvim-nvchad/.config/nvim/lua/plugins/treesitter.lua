@@ -1,6 +1,7 @@
+-- Overwrite the nvchad defaults
+
 return {
     "nvim-treesitter/nvim-treesitter",
-    event = "VeryLazy",
     opts = {
         ensure_installed = {
             "bash",
@@ -22,9 +23,6 @@ return {
             --   "python"
             -- },
         },
-        highlight = {
-            enable = true,
-            use_languagetree = true,
-        },
+        highlight = { enable = true },
     },
 }

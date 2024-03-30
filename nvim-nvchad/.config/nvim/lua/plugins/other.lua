@@ -1,5 +1,15 @@
 return {
     {
+        "tpope/vim-fugitive",
+        event = "VeryLazy",
+    },
+
+    {
+        "tpope/vim-surround",
+        event = "User FilePost",
+    },
+
+    {
         "famiu/bufdelete.nvim",
         event = "VeryLazy"
     },

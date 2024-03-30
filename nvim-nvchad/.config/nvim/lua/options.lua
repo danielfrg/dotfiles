@@ -1,3 +1,5 @@
+-- require "nvchad.options"
+
 -- Remap space as leader key
 vim.g.mapleader = " "
 

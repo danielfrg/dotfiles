@@ -1,9 +1,11 @@
+-- Overwrite the nvchad defaults
+
 return {
     {
         "lewis6991/gitsigns.nvim",
-        event = "VeryLazy",
+        event = "User FilePost",
         opts = function()
-            local options = {
+            return {
                 signs = {
                     add = { text = "│" },
                     change = { text = "│" },
@@ -27,9 +29,9 @@ return {
                     map("n", "<leader>gb", gs.blame_line, opts "Blame Line")
                 end,
             }
-            return options
         end,
         config = function(_, opts)
+            dofile(vim.g.base46_cache .. "git")
             require("gitsigns").setup(opts)
         end,
     }

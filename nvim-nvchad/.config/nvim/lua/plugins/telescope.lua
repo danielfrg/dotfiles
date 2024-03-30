@@ -19,8 +19,9 @@ return {
             map("n", "<leader>:", "<cmd>Telescope command_history<CR>", { desc = "Command History" })
 
             -- File Browser
-            map("n", "<space>fb", ":Telescope file_browser hidden=true<CR>")
-            map("n", "<space>fB", ":Telescope file_browser path=%:p:h select_buffer=true hidden=true<CR>")
+            map("n", "<space>fb", ":Telescope file_browser hidden=true<CR>", { desc = "Telescope File Browser" })
+            map("n", "<space>fB", ":Telescope file_browser path=%:p:h select_buffer=true hidden=true<CR>",
+                { desc = "Telescope File Browser (CWD)" })
 
             -- Search
             map("n", "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", { desc = "Buffer" })

@@ -1,16 +1,5 @@
 return {
     {
-        "williamboman/mason.nvim",
-        -- event = "VeryLazy",
-        cmd = { "Mason", "MasonInstall", "MasonUpdate" },
-        keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
-        build = ":MasonUpdate",
-
-        config = function()
-            require("mason").setup()
-        end
-    },
-    {
         "williamboman/mason-lspconfig.nvim",
         event = "VeryLazy",
         dependencies = { "mason.nvim" },
@@ -45,6 +34,17 @@ return {
         config = function(_, opts)
             require("mason-lspconfig").setup(opts)
         end
-    }
+    },
 
+    {
+        "williamboman/mason.nvim",
+        -- event = "VeryLazy",
+        cmd = { "Mason", "MasonInstall", "MasonUpdate" },
+        keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
+        build = ":MasonUpdate",
+
+        config = function()
+            require("mason").setup()
+        end
+    },
 }

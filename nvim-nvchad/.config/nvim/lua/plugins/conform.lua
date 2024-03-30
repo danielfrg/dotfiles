@@ -2,7 +2,6 @@ return {
     {
         "stevearc/conform.nvim",
         event = 'BufWritePre', -- uncomment for format on save
-
         opts = function()
             return {
                 formatters_by_ft = {
@@ -33,11 +32,6 @@ return {
 
         config = function(_, opts)
             require("conform").setup(opts)
-
-            local map = vim.keymap.set
-            map("n", "<leader>cf", function()
-                require("conform").format { lsp_fallback = true }
-            end, { desc = "Format Files" })
         end,
     },
 }
