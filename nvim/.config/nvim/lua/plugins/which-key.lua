@@ -7,10 +7,13 @@ return {
       local wk = require('which-key')
       wk.setup(opts)
       wk.register({
-        ['f'] = { name = "Find" },
-        ['g'] = { name = "Git" },
-        ['s'] = { name = "Search" },
-      }, { prefix = "<leader>" })
+        ['<leader>c'] = { name = "Code" },
+        ['<leader>f'] = { name = "Find" },
+        ['<leader>g'] = { name = "Git" },
+        ['g'] = { name = "Goto" },
+        ['<leader>h'] = { name = "Harpoon" },
+        ['<leader>s'] = { name = "Search" },
+      })
     end,
   },
 }

@@ -1,12 +1,19 @@
 -- Remap space as leader key
-vim.g.mapleader = " "
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
+vim.g.have_nerd_font = true
 
 vim.opt.cmdheight = 1
+
+-- don't show the mode, since it's already in the status line
+vim.opt.showmode = false
 
 -- make line numbers default
 vim.opt.number = true
 vim.opt.relativenumber = true
 
+-- show which line your cursor is on
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = 'line,number'
 
@@ -27,6 +34,8 @@ vim.opt.mouse = "a"
 vim.opt.hlsearch = true
 -- highligh as you type
 vim.opt.incsearch = true
+-- preview substitutions as you type
+vim.opt.inccommand = 'split'
 
 -- sync/nosync clipboard between OS and Neovim
 vim.opt.clipboard = "" -- nosync
@@ -49,7 +58,7 @@ vim.o.smartcase = true
 vim.opt.termguicolors = true
 
 -- scroll padding
-vim.opt.scrolloff = 8
+vim.opt.scrolloff = 10
 vim.opt.sidescrolloff = 8
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
@@ -60,10 +69,15 @@ vim.opt.colorcolumn = "80"
 vim.o.updatetime = 50
 vim.o.timeoutlen = 300
 
--- force all horizontal splits to go below current window
-vim.opt.splitbelow = true
--- force all vertical splits to go to the right of current window
+-- Configure how new splits should be opened
 vim.opt.splitright = true
+vim.opt.splitbelow = true
+
+-- Sets how neovim will display certain whitespace characters in the editor.
+--  See `:help 'list'`
+--  and `:help 'listchars'`
+vim.opt.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- so that `` is visible in markdown files
 vim.opt.conceallevel = 0

@@ -3,14 +3,14 @@ return {
         "lewis6991/gitsigns.nvim",
         event = "VeryLazy",
         opts = function()
-            local options = {
+            return {
                 signs = {
-                    add = { text = "│" },
-                    change = { text = "│" },
-                    delete = { text = "󰍵" },
+                    add = { text = "+" },
+                    change = { text = "~" },
+                    delete = { text = "_" },
                     topdelete = { text = "‾" },
                     changedelete = { text = "~" },
-                    untracked = { text = "│" },
+                    untracked = { text = "?" },
                 },
 
                 on_attach = function(bufnr)
@@ -27,10 +27,9 @@ return {
                     map("n", "<leader>gb", gs.blame_line, opts "Blame Line")
                 end,
             }
-            return options
         end,
-        config = function(_, opts)
-            require("gitsigns").setup(opts)
-        end,
+        -- config = function(_, opts)
+        --     require("gitsigns").setup(opts)
+        -- end,
     }
 }
