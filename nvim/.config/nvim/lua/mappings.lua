@@ -58,10 +58,10 @@ map("n", "<leader>x", "<cmd>Bdelete<cr>", { desc = "Close buffer" })
 map("n", "<leader>c", "<cmd>Bdelete<cr>", { desc = "Close buffer" })
 
 -- tmux navigation
--- map("n", "<C-h>", "<cmd> TmuxNavigateLeft<CR>", { desc = "window left"})
--- map("n", "<C-l>", "<cmd> TmuxNavigateRight<CR>", { desc = "window right"})
--- map("n", "<C-j>", "<cmd> TmuxNavigateDown<CR>", { desc = "window down"})
--- map("n", "<C-k>", "<cmd> TmuxNavigateUp<CR>", { desc = "window up"})
+map("n", "<C-h>", "<cmd> TmuxNavigateLeft<CR>", { desc = "window left" })
+map("n", "<C-l>", "<cmd> TmuxNavigateRight<CR>", { desc = "window right" })
+map("n", "<C-j>", "<cmd> TmuxNavigateDown<CR>", { desc = "window down" })
+map("n", "<C-k>", "<cmd> TmuxNavigateUp<CR>", { desc = "window up" })
 
 -- tmux sessionizer
 map("n", "<C-f>", "<cmd> silent !tmux neww tmux-sessionizer<CR>")
@@ -70,4 +70,4 @@ map("n", "<C-f>", "<cmd> silent !tmux neww tmux-sessionizer<CR>")
 -- PLUGINS
 
 -- undotree
-map("n", "<leader>u", "<cmd>UndotreeToggle<CR>", { desc = "Open undotree" })
+map("n", "<leader>cu", "<cmd>UndotreeToggle<CR>", { desc = "Open undotree" })

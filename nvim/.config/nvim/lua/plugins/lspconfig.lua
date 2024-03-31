@@ -35,6 +35,30 @@ local on_attach = function(client, bufnr)
         end,
         opts "Source Action"
     )
+    map("n", "<leader>co",
+        function()
+            vim.lsp.buf.code_action({
+                apply = true,
+                context = {
+                    only = { "source.organizeImports.ts" },
+                    diagnostics = {},
+                },
+            })
+        end,
+        opts "Organize Imports"
+    )
+    map("n", "<leader>cR",
+        function()
+            vim.lsp.buf.code_action({
+                apply = true,
+                context = {
+                    only = { "source.removeUnused.ts" },
+                    diagnostics = {},
+                },
+            })
+        end,
+        opts "Remove Unused Imports"
+    )
     map("n", "<leader>cr", function() require "nvchad.lsp.renamer" () end, opts "Lsp NvRenamer")
 
     -- setup signature popup
@@ -42,6 +66,7 @@ local on_attach = function(client, bufnr)
         require("nvchad.lsp.signature").setup(client, bufnr)
     end
 
+    -- Python
     if client.name == 'ruff_lsp' then
         -- Disable hover in favor of Pyright
         client.server_capabilities.hoverProvider = false
@@ -52,6 +77,8 @@ end
 return {
     "neovim/nvim-lspconfig",
     event = "VeryLazy",
+
+    dependencies = { "hrsh7th/cmp-nvim-lsp", "hrsh7th/nvim-cmp" },
 
     config = function()
         -- Neovim LSP config UI
@@ -66,6 +93,8 @@ return {
             silent = true,
         })
 
+        local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
         -- Plugin config
         local lspconfig = require("lspconfig")
         local servers = { "html", "cssls" }
@@ -74,16 +103,14 @@ return {
         for _, lsp in ipairs(servers) do
             lspconfig[lsp].setup {
                 on_attach = on_attach,
-                -- on_init = on_init,
-                -- capabilities = capabilities,
+                capabilities = capabilities,
             }
         end
 
         -- typescript
         lspconfig.tsserver.setup {
             on_attach = on_attach,
-            -- on_init = on_init,
-            -- capabilities = capabilities,
+            capabilities = capabilities,
             init_options = {
                 preferences = {
                     disableSuggestions = true,
@@ -95,6 +122,7 @@ return {
         lspconfig.pyright.setup {
             filetypes = { "python" },
             on_attach = on_attach,
+            capabilities = capabilities,
             settings = {
                 pyright = {
                     -- disable to use ruff import organizer
@@ -112,6 +140,7 @@ return {
         lspconfig.ruff_lsp.setup {
             filetypes = { "python" },
             on_attach = on_attach,
+            capabilities = capabilities,
             init_options = {
                 settings = {
                     -- Any extra CLI arguments for `ruff` go here.

@@ -3,16 +3,27 @@ return {
     event = "VeryLazy",
     opts = {
         ensure_installed = {
-            "bash",
+            -- Python
             "python",
+            "ninja",
+            "rst",
+            "toml",
+
+            -- Web
             "html",
             "css",
             "javascript",
+            "jsx",
             "typescript",
             "tsx",
+
             "markdown",
             "markdown_inline",
+            "bash",
             "terraform",
+            "yaml",
+
+            -- nvim
             "vim",
             "lua",
         },

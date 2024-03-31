@@ -35,6 +35,7 @@ return {
 
                     -- Other
                     "terraformls",
+                    "ansiblels",
 
                     -- Lua
                     "lua_ls",
