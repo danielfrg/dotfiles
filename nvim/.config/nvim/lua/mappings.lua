@@ -11,9 +11,24 @@ map("n", "<leader>s", "<cmd>w!<cr><esc>", { desc = "Save file" })
 map("n", "<leader>n", "<cmd>enew<cr>", { desc = "New file" })
 map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>")
 
+-- Disable arrow keys in normal mode
+map('n', '<left>', '<cmd>echo "Use h to move!"<CR>')
+map('n', '<right>', '<cmd>echo "Use l to move!"<CR>')
+map('n', '<up>', '<cmd>echo "Use k to move!"<CR>')
+map('n', '<down>', '<cmd>echo "Use j to move!"<CR>')
+-- And in insert mode
+map('i', '<left>', '<cmd>echo "Use h to move!"<CR>')
+map('i', '<right>', '<cmd>echo "Use l to move!"<CR>')
+map('i', '<up>', '<cmd>echo "Use k to move!"<CR>')
+map('i', '<down>', '<cmd>echo "Use j to move!"<CR>')
+
 -- Remove search highlights
 map("n", "<Esc>", ":noh<return><esc>")
 map("n", "<C-c>", ":noh<return><esc>")
+
+-- better move page up and down (keep cursor in the middle)
+map("n", "<C-d>", "<C-d>zz")
+map("n", "<C-u>", "<C-u>zz")
 
 -- keep cursor in the middle when searching
 map("n", "n", "nzzzv")
@@ -21,10 +36,6 @@ map("n", "N", "Nzzzv")
 
 -- rename
 map("n", "<leader>rr", ":%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>", { desc = "Replace current word" })
-
--- better move page up and down (keep cursor in the middle)
-map("n", "<C-d>", "<C-d>zz")
-map("n", "<C-u>", "<C-u>zz")
 
 -- yank to system clipboard
 map("n", "<leader>y", '"+y', { desc = "Yank to clipboard" })
