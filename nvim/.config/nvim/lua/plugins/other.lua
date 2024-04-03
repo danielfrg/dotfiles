@@ -8,15 +8,26 @@ return {
         end,
     },
 
+    {
+        "nvim-tree/nvim-web-devicons",
+        lazy = true
+    },
+
     -- Detect tabstop and shiftwidth automatically
-    { "tpope/vim-sleuth" },
+    {
+        "tpope/vim-sleuth",
+        event = "VeryLazy",
+    },
 
     -- "gc" to comment visual regions/lines
-    { "numToStr/Comment.nvim", event = "VeryLazy" },
+    {
+        "numToStr/Comment.nvim",
+        event = "VeryLazy",
+    },
 
     {
         "folke/todo-comments.nvim",
-        event = "VimEnter",
+        event = "VeryLazy",
         dependencies = { "nvim-lua/plenary.nvim" },
         opts = { signs = false }
     },
