@@ -19,7 +19,8 @@ return {
 
     {
         "tpope/vim-surround",
-        event = "User FilePost",
+        event = "VeryLazy",
+        -- event = "User FilePost",
     },
 
     {

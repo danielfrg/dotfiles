@@ -13,6 +13,7 @@ return {
         opts = function()
             return {
                 defaults = {
+                    file_ignore_patterns = { ".git/" },
                     vimgrep_arguments = {
                         "rg",
                         "-L",
@@ -27,6 +28,13 @@ return {
                     file_previewer = require 'telescope.previewers'.vim_buffer_cat.new,
                     grep_previewer = require 'telescope.previewers'.vim_buffer_vimgrep.new,
                     qflist_previewer = require 'telescope.previewers'.vim_buffer_qflist.new,
+                },
+                pickers = {
+                    live_grep = {
+                        additional_args = function(opts)
+                            return { "--hidden" }
+                        end
+                    },
                 },
                 extensions = {
                     file_browser = {
@@ -59,10 +67,10 @@ return {
             map("n", "<leader><space>", "<cmd>Telescope find_files hidden=true<CR>", { desc = "Find Files" })
             map("n", "<leader>ff", "<cmd>Telescope find_files hidden=true<CR>", { desc = "Find Files" })
             map("n", "<leader>fF", "<cmd>Telescope find_files hidden=true cwd=false<CR>", { desc = "Find Files (cwd)" })
-            map('n', '<leader>fw', builtin.grep_string, { desc = 'Find current [W]ord' })
-            map('n', '<leader>fW', builtin.live_grep, { desc = 'Find current [W]ord' })
+            map('n', '<leader>fw', "<cmd>Telescope live_grep hidden=true<CR>", { desc = 'Find grep' })
+            map('n', '<leader>fW', "<cmd>Telescope grep_string hidden=true<CR>", { desc = 'Find current [W]ord' })
             -- map("n", '<leader><leader>', <cmd>Telescope buffers sort_mru=true sort_lastused=true<CR>, { desc = 'Find existing buffers' })
-            map("n", "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<CR>", { desc = "Buffers" })
+            -- map("n", "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<CR>", { desc = "Buffers" })
             map("n", "<leader>fg", "<cmd>Telescope git_files<CR>", { desc = "Find Files (git-files)" })
             map("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", { desc = "Recent/old Files" })
             map("n", "<leader>fr", "<cmd>Telescope oldfiles<CR>", { desc = "Recent/old Files" })
@@ -71,8 +79,9 @@ return {
             map('n', '<leader>sk', builtin.keymaps, { desc = 'Find Keymaps' })
 
             -- File Browser
-            map("n", "<space>fb", ":Telescope file_browser hidden=true<CR>")
-            map("n", "<space>fB", ":Telescope file_browser path=%:p:h select_buffer=true hidden=true<CR>")
+            map("n", "<space>fB", ":Telescope file_browser hidden=true<CR>", { desc = "File browser" })
+            map("n", "<space>fb", ":Telescope file_browser path=%:p:h select_buffer=true hidden=true<CR>",
+                { desc = "File Browser (cwd)" })
 
             -- Search
             map("n", "<leader>sc", "<cmd>Telescope command_history<cr>", { desc = "Command History" })
@@ -81,13 +90,13 @@ return {
             map("n", "<leader>sD", "<cmd>Telescope diagnostics<cr>", { desc = "Workspace Diagnostics" })
             map("n", "<leader>sk", "<cmd>Telescope keymaps<cr>", { desc = "Key Maps" })
             -- map("n", "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", { desc = "Buffer" })
-            map('n', '<leader>/', function()
+            map('n', '<leader>ft', function()
                 -- You can pass additional configuration to Telescope to change the theme, layout, etc.
                 builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
                     winblend = 10,
                     previewer = false,
                 })
-            end, { desc = '[/] Fuzzily search in current buffer' })
+            end, { desc = "Fuzzily search in current buffer" })
 
             -- Git
             map("n", "<leader>gc", "<cmd>Telescope git_commits<CR>", { desc = "Telescope Git commits" })
