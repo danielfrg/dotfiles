@@ -13,11 +13,14 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("options")
 require("mappings")
 require("autocmds")
 
-require('lazy').setup("plugins");
+require('lazy').setup("plugins",
+    {
+        -- defaults = { lazy = true }
+    }
+);
 
 local lsp = vim.lsp
 

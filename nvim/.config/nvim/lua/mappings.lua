@@ -9,7 +9,7 @@ map("i", "<Esc>", "<ESC>l")
 map("n", "<C-s>", "<cmd>w!<cr><esc>", { desc = "Save file" })
 map("n", "<leader>s", "<cmd>w!<cr><esc>", { desc = "Save file" })
 map("n", "<leader>n", "<cmd>enew<cr>", { desc = "New file" })
-map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>")
+-- map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>")
 
 -- Disable arrow keys in normal mode
 map('n', '<left>', '<cmd>echo "Use h to move!"<CR>')

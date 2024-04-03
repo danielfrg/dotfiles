@@ -4,6 +4,8 @@ local WIDTH_RATIO = 0.5  -- You can change this
 return {
     {
         "nvim-tree/nvim-tree.lua",
+        event = "VeryLazy",
+        keys = { { "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Open explorer" } } },
         opts = {
             filters = {
                 dotfiles = false,
