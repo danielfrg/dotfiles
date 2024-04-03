@@ -147,6 +147,10 @@
     "branch": "main",
     "commit": "a7e39ae9e74f2c8c6dc4eea6d40c3971ae84752d"
   },
+  "trouble.nvim": {
+    "branch": "dev",
+    "commit": "10eff94809ecd6ee6cc59f42e9521b9b8a14e9ce"
+  },
   "undotree": {
     "branch": "master",
     "commit": "aa93a7e5890dbbebbc064cd22260721a6db1a196"

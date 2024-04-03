@@ -14,6 +14,7 @@ return {
         ['g'] = { name = "Goto" },
         ['<leader>h'] = { name = "Harpoon" },
         ['<leader>s'] = { name = "Search" },
+        ['<leader>x'] = { name = "Trouble" },
       })
     end,
   },

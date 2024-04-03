@@ -65,7 +65,7 @@ map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Last Buffer" })
 map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Last Buffer" })
 map("n", "<S-x>", "<cmd>e #<cr>", { desc = "Switch to Last Buffer" })
-map("n", "<leader>x", "<cmd>Bdelete<cr>", { desc = "Close buffer" })
+map("n", "<leader>z", "<cmd>Bdelete<cr>", { desc = "Close buffer" })
 map("n", "<leader>c", "<cmd>Bdelete<cr>", { desc = "Close buffer" })
 
 -- tmux navigation
