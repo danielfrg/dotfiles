@@ -16,11 +16,38 @@ return {
         },
         sections = {
           lualine_b = {},
-          lualine_c = {},
+          lualine_c = {
+            {
+              "diff",
+              symbols = {
+                added = " ",
+                modified = " ",
+                removed = " ",
+              },
+              diff_color = {
+                added = { fg = "#777777" },
+                modified = { fg = "#777777" },
+                removed = { fg = "#777777" },
+              },
+              -- source = function()
+              --   local gitsigns = vim.b.gitsigns_status_dict
+              --   if gitsigns then
+              --     return {
+              --       added = " ",
+              --       modified = " ",
+              --       removed = " ",
+              --     }
+              --   end
+              -- end,
+            }
+          },
           lualine_x = {
             require('lsp-progress').progress,
           },
-          lualine_y = {},
+          lualine_y = {
+            -- { "progress", separator = " ",                  padding = { left = 1, right = 0 } },
+            { "location", padding = { left = 0, right = 1 } },
+          },
           lualine_z = { "branch" }
         }
       }
