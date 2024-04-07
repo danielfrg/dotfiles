@@ -704,21 +704,15 @@
         },
         "rules": [
           {
-            "description": "Change CapsLock to HYPER/esc",
+            "description": "Change CapsLock ESC",
             "manipulators": [
               {
-                "to_if_alone": [
-                  {
-                    "key_code": "escape"
-                  }
-                ],
                 "from": {
                   "key_code": "caps_lock"
                 },
                 "to": [
                   {
-                    "key_code": "left_shift",
-                    "modifiers": ["left_command", "left_control", "left_option"]
+                    "key_code": "escape"
                   }
                 ],
                 "type": "basic"
@@ -726,23 +720,21 @@
             ]
           },
           {
-            "description": "HYPER + space = backspace",
+            "description": "Change TAB to HYPER/TAB",
             "manipulators": [
               {
-                "from": {
-                  "key_code": "spacebar",
-                  "modifiers": {
-                    "mandatory": [
-                      "left_command",
-                      "left_control",
-                      "left_option",
-                      "left_shift"
-                    ]
+                "to_if_alone": [
+                  {
+                    "key_code": "tab"
                   }
+                ],
+                "from": {
+                  "key_code": "tab"
                 },
                 "to": [
                   {
-                    "key_code": "delete_or_backspace"
+                    "key_code": "left_shift",
+                    "modifiers": ["left_command", "left_control", "left_option"]
                   }
                 ],
                 "type": "basic"

@@ -17,32 +17,39 @@ return {
             separator_style = "thick" -- | "slope" | "thick" | "thin" | { 'any', 'any' },
         },
         highlights = {
-
-            -- One tab : [indicator-buffer(visible|selected)-close(selected)]
             -- buffline: [tab][sep][tab]fill-background
+            -- [tab]: [indicator-buffer(visible|selected)-close(selected)]
+
             fill = {
                 fg = '#7B7970',
                 bg = '#16161E',
             },
-
-            indicator_visible = {
-                fg = '#16161E',
-                bg = '#16161E',
-            },
-            indicator_selected = {
-                fg = '#363646',
-                bg = '#363646',
-            },
-
-            buffer_visible = {
-                fg = '#DCD7BB',
-                bg = '#363646',
-            },
-            buffer_selected = {
-                fg = '#DCD7BB',
-                bg = '#363646',
-            },
-
+            -- background = {
+            --     fg = '#ff0000',
+            --     bg = '#ff0000',
+            -- },
+            -- tab = {
+            --     fg = '#ff0000',
+            --     bg = '#ff0000',
+            -- },
+            -- tab_selected = {
+            --     fg = '#ff0000',
+            --     bg = '#ff0000',
+            -- },
+            -- tab_separator = {
+            --     fg = '#ff0000',
+            --     bg = '#ff0000',
+            -- },
+            -- tab_separator_selected = {
+            --     fg = '#ff0000',
+            --     bg = '#ff0000',
+            --     sp = '#ff0000',
+            --     underline = '#ff0000',
+            -- },
+            -- tab_close = {
+            --     fg = '#ff0000',
+            --     bg = '#ff0000',
+            -- },
             close_button = {
                 fg = '#7B7970',
                 bg = '#16161E',
@@ -55,7 +62,172 @@ return {
                 fg = '#DCD7BB',
                 bg = '#363646',
             },
-
+            buffer_visible = {
+                fg = '#DCD7BB',
+                bg = '#363646',
+            },
+            buffer_selected = {
+                fg = '#DCD7BB',
+                bg = '#363646',
+                -- bold = true,
+                -- italic = true,
+            },
+            -- numbers = {
+            --     fg = '#ff0000',
+            --     bg = '#ff0000',
+            -- },
+            -- numbers_visible = {
+            --     fg = '#ff0000',
+            --     bg = '#ff0000',
+            -- },
+            -- numbers_selected = {
+            --     fg = '#ff0000',
+            --     bg = '#ff0000',
+            --     bold = true,
+            --     italic = true,
+            -- },
+            -- diagnostic = {
+            --     fg = '#ff0000',
+            --     bg = '#ff0000',
+            -- },
+            -- diagnostic_visible = {
+            --     fg = '#ff0000',
+            --     bg = '#ff0000',
+            -- },
+            -- diagnostic_selected = {
+            --     fg = '#ff0000',
+            --     bg = '#ff0000',
+            --     bold = true,
+            --     italic = true,
+            -- },
+            -- hint = {
+            --     fg = '#ff0000',
+            --     sp = '#ff0000',
+            --     bg = '#ff0000',
+            -- },
+            -- hint_visible = {
+            --     fg = '#ff0000',
+            --     bg = '#ff0000',
+            -- },
+            -- hint_selected = {
+            --     fg = '#ff0000',
+            --     bg = '#ff0000',
+            --     sp = '#ff0000',
+            --     bold = true,
+            --     italic = true,
+            -- },
+            -- hint_diagnostic = {
+            --     fg = '#ff0000',
+            --     sp = '#ff0000',
+            --     bg = '#ff0000',
+            -- },
+            -- hint_diagnostic_visible = {
+            --     fg = '#ff0000',
+            --     bg = '#ff0000',
+            -- },
+            -- hint_diagnostic_selected = {
+            --     fg = '#ff0000',
+            --     bg = '#ff0000',
+            --     sp = '#ff0000',
+            --     bold = true,
+            --     italic = true,
+            -- },
+            -- info = {
+            --     fg = '#ff0000',
+            --     sp = '#ff0000',
+            --     bg = '#ff0000',
+            -- },
+            -- info_visible = {
+            --     fg = '#ff0000',
+            --     bg = '#ff0000',
+            -- },
+            -- info_selected = {
+            --     fg = '#ff0000',
+            --     bg = '#ff0000',
+            --     sp = '#ff0000',
+            --     bold = true,
+            --     italic = true,
+            -- },
+            -- info_diagnostic = {
+            --     fg = '#ff0000',
+            --     sp = '#ff0000',
+            --     bg = '#ff0000',
+            -- },
+            -- info_diagnostic_visible = {
+            --     fg = '#ff0000',
+            --     bg = '#ff0000',
+            -- },
+            -- info_diagnostic_selected = {
+            --     fg = '#ff0000',
+            --     bg = '#ff0000',
+            --     sp = '#ff0000',
+            --     bold = true,
+            --     italic = true,
+            -- },
+            -- warning = {
+            --     fg = '#ff0000',
+            --     sp = '#ff0000',
+            --     bg = '#ff0000',
+            -- },
+            -- warning_visible = {
+            --     fg = '#ff0000',
+            --     bg = '#ff0000',
+            -- },
+            -- warning_selected = {
+            --     fg = '#ff0000',
+            --     bg = '#ff0000',
+            --     sp = '#ff0000',
+            --     bold = true,
+            --     italic = true,
+            -- },
+            -- warning_diagnostic = {
+            --     fg = '#ff0000',
+            --     sp = '#ff0000',
+            --     bg = '#ff0000',
+            -- },
+            -- warning_diagnostic_visible = {
+            --     fg = '#ff0000',
+            --     bg = '#ff0000',
+            -- },
+            -- warning_diagnostic_selected = {
+            --     fg = '#ff0000',
+            --     bg = '#ff0000',
+            --     sp = '#ff0000',
+            --     bold = true,
+            --     italic = true,
+            -- },
+            -- error = {
+            --     fg = '#ff0000',
+            --     bg = '#ff0000',
+            --     sp = '#ff0000',
+            -- },
+            -- error_visible = {
+            --     fg = '#ff0000',
+            --     bg = '#ff0000',
+            -- },
+            -- error_selected = {
+            --     fg = '#ff0000',
+            --     bg = '#ff0000',
+            --     sp = '#ff0000',
+            --     bold = true,
+            --     italic = true,
+            -- },
+            -- error_diagnostic = {
+            --     fg = '#ff0000',
+            --     bg = '#ff0000',
+            --     sp = '#ff0000',
+            -- },
+            -- error_diagnostic_visible = {
+            --     fg = '#ff0000',
+            --     bg = '#ff0000',
+            -- },
+            -- error_diagnostic_selected = {
+            --     fg = '#ff0000',
+            --     bg = '#ff0000',
+            --     sp = '#ff0000',
+            --     bold = true,
+            --     italic = true,
+            -- },
             modified = {
                 -- fg = '#7B7970',
                 bg = '#16161E',
@@ -68,13 +240,67 @@ return {
                 -- fg = '#DCD7BB',
                 bg = '#363646',
             },
-
+            duplicate_selected = {
+                fg = '#DCD7BB',
+                bg = '#363646',
+                italic = true,
+            },
+            duplicate_visible = {
+                -- fg = '#DCD7BB',
+                bg = '#16161E',
+                italic = true,
+            },
+            duplicate = {
+                -- fg = '#DCD7BB',
+                bg = '#16161E',
+                italic = true,
+            },
             separator = {
                 fg = '#16161E',
                 bg = '#16161E',
             },
-
-
+            -- separator_selected = {
+            --     fg = '#ff0000',
+            --     bg = '#ff0000',
+            -- },
+            -- separator_visible = {
+            --     fg = '#ff0000',
+            --     bg = '#ff0000',
+            -- },
+            indicator_visible = {
+                fg = '#16161E',
+                bg = '#16161E',
+            },
+            indicator_selected = {
+                fg = '#363646',
+                bg = '#363646',
+            },
+            -- pick_selected = {
+            --     fg = '#ff0000',
+            --     bg = '#ff0000',
+            --     bold = true,
+            --     italic = true,
+            -- },
+            -- pick_visible = {
+            --     fg = '#ff0000',
+            --     bg = '#ff0000',
+            --     bold = true,
+            --     italic = true,
+            -- },
+            -- pick = {
+            --     fg = '#ff0000',
+            --     bg = '#ff0000',
+            --     bold = true,
+            --     italic = true,
+            -- },
+            -- offset_separator = {
+            --     fg = '#ff0000',
+            --     bg = '#ff0000',
+            -- },
+            -- trunc_marker = {
+            --     fg = '#ff0000',
+            --     bg = '#ff0000',
+            -- }
         }
     },
 
