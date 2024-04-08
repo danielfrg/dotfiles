@@ -8,6 +8,22 @@ return {
             "saadparwaiz1/cmp_luasnip",
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-path",
+            {
+                "zbirenbaum/copilot-cmp",
+                dependencies = "copilot.lua",
+                opts = {},
+                config = function(_, opts)
+                    local copilot_cmp = require("copilot_cmp")
+                    copilot_cmp.setup(opts)
+                    -- attach cmp source whenever copilot attaches
+                    -- fixes lazy-loading issues with the copilot cmp source
+                    -- LazyVim.lsp.on_attach(function(client)
+                    --     if client.name == "copilot" then
+                    --         copilot_cmp._on_insert_enter({})
+                    --     end
+                    -- end)
+                end,
+            },
         },
 
         config = function(_, opts)
@@ -45,7 +61,7 @@ return {
                     -- Manually trigger a completion from nvim-cmp.
                     --  Generally you don't need this, because nvim-cmp will display
                     --  completions whenever it has completion options available.
-                    ['<C-Space>'] = cmp.mapping.complete {},
+                    ['<M-Space>'] = cmp.mapping.complete {},
 
                     -- Think of <c-l> as moving to the right of your snippet expansion.
                     --  So if you have a snippet that's like:
@@ -97,6 +113,7 @@ return {
                     { name = 'nvim_lsp' },
                     { name = 'luasnip' },
                     { name = 'path' },
+                    { name = 'copilot' },
                 })
             })
         end,

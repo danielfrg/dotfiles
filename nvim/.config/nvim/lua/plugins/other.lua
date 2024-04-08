@@ -13,6 +13,41 @@ return {
         lazy = true
     },
 
+    {
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "InsertEnter",
+        config = function()
+            require("copilot").setup({
+                suggestion = {
+                    enabled = false,
+                    auto_trigger = true,
+                    keymap = {
+                        accept = "<M-l>",
+                        accept_word = false,
+                        accept_line = false,
+                        next = "<M-]>",
+                        prev = "<M-[>",
+                        dismiss = "<C-]>",
+                    },
+                },
+            })
+        end,
+        keys = {
+            { "<leader>cp", "<cmd>Copilot enable<CR>",  { desc = "Enable copilot" } },
+            { "<leader>cP", "<cmd>Copilot disable<CR>", { desc = "Disable copilot" } }
+        },
+    },
+
+    -- {
+    --     "github/copilot.vim",
+    --     lazy = true,
+    --     keys = {
+    --         { "<leader>cp", "<cmd>Copilot enable<CR>",  { desc = "Enable copilot" } },
+    --         { "<leader>cP", "<cmd>Copilot disable<CR>", { desc = "Disable copilot" } }
+    --     },
+    -- },
+
     -- Detect tabstop and shiftwidth automatically
     {
         "tpope/vim-sleuth",
