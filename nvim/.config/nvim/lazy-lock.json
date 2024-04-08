@@ -7,6 +7,10 @@
     "branch": "master",
     "commit": "a7a4b4682c4b3e2ba82b82a4e6e5f5a0e79dec32"
   },
+  "auto-session": {
+    "branch": "main",
+    "commit": "64dc86e43c85f0062baafb0b607a6162efc99c91"
+  },
   "bufdelete.nvim": {
     "branch": "master",
     "commit": "f6bcea78afb3060b198125256f897040538bcb81"
@@ -54,10 +58,6 @@
   "harpoon": {
     "branch": "harpoon2",
     "commit": "a38be6e0dd4c6db66997deab71fc4453ace97f9c"
-  },
-  "kanagawa.nvim": {
-    "branch": "master",
-    "commit": "bfa818c7bf6259152f1d89cf9fbfba3554c93695"
   },
   "lazy.nvim": {
     "branch": "main",
@@ -118,10 +118,6 @@
   "nvim-web-devicons": {
     "branch": "master",
     "commit": "3ee60deaa539360518eaab93a6c701fe9f4d82ef"
-  },
-  "persistence.nvim": {
-    "branch": "main",
-    "commit": "4982499c1636eac254b72923ab826ee7827b3084"
   },
   "plenary.nvim": {
     "branch": "master",

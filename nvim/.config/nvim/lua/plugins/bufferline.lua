@@ -1,5 +1,6 @@
 return {
     "akinsho/bufferline.nvim",
+    event = "BufReadPre",
     lazy = false,
 
     dependencies = { { 'echasnovski/mini.nvim', version = '*' } },
@@ -70,7 +71,7 @@ return {
                 fg = '#DCD7BB',
                 bg = '#363646',
                 -- bold = true,
-                -- italic = true,
+                -- italic = false,
             },
             -- numbers = {
             --     fg = '#ff0000',

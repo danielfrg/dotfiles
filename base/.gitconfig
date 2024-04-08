@@ -1,158 +1,151 @@
 [user]
-	name = Daniel Rodriguez
-	email = daniel@danielfrg.com
+    name = Daniel Rodriguez
+    email = daniel@danielfrg.com
 
 [include]
-	path = .gitconfig.local
+    path = .gitconfig.local
 
 [core]
-	# Use custom `.gitignore` and `.gitattributes`
-	excludesfile = ~/.gitignore_global
-	attributesfile = ~/.gitattributes
+    # Use custom `.gitignore` and `.gitattributes`
+    excludesfile = ~/.gitignore_global
+    attributesfile = ~/.gitattributes
 
-	# Treat spaces before tabs and all kinds of trailing whitespace as an error
-	# [default] trailing-space: looks for spaces at the end of a line
-	# [default] space-before-tab: looks for spaces before tabs at the beginning of a line
-	whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+    # Treat spaces before tabs and all kinds of trailing whitespace as an error
+    # [default] trailing-space: looks for spaces at the end of a line
+    # [default] space-before-tab: looks for spaces before tabs at the beginning of a line
+    whitespace = space-before-tab,-indent-with-non-tab,trailing-space
 
-	# Make `git rebase` safer on OS X
-	# More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
-	trustctime = false
-	editor = vim
+    # Make `git rebase` safer on OS X
+    # More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
+    trustctime = false
+    editor = vim
 
-	autocrlf = input
-	precomposeunicode = true
+    autocrlf = input
+    precomposeunicode = true
 
 [init]
-	defaultBranch = main
+    defaultBranch = main
 
 [apply]
-	# Detect whitespace errors when applying a patch
-	whitespace = fix
+    # Detect whitespace errors when applying a patch
+    whitespace = fix
 
 # [gpg]
-# 	program = gpg
+#     program = gpg
 
 # [commit]
-# 	gpgsign = true
+#     gpgsign = true
 
 [tag]
-	forceSignAnnotated = true
+    forceSignAnnotated = true
 
 [push]
-	default = simple
-	autoSetupRemote = true
+    default = simple
+    autoSetupRemote = true
 
 [pull]
-	rebase = false
+    rebase = false
 
 [merge]
-	# Include summaries of merged commits in newly created merge commit messages
-	log = true
+    # Include summaries of merged commits in newly created merge commit messages
+    log = true
 
 [diff]
-	algorithm = patience
+    algorithm = patience
 
 [submodule]
-	recurse = true
+    recurse = true
 
 [help]
-	# Automatically correct and execute mistyped commands
-	autocorrect = 1
+    # Automatically correct and execute mistyped commands
+    autocorrect = 1
 
 [alias]
-	# View the current working tree status using the short format
-	c = commit
-	cm = commit
-	s = status -sb
-	st = status -sb
-	co = checkout
-	br = branch
-	cu = commit -am 'Update'
-	wip = commit -am 'WIP'
-	runci = commit --allow-empty -nm 'Empty commit to run ci'
+    # View the current working tree status using the short format
+    c = commit
+    cm = commit
+    s = status -sb
+    st = status -sb
+    co = checkout
+    br = branch
+    cu = commit -am 'Update'
+    wip = commit -am 'WIP'
+    runci = commit --allow-empty -nm 'Empty commit to run ci'
 
-	uncommit = reset HEAD^
+    uncommit = reset HEAD^
 
-	# View abbreviated SHA, description, and history graph of the latest 20 commits
-	l = log --pretty=oneline -n 20 --graph --abbrev-commit
+    # View abbreviated SHA, description, and history graph of the latest 20 commits
+    l = log --pretty=oneline -n 20 --graph --abbrev-commit
 
-	# Show the diff between the latest commit and the current state
-	d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+    # Show the diff between the latest commit and the current state
+    d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
 
-	# Pull in remote changes for the current repository and all its submodules
-	p = !"git pull; git submodule foreach git pull origin master"
+    # Pull in remote changes for the current repository and all its submodules
+    p = !"git pull; git submodule foreach git pull origin master"
 
-	# Checkout a pull request from origin (of a github repository)
-	pr = !"pr() { git fetch origin pull/$1/head:pr-$1; git checkout pr-$1; }; pr"
+    # Checkout a pull request from origin (of a github repository)
+    pr = !"pr() { git fetch origin pull/$1/head:pr-$1; git checkout pr-$1; }; pr"
 
-	# Switch to a branch, creating it if necessary
-	go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+    # Switch to a branch, creating it if necessary
+    go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
 
-	# Amend the currently staged files to the latest commit
-	amend = commit --amend --reuse-message=HEAD
+    # Amend the currently staged files to the latest commit
+    amend = commit --amend --reuse-message=HEAD
 
-	rebase-branch = "!f() { git rebase -i $(git merge-base $(git main-branch) HEAD); }; f"
-	yolo = !git commit -am \"$(curl -s whatthecommit.com/index.txt)\" && git push
+    rebase-branch = "!f() { git rebase -i $(git merge-base $(git main-branch) HEAD); }; f"
+    yolo = !git commit -am \"$(curl -s whatthecommit.com/index.txt)\" && git push
     yoloc = !git commit -am \"$curl -s whatthecommit.com/intex.txt)\"
-	nope = "!f() { git reset HEAD --hard && git clean -fd; } ; f"
-  	fuckit = "!f() { git clean -d -x -f; git reset --hard; } ; f"
+    nope = "!f() { git reset HEAD --hard && git clean -fd; } ; f"
+      fuckit = "!f() { git clean -d -x -f; git reset --hard; } ; f"
 
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
 
 [color]
-	ui = auto
+    ui = auto
 
 [color "branch"]
-	current = red
-	local = yellow
-	remote = green
+    current = red
+    local = yellow
+    remote = green
 
 [color "diff"]
-	meta = cyan
-	frag = magenta
-	old = red bold
-	new = green bold
+    meta = cyan
+    frag = magenta
+    old = red bold
+    new = green bold
 
 [color "status"]
-	added = yellow
-	changed = green
-	untracked = cyan
+    added = yellow
+    changed = green
+    untracked = cyan
 
 [url "git://github.com/"]
-	insteadOf = "github:"
+    insteadOf = "github:"
 
 [url "git@gist.github.com:"]
-	insteadOf = "gst:"
-	pushInsteadOf = "gist:"
-	pushInsteadOf = "git://gist.github.com/"
+    insteadOf = "gst:"
+    pushInsteadOf = "gist:"
+    pushInsteadOf = "git://gist.github.com/"
 
 [url "git://gist.github.com/"]
-	insteadOf = "gist:"
+    insteadOf = "gist:"
 
 [credential "https://github.com"]
-	helper = !/opt/homebrew/bin/gh auth git-credential
-	helper = !/usr/bin/gh auth git-credential
+    helper = !/opt/homebrew/bin/gh auth git-credential
+    helper = !/usr/bin/gh auth git-credential
 
 [credential "https://gist.github.com"]
-	helper = !/opt/homebrew/bin/gh auth git-credential
-	helper = !/usr/bin/gh auth git-credential
+    helper = !/opt/homebrew/bin/gh auth git-credential
+    helper = !/usr/bin/gh auth git-credential
+
+[status] submoduleSummary = true
 
 # [url "https://github.com/"]
-# 	insteadOf = git@github.com:
+#     insteadOf = git@github.com:
 
 # [url "https://"]
-# 	insteadOf = git://
-[status]
-	submoduleSummary = true
-[maintenance]
-	repo = /Users/danielfrg/.local/share/znap/znap.zsh
-	repo = /Users/danielfrg/.local/share/znap/Aloxaf/fzf-tab
-	repo = /Users/danielfrg/.local/share/znap/ajeetdsouza/zoxide
-	repo = /Users/danielfrg/.local/share/znap/zsh-users/zsh-autosuggestions
-	repo = /Users/danielfrg/.local/share/znap/zsh-users/zsh-completions
-	repo = /Users/danielfrg/.local/share/znap/zsh-users/zsh-syntax-highlighting
+#     insteadOf = git://

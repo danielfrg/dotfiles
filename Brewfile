@@ -128,6 +128,7 @@ cask 'raycast'
 # cask 'tor-browser'
 cask 'visual-studio-code'
 cask 'vb-cable'
+cask 'wezterm'
 cask 'zed'
 
 # Fonts

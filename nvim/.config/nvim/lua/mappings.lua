@@ -1,7 +1,7 @@
 local map = vim.keymap.set
 -- local nomap = vim.keymap.del
 
-map("n", ";", ":", { desc = "CMD enter command mode" })
+-- map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
 map("i", "<Esc>", "<ESC>l")
 

@@ -50,6 +50,9 @@ vim.opt.undofile = true
 -- enable break indent
 vim.opt.breakindent = true
 
+-- sessions
+vim.o.sessionoptions = "globals"
+
 -- case insensitive searching UNLESS /C or capital in search
 vim.o.ignorecase = true
 vim.o.smartcase = true
