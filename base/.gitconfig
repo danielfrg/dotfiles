@@ -23,12 +23,24 @@
     autocrlf = input
     precomposeunicode = true
 
+    pager = delta
+
 [init]
     defaultBranch = main
 
 [apply]
     # Detect whitespace errors when applying a patch
     whitespace = fix
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true    # use n and N to move between diff sections
+
+    # delta detects terminal colors automatically; set one of these to disable auto-detection
+    # dark = true
+    # light = true
 
 # [gpg]
 #     program = gpg
@@ -49,9 +61,11 @@
 [merge]
     # Include summaries of merged commits in newly created merge commit messages
     log = true
+    conflictstyle = diff3
 
 [diff]
     algorithm = patience
+    colorMoved = default
 
 [submodule]
     recurse = true

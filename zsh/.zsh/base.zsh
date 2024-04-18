@@ -47,7 +47,7 @@ if [[ $(uname) == "Darwin" ]]; then
     alias rm="trash"
 
     # zoxide only on laptop
-    alias cd='z'
+    # alias cd='z'
 
     # Lock the screen (when going AFK)
     alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
@@ -86,6 +86,7 @@ fi
 alias sudo='sudo '
 
 # Files
+alias ls='eza'
 alias l='ls'
 alias ll='ls -la'
 alias la='ls -la'
@@ -128,9 +129,9 @@ zle -N project_switcher{,}
 bindkey -s ^f "tmux-sessionizer\n"
 
 # tmuxifier
-export PATH="$HOME/.tmuxifier/bin:$PATH"
-export TMUXIFIER_LAYOUT_PATH="$HOME/code/dotfiles/tmuxifier/layouts"
-eval "$(tmuxifier init -)"
+# export PATH="$HOME/.tmuxifier/bin:$PATH"
+# export TMUXIFIER_LAYOUT_PATH="$HOME/code/dotfiles/tmuxifier/layouts"
+# eval "$(tmuxifier init -)"
 
 alias ..="cd .."
 alias ...="cd ../.."

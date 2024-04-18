@@ -25,14 +25,18 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 # Menu bar: Show
 # defaults write com.apple.systemuiserver menuExtras -array \
-# 	"/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
-# 	"/System/Library/CoreServices/Menu Extras/Volume.menu" \
-# 	"/System/Library/CoreServices/Menu Extras/AirPort.menu" \
-# 	"/System/Library/CoreServices/Menu Extras/Battery.menu" \
-# 	"/System/Library/CoreServices/Menu Extras/Clock.menu"
+#     "/System/Library/CoreServices/Menu Extras/Volume.menu" \
+#     "/System/Library/CoreServices/Menu Extras/Battery.menu" \
+#     "/System/Library/CoreServices/Menu Extras/Clock.menu"
+
+# Use dark mode by default
+defaults write NSGlobalDomain AppleInterfaceStyle -string "Dark"
 
 # Increase window resize speed for Cocoa applications
 defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
+
+# Double-click to maximize windows
+defaults write NSGlobalDomain AppleActionOnDoubleClick -string "Maximize"
 
 # Expand save panel by default
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
@@ -51,11 +55,11 @@ defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 # Disable the “Are you sure you want to open this application?” dialog
 defaults write com.apple.LaunchServices LSQuarantine -bool false
 
-# Disable the crash reporter
-defaults write com.apple.CrashReporter DialogType -string "none"
+# Disable Resume system-wide
+defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false
 
-# Remove duplicates in the “Open With” menu (also see `lscleanup` alias)
-/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
+# Disable automatic termination of inactive apps
+defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
 
 # Never go into computer sleep mode
 systemsetup -setcomputersleep Off > /dev/null
@@ -73,13 +77,35 @@ defaults write com.apple.mail SpellCheckingBehavior -string "NoSpellCheckingEnab
 # in the login window
 sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
 
+# Disable Notification Center and remove the menu bar icon
+launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
+
+# Disable automatic capitalization as it’s annoying when typing code
+defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
+
+# Disable smart dashes as they’re annoying when typing code
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+
+# Disable automatic period substitution as it’s annoying when typing code
+defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
+
+# Disable smart quotes as they’re annoying when typing code
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+
+# Disable auto-correct
+# defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+
 ###############################################################################
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input #
 ###############################################################################
 
 # Trackpad: enable tap to click for this user and for the login screen
+# For Laptop's Trackpad
+defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
+# For Magic Trackpad
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
 defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults -currentHost write 'Apple Global Domain' com.apple.mouse.tapBehavior 1
 defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
 # Trackpad: map bottom right corner to right-click
@@ -88,7 +114,7 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightC
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
 
-# Enable “natural” (Lion-style) scrolling
+# Disable “natural” (Lion-style) scrolling
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true
 
 # Increase sound quality for Bluetooth headphones/headsets
@@ -98,12 +124,18 @@ defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int
 # (e.g. enable Tab in modal dialogs)
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
-# Disabled for now this because of error: Could not write domain com.apple.universalaccess;
 # Use scroll gesture with the Ctrl (^) modifier key to zoom
-# defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
-# defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144
+sudo defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
+sudo defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144
 # Follow the keyboard focus while zoomed in
-# defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true
+sudo defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true
+
+# Disable press-and-hold for keys in favor of key repeat
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+
+# Set a blazingly fast keyboard repeat rate
+defaults write NSGlobalDomain KeyRepeat -int 1
+defaults write NSGlobalDomain InitialKeyRepeat -int 10
 
 # Disable press-and-hold for keys in favor of key repeat
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
@@ -117,14 +149,6 @@ defaults write -g WebAutomaticTextReplacementEnabled -int 1
 
 # Disable auto-correct
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -int 0
-
-# Set language and text formats
-# Note: if you’re in the US, replace `EUR` with `USD`, `Centimeters` with
-# `Inches`, `en_GB` with `en_US`, and `true` with `false`.
-defaults write NSGlobalDomain AppleLanguages -array "en" "nl"
-defaults write NSGlobalDomain AppleLocale -string "en_GB@currency=USD"
-defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
-defaults write NSGlobalDomain AppleMetricUnits -bool true
 
 # Show language menu in the top right corner of the boot screen
 # sudo defaults write /Library/Preferences/com.apple.loginwindow showInputMenu -bool true
@@ -143,9 +167,9 @@ defaults write NSGlobalDomain AppleMetricUnits -bool true
 # 11 right option
 # 12 right command
 
-ioreg -rn IOHIDKeyboard | grep -E 'VendorID"|ProductID' | awk '{ print $4 }' | paste -s -d'-\n' - | while read kid; do
-  defaults -currentHost write -g com.apple.keyboard.modifiermapping.${kid}-0 -array '<dict><key>HIDKeyboardModifierMappingDst</key><integer>4</integer><key>HIDKeyboardModifierMappingSrc</key><integer>0</integer></dict>'
-done
+# ioreg -rn IOHIDKeyboard | grep -E 'VendorID"|ProductID' | awk '{ print $4 }' | paste -s -d'-\n' - | while read kid; do
+#   defaults -currentHost write -g com.apple.keyboard.modifiermapping.${kid}-0 -array '<dict><key>HIDKeyboardModifierMappingDst</key><integer>4</integer><key>HIDKeyboardModifierMappingSrc</key><integer>0</integer></dict>'
+# done
 
 ###############################################################################
 # Energy saving                                                               #
@@ -160,14 +184,17 @@ sudo pmset -a autorestart 1
 # Restart automatically if the computer freezes
 sudo systemsetup -setrestartfreeze on
 
+# Start screen saver after 10 minutes
+defaults -currentHost write com.apple.screensaver idleTime -int 600
+
 # Sleep the display after 15 minutes
 sudo pmset -a displaysleep 15
 
 # Disable machine sleep while charging
 sudo pmset -c sleep 0
 
-# Set machine sleep to 15 minutes on battery
-sudo pmset -b sleep 15
+# Set machine sleep to 5 minutes on battery
+sudo pmset -b sleep 5
 
 # Set standby delay to 24 hours (default is 1 hour)
 sudo pmset -a standbydelay 86400
@@ -186,8 +213,8 @@ sudo pmset -a hibernatemode 0
 ###############################################################################
 
 # Require password immediately after sleep or screen saver begins
-defaults write com.apple.screensaver askForPassword -int 1
-defaults write com.apple.screensaver askForPasswordDelay -int 0
+# defaults write com.apple.screensaver askForPassword -int 1
+# defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 # Save screenshots to ~/Downloads
 defaults write com.apple.screencapture location -string "${HOME}/Downloads"
@@ -216,16 +243,13 @@ sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutio
 defaults write com.apple.finder AppleShowAllFiles -bool YES
 
 # Finder: show all filename extensions
-# defaults write NSGlobalDomain AppleShowAllExtensions -bool true
-
-# Finder: show all filename extensions
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
 # Set the default location for new Finder windows
 defaults write com.apple.finder NewWindowTarget -string "PfLo"
 defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/code"
 
-# Finder: Don't show status bar
+# Finder: Dont show status bar
 defaults write com.apple.finder ShowStatusBar -bool false
 
 # Finder: show path bar
@@ -291,6 +315,9 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 # Automatically hide and show the Dock
 defaults write com.apple.dock autohide -bool true
 
+# Move the dock on the left
+defaults write com.apple.dock orientation -string "right"
+
 # Enable highlight hover effect for the grid view of a stack (Dock)
 defaults write com.apple.dock mouse-over-hilite-stack -bool true
 
@@ -310,7 +337,7 @@ defaults write com.apple.dock show-process-indicators -bool true
 defaults write com.apple.dock mru-spaces -bool false
 
 # Don’t animate opening applications from the Dock
-# defaults write com.apple.dock launchanim -bool false
+defaults write com.apple.dock launchanim -bool false
 
 # Speed up Mission Control animations
 defaults write com.apple.dock expose-animation-duration -float 0.1
@@ -319,99 +346,125 @@ defaults write com.apple.dock expose-animation-duration -float 0.1
 defaults write com.apple.dock autohide-delay -float 0
 
 # Remove the animation when hiding/showing the Dock
-# defaults write com.apple.dock autohide-time-modifier -float 0.2
+defaults write com.apple.dock autohide-time-modifier -float 0.2
 
 # Don’t show recent applications in Dock
 defaults write com.apple.dock show-recents -bool false
+
+# Hot corners
+# Possible values:
+#  0: no-op
+#  2: Mission Control
+#  3: Show application windows
+#  4: Desktop
+#  5: Start screen saver
+#  6: Disable screen saver
+#  7: Dashboard
+# 10: Put display to sleep
+# 11: Launchpad
+# 12: Notification Center
+# 13: Lock Screen
+# Top left screen corner
+defaults write com.apple.dock wvous-tl-corner -int 0
+defaults write com.apple.dock wvous-tl-modifier -int 0
+# Top right screen corner
+defaults write com.apple.dock wvous-tr-corner -int 0
+defaults write com.apple.dock wvous-tr-modifier -int 0
+# Bottom left screen corner
+defaults write com.apple.dock wvous-bl-corner -int 0
+defaults write com.apple.dock wvous-bl-modifier -int 0
+# Bottom right
+defaults write com.apple.dock wvous-br-corner -int 0
+defaults write com.apple.dock wvous-br-modifier -int 0
 
 ################################################################################
 # Safari & WebKit                                                              #
 ################################################################################
 
-# Privacy: don’t send search queries to Apple
-defaults write com.apple.Safari UniversalSearchEnabled -bool false
-defaults write com.apple.Safari SuppressSearchSuggestions -bool true
+# # Privacy: don’t send search queries to Apple
+# defaults write com.apple.Safari UniversalSearchEnabled -bool false
+# defaults write com.apple.Safari SuppressSearchSuggestions -bool true
 
-# Press Tab to highlight each item on a web page
-defaults write com.apple.Safari WebKitTabToLinksPreferenceKey -bool true
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks -bool true
+# # Press Tab to highlight each item on a web page
+# defaults write com.apple.Safari WebKitTabToLinksPreferenceKey -bool true
+# defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks -bool true
 
-# Show the full URL in the address bar (note: this still hides the scheme)
-defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true
+# # Show the full URL in the address bar (note: this still hides the scheme)
+# defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true
 
-# Set Safari’s home page to `about:blank` for faster loading
-# defaults write com.apple.Safari HomePage -string "about:blank"
+# # Set Safari’s home page to `about:blank` for faster loading
+# # defaults write com.apple.Safari HomePage -string "about:blank"
 
-# Prevent Safari from opening ‘safe’ files automatically after downloading
-defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
+# # Prevent Safari from opening ‘safe’ files automatically after downloading
+# defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
 
-# Allow hitting the Backspace key to go to the previous page in history
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2BackspaceKeyNavigationEnabled -bool true
+# # Allow hitting the Backspace key to go to the previous page in history
+# defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2BackspaceKeyNavigationEnabled -bool true
 
-# Hide Safari’s bookmarks bar by default
-defaults write com.apple.Safari ShowFavoritesBar -bool false
+# # Hide Safari’s bookmarks bar by default
+# defaults write com.apple.Safari ShowFavoritesBar -bool false
 
-# Hide Safari’s sidebar in Top Sites
-defaults write com.apple.Safari ShowSidebarInTopSites -bool false
+# # Hide Safari’s sidebar in Top Sites
+# defaults write com.apple.Safari ShowSidebarInTopSites -bool false
 
-# Disable Safari’s thumbnail cache for History and Top Sites
-defaults write com.apple.Safari DebugSnapshotsUpdatePolicy -int 2
+# # Disable Safari’s thumbnail cache for History and Top Sites
+# defaults write com.apple.Safari DebugSnapshotsUpdatePolicy -int 2
 
-# Enable Safari’s debug menu
-defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
+# # Enable Safari’s debug menu
+# defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
 
-# Make Safari’s search banners default to Contains instead of Starts With
-defaults write com.apple.Safari FindOnPageMatchesWordStartsOnly -bool false
+# # Make Safari’s search banners default to Contains instead of Starts With
+# defaults write com.apple.Safari FindOnPageMatchesWordStartsOnly -bool false
 
-# Remove useless icons from Safari’s bookmarks bar
-defaults write com.apple.Safari ProxiesInBookmarksBar "()"
+# # Remove useless icons from Safari’s bookmarks bar
+# defaults write com.apple.Safari ProxiesInBookmarksBar "()"
 
-# Enable the Develop menu and the Web Inspector in Safari
-defaults write com.apple.Safari IncludeDevelopMenu -bool true
-defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
+# # Enable the Develop menu and the Web Inspector in Safari
+# defaults write com.apple.Safari IncludeDevelopMenu -bool true
+# defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+# defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
 
-# Add a context menu item for showing the Web Inspector in web views
-defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
+# # Add a context menu item for showing the Web Inspector in web views
+# defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 
-# Enable continuous spellchecking
-defaults write com.apple.Safari WebContinuousSpellCheckingEnabled -bool true
-# Disable auto-correct
-defaults write com.apple.Safari WebAutomaticSpellingCorrectionEnabled -bool false
+# # Enable continuous spellchecking
+# defaults write com.apple.Safari WebContinuousSpellCheckingEnabled -bool true
+# # Disable auto-correct
+# defaults write com.apple.Safari WebAutomaticSpellingCorrectionEnabled -bool false
 
-# Disable AutoFill
-defaults write com.apple.Safari AutoFillFromAddressBook -bool false
-defaults write com.apple.Safari AutoFillPasswords -bool false
-defaults write com.apple.Safari AutoFillCreditCardData -bool false
-defaults write com.apple.Safari AutoFillMiscellaneousForms -bool false
+# # Disable AutoFill
+# defaults write com.apple.Safari AutoFillFromAddressBook -bool false
+# defaults write com.apple.Safari AutoFillPasswords -bool false
+# defaults write com.apple.Safari AutoFillCreditCardData -bool false
+# defaults write com.apple.Safari AutoFillMiscellaneousForms -bool false
 
-# Warn about fraudulent websites
-defaults write com.apple.Safari WarnAboutFraudulentWebsites -bool true
+# # Warn about fraudulent websites
+# defaults write com.apple.Safari WarnAboutFraudulentWebsites -bool true
 
-# Disable plug-ins
-# defaults write com.apple.Safari WebKitPluginsEnabled -bool false
-# defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2PluginsEnabled -bool false
+# # Disable plug-ins
+# # defaults write com.apple.Safari WebKitPluginsEnabled -bool false
+# # defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2PluginsEnabled -bool false
 
-# Disable Java
-defaults write com.apple.Safari WebKitJavaEnabled -bool false
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabled -bool false
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabledForLocalFiles -bool false
+# # Disable Java
+# defaults write com.apple.Safari WebKitJavaEnabled -bool false
+# defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabled -bool false
+# defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabledForLocalFiles -bool false
 
-# Block pop-up windows
-defaults write com.apple.Safari WebKitJavaScriptCanOpenWindowsAutomatically -bool false
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanOpenWindowsAutomatically -bool false
+# # Block pop-up windows
+# defaults write com.apple.Safari WebKitJavaScriptCanOpenWindowsAutomatically -bool false
+# defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanOpenWindowsAutomatically -bool false
 
-# Disable auto-playing video
-#defaults write com.apple.Safari WebKitMediaPlaybackAllowsInline -bool false
-#defaults write com.apple.SafariTechnologyPreview WebKitMediaPlaybackAllowsInline -bool false
-#defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback -bool false
-#defaults write com.apple.SafariTechnologyPreview com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback -bool false
+# # Disable auto-playing video
+# #defaults write com.apple.Safari WebKitMediaPlaybackAllowsInline -bool false
+# #defaults write com.apple.SafariTechnologyPreview WebKitMediaPlaybackAllowsInline -bool false
+# #defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback -bool false
+# #defaults write com.apple.SafariTechnologyPreview com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback -bool false
 
-# Enable “Do Not Track”
-defaults write com.apple.Safari SendDoNotTrackHTTPHeader -bool true
+# # Enable “Do Not Track”
+# defaults write com.apple.Safari SendDoNotTrackHTTPHeader -bool true
 
-# Update extensions automatically
-defaults write com.apple.Safari InstallExtensionUpdatesAutomatically -bool true
+# # Update extensions automatically
+# defaults write com.apple.Safari InstallExtensionUpdatesAutomatically -bool true
 
 ###############################################################################
 # Spotlight #
@@ -467,6 +520,38 @@ sudo mdutil -E / > /dev/null
 # sudo mv /System/Library/CoreServices/Search.bundle.bak /System/Library/CoreServices/Search.bundle
 
 ###############################################################################
+# Mac App Store                                                               #
+###############################################################################
+
+# Enable the WebKit Developer Tools in the Mac App Store
+defaults write com.apple.appstore WebKitDeveloperExtras -bool true
+
+# Enable Debug Menu in the Mac App Store
+defaults write com.apple.appstore ShowDebugMenu -bool true
+
+# Enable the automatic update check
+defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
+
+# Check for software updates daily, not just once per week
+defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
+
+# Download newly available updates in background
+defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
+
+# Install System data files & security updates
+defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -int 1
+
+# Automatically download apps purchased on other Macs
+defaults write com.apple.SoftwareUpdate ConfigDataInstall -int 1
+
+# Turn on app auto-update
+defaults write com.apple.commerce AutoUpdate -bool true
+
+# Allow the App Store to reboot machine on macOS updates
+defaults write com.apple.commerce AutoUpdateRestartRequired -bool true
+
+
+###############################################################################
 # Siri #
 ##############################################################################
 
@@ -510,33 +595,63 @@ defaults write com.apple.ActivityMonitor SortDirection -int 0
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
 ###############################################################################
-# Transmission.app #
+# Transmission.app                                                            #
 ###############################################################################
 
-# Use `~/Documents/Downloads` to store incomplete downloads
-defaults write org.m0k.transmission UseIncompleteDownloadFolder -bool true
-defaults write org.m0k.transmission IncompleteDownloadFolder -string "${HOME}/Downloads"
+# # Use `~/Documents/Downloads` to store incomplete downloads
+# defaults write org.m0k.transmission UseIncompleteDownloadFolder -bool true
+# defaults write org.m0k.transmission IncompleteDownloadFolder -string "${HOME}/Documents/Downloads"
 
-# Don’t prompt for confirmation before downloading
-defaults write org.m0k.transmission DownloadAsk -bool false
+# # Use `~/Downloads` to store completed downloads
+# defaults write org.m0k.transmission DownloadLocationConstant -bool true
 
-# Trash original torrent files
-defaults write org.m0k.transmission DeleteOriginalTorrent -bool true
+# # Don’t prompt for confirmation before downloading
+# defaults write org.m0k.transmission DownloadAsk -bool false
+# defaults write org.m0k.transmission MagnetOpenAsk -bool false
 
-# Hide the donate message
-defaults write org.m0k.transmission WarningDonate -bool false
+# # Don’t prompt for confirmation before removing non-downloading active transfers
+# defaults write org.m0k.transmission CheckRemoveDownloading -bool true
 
-# Hide the legal disclaimer
-defaults write org.m0k.transmission WarningLegal -bool false
+# # Trash original torrent files
+# defaults write org.m0k.transmission DeleteOriginalTorrent -bool true
+
+# # Hide the donate message
+# defaults write org.m0k.transmission WarningDonate -bool false
+# # Hide the legal disclaimer
+# defaults write org.m0k.transmission WarningLegal -bool false
+
+# # IP block list.
+# # Source: https://giuliomac.wordpress.com/2014/02/19/best-blocklist-for-transmission/
+# defaults write org.m0k.transmission BlocklistNew -bool true
+# defaults write org.m0k.transmission BlocklistURL -string "http://john.bitsurge.net/public/biglist.p2p.gz"
+# defaults write org.m0k.transmission BlocklistAutoUpdate -bool true
+
+# # Randomize port on launch
+# defaults write org.m0k.transmission RandomPort -bool true
 
 ###############################################################################
 # Kill affected applications #
 ###############################################################################
 
-for app in "SystemUIServer" "Activity Monitor" "Address Book" "Calendar" \
-	"Contacts" "cfprefsd" "Dock" "Finder" "Mail" "Messages" "Safari" "SizeUp" \
-	"Terminal" "Transmission" "Twitter" "iCal"; do
-	killall "${app}" > /dev/null 2>&1
+for app in "Activity Monitor" \
+	"Address Book" \
+	"Calendar" \
+	"cfprefsd" \
+	"Contacts" \
+	"Dock" \
+	"Finder" \
+	"Google Chrome" \
+	"Mail" \
+	"Messages" \
+	"Photos" \
+	"Safari" \
+	"SystemUIServer" \
+	"Terminal" \
+	"Transmission" \
+	"iCal"; do
+	killall "${app}" &> /dev/null
 done
 
+echo "-------------------"
 echo "Done. Note that some of these changes require a logout/restart to take effect."
+

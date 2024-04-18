@@ -3,4 +3,5 @@
 yabai --stop-service
 yabai --start-service
 
-skhd --reload
+skhd --stop-service
+skhd --start-service
