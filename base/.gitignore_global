@@ -17,8 +17,5 @@ default.profraw
 # Python
 .python-version
 
-# Ruby
-.rbenv-gemsets
-
 # Terraform
 local-terraform

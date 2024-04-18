@@ -8,7 +8,7 @@ export PATH="$HOME/.rye/shims:$PATH"
 # Activate pyenv
 usepyenv() {
     # Remove RYE
-    PATH=$(echo "$PATH" | sed -e 's@:/Users/danielfrg/.rye/shims@@g')
+    PATH=$(echo "$PATH" | sed -e 's@:/Users/danrodriguez/.rye/shims@@g')
 
     export PYENV_ROOT="$HOME/.pyenv"
     export PATH="$PYENV_ROOT/bin:$PATH"
@@ -20,10 +20,10 @@ usepyenv() {
         # Start: pyenv init - --no-rehash zsh
         PATH="$(bash --norc -ec 'IFS=:; paths=($PATH);
         for i in ${!paths[@]}; do
-        if [[ ${paths[i]} == "''/Users/danielfrg/.pyenv/shims''" ]]; then unset '\''paths[i]'\'';
+        if [[ ${paths[i]} == "''/Users/danrodriguez/.pyenv/shims''" ]]; then unset '\''paths[i]'\'';
         fi; done;
         echo "${paths[*]}"')"
-        export PATH="/Users/danielfrg/.pyenv/shims:${PATH}"
+        export PATH="/Users/danrodriguez/.pyenv/shims:${PATH}"
         export PYENV_SHELL=zsh
         source '/opt/homebrew/Cellar/pyenv/2.3.30/libexec/../completions/pyenv.zsh'
         pyenv() {
@@ -95,7 +95,7 @@ export VOLTA_FEATURE_PNPM=1
 
 alias npmreset="rm -rf node_modules"
 
-alias npm_="/Users/danielfrg/.volta/bin/npm"
+alias npm_="/Users/danrodriguez/.volta/bin/npm"
 alias npm=pnpm
 alias npx=pnpx
 
@@ -104,7 +104,7 @@ export ADBLOCK=1
 
 
 # pnpm
-export PNPM_HOME="/Users/danielfrg/Library/pnpm"
+export PNPM_HOME="/Users/danrodriguez/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -133,34 +133,3 @@ goinstalltools() {
 
 # source $HOME/.cargo/env
 
-# RUBY -------------------------------------------------------------------------
-
-# Add RVM to PATH
-
-# Copy/Paste directly this to make it faster
-# Default to evaluate if not in MacOS
-if [[ $(uname) == "Darwin" ]]; then
-    # Start: rbenv init - --no-rehash zsh
-    export PATH="/Users/danielfrg/.rbenv/shims:${PATH}"
-    export RBENV_SHELL=zsh
-    source '/opt/homebrew/Cellar/rbenv/1.2.0/libexec/../completions/rbenv.zsh'
-    rbenv() {
-    local command
-    command="${1:-}"
-    if [ "$#" -gt 0 ]; then
-        shift
-    fi
-
-    case "$command" in
-    rehash|shell)
-        eval "$(rbenv "sh-$command" "$@")";;
-    *)
-        command rbenv "$command" "$@";;
-    esac
-    }
-    # End: rbenv init
-else
-    if type rbenv > /dev/null; then
-        eval "$(rbenv init - --no-rehash zsh)"
-    fi
-fi

@@ -112,7 +112,7 @@ alias du='du -kh'
 
 # Navigation
 project_switcher() {
-  selected=$(find_ ~/code ~/code/danielfrg ~/code/inmatura ~/google -mindepth 1 -maxdepth 1 -type d | fzf)
+  selected=$(find_ ~/code ~/code/danielfrg ~/code/inmatura ~/nvidia -mindepth 1 -maxdepth 1 -type d | fzf)
 
   if [[ -z $selected ]]; then
       exit 0

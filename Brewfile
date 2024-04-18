@@ -80,11 +80,6 @@ brew 'yarn'
 # Go
 brew 'go'
 
-# Ruby
-brew 'ruby'
-brew 'ruby-build'
-brew 'rbenv'
-
 # docker and k8s
 # brew 'dive'
 brew 'kubectl'
@@ -110,10 +105,10 @@ cask 'blackhole-2ch'
 cask 'cleanshot'
 cask 'discord'
 cask 'docker'
-# cask 'eloston-chromium'
+ cask 'eloston-chromium'
 cask 'fliqlo'
 # cask 'google-chrome'
-# cask 'google-drive'
+cask 'google-drive'
 cask 'gpg-suite'
 cask 'httpie'
 cask 'iina'

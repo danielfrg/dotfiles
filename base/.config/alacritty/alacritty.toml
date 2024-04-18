@@ -1,5 +1,5 @@
 # "cursor.style" = "Block"
-import = ["/Users/danielfrg/.config/alacritty/themes/themes/catppuccin.toml"]
+import = ["/Users/danrodriguez/.config/alacritty/themes/themes/catppuccin.toml"]
 live_config_reload = true
 
 [bell]
