@@ -12,7 +12,7 @@ for file in "${HOME}/.zsh/base.zsh" \
             "${HOME}/.local/bin/imagecat.zsh" \
             "${HOME}/.zsh/languages.zsh" \
             "${HOME}/.zsh/ssh.zsh" \
-            "$HOME/code/dotfiles/personal/entrypoint.sh"
+            "${HOME}/code/dotfiles/personal/entrypoint.sh"
 do
     [ -s "${file}" ] && source "${file}"
 done
