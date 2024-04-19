@@ -52,5 +52,8 @@ yabai -m rule --add app="^Things$" manage=off
 yabai -m rule --add app="^Keyboard Maestro$" manage=off
 yabai -m rule --add app="^1Password$" manage=off
 yabai -m rule --add app="^Archive Utility$" manage=off
+yabai -m rule --add app="^AnyConnect$" manage=off
+yabai -m rule --add app="^Cisco AnyConnect Login$" manage=off
+yabai -m rule --add app="^Cisco AnyConnect Secure Mobility Client$" manage=off
 
 echo "yabai configuration loaded.."
