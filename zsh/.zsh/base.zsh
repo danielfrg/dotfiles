@@ -162,6 +162,7 @@ alias sed="gsed"
 alias vim_="/usr/bin/vim"
 alias nvim_="/opt/homebrew/bin/nvim"
 alias neovide='/Applications/Neovide.app/Contents/MacOS/neovide'
+alias n="nvim -c 'Telescope oldfiles'"
 
 nvim() {
     if [[ $@ == "." ]]; then
