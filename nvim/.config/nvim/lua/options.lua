@@ -6,6 +6,9 @@ vim.g.have_nerd_font = true
 
 vim.opt.cmdheight = 1
 
+-- no splash screen
+vim.opt.shortmess = vim.opt.shortmess + 'I'
+
 -- don't show the mode, since it's already in the status line
 vim.opt.showmode = false
 
@@ -24,8 +27,8 @@ vim.opt.shiftwidth = 4     -- Number of spaces inserted when indenting
 vim.opt.smartindent = true -- Be smart when indenting
 vim.opt.expandtab = true   -- Pressing the TAB key will insert spaces instead of a TAB character
 
--- disable line wrap
-vim.opt.wrap = false
+-- line wrap
+vim.opt.wrap = true
 
 -- enable mouse mode
 vim.opt.mouse = "a"

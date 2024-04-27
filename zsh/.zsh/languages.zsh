@@ -5,6 +5,14 @@ export HATCH_CONFIG=$HOME/.config/hatch/config.toml
 # Rye config
 export PATH="$HOME/.rye/shims:$PATH"
 
+# Activate conda
+useconda() {
+    # Remove RYE
+    PATH=$(echo "$PATH" | sed -e 's@:/Users/danrodriguez/.rye/shims@@g')
+
+    eval "$(/Users/danrodriguez/conda/bin/conda shell.zsh hook)"
+}
+
 # Activate pyenv
 usepyenv() {
     # Remove RYE
@@ -99,6 +107,7 @@ alias npm_="/Users/danrodriguez/.volta/bin/npm"
 alias npm=pnpm
 alias npx=pnpx
 
+export NEXT_TELEMETRY_DEBUG=1.
 export DISABLE_OPENCOLLECTIVE=1
 export ADBLOCK=1
 
@@ -110,6 +119,11 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+# C/C++ -------------------------------------------------------------------------
+
+export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
 
 # GO ---------------------------------------------------------------------------
 
@@ -133,3 +147,6 @@ goinstalltools() {
 
 # source $HOME/.cargo/env
 
+# JAVA -------------------------------------------------------------
+
+ export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"

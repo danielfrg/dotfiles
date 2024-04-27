@@ -1,4 +1,9 @@
 return {
+    {
+        "nvim-tree/nvim-web-devicons",
+        lazy = true
+    },
+
     -- measure startuptime
     {
         "dstein64/vim-startuptime",
@@ -6,11 +11,6 @@ return {
         config = function()
             vim.g.startuptime_tries = 10
         end,
-    },
-
-    {
-        "nvim-tree/nvim-web-devicons",
-        lazy = true
     },
 
     -- Detect tabstop and shiftwidth automatically

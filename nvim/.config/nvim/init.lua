@@ -24,6 +24,6 @@ require('lazy').setup("plugins",
 
 local lsp = vim.lsp
 
-lsp.handlers["textDocument/hover"] = lsp.with(vim.lsp.handlers.hover, {
-    border = "rounded",
-})
+-- lsp.handlers["textDocument/hover"] = lsp.with(vim.lsp.handlers.hover, {
+--     border = "rounded",
+-- })

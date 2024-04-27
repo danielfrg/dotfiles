@@ -1,81 +1,4 @@
--- typescript
-local tsserver = {
-    init_options = {
-        preferences = {
-            disableSuggestions = true,
-        }
-    }
-}
-
--- python
-local pyright = {
-    filetypes = { "python" },
-    settings = {
-        pyright = {
-            -- disable to use ruff import organizer
-            disableOrganizeImports = true,
-        },
-        python = {
-            analysis = {
-                -- Ignore all files for analysis to exclusively use ruff for linting
-                ignore = { "*" },
-            },
-        },
-    },
-}
-
-local ruff_lsp = {
-    filetypes = { "python" },
-    init_options = {
-        settings = {
-            -- Any extra CLI arguments for `ruff` go here.
-            args = {},
-        }
-    },
-}
-
-local lua_ls = {
-    settings = {
-        Lua = {
-            runtime = { version = "LuaJIT" },
-            workspace = {
-                checkThirdParty = false,
-                -- Tells lua_ls where to find all the Lua files that you
-                -- have loaded for your nvim config
-                library = {
-                    "${3rd}/luv/library",
-                    unpack(vim.api.nvim_get_runtime_file("", true)),
-                },
-            },
-            completion = {
-                callSnippet = 'Replace',
-            },
-            -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-            -- diagnostics = { disable = { 'missing-fields' } },
-        },
-    },
-}
-
-local servers = {
-    astro = {},
-    cssls = {},
-    eslint = {},
-    html = {},
-    tailwindcss = {},
-    tsserver = tsserver,
-    svelte = {},
-
-    pyright = pyright,
-    ruff_lsp = ruff_lsp,
-
-    terraformls = {},
-    ansiblels = {},
-    yamlls = {},
-
-    lua_ls = lua_ls,
-}
-
-local on_attach = function(client, bufnr)
+local base_on_attach = function(client, bufnr)
     local map = function(mode, keys, func, desc)
         vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = 'LSP: ' .. desc })
     end
@@ -144,6 +67,93 @@ local on_attach = function(client, bufnr)
     end
 end
 
+-- typescript
+local tsserver = {
+    init_options = {
+        preferences = {
+            disableSuggestions = true,
+        }
+    }
+}
+
+-- python
+local pyright = {
+    filetypes = { "python" },
+    settings = {
+        pyright = {
+            -- disable to use ruff import organizer
+            disableOrganizeImports = true,
+        },
+        python = {
+            analysis = {
+                -- Ignore all files for analysis to exclusively use ruff for linting
+                ignore = { "*" },
+            },
+        },
+    },
+}
+
+local ruff_lsp = {
+    filetypes = { "python" },
+    init_options = {
+        settings = {
+            -- Any extra CLI arguments for `ruff` go here.
+            args = {},
+        }
+    },
+}
+
+-- typescript
+local clangd = {
+    on_attach = function(client, bufnr)
+        client.server_capabilities.signatureHelpProvider = false
+        base_on_attach(client, bufnr)
+    end
+}
+
+local lua_ls = {
+    settings = {
+        Lua = {
+            runtime = { version = "LuaJIT" },
+            workspace = {
+                checkThirdParty = false,
+                -- Tells lua_ls where to find all the Lua files that you
+                -- have loaded for your nvim config
+                library = {
+                    "${3rd}/luv/library",
+                    unpack(vim.api.nvim_get_runtime_file("", true)),
+                },
+            },
+            completion = {
+                callSnippet = 'Replace',
+            },
+            -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+            -- diagnostics = { disable = { 'missing-fields' } },
+        },
+    },
+}
+
+local servers = {
+    astro = {},
+    cssls = {},
+    eslint = {},
+    html = {},
+    tailwindcss = {},
+    tsserver = tsserver,
+    svelte = {},
+
+    pyright = pyright,
+    ruff_lsp = ruff_lsp,
+
+    clangd = clangd,
+
+    terraformls = {},
+    ansiblels = {},
+    yamlls = {},
+
+    lua_ls = lua_ls,
+}
+
 
 return {
     "neovim/nvim-lspconfig",
@@ -200,7 +210,7 @@ return {
                     -- This handles overriding only values explicitly passed
                     -- by the server configuration above. Useful when disabling
                     -- certain features of an LSP (for example, turning off formatting for tsserver)
-                    server.on_attach = server.on_attach or on_attach or {}
+                    server.on_attach = server.on_attach or base_on_attach or {}
                     server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
                     require('lspconfig')[server_name].setup(server)
                 end,

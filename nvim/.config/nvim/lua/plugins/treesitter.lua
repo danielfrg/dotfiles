@@ -5,6 +5,10 @@ local ensure_installed = {
     "rst",
     "toml",
 
+    -- C/C++
+    "c",
+    "cpp",
+
     -- Web
     "html",
     "css",
