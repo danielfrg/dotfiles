@@ -10,6 +10,7 @@ local ensure_installed = {
     "cpp",
 
     -- Web
+    "astro",
     "html",
     "css",
     "javascript",
