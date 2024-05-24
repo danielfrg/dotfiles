@@ -111,7 +111,6 @@ export NEXT_TELEMETRY_DEBUG=1.
 export DISABLE_OPENCOLLECTIVE=1
 export ADBLOCK=1
 
-
 # pnpm
 export PNPM_HOME="/Users/danrodriguez/Library/pnpm"
 case ":$PATH:" in
@@ -120,7 +119,7 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-# C/C++ -------------------------------------------------------------------------
+# C/C++ ------------------------------------------------------------------------
 
 export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
@@ -147,6 +146,60 @@ goinstalltools() {
 
 # source $HOME/.cargo/env
 
-# JAVA -------------------------------------------------------------
+# JAVA -------------------------------------------------------------------------
 
- export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+
+# Kubernetes -------------------------------------------------------------------
+
+alias k='kubectl'
+alias kgp="kubectl get pod"
+alias kubecl='kubectl'
+alias kubect='kubectl'
+alias kubelt='kubectl'
+alias kubeclt='kubectl'
+alias kuebctl='kubectl'
+alias kns='kubens'
+alias kctx='kubectx'
+alias terrafrom='terraform'
+alias tf='terraform'
+
+k_logs_deploy() {
+  if [ -n "$1" ]
+  then
+    kubectl logs $(kubectl get pods -l app=$1 -o jsonpath="{.items[*].metadata.name}")
+  fi
+}
+
+k_delete_deployment_pods() {
+  if [ -n "$1" ]
+  then
+    kubectl delete pod $(kubectl get pods -l app=$1 -o jsonpath="{.items[*].metadata.name}")
+  fi
+}
+
+kubedecode() {
+    if [ $# -ne 2 ]
+    then
+        echo "Arguments: secret_name key"
+    else
+        kubectl get secret $1 -o json | jq -r ".[\"data\"][\"$2\"]" | base64 --decode
+    fi
+}
+
+kexec() {
+    if [ $# -ne 1 ]
+    then
+        echo "Arguments: pod_name"
+    else
+        kubectl exec -it $1 -- bash
+    fi
+}
+
+# DOCKER -----------------------------------------------------------------------
+
+docker-stop-all() { docker stop $(docker ps -a -q) }
+docker-prune() { docker system prune -f }
+docker-clean() { docker-stop-all; docker-prune; }
+docker-rmi-prefix () { docker rmi -f $(docker images --filter=reference='prefix*' --format '{{.Repository}}:{{.Tag}}') }
+docker-rmi-all () { docker rmi -f $(docker images --format '{{.ID}}') }

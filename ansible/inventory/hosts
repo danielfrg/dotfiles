@@ -6,3 +6,6 @@ homelab
 
 [rpi]
 rpi1
+
+[nvidia]
+colossus ansible_user=local-danrodriguez

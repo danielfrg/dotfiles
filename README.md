@@ -12,12 +12,6 @@ Install brew bundle:
 brew bundle
 ```
 
-NVChad:
-
-```terminal
-git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim
-```
-
 Link files to home directory using on `stow`:
 
 ```terminal

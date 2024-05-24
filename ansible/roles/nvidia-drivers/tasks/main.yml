@@ -1,0 +1,26 @@
+- name: install ubuntu-drivers
+  ansible.builtin.package:
+    name: ubuntu-drivers-common
+    state: present
+    update_cache: true
+
+- name: check ubuntu-drivers
+  command:
+    cmd: ubuntu-drivers --help
+  register: ubuntu_drivers_command
+
+- name: install nvidia driver
+  when:
+    - ubuntu_drivers_command.rc == 0
+  command:
+    cmd: "ubuntu-drivers install --gpgpu"
+
+- name: install nvidia utils
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: present
+    # update_cache: yes
+  with_items:
+    - nvidia-utils-535-server
+    - nvidia-cuda-toolkit
+

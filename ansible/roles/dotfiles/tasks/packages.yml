@@ -12,7 +12,6 @@
     state: present
     # update_cache: yes
   with_items:
-    - exa
     - fzf
     - git
     - neovim
@@ -29,9 +28,3 @@
       - task
     classic: true
 
-- name: Install dotfiles deps (snap edge)
-  become: true
-  community.general.snap:
-    name:
-      - starship
-    channel: latest/edge

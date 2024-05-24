@@ -1,0 +1,13 @@
+- hosts: nvidia
+
+
+  vars:
+    setup_user: local-danrodriguez
+
+  roles:
+    - role: nvidia-drivers
+      tags: ["always"]
+      become: true
+
+    - role: dotfiles
+      tags: ["always"]
