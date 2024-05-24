@@ -1,7 +1,7 @@
 brew 'coreutils'
 brew 'moreutils'
 brew 'findutils'
-brew 'atuin'
+# brew 'atuin'
 brew 'ansible'
 brew 'awscli'
 brew 'bash'
