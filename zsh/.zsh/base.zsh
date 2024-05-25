@@ -128,11 +128,12 @@ alias sha256sum="shasum -a 256"
 alias sed_="/usr/bin/sed"
 alias sed="gsed"
 
-# NeoVim
+# Vim
 alias n="nvim -c 'Telescope oldfiles'"
 alias nvim_="/opt/homebrew/bin/nvim"
 alias neovide='/Applications/Neovide.app/Contents/MacOS/neovide'
 alias vim_="/usr/bin/vim"
+alias vim="nvim"
 alias vimdiff="nvim -d"
 
 nvim() {
