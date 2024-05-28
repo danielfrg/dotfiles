@@ -27,9 +27,6 @@ if [[ $(uname) == "Darwin" ]]; then
 
     alias rm_="/bin/rm"
     alias rm="trash"
-
-    # Lock the screen
-    alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 else
     # echo 'Unknown OS!'
 fi

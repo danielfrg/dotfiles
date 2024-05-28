@@ -57,6 +57,7 @@ brew 'viddy'
 brew 'watch'
 brew 'wget'
 brew 'zsh'
+brew 'yazi'
 brew 'youtube-dl'
 brew 'zoxide'
 
