@@ -31,11 +31,11 @@ zinit snippet OMZP::command-not-found
 zinit cdreplay -q
 
 # Source my config
-# "${HOME}/.zsh/prompt.zsh" \
 for file in "${HOME}/.zsh/base.zsh" \
             "${HOME}/.zsh/languages.zsh" \
             "${HOME}/.zsh/ssh.zsh" \
-            "${HOME}/code/dotfiles/personal/entrypoint.sh"
+            "${HOME}/code/dotfiles/personal/entrypoint.sh" \
+            "${HOME}/.zsh/prompt.zsh"
 do
     [ -s "${file}" ] && source "${file}"
 done
@@ -46,4 +46,4 @@ done
 touch ~/.zshrc.local
 source ~/.zshrc.local
 
-eval "$(starship init zsh)"
+# eval "$(starship init zsh)"

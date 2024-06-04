@@ -57,6 +57,16 @@ RPROMPT='%*'
 chpwd_functions=("${(@)chpwd_functions:#chpwd_update_git_vars}")
 precmd_functions=("${(@)precmd_functions:#precmd_update_git_vars}")
 
+function virtualenv_prompt_info() {
+  [[ -n ${VIRTUAL_ENV} ]] || return
+  local NAME="${VIRTUAL_ENV:t}"
+  if [[ $NAME == "venv" || $NAME == "env" || $NAME == ".venv" ]]; then
+    local BASE="${VIRTUAL_ENV:h}"
+    NAME="${BASE:t}"
+  fi
+  echo "${ZSH_THEME_VIRTUALENV_PREFIX:=[}${NAME}${ZSH_THEME_VIRTUALENV_SUFFIX:=]}"
+}
+
 function _zsh_prompt_precmd() {
   _zsh_async_prompt_rv=$?
 
