@@ -61,9 +61,12 @@ brew 'yazi'
 brew 'youtube-dl'
 brew 'zoxide'
 
-tap 'koekeishiya/formulae'
-brew 'koekeishiya/formulae/yabai'
-brew 'koekeishiya/formulae/skhd'
+tap 'nikitabobko/tap'
+brew 'nikitabobko/tap/aerospace'
+
+# tap 'koekeishiya/formulae'
+# brew 'koekeishiya/formulae/yabai'
+# brew 'koekeishiya/formulae/skhd'
 
 # Python
 # brew 'pyenv'

@@ -38,6 +38,12 @@ defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
 # Double-click to maximize windows
 defaults write NSGlobalDomain AppleActionOnDoubleClick -string "Maximize"
 
+# Now, you can move windows by holding ctrl + cmd and dragging any part of the window (not necessarily the window title)
+defaults write -g NSWindowShouldDragOnGesture YES
+
+# Disable windows opening animations
+defaults write -g NSAutomaticWindowAnimationsEnabled -bool false
+
 # Expand save panel by default
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
