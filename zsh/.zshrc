@@ -46,4 +46,3 @@ done
 touch ~/.zshrc.local
 source ~/.zshrc.local
 
-# eval "$(starship init zsh)"

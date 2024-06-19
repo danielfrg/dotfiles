@@ -1,8 +1,7 @@
 return {
     {
         "stevearc/conform.nvim",
-        event = 'BufWritePre', -- uncomment for format on save
-        -- event = 'VeryLazy',
+        event = 'VeryLazy',
 
         opts = function()
             return {
@@ -26,7 +25,7 @@ return {
                 format_on_save = {
                     -- These options will be passed to conform.format()
                     timeout_ms = 500,
-                    async = true,
+                    format_after_save = true,
                     lsp_fallback = true,
                 },
             }

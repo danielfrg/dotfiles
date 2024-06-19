@@ -2,18 +2,18 @@ enable-normalization-flatten-containers = false
 enable-normalization-opposite-orientation-for-nested-containers = false
 
 [mode.main.binding]
-alt-j = 'focus left'
-alt-k = 'focus down'
-alt-l = 'focus up'
-alt-semicolon = 'focus right'
+alt-shift-j = 'focus left'
+alt-shift-k = 'focus down'
+alt-shift-l = 'focus up'
+alt-shift-semicolon = 'focus right'
 
-alt-shift-j = 'move left'
-alt-shift-k = 'move down'
-alt-shift-l = 'move up'
-alt-shift-semicolon = 'move right'
+# alt-shift-j = 'move left'
+# alt-shift-k = 'move down'
+# alt-shift-l = 'move up'
+# alt-shift-semicolon = 'move right'
 
-alt-h = 'split horizontal'
-alt-v = 'split vertical'
+# alt-h = 'split horizontal'
+# alt-v = 'split vertical'
 
 cmd-alt-ctrl-shift-f = 'fullscreen'
 alt-f = 'fullscreen'
@@ -92,6 +92,11 @@ run = ['layout floating']
 
 [[on-window-detected]]
 if.app-id = 'com.apple.ActivityMonitor'
+check-further-callbacks = true
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.cisco.anyconnect.gui'
 check-further-callbacks = true
 run = ['layout floating']
 

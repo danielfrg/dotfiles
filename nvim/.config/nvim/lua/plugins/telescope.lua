@@ -1,7 +1,8 @@
 return {
     {
         "nvim-telescope/telescope.nvim",
-        -- event = "VimEnter",
+        lazy = true,
+        event = "VeryLazy",
         cmd = "Telescope",
         dependencies = {
             "nvim-lua/plenary.nvim",

@@ -36,7 +36,7 @@ function async_prompt() {
   if [[ x$_zsh_async_prompt_rv != x0 ]]; then
     echo -n " exited %{$fg[red]%}$_zsh_async_prompt_rv%{$reset_color%}" >> $_ZSH_ASYNC_PROMPT_FN
   fi
-  echo -n $'\n$ ' >> $_ZSH_ASYNC_PROMPT_FN
+  echo -n $'\n❯ ' >> $_ZSH_ASYNC_PROMPT_FN
 
   # signal parent
   kill -s USR1 $$
@@ -48,7 +48,7 @@ function async_prompt() {
 # This is the base prompt that is rendered sync. It should be
 # fast to render as a result.  The extra whitespace before the
 # newine is necessary to avoid some rendering bugs.
-PROMPT=$'\n'$_BASE_PROMPT$'\n$ '
+PROMPT=$'\n'$_BASE_PROMPT$'\n❯ '
 RPROMPT='%*'
 
 # Remove the default git var update from chpwd and precmd to speed
@@ -100,3 +100,35 @@ function _zsh_prompt_zshexit() {
 precmd_functions+=(_zsh_prompt_precmd)
 zshexit_functions+=(_zsh_prompt_zshexit)
 trap '_zsh_prompt_trapusr1' USR1
+
+# Transient prompt
+zle-line-init() {
+    emulate -L zsh
+
+    [[ $CONTEXT == start ]] || return 0
+
+    while true; do
+        zle .recursive-edit
+        local -i ret=$?
+        [[ $ret == 0 && $KEYS == $'\4' ]] || break
+        [[ -o ignore_eof ]] || exit 0
+    done
+
+    local saved_prompt=$PROMPT
+    local saved_rprompt=$RPROMPT
+    # PROMPT='%(?:%{$fg[green]%}❯ :%{$fg_bold[red]%}❯ ) %{$reset_color%}'
+    PROMPT='❯ %{$reset_color%}'
+    RPROMPT=''
+    zle .reset-prompt
+    PROMPT=$saved_prompt
+    RPROMPT=$saved_rprompt
+
+    if ((ret)); then
+        zle .send-break
+    else
+        zle .accept-line
+    fi
+    return ret
+}
+
+zle -N zle-line-init

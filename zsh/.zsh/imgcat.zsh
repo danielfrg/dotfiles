@@ -1,1 +1,0 @@
-alias imgcat='imgcat.sh'

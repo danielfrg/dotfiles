@@ -1,6 +1,6 @@
 return {
     "akinsho/bufferline.nvim",
-    event = "BufReadPre",
+    event = "VimEnter",
     lazy = false,
 
     dependencies = { { 'echasnovski/mini.nvim', version = '*' } },
