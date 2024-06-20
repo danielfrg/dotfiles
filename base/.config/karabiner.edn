@@ -41,13 +41,13 @@
    ; {:des "HYPER + space = backspace"
    ; :rules [[:!!spacebar :delete_or_backspace]]}
 
-   {  :des "HYPER + HJKL = arrows"
-      :rules [
-         [:!!h :left_arrow]
-         [:!!j :down_arrow]
-         [:!!k :up_arrow]
-         [:!!l :right_arrow]
-   ]}
+   ; {  :des "HYPER + HJKL = arrows"
+   ;    :rules [
+   ;       [:!!h :left_arrow]
+   ;       [:!!j :down_arrow]
+   ;       [:!!k :up_arrow]
+   ;       [:!!l :right_arrow]
+   ; ]}
 
    ; {:des "Vi Mode [D as Trigger Key]"
    ;      :rules [[:##j :down_arrow :vi-mode]
