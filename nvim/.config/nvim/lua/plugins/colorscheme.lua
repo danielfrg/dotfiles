@@ -13,7 +13,7 @@ return {
   --   version = false,
   --   lazy = false,
   --   priority = 1000, -- make sure to load this before all the other start plugins
-  --   -- Optional; default configuration will be used if setup isn't called.
+  --   -- Optional; default configuration will be used if setup isn"t called.
   --   config = function()
   --     vim.cmd([[colorscheme everforest]])
   --     require("everforest").setup({
@@ -29,10 +29,10 @@ return {
   --   priority = 1000,
   --
   --   config = function()
-  --     require('kanagawa').setup({
+  --     require("kanagawa").setup({
   --       compile = true, -- enable compiling the colorscheme
   --
-  --       theme = "wave", -- Load "wave" theme when 'background' option is not set
+  --       theme = "wave", -- Load "wave" theme when "background" option is not set
   --       keywordStyle = { italic = true },
   --
   --       colors = {

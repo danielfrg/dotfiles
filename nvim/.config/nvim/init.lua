@@ -18,7 +18,10 @@ require("autocmds")
 
 require('lazy').setup("plugins",
     {
-        -- defaults = { lazy = true }
+        defaults = {
+            event = "VeryLazy",
+            -- lazy = true
+        }
     }
 );
 

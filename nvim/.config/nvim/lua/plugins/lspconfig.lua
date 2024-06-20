@@ -2,7 +2,7 @@ local base_on_attach = function(client, bufnr)
     local map = function(mode, keys, func, desc)
         vim.keymap.set(mode, keys, func, {
             buffer = bufnr,
-            desc = 'LSP: ' .. desc
+            desc = "LSP: " .. desc
         })
     end
 
@@ -15,7 +15,7 @@ local base_on_attach = function(client, bufnr)
     map("n", "gr", telescope.lsp_references, "Show References")
     map("n", "gi", telescope.lsp_implementations, "Goto Implementation")
     map("n", "gt", telescope.lsp_type_definitions, "Goto Type Definition")
-    map("n", "<leader>fs", telescope.lsp_document_symbols, 'Find Symbols')
+    map("n", "<leader>fs", telescope.lsp_document_symbols, "Find Symbols")
     map("n", "<leader>rn", vim.lsp.buf.rename, "Rename")
     map("n", "K", vim.lsp.buf.hover, "Hover")
     map("n", "gK", vim.lsp.buf.signature_help, "Signature Help")
@@ -118,10 +118,10 @@ local lua_ls = {
                 library = {"${3rd}/luv/library", unpack(vim.api.nvim_get_runtime_file("", true))}
             },
             completion = {
-                callSnippet = 'Replace'
+                callSnippet = "Replace"
             }
-            -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-            -- diagnostics = { disable = { 'missing-fields' } },
+            -- You can toggle below to ignore Lua_LS"s noisy `missing-fields` warnings
+            -- diagnostics = { disable = { "missing-fields" } },
         }
     }
 }
@@ -175,7 +175,7 @@ local yamlls = {
                 -- Must disable built-in schemaStore support to use
                 -- schemas from SchemaStore.nvim plugin
                 enable = false,
-                -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+                -- Avoid TypeError: Cannot read properties of undefined (reading "length")
                 url = ""
             }
         }
@@ -272,16 +272,16 @@ return {
             })
 
             local capabilities = vim.lsp.protocol.make_client_capabilities()
-            -- capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+            -- capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
             -- Ensure the servers and tools defined in `servers` above are installed
-            require('mason').setup()
+            require("mason").setup()
 
             local ensure_installed = vim.tbl_keys(servers or {})
             -- vim.print(ensure_installed)
-            -- require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+            -- require("mason-tool-installer").setup { ensure_installed = ensure_installed }
 
-            require('mason-lspconfig').setup {
+            require("mason-lspconfig").setup {
                 ensure_installed = ensure_installed,
                 handlers = {function(server_name)
                     local server = servers[server_name] or {}
@@ -289,25 +289,10 @@ return {
                     -- by the server configuration above. Useful when disabling
                     -- certain features of an LSP (for example, turning off formatting for tsserver)
                     server.on_attach = server.on_attach or base_on_attach or {}
-                    server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-                    require('lspconfig')[server_name].setup(server)
+                    server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+                    require("lspconfig")[server_name].setup(server)
                 end}
             }
         end
     },
-
-    {
-        "someone-stole-my-name/yaml-companion.nvim",
-        ft = {"yaml"},
-        dependencies = {
-            {"neovim/nvim-lspconfig"},
-            {"nvim-lua/plenary.nvim"},
-            {"nvim-telescope/telescope.nvim"}
-        },
-        config = function(_, opts)
-            local cfg = require("yaml-companion").setup(opts)
-            require("lspconfig")["yamlls"].setup(cfg)
-            require("telescope").load_extension("yaml_schema")
-        end
-    }
 }

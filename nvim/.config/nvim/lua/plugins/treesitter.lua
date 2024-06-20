@@ -33,7 +33,7 @@ return {
     {
         "nvim-treesitter/nvim-treesitter",
         event = "VeryLazy",
-        build = ':TSUpdate',
+        build = ":TSUpdate",
         opts = {
             ensure_installed = ensure_installed,
             indent = {
@@ -49,9 +49,12 @@ return {
         },
 
         config = function(_, opts)
-            require('nvim-treesitter.configs').setup(opts)
+            require("nvim-treesitter.configs").setup(opts)
         end
     },
 
-    "nvim-treesitter/nvim-treesitter-context"
+    {
+        "nvim-treesitter/nvim-treesitter-context",
+        event = "VeryLazy",
+    }
 }

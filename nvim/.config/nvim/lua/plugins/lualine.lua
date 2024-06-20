@@ -1,23 +1,23 @@
 return {
   {
-    'nvim-lualine/lualine.nvim',
+    "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
     dependencies = {
-      'nvim-tree/nvim-web-devicons',
-      'linrongbin16/lsp-progress.nvim',
+      "nvim-tree/nvim-web-devicons",
+      "linrongbin16/lsp-progress.nvim",
       "someone-stole-my-name/yaml-companion.nvim"
     },
-    lazy = false,
+    lazy = true,
 
     opts = function()
       return {
         options = {
           icons_enabled = true,
-          theme = 'auto',
+          theme = "auto",
           globalstatus = true,
           -- disabled_filetypes = { statusline = { "dashboard", "alpha", "starter" } },
-          component_separators = '',
-          section_separators = { left = '', right = '' },
+          component_separators = "",
+          section_separators = { left = "", right = "" },
         },
         sections = {
           lualine_b = {},
@@ -47,7 +47,7 @@ return {
             }
           },
           lualine_x = {
-            require('lsp-progress').progress,
+            require("lsp-progress").progress,
             {
               function()
                 local schema = require("yaml-companion").get_buf_schema(0)
@@ -68,7 +68,7 @@ return {
     end,
 
     config = function(_, opts)
-      require('lualine').setup(opts)
+      require("lualine").setup(opts)
 
       vim.api.nvim_create_augroup("lualine_augroup", { clear = true })
       vim.api.nvim_create_autocmd("User", {
@@ -80,7 +80,23 @@ return {
   },
 
   {
-    'linrongbin16/lsp-progress.nvim',
+    "someone-stole-my-name/yaml-companion.nvim",
+    ft = {"yaml"},
+    dependencies = {
+        {"neovim/nvim-lspconfig"},
+        {"nvim-lua/plenary.nvim"},
+        {"nvim-telescope/telescope.nvim"}
+    },
+    config = function(_, opts)
+        local cfg = require("yaml-companion").setup(opts)
+        require("lspconfig")["yamlls"].setup(cfg)
+        require("telescope").load_extension("yaml_schema")
+    end
+  },
+
+  {
+    "linrongbin16/lsp-progress.nvim",
+    event = "VeryLazy",
     config = function()
       require("lsp-progress").setup({
         client_format = function(client_name, spinner, series_messages)

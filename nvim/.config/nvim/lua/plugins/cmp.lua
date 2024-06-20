@@ -24,8 +24,9 @@ return {
 
   {
     "nvim-lspconfig",
-    after = { 'nvim-cmp' },
-    event = { "VeryLazy", 'BufRead', 'BufNewFile', 'InsertEnter' },
+    after = { "nvim-cmp" },
+    event = { "VeryLazy" },
+    -- event = { "VeryLazy", "BufRead", "BufNewFile", "InsertEnter" },
   },
 
   {
@@ -41,6 +42,7 @@ return {
 
   {
     "zbirenbaum/copilot-cmp",
+    event = "VeryLazy",
     config = function()
       require("copilot_cmp").setup()
     end
@@ -48,7 +50,7 @@ return {
 
   {
     "hrsh7th/nvim-cmp",
-    event = 'VeryLazy',
+    event = "VeryLazy",
     dependencies = {
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-nvim-lsp",
@@ -73,9 +75,9 @@ return {
         },
         mapping = cmp.mapping.preset.insert({
           -- Select the [n]ext item
-          ['<C-n>'] = cmp.mapping.select_next_item(),
+          ["<C-n>"] = cmp.mapping.select_next_item(),
           -- Select the [p]revious item
-          ['<C-p>'] = cmp.mapping.select_prev_item(),
+          ["<C-p>"] = cmp.mapping.select_prev_item(),
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<C-Space>"] = cmp.mapping.complete(),

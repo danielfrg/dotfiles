@@ -1,7 +1,7 @@
 return {
     {
         "stevearc/conform.nvim",
-        event = 'VeryLazy',
+        event = "VeryLazy",
 
         opts = function()
             return {
