@@ -7,7 +7,6 @@ return {
       "linrongbin16/lsp-progress.nvim",
       "someone-stole-my-name/yaml-companion.nvim"
     },
-    lazy = true,
 
     opts = function()
       return {

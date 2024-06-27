@@ -4,7 +4,7 @@
 export HATCH_CONFIG=$HOME/.config/hatch/config.toml
 
 # Rye config
-# export PATH="$HOME/.rye/shims:$PATH"
+export PATH="$HOME/.rye/shims:$PATH"
 
 # Activate conda
 useconda() {

@@ -11,6 +11,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
         lazypath,
     })
 end
+print(lazypath)
 vim.opt.rtp:prepend(lazypath)
 
 require("mappings")

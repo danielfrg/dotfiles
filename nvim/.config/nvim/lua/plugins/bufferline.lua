@@ -1,7 +1,6 @@
 return {
     "akinsho/bufferline.nvim",
     event = "VeryLazy",
-    lazy = true,
 
     dependencies = { { "echasnovski/mini.nvim", version = "*" } },
 

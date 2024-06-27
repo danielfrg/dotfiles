@@ -1,7 +1,6 @@
 return {
     {
         "stevearc/oil.nvim",
-        lazy = true,
         dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function()
             require("oil").setup {
