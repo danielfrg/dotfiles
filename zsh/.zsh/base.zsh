@@ -100,24 +100,26 @@ bindkey -s ^f "tmux-sessionizer\n"
 
 alias cdc='tmux-sessionizer'
 
-# fancy tools
-alias cat='bat --style="header"'
-alias cat_='/bin/cat'
-alias df='duf'
-alias df_='/usr/df'
-alias grep='rg'
-alias grep_='/usr/bin/grep -i --color=always'
-alias find='fd -H'
-alias find_='/usr/bin/find'
-alias ls='eza'
-alias l='ls'
-alias ll='ls -la'
-alias la='ls -la'
-alias lt='ls --tree'
-alias ping='prettyping --nolegend'
-alias ping_='/sbin/ping'
-alias top='btm'
-alias top_='/usr/bin/top'
+if [[ $(uname) == "Darwin" ]]; then
+  # fancy tools
+  alias cat='bat --style="header"'
+  alias cat_='/bin/cat'
+  alias df='duf'
+  alias df_='/usr/df'
+  alias grep='rg'
+  alias grep_='/usr/bin/grep -i --color=always'
+  alias find='fd -H'
+  alias find_='/usr/bin/find'
+  alias ls='eza'
+  alias l='ls'
+  alias ll='ls -la'
+  alias la='ls -la'
+  alias lt='ls --tree'
+  alias ping='prettyping --nolegend'
+  alias ping_='/sbin/ping'
+  alias top='btm'
+  alias top_='/usr/bin/top'
+fi
 
 # GNU tools
 alias md5sum='md5 -r'
