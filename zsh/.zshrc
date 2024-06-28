@@ -33,7 +33,6 @@ zinit cdreplay -q
 # Source my config
 for file in "${HOME}/.zsh/base.zsh" \
             "${HOME}/.zsh/languages.zsh" \
-            "${HOME}/.zsh/ssh.zsh" \
             "${HOME}/code/dotfiles/personal/entrypoint.sh" \
             "${HOME}/.zsh/prompt.zsh"
 do
