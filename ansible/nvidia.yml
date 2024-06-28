@@ -10,7 +10,7 @@
       tags: [dotfiles]
 
     - role: nvidia-drivers
-      tags: [drivers]
+      tags: [gpu]
 
     - role: conda
       tags: [conda]

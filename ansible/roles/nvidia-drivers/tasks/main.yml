@@ -7,7 +7,7 @@
   with_items:
     - linux-modules-nvidia-535-generic
     # linux-modules-nvidia-535-$(uname -r)
-    - linux-modules-nvidia-535-6.5.0-41-generic
+    - linux-modules-nvidia-535-6.8.0-36-generic
     - nvidia-cuda-toolkit
 
 - name: check ubuntu-drivers
