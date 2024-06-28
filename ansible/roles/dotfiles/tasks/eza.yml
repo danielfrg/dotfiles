@@ -11,10 +11,15 @@
     dest: /tmp/gierens.asc
   register: gpg_download
 
+- name: Check if the key file exists
+  stat:
+    path: /etc/apt/keyrings/gierens.gpg
+  register: key_file_check
+
 - name: Add key to keyrings
   become: true
   ansible.builtin.command: gpg --dearmor -o /etc/apt/keyrings/gierens.gpg /tmp/gierens.asc
-  # when: gpg_download.changed
+  when: not key_file_check.stat.exists
 
 - name: Add repository to sources.list
   become: true

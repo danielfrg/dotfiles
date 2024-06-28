@@ -103,6 +103,11 @@ alias cdc='tmux-sessionizer'
 if command -v eza > /dev/null 2>&1; then
   alias ls='eza'
 fi
+alias l='ls'
+alias ll='ls -l'
+alias la='ls -la'
+alias lt='ls --tree'
+
 if [[ $(uname) == "Darwin" ]]; then
   alias cat='bat --style="header"'
   alias cat_='/bin/cat'
@@ -118,10 +123,6 @@ if [[ $(uname) == "Darwin" ]]; then
   alias top_='/usr/bin/top'
   eval "$(zoxide init zsh --cmd cd)"
 fi
-alias l='ls'
-alias ll='ls -la'
-alias la='ls -la'
-alias lt='ls --tree'
 
 # GNU tools
 alias md5sum='md5 -r'

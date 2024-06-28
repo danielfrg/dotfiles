@@ -12,3 +12,8 @@
 - name: install conda
   command: "bash {{ ansible_env.HOME }}/conda.sh -p {{ ansible_env.HOME }}/conda -b"
   when: not conda.stat.exists
+
+- name: remove installer
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/conda.sh"
+    state: absent
