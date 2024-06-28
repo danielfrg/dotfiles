@@ -1,0 +1,22 @@
+---
+- name: Ensure ~/.local/bin exists
+  file:
+    path: ~/.local/bin
+    state: directory
+    mode: 0755
+
+- name: Download fzf
+  get_url:
+    url: https://github.com/junegunn/fzf/releases/download/0.53.0/fzf-0.53.0-linux_amd64.tar.gz
+    dest: /tmp/fzf.zip
+
+- name: Unarchive fzf
+  unarchive:
+    src: /tmp/fzf.zip
+    dest: ~/.local/bin
+    remote_src: yes
+
+- name: Remove temporary files
+  file:
+    path: /tmp/fzf.zip
+    state: absent

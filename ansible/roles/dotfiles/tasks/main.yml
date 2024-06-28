@@ -11,7 +11,6 @@
     name: "{{ item }}"
     state: present
   with_items:
-    - fzf
     - git
     - gpg
     - neovim
@@ -20,6 +19,9 @@
     - stow
     - zsh
   ignore_errors: true
+
+- name: install fzf
+  ansible.builtin.include_tasks: fzf.yml
 
 - name: install eza
   ansible.builtin.include_tasks: eza.yml

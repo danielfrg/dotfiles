@@ -6,14 +6,14 @@
 - name: download miniforge
   ansible.builtin.get_url:
     url: https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh
-    dest: "{{ ansible_env.HOME }}/conda.sh"
+    dest: "/tmp/conda.sh"
   when: not conda.stat.exists
 
 - name: install conda
-  command: "bash {{ ansible_env.HOME }}/conda.sh -p {{ ansible_env.HOME }}/conda -b"
+  command: "bash /tmp/conda.sh -p {{ ansible_env.HOME }}/conda -b"
   when: not conda.stat.exists
 
 - name: remove installer
   ansible.builtin.file:
-    path: "{{ ansible_env.HOME }}/conda.sh"
+    path: "/tmp/conda.sh"
     state: absent
