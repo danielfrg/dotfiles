@@ -60,7 +60,6 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 eval "$(fzf --zsh)"
-eval "$(zoxide init zsh --cmd cd)"
 
 # History: Atuin
 # local FOUND_ATUIN=$+commands[atuin]
@@ -100,8 +99,11 @@ bindkey -s ^f "tmux-sessionizer\n"
 
 alias cdc='tmux-sessionizer'
 
+# fancy tools
+if command -v eza > /dev/null 2>&1; then
+  alias ls='eza'
+fi
 if [[ $(uname) == "Darwin" ]]; then
-  # fancy tools
   alias cat='bat --style="header"'
   alias cat_='/bin/cat'
   alias df='duf'
@@ -110,16 +112,16 @@ if [[ $(uname) == "Darwin" ]]; then
   alias grep_='/usr/bin/grep -i --color=always'
   alias find='fd -H'
   alias find_='/usr/bin/find'
-  alias ls='eza'
-  alias l='ls'
-  alias ll='ls -la'
-  alias la='ls -la'
-  alias lt='ls --tree'
   alias ping='prettyping --nolegend'
   alias ping_='/sbin/ping'
   alias top='btm'
   alias top_='/usr/bin/top'
+  eval "$(zoxide init zsh --cmd cd)"
 fi
+alias l='ls'
+alias ll='ls -la'
+alias la='ls -la'
+alias lt='ls --tree'
 
 # GNU tools
 alias md5sum='md5 -r'
