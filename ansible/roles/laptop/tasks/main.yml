@@ -1,8 +1,0 @@
----
-# - ansible.builtin.include_tasks: rye.yml
-#   args:
-#     apply:
-#       tags:
-#         - rye
-#   tags:
-#     - always

@@ -1,17 +1,55 @@
 ---
-- ansible.builtin.include_tasks: packages.yml
-  tags:
-    - always
+- name: Install deps (apt-update)
+  become: true
+  ansible.builtin.apt:
+    update_cache: yes
+  ignore_errors: true
 
-- ansible.builtin.include_tasks: repo.yml
-  tags:
-    - always
+- name: Install deps (apt)
+  become: true
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - fzf
+    - git
+    - gpg
+    - neovim
+    - net-tools
+    - snapd
+    - stow
+    - zsh
+  ignore_errors: true
+
+- name: install eza
+  ansible.builtin.include_tasks: eza.yml
 
 - name: Change shell to zsh
   become: true
   user:
     name: "{{ setup_user }}"
     shell: /usr/bin/zsh
+
+- name: Install dotfiles deps (snap classic)
+  become: true
+  community.general.snap:
+    name:
+      - task
+    classic: true
+
+- name: Ensure ~/code directory exists
+  file:
+    dest: "{{ ansible_env.HOME }}/code"
+    state: directory
+
+- name: Clone dotfiles repo
+  ansible.builtin.git:
+    repo: git@github.com:danielfrg/dotfiles.git
+    dest: "{{ ansible_env.HOME }}/code/dotfiles"
+    recursive: yes
+    update: yes
+  tags:
+    - repo
 
 - name: Stow files
   ansible.builtin.command: task link

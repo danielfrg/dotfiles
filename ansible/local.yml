@@ -1,9 +1,0 @@
-- hosts: laptop
-  connection: local
-
-  vars:
-    home_dir: "{{ lookup('env', 'HOME') }}"
-
-  roles:
-    - role: laptop
-      tags: ["always", "laptop"]

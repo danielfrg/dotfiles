@@ -1,0 +1,14 @@
+---
+- name: check conda
+  stat: path=/{{ ansible_env.HOME }}/conda
+  register: conda
+
+- name: download miniforge
+  ansible.builtin.get_url:
+    url: https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh
+    dest: "{{ ansible_env.HOME }}/conda.sh"
+  when: not conda.stat.exists
+
+- name: install conda
+  command: "bash {{ ansible_env.HOME }}/conda.sh -p {{ ansible_env.HOME }}/conda -b"
+  when: not conda.stat.exists

@@ -1,13 +1,20 @@
 - hosts: nvidia
 
-
   vars:
-    setup_user: local-danrodriguez
+    setup_user: danrodriguez
+    docker_users:
+      - danrodriguez
 
   roles:
-    - role: nvidia-drivers
-      tags: ["always"]
-      become: true
-
     - role: dotfiles
-      tags: ["always"]
+      tags: [dotfiles]
+
+    - role: nvidia-drivers
+      tags: [drivers]
+
+    - role: conda
+      tags: [conda]
+
+    - role: geerlingguy.docker
+      become: true
+      tags: [docker]

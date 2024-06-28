@@ -2,10 +2,10 @@
 laptop
 
 [homelab]
-homelab
+node-control-01
 
 [rpi]
 rpi1
 
 [nvidia]
-colossus ansible_user=local-danrodriguez
+nvidia-workstation ansible_user=danrodriguez
