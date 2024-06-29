@@ -97,7 +97,7 @@ alias npmreset="rm -rf node_modules"
 
 alias npm_="/Users/danrodriguez/.volta/bin/npm"
 alias npm=pnpm
-alias npx=pnpx
+alias npx=pnpm dlx
 
 export NEXT_TELEMETRY_DEBUG=1.
 export DISABLE_OPENCOLLECTIVE=1

@@ -87,6 +87,7 @@
     runci = commit --allow-empty -nm 'Empty commit to run ci'
 
     uncommit = reset HEAD^
+    unstage = reset HEAD --
 
     # View abbreviated SHA, description, and history graph of the latest 20 commits
     l = log --pretty=oneline -n 20 --graph --abbrev-commit
