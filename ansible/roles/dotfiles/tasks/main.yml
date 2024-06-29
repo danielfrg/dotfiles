@@ -11,8 +11,11 @@
     name: "{{ item }}"
     state: present
   with_items:
+    - build-essential
     - git
+    - git-delta
     - gpg
+    - htop
     - neovim
     - net-tools
     - snapd

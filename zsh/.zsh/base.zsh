@@ -121,14 +121,14 @@ if [[ $(uname) == "Darwin" ]]; then
   alias ping_='/sbin/ping'
   alias top='btm'
   alias top_='/usr/bin/top'
+  alias sed="gsed"
+  alias sed_="/usr/bin/sed"
   eval "$(zoxide init zsh --cmd cd)"
 fi
 
 # GNU tools
 alias md5sum='md5 -r'
 alias sha256sum="shasum -a 256"
-alias sed_="/usr/bin/sed"
-alias sed="gsed"
 
 # Vim
 alias n="nvim -c 'Telescope oldfiles'"
