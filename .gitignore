@@ -12,3 +12,5 @@
 /python/.jupyter/lab/
 /python/.jupyter/serverconfig/
 /python/.jupyter/migrated
+
+/nvim/.config/nvim/lua/local.lua
