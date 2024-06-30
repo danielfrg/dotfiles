@@ -106,7 +106,7 @@ if vim.g.neovide then
     vim.keymap.set("i", "<c-r>", "<c-s-v>")
 end
 
-local status, plugin = pcall(require, 'plugin_name')
+local status, plugin = pcall(require, 'local')
 -- if not status then
 --     print('Something went wrong:', plugin)
 -- else
