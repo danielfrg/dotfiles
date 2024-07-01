@@ -18,9 +18,13 @@
     - htop
     - neovim
     - net-tools
+    - openconnect
     - snapd
     - stow
+    - unzip
     - zsh
+    - nodejs
+    - npm
   ignore_errors: true
 
 - name: install fzf

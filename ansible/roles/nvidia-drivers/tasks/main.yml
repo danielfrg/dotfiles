@@ -1,14 +1,18 @@
 - name: install kernel modules and ubuntu-drivers
   become: true
   ansible.builtin.package:
-    name: ubuntu-drivers-common
+    name: "{{ item }}"
     state: present
     update_cache: true
   with_items:
-    - linux-modules-nvidia-535-generic
+    - linux-modules-nvidia-535-server-generic
     # linux-modules-nvidia-535-$(uname -r)
     - linux-modules-nvidia-535-6.8.0-36-generic
+    - ubuntu-drivers-common
     - nvidia-cuda-toolkit
+    - nvidia-utils-535-server
+    - nvidia-fabricmanager-535
+    - libnvidia-nscq-535
 
 - name: check ubuntu-drivers
   become: true
@@ -21,14 +25,4 @@
   when:
     - ubuntu_drivers_command.rc == 0
   command:
-    cmd: "ubuntu-drivers install --gpgpu"
-
-- name: install nvidia utils
-  become: true
-  ansible.builtin.package:
-    name: "{{ item }}"
-    state: present
-    update_cache: yes
-  with_items:
-    - nvidia-utils-535-server
-    - nvidia-cuda-toolkit
+    cmd: "ubuntu-drivers install"

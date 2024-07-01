@@ -62,10 +62,10 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 eval "$(fzf --zsh)"
 
 # History: Atuin
-# local FOUND_ATUIN=$+commands[atuin]
-# if [[ $FOUND_ATUIN -eq 1 ]]; then
-#   source <(atuin init zsh --disable-up-arrow)
-# fi
+local FOUND_ATUIN=$+commands[atuin]
+if [[ $FOUND_ATUIN -eq 1 ]]; then
+  source <(atuin init zsh --disable-up-arrow)
+fi
 
 #########################
 # ALIASES
