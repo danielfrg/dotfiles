@@ -2,12 +2,9 @@ changeps1: false
 
 create_default_packages:
   - pip
-  - pylint
-  - black
 
 channels:
   - conda-forge
-  - defaults
 
 update_dependencies: false
 channel_priority: true
