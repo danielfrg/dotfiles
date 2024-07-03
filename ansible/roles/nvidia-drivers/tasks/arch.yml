@@ -1,0 +1,9 @@
+- name: install nvidia drivers
+  become: true
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+  with_items:
+    - nvidia
+    - nvidia-utils

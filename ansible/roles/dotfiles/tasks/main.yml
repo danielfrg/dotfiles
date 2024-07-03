@@ -1,50 +1,24 @@
 ---
-- name: Install deps (apt-update)
+- name: Install deps
   become: true
-  ansible.builtin.apt:
-    update_cache: yes
-  ignore_errors: true
-
-- name: Install deps (apt)
-  become: true
-  ansible.builtin.apt:
+  ansible.builtin.package:
     name: "{{ item }}"
     state: present
+    update_cache: true
   with_items:
-    - build-essential
     - git
     - git-delta
-    - gpg
+    - eza
+    - fzf
     - htop
+    - less
     - neovim
-    - net-tools
-    - openconnect
-    - snapd
-    - stow
-    - unzip
-    - zsh
     - nodejs
     - npm
-  ignore_errors: true
-
-- name: install fzf
-  ansible.builtin.include_tasks: fzf.yml
-
-- name: install eza
-  ansible.builtin.include_tasks: eza.yml
-
-- name: Change shell to zsh
-  become: true
-  user:
-    name: "{{ setup_user }}"
-    shell: /usr/bin/zsh
-
-- name: Install dotfiles deps (snap classic)
-  become: true
-  community.general.snap:
-    name:
-      - task
-    classic: true
+    - openconnect
+    - stow
+    - go-task
+    - zsh
 
 - name: Ensure ~/code directory exists
   file:
@@ -61,7 +35,7 @@
     - repo
 
 - name: Stow files
-  ansible.builtin.command: task link
+  ansible.builtin.command: go-task link
   args:
     chdir: /home/{{ setup_user }}/code/dotfiles
 
@@ -69,5 +43,9 @@
   file:
     path: /home/{{ setup_user }}/.tmux.conf
     state: absent
-# Do this after stowing the files
-# - ansible.builtin.include_tasks: atuin.yml
+
+- name: Change shell to zsh
+  become: true
+  user:
+    name: "{{ setup_user }}"
+    shell: /usr/bin/zsh

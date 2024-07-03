@@ -1,0 +1,3 @@
+- name: Include conda tasks
+  import_tasks: conda.yml
+  tags: [conda]

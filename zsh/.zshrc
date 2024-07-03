@@ -16,7 +16,6 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 zinit light olivierverdier/zsh-git-prompt
-zinit load atuinsh/atuin
 
 # Load completions
 autoload -Uz compinit && compinit
@@ -33,7 +32,7 @@ zinit cdreplay -q
 
 # Source my config
 for file in "${HOME}/.zsh/base.zsh" \
-            "${HOME}/.zsh/languages.zsh" \
+            "${HOME}/.zsh/dev.zsh" \
             "${HOME}/code/dotfiles/personal/entrypoint.sh" \
             "${HOME}/.zsh/prompt.zsh"
 do

@@ -1,18 +1,33 @@
 # PYTHON
-# ==========
+# ------
 
 export HATCH_CONFIG=$HOME/.config/hatch/config.toml
 
 # Rye config
 export PATH="$HOME/.rye/shims:$PATH"
 
-# Activate conda
-useconda() {
-    # Remove RYE
-    PATH=$(echo "$PATH" | sed -e 's@:/Users/danrodriguez/.rye/shims@@g')
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('$HOME/conda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/danielfrg/conda/etc/profile.d/conda.sh" ]; then
+        . "/home/danielfrg/conda/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/danielfrg/conda/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
 
-    eval "$(/Users/danrodriguez/conda/bin/conda shell.zsh hook)"
-}
+# # Activate conda
+# useconda() {
+#     # Remove RYE
+#     PATH=$(echo "$PATH" | sed -e 's@:/Users/danrodriguez/.rye/shims@@g')
+#
+#     eval "$(/Users/danrodriguez/conda/bin/conda shell.zsh hook)"
+# }
 
 # Activate pyenv
 # usepyenv() {
