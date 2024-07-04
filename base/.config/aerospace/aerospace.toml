@@ -19,8 +19,8 @@ cmd-alt-ctrl-shift-f = 'fullscreen'
 alt-f = 'fullscreen'
 
 # alt-s = 'layout v_accordion' # 'layout stacking' in i3
-# alt-w = 'layout h_accordion' # 'layout tabbed' in i3
-alt-s = 'layout tiles horizontal vertical' # 'layout toggle split' in i3
+cmd-alt-ctrl-shift-w = 'layout h_accordion' # 'layout tabbed' in i3
+cmd-alt-ctrl-shift-e = 'layout tiles horizontal vertical' # 'layout toggle split' in i3
 
 alt-shift-space = 'layout floating tiling' # 'floating toggle' in i3
 

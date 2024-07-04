@@ -1,0 +1,24 @@
+---
+- name: Install docker
+  become: true
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+  with_items:
+    - docker
+
+- name: Start and enable docker.service
+  become: true
+  systemd:
+    name: docker.service
+    state: started
+    enabled: yes
+
+- name: Add user to docker group
+  become: true
+  user:
+    name: "{{ setup_user }}"
+    groups:
+      - docker
+    append: true

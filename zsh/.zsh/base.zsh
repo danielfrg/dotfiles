@@ -1,7 +1,5 @@
 if [[ $(uname) == "Darwin" ]]; then
-    # Mac only
-
-    # Do this manually to make it faster
+    # Pasted here explicitly to make it faster
     # Start: eval $($brew_path/brew shellenv)
     export HOMEBREW_PREFIX="/opt/homebrew";
     export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
@@ -27,6 +25,12 @@ if [[ $(uname) == "Darwin" ]]; then
 
     alias rm_="/bin/rm"
     alias rm="trash"
+
+    zle -N project_switcher{,}
+    # ctrl-f for tmux-sessionizer
+    bindkey -s ^f "tmux-sessionizer\n"
+
+    alias cdc='tmux-sessionizer'
 else
     # echo 'Unknown OS!'
 fi
@@ -92,12 +96,6 @@ project_switcher() {
   echo "cd $selected"
   cd $selected
 }
-
-zle -N project_switcher{,}
-# ctrl-f for tmux-sessionizer
-bindkey -s ^f "tmux-sessionizer\n"
-
-alias cdc='tmux-sessionizer'
 
 # fancy tools
 if command -v eza > /dev/null 2>&1; then

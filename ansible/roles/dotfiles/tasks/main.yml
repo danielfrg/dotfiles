@@ -1,23 +1,25 @@
 ---
-- name: Install deps
+- name: Install packages
   become: true
   ansible.builtin.package:
     name: "{{ item }}"
     state: present
     update_cache: true
   with_items:
+    - base-devel
     - git
     - git-delta
     - eza
     - fzf
+    - go-task
     - htop
     - less
     - neovim
     - nodejs
     - npm
     - openconnect
+    - unzip
     - stow
-    - go-task
     - zsh
 
 - name: Ensure ~/code directory exists
