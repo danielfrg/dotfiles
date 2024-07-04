@@ -24,6 +24,7 @@
     precomposeunicode = true
 
     pager = delta
+    editor = nvim
 
 [init]
     defaultBranch = main
@@ -33,7 +34,13 @@
     whitespace = fix
 
 [interactive]
+    algorithm = patience
+	compactionHeuristic = true
+	tool = nvimdiff
     diffFilter = delta --color-only
+
+[difftool "nvimdiff"]
+	cmd = nvim -d \"$LOCAL\" \"$REMOTE\" -c \"wincmd w\" -c \"wincmd L\"
 
 [delta]
     navigate = true    # use n and N to move between diff sections

@@ -26,6 +26,11 @@ return {
     },
 
     {
+        "mbbill/undotree",
+        event = "VeryLazy"
+    },
+
+    {
         "folke/todo-comments.nvim",
         event = "VeryLazy",
         dependencies = { "nvim-lua/plenary.nvim" },
@@ -42,18 +47,29 @@ return {
         event = "VeryLazy",
     },
 
+    { "tpope/vim-repeat" },
+
     {
         "tpope/vim-surround",
         event = "VeryLazy",
     },
 
+    { "windwp/nvim-autopairs" }, -- autopairs
     {
-        "christoomey/vim-tmux-navigator",
-        event = "VeryLazy"
+        "andymass/vim-matchup",
+        config = function()
+            vim.api.nvim_set_hl(0, "OffScreenPopup",
+                { fg = "#fe8019", bg = "#3c3836", italic = true })
+            vim.g.matchup_matchparen_offscreen = {
+                method = "popup",
+                highlight = "OffScreenPopup"
+            }
+        end
     },
+    { "wellle/targets.vim" }, -- adds more targets like [ or ,
 
     {
-        "mbbill/undotree",
+        "christoomey/vim-tmux-navigator",
         event = "VeryLazy"
     },
 

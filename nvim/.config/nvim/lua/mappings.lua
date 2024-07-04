@@ -81,4 +81,10 @@ map("n", "<C-f>", "<cmd> silent !tmux neww tmux-sessionizer<CR>")
 -- PLUGINS
 
 -- undotree
-map("n", "<leader>cu", "<cmd>UndotreeToggle<CR>", { desc = "Open undotree" })
+map("n", "<leader>u", "<cmd>UndotreeToggle<CR>", { desc = "Open undotree" })
+
+-- Save undo with other actions
+map("i", ",", ",<C-g>U")
+map("i", ".", ".<C-g>U")
+map("i", "!", "!<C-g>U")
+map("i", "?", "?<C-g>U")

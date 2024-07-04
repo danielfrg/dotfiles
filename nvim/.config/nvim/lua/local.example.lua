@@ -1,0 +1,1 @@
+-- vim.g.python_host_prog = '/usr/bin/python2'

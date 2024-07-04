@@ -42,6 +42,16 @@ vim.opt.incsearch = true
 -- preview substitutions as you type
 vim.opt.inccommand = 'split'
 
+-- For :command mode
+-- Complete to longest then show list
+vim.opt.wildmode = "list:longest,list:full"
+vim.opt.wildignore:append({".javac", "node_modules", "*.pyc"})
+vim.opt.wildignore:append({
+    ".o", ".obj", ".dll", ".exe", ".so", ".a", ".lib", ".pyc", ".pyo", ".pyd",
+    ".swp", ".swo", ".class", ".DS_Store", ".git", ".hg", ".orig"
+})
+vim.opt.suffixesadd:append({".java", ".rs"})
+
 -- sync/nosync clipboard between OS and Neovim
 vim.opt.clipboard = "" -- nosync
 -- vim.opt.clipboard = "unnamedplus" -- sync
