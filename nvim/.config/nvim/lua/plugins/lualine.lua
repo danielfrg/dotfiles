@@ -1,14 +1,56 @@
+-- From: https://gist.github.com/Lamarcke/36e086dd3bb2cebc593d505e2f838e07
+local function get_attached_clients()
+  local buf_clients = vim.lsp.get_active_clients({ bufnr = 0 })
+  if #buf_clients == 0 then
+    return "NO LSP"
+  end
+
+  local buf_ft = vim.bo.filetype
+  local buf_client_names = {}
+
+  -- add client
+  for _, client in pairs(buf_clients) do
+    if client.name ~= "copilot" and client.name ~= "null-ls" then
+      table.insert(buf_client_names, client.name)
+    end
+  end
+  -- This needs to be a string only table so we can use concat below
+  local unique_client_names = {}
+  for _, client_name_target in ipairs(buf_client_names) do
+    local is_duplicate = false
+    for _, client_name_compare in ipairs(unique_client_names) do
+      if client_name_target == client_name_compare then
+        is_duplicate = true
+      end
+    end
+    if not is_duplicate then
+      table.insert(unique_client_names, client_name_target)
+    end
+  end
+
+  local client_names_str = table.concat(unique_client_names, ", ")
+  local language_servers = string.format("[%s]", client_names_str)
+
+  return language_servers
+end
+
+
 return {
   {
     "nvim-lualine/lualine.nvim",
-    event = "VeryLazy",
+
     dependencies = {
       "nvim-tree/nvim-web-devicons",
-      "linrongbin16/lsp-progress.nvim",
-      "someone-stole-my-name/yaml-companion.nvim"
     },
 
     opts = function()
+      local attached_clients = {
+        get_attached_clients,
+        color = {
+          gui = "bold"
+        }
+      }
+
       return {
         options = {
           icons_enabled = true,
@@ -46,14 +88,14 @@ return {
             }
           },
           lualine_x = {
-            require("lsp-progress").progress,
+            attached_clients,
             {
               function()
                 local schema = require("yaml-companion").get_buf_schema(0)
                 if schema.result[1].name == "none" then
                   return ""
                 end
-                return "[" .. schema.result[1].name .. "]"
+                return "[schema: " .. schema.result[1].name .. "]"
               end,
             },
           },
@@ -65,91 +107,21 @@ return {
         }
       }
     end,
-
-    config = function(_, opts)
-      require("lualine").setup(opts)
-
-      vim.api.nvim_create_augroup("lualine_augroup", { clear = true })
-      vim.api.nvim_create_autocmd("User", {
-        group = "lualine_augroup",
-        pattern = "LspProgressStatusUpdated",
-        callback = require("lualine").refresh,
-      })
-    end
   },
 
   {
     "someone-stole-my-name/yaml-companion.nvim",
-    ft = {"yaml"},
+    lazy = true,
+
+    ft = { "yaml" },
     dependencies = {
-        {"neovim/nvim-lspconfig"},
-        {"nvim-lua/plenary.nvim"},
-        {"nvim-telescope/telescope.nvim"}
+      { "neovim/nvim-lspconfig" },
+      { "nvim-telescope/telescope.nvim" }
     },
     config = function(_, opts)
-        local cfg = require("yaml-companion").setup(opts)
-        require("lspconfig")["yamlls"].setup(cfg)
-        require("telescope").load_extension("yaml_schema")
+      local cfg = require("yaml-companion").setup(opts)
+      require("lspconfig")["yamlls"].setup(cfg)
+      require("telescope").load_extension("yaml_schema")
     end
   },
-
-  {
-    "linrongbin16/lsp-progress.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("lsp-progress").setup({
-        client_format = function(client_name, spinner, series_messages)
-          if #series_messages == 0 then
-            return nil
-          end
-          return {
-            name = client_name,
-            body = spinner .. " " .. table.concat(series_messages, ", "),
-          }
-        end,
-        format = function(client_messages)
-          --- @param name string
-          --- @param msg string?
-          --- @return string
-          local function stringify(name, msg)
-            return msg and string.format("%s %s", name, msg) or name
-          end
-
-          local sign = "" -- nf-fa-gear \uf013
-          local lsp_clients = vim.lsp.get_active_clients()
-          local messages_map = {}
-          for _, climsg in ipairs(client_messages) do
-            messages_map[climsg.name] = climsg.body
-          end
-
-          if #lsp_clients > 0 then
-            table.sort(lsp_clients, function(a, b)
-              return a.name < b.name
-            end)
-            local builder = {}
-            for _, cli in ipairs(lsp_clients) do
-              if
-                  type(cli) == "table"
-                  and type(cli.name) == "string"
-                  and string.len(cli.name) > 0
-              then
-                if messages_map[cli.name] then
-                  table.insert(
-                    builder,
-                    stringify(cli.name, messages_map[cli.name])
-                  )
-                else
-                  table.insert(builder, stringify(cli.name))
-                end
-              end
-            end
-            if #builder > 0 then
-              return sign .. " " .. table.concat(builder, ", ")
-            end
-          end
-          return ""
-        end,
-      })
-    end
-  }
 }

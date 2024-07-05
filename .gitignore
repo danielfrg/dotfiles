@@ -14,3 +14,4 @@
 /python/.jupyter/migrated
 
 /nvim/.config/nvim/lua/local.lua
+/nvim/.config/nvim/lazy-lock.json

@@ -1,16 +1,8 @@
 return {
+    -- undo tree
     {
-        "nvim-tree/nvim-web-devicons",
-        lazy = true
-    },
-
-    -- measure startuptime
-    {
-        "dstein64/vim-startuptime",
-        cmd = "StartupTime",
-        config = function()
-            vim.g.startuptime_tries = 10
-        end,
+        "mbbill/undotree",
+        event = "VeryLazy"
     },
 
     -- Detect tabstop and shiftwidth automatically
@@ -19,15 +11,26 @@ return {
         event = "VeryLazy",
     },
 
-    -- "gc" to comment visual regions/lines
     {
-        "numToStr/Comment.nvim",
+        "tpope/vim-fugitive",
         event = "VeryLazy",
     },
 
     {
-        "mbbill/undotree",
-        event = "VeryLazy"
+        "tpope/vim-repeat",
+        event = "VeryLazy",
+    },
+
+    {
+        "tpope/vim-surround",
+        event = "VeryLazy",
+    },
+
+
+    -- "gc" to comment visual regions/lines
+    {
+        "numToStr/Comment.nvim",
+        event = "VeryLazy",
     },
 
     {
@@ -42,21 +45,16 @@ return {
         event = "VeryLazy"
     },
 
+    -- autopairs
     {
-        "tpope/vim-fugitive",
-        event = "VeryLazy",
+        "windwp/nvim-autopairs",
+        event = "VeryLazy"
     },
 
-    { "tpope/vim-repeat" },
-
-    {
-        "tpope/vim-surround",
-        event = "VeryLazy",
-    },
-
-    { "windwp/nvim-autopairs" }, -- autopairs
     {
         "andymass/vim-matchup",
+        event = "VeryLazy",
+
         config = function()
             vim.api.nvim_set_hl(0, "OffScreenPopup",
                 { fg = "#fe8019", bg = "#3c3836", italic = true })
@@ -66,7 +64,12 @@ return {
             }
         end
     },
-    { "wellle/targets.vim" }, -- adds more targets like [ or ,
+
+    -- adds more targets like [ or ,
+    {
+        "wellle/targets.vim",
+        event = "VeryLazy"
+    },
 
     {
         "christoomey/vim-tmux-navigator",

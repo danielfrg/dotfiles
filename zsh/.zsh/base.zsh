@@ -233,3 +233,13 @@ alias httpserver="open http://localhost:8000 && python -m http.server 8000"
 # Helpers
 port_listening_who() { lsof -i ":$1" | grep LISTEN }
 
+
+# Determine if we are an SSH connection
+if [[ -n "$SSH_CLIENT" ]] || [[ -n "$SSH_TTY" ]]; then
+    export IS_SSH=true
+    export TMUX=1
+else
+    case $(ps -o comm= -p $PPID) in
+        sshd|*/sshd) IS_SSH=true
+    esac
+fi

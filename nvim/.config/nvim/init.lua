@@ -1,4 +1,8 @@
+-- Load options first
 require("options")
+
+-- Local local.lua if found
+local status, plugin = pcall(require, 'local')
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -18,15 +22,12 @@ require("autocmds")
 
 require('lazy').setup("plugins",
     {
-        defaults = {
-            event = "VeryLazy",
-            -- lazy = true
-        }
+        -- defaults = {
+        --     event = "VeryLazy",
+        --     lazy = true
+        -- },
+        change_detection = {
+            notify = false,
+        },
     }
 );
-
--- local lsp = vim.lsp
-
--- lsp.handlers["textDocument/hover"] = lsp.with(vim.lsp.handlers.hover, {
---     border = "rounded",
--- })

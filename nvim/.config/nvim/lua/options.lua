@@ -9,7 +9,7 @@ vim.g.have_nerd_font = true
 vim.opt.cmdheight = 1
 
 -- no splash screen
-vim.opt.shortmess = vim.opt.shortmess + 'I'
+vim.opt.shortmess:append "I"
 
 -- don't show the mode, since it's already in the status line
 vim.opt.showmode = false
@@ -45,12 +45,12 @@ vim.opt.inccommand = 'split'
 -- For :command mode
 -- Complete to longest then show list
 vim.opt.wildmode = "list:longest,list:full"
-vim.opt.wildignore:append({".javac", "node_modules", "*.pyc"})
+vim.opt.wildignore:append({ ".javac", "node_modules", "*.pyc" })
 vim.opt.wildignore:append({
     ".o", ".obj", ".dll", ".exe", ".so", ".a", ".lib", ".pyc", ".pyo", ".pyd",
     ".swp", ".swo", ".class", ".DS_Store", ".git", ".hg", ".orig"
 })
-vim.opt.suffixesadd:append({".java", ".rs"})
+vim.opt.suffixesadd:append({ ".java", ".rs" })
 
 -- sync/nosync clipboard between OS and Neovim
 vim.opt.clipboard = "" -- nosync
@@ -104,7 +104,7 @@ vim.opt.conceallevel = 0
 
 -- suppress ruff lsp warning:
 -- https://github.com/nvimtools/none-ls.nvim/discussions/81
-vim.g.nonels_suppress_issue58 = true
+-- vim.g.nonels_suppress_issue58 = true
 
 if vim.g.neovide then
     vim.o.guifont = "JetbrainsMono Nerd Font:h10"
@@ -115,10 +115,3 @@ if vim.g.neovide then
     vim.keymap.set("i", "<c-s-v>", "<c-r>+")
     vim.keymap.set("i", "<c-r>", "<c-s-v>")
 end
-
-local status, plugin = pcall(require, 'local')
--- if not status then
---     print('Something went wrong:', plugin)
--- else
---     plugin.setup()
--- end

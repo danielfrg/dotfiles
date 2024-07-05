@@ -3,26 +3,11 @@ return {
     "catppuccin/nvim",
     name = "catppuccin",
     priority = 1000,
+    lazy = false,
     config = function()
       vim.cmd([[colorscheme catppuccin-mocha]])
     end,
   },
-
-  -- {
-  --   "neanias/everforest-nvim",
-  --   version = false,
-  --   lazy = false,
-  --   priority = 1000, -- make sure to load this before all the other start plugins
-  --   -- Optional; default configuration will be used if setup isn"t called.
-  --   config = function()
-  --     vim.cmd([[colorscheme everforest]])
-  --     require("everforest").setup({
-  --       -- Your config here
-  --       background = "hard",
-  --     })
-  --   end,
-  -- }
-
 
   -- {
   --   "rebelot/kanagawa.nvim",
