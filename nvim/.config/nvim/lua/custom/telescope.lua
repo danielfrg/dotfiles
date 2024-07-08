@@ -1,17 +1,54 @@
 local data = assert(vim.fn.stdpath "data") --[[@as string]]
 
 require("telescope").setup {
+    defaults = {
+        file_ignore_patterns = { ".git/" },
+        vimgrep_arguments = {
+            "rg",
+            "-L",
+            "--color=never",
+            "--no-heading",
+            "--with-filename",
+            "--line-number",
+            "--column",
+            "--smart-case",
+        },
+        previewer = true,
+        file_previewer = require "telescope.previewers".vim_buffer_cat.new,
+        grep_previewer = require "telescope.previewers".vim_buffer_vimgrep.new,
+        qflist_previewer = require "telescope.previewers".vim_buffer_qflist.new,
+    },
+    pickers = {
+        live_grep = {
+            additional_args = function(opts)
+                return { "--hidden" }
+            end
+        },
+    },
     extensions = {
         wrap_results = true,
 
-        fzf = {},
-        -- history = {
-        --     path = vim.fs.joinpath(data, "telescope_history.sqlite3"),
-        --     limit = 100,
-        -- },
+        file_browser = {
+            -- theme = "dropdown",
+            hijack_netrw = true,
+        },
+
+        -- native FZF support
+        fzf = {
+            fuzzy = true,                   -- false will only do exact matching
+            override_generic_sorter = true, -- override the generic sorter
+            override_file_sorter = true,    -- override the file sorter
+            case_mode = "smart_case",       -- "smart_case" or "ignore_case" or "respect_case"
+        },
+
         ["ui-select"] = {
             require("telescope.themes").get_dropdown {},
         },
+
+    },
+    extensions_list = {
+        "file_browser",
+        "fzf",
     },
 }
 

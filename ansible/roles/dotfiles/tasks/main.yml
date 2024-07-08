@@ -41,10 +41,10 @@
   args:
     chdir: /home/{{ setup_user }}/code/dotfiles
 
-- name: Remove .tmux.conf
-  file:
-    path: /home/{{ setup_user }}/.tmux.conf
-    state: absent
+# - name: Remove .tmux.conf
+#   file:
+#     path: /home/{{ setup_user }}/.tmux.conf
+#     state: absent
 
 - name: Change shell to zsh
   become: true

@@ -8,17 +8,21 @@ export PATH="$HOME/.rye/shims:$PATH"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('$HOME/conda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/Users/danrodriguez/conda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/danielfrg/conda/etc/profile.d/conda.sh" ]; then
-        . "/home/danielfrg/conda/etc/profile.d/conda.sh"
+    if [ -f "/Users/danrodriguez/conda/etc/profile.d/conda.sh" ]; then
+        . "/Users/danrodriguez/conda/etc/profile.d/conda.sh"
     else
-        export PATH="/home/danielfrg/conda/bin:$PATH"
+        export PATH="/Users/danrodriguez/conda/bin:$PATH"
     fi
 fi
 unset __conda_setup
+
+if [ -f "/Users/danrodriguez/conda/etc/profile.d/mamba.sh" ]; then
+    . "/Users/danrodriguez/conda/etc/profile.d/mamba.sh"
+fi
 # <<< conda initialize <<<
 
 # # Activate conda
