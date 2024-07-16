@@ -25,74 +25,6 @@ if [ -f "/Users/danrodriguez/conda/etc/profile.d/mamba.sh" ]; then
 fi
 # <<< conda initialize <<<
 
-# # Activate conda
-# useconda() {
-#     # Remove RYE
-#     PATH=$(echo "$PATH" | sed -e 's@:/Users/danrodriguez/.rye/shims@@g')
-#
-#     eval "$(/Users/danrodriguez/conda/bin/conda shell.zsh hook)"
-# }
-
-# Activate pyenv
-# usepyenv() {
-#     # Remove RYE
-#     PATH=$(echo "$PATH" | sed -e 's@:/Users/danrodriguez/.rye/shims@@g')
-#
-#     export PYENV_ROOT="$HOME/.pyenv"
-#     export PATH="$PYENV_ROOT/bin:$PATH"
-#     export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-#
-#     # Copy/Paste directly this to make it faster
-#     # Default to evaluate if not in MacOS
-#     if [[ $(uname) == "Darwin" ]]; then
-#         # Start: pyenv init - --no-rehash zsh
-#         PATH="$(bash --norc -ec 'IFS=:; paths=($PATH);
-#         for i in ${!paths[@]}; do
-#         if [[ ${paths[i]} == "''/Users/danrodriguez/.pyenv/shims''" ]]; then unset '\''paths[i]'\'';
-#         fi; done;
-#         echo "${paths[*]}"')"
-#         export PATH="/Users/danrodriguez/.pyenv/shims:${PATH}"
-#         export PYENV_SHELL=zsh
-#         source '/opt/homebrew/Cellar/pyenv/2.3.30/libexec/../completions/pyenv.zsh'
-#         pyenv() {
-#         local command
-#         command="${1:-}"
-#         if [ "$#" -gt 0 ]; then
-#             shift
-#         fi
-#
-#         case "$command" in
-#         activate|deactivate|rehash|shell)
-#             eval "$(pyenv "sh-$command" "$@")"
-#             ;;
-#         *)
-#             command pyenv "$command" "$@"
-#             ;;
-#         esac
-#         }
-#         # End: pyenv init
-#
-#         # Start: pyenv virtualenv-init - --no-rehash zsh
-#         export PATH="/opt/homebrew/Cellar/pyenv-virtualenv/1.2.1/shims:${PATH}";
-#         export PYENV_VIRTUALENV_INIT=1;
-#         _pyenv_virtualenv_hook() {
-#         local ret=$?
-#         if [ -n "${VIRTUAL_ENV-}" ]; then
-#             eval "$(pyenv sh-activate --quiet || pyenv sh-deactivate --quiet || true)" || true
-#         else
-#             eval "$(pyenv sh-activate --quiet || true)" || true
-#         fi
-#         return $ret
-#         };
-#         # End: pyenv virtualenv-init
-#     else
-#         if type pyenv > /dev/null; then
-#             eval "$(pyenv init - --no-rehash zsh)"
-#             eval "$(pyenv virtualenv-init - --no-rehash zsh)"
-#         fi
-#     fi
-# }
-
 function pyclean() {
     find_ . -type f -name '*.py[co]' -delete
     find_ . -type d -name __pycache__ -exec rm -rf {} +
@@ -102,7 +34,7 @@ function pyclean() {
     find_ . -type d -name .venv -exec rm -rf {} +
 }
 
-# disables prompt mangling in virtual_env/bin/activate
+# disables virtual_env/bin/activate prompt
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 # JS
