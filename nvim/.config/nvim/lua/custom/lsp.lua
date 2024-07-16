@@ -288,7 +288,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 -- Autoformatting Setup
 require("conform").setup {
     formatters_by_ft = {
-
         python = { "ruff_format" },
 
         javascript = { "prettier" },
