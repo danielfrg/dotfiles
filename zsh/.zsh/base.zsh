@@ -212,13 +212,17 @@ function clipvideo() {
     ffmpeg -i  $1 -ss $2 -to $3 -c:v copy -c:a copy $4
 }
 
+function printpath() {
+  echo $PATH | sed 's/:/\n/g'
+}
+
 # ----------
 # Networking
 
 # IP addresses
 alias publicip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip="ipconfig getifaddr en0"
-alias allips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+alias rallips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 
 # URL-encode strings
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
@@ -232,7 +236,6 @@ alias httpserver="open http://localhost:8000 && python -m http.server 8000"
 
 # Helpers
 port_listening_who() { lsof -i ":$1" | grep LISTEN }
-
 
 # Determine if we are an SSH connection
 if [[ -n "$SSH_CLIENT" ]] || [[ -n "$SSH_TTY" ]]; then

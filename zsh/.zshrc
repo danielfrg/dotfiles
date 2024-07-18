@@ -1,46 +1,53 @@
-# Set the directory we want to store zinit and plugins
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+# Zsh options
+setopt extended_glob
 
-# Download Zinit, if it's not there yet
-if [ ! -d "$ZINIT_HOME" ]; then
-   mkdir -p "$(dirname $ZINIT_HOME)"
-   git clone https:/    /github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+# Set the directory we want to store antidote
+ANTIDOTE_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/antidote"
+
+# Download antidote, if it's not there yet
+if [ ! -d "$ANTIDOTE_HOME" ]; then
+   mkdir -p "$(dirname $ANTIDOTE_HOME)"
+   git clone --depth=1 https://github.com/mattmc3/antidote.git "$ANTIDOTE_HOME"
 fi
 
-# Source/Load zinit
-source "${ZINIT_HOME}/zinit.zsh"
+# Autoload functions you might want to use with antidote.
+# Not needed i think
+# ZFUNCDIR=${ZFUNCDIR:-$HOME/.zsh/functions}
+# fpath=($ZFUNCDIR $fpath)
+# autoload -Uz $fpath[1]/*(.:t)
 
-# Add in zsh plugins
-zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-completions
-zinit light zsh-users/zsh-autosuggestions
-zinit light Aloxaf/fzf-tab
-zinit light olivierverdier/zsh-git-prompt
+export ZSH_CUSTOM="${HOME}/.zsh"
 
-# Load completions
-autoload -Uz compinit && compinit
+# load antidote
+source "${ANTIDOTE_HOME}/antidote.zsh"
+antidote load
 
-# Add in snippets
-zinit snippet OMZP::git
-zinit snippet OMZP::sudo
-zinit snippet OMZP::aws
-zinit snippet OMZP::kubectl
-zinit snippet OMZP::kubectx
-zinit snippet OMZP::command-not-found
+source "${ZSH_CUSTOM}/base.zsh"
+source "${ZSH_CUSTOM}/prompt.zsh"
 
-zinit cdreplay -q
+# # Add in snippets
+# zinit snippet OMZP::git
+# zinit snippet OMZP::sudo
+# zinit snippet OMZP::aws
+# zinit snippet OMZP::kubectl
+# zinit snippet OMZP::kubectx
+# zinit snippet OMZP::command-not-found
 
-# Source my config
-for file in "${HOME}/.zsh/base.zsh" \
-            "${HOME}/.zsh/dev.zsh" \
-            "${HOME}/code/dotfiles/personal/entrypoint.sh" \
-            "${HOME}/.zsh/prompt.zsh"
-do
-    [ -s "${file}" ] && source "${file}"
-done
+# zinit cdreplay -q
+
+# # My config
+# for file in "${HOME}/.zsh/base.zsh" \
+#             "${HOME}/code/dotfiles/personal/entrypoint.sh" \
+#             "${HOME}/.zsh/prompt.zsh"
+# do
+#     [ -s "${file}" ] && source "${file}"
+# done
+
+# zi ice pick"async.zsh" src"${HOME}/.zsh/dev.zsh"
 
 # ---------------------------------
 # Stuff that is not to be committed
 
-touch ~/.zshrc.local
-source ~/.zshrc.local
+if [ -f ~/.zshrc.local ]; then
+    source ~/.zshrc.local
+fi

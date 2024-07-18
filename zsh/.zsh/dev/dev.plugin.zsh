@@ -1,6 +1,6 @@
 # PYTHON
 # ------
-
+echo "DEV"
 export HATCH_CONFIG=$HOME/.config/hatch/config.toml
 
 # Rye config

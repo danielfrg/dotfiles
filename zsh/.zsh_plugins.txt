@@ -1,0 +1,23 @@
+# Based on https://github.com/getantidote/zdotdir
+
+olivierverdier/zsh-git-prompt
+Aloxaf/fzf-tab
+
+# My stuff
+$ZSH_CUSTOM/dev kind:defer
+
+# Syntax highlighting
+# zsh-users/zsh-syntax-highlighting kind:defer
+zdharma-continuum/fast-syntax-highlighting kind:defer
+
+# Completion
+zsh-users/zsh-completions path:src kind:fpath
+
+# If you want to use the belak/zsh-utils completion plugin to run your compinit, this
+# plugin is meant to be run near the END of your .zsh_plugins.txt file after fpath is
+# fully populated.
+belak/zsh-utils path:completion
+
+# Do this at the end
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-history-substring-search
