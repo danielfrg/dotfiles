@@ -11,8 +11,8 @@
     - git-delta
     - eza
     - fzf
-    - go-task
     - htop
+    - just
     - less
     - neovim
     - nodejs
@@ -37,7 +37,7 @@
     - repo
 
 - name: Stow files
-  ansible.builtin.command: go-task link
+  ansible.builtin.command: just link
   args:
     chdir: /home/{{ setup_user }}/code/dotfiles
 

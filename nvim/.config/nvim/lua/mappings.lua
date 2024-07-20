@@ -77,6 +77,19 @@ map("n", "<C-k>", "<cmd>TmuxNavigateUp<CR>", { desc = "window up" })
 -- tmux sessionizer
 map("n", "<C-f>", "<cmd> silent !tmux neww tmux-sessionizer<CR>")
 
+-- common typos
+vim.api.nvim_create_user_command('W', function()
+    vim.cmd('w')
+end, { nargs = 0 })
+
+vim.api.nvim_create_user_command('Wq', function()
+    vim.cmd('wq')
+end, { nargs = 0 })
+
+vim.api.nvim_create_user_command('WQ', function()
+    vim.cmd('wq')
+end, { nargs = 0 })
+
 --------------------------------------------------------------------------------
 -- PLUGINS
 

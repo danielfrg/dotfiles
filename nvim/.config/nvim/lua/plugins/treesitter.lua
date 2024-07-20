@@ -18,9 +18,10 @@ local ensure_installed = {
     "typescript",
     "tsx",
 
+    "bash",
+    "just",
     "markdown",
     "markdown_inline",
-    "bash",
     "terraform",
     "yaml",
 
@@ -56,5 +57,5 @@ return {
     {
         "nvim-treesitter/nvim-treesitter-context",
         event = "VeryLazy",
-    }
+    },
 }

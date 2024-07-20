@@ -15,11 +15,11 @@ brew bundle
 Link files to home directory using on `stow`:
 
 ```terminal
-task link
+just link
 ```
 
 Fonts:
 
 ```terminal
-task fonts
+just fonts
 ```

@@ -1,11 +1,6 @@
 # PYTHON
 # ------
 
-export HATCH_CONFIG=$HOME/.config/hatch/config.toml
-
-# Rye config
-# export PATH="$HOME/.rye/shims:$PATH"
-
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/Users/danrodriguez/conda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
@@ -24,6 +19,12 @@ if [ -f "/Users/danrodriguez/conda/etc/profile.d/mamba.sh" ]; then
     . "/Users/danrodriguez/conda/etc/profile.d/mamba.sh"
 fi
 # <<< conda initialize <<<
+
+# Rye
+export PATH="$HOME/.rye/shims:$PATH"
+
+# Other
+export HATCH_CONFIG=$HOME/.config/hatch/config.toml
 
 function pyclean() {
     find_ . -type f -name '*.py[co]' -delete
