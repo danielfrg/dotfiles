@@ -1,10 +1,10 @@
 # PYTHON
 # ------
-echo "DEV"
+
 export HATCH_CONFIG=$HOME/.config/hatch/config.toml
 
 # Rye config
-export PATH="$HOME/.rye/shims:$PATH"
+# export PATH="$HOME/.rye/shims:$PATH"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -111,6 +111,12 @@ alias kns='kubens'
 alias kctx='kubectx'
 alias terrafrom='terraform'
 alias tf='terraform'
+
+if [[ -z $KUBECTL_COMPLETE ]]
+then
+    source <(command kubectl completion zsh)
+    KUBECTL_COMPLETE=1
+fi
 
 k_logs_deploy() {
   if [ -n "$1" ]

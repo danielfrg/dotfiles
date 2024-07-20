@@ -17,9 +17,6 @@ if [[ $(uname) == "Darwin" ]]; then
     export PATH="/usr/local/opt/curl/bin:$PATH"
     export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
-    # Completitions
-    FPATH="/opt/homebrew/share/zsh/site-functions:${FPATH}"
-
     # Git and GPG config
     export GPG_TTY=$TTY
 
@@ -27,8 +24,9 @@ if [[ $(uname) == "Darwin" ]]; then
     alias rm="trash"
 
     zle -N project_switcher{,}
+
     # ctrl-f for tmux-sessionizer
-    bindkey -s ^f "tmux-sessionizer\n"
+    bindkey -s "^F" "tmux-sessionizer\n"
 
     alias cdc='tmux-sessionizer'
 else
