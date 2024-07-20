@@ -23,6 +23,12 @@ fi
 # Rye
 export PATH="$HOME/.rye/shims:$PATH"
 
+if [[ -z $RYE_COMPLETE ]]
+then
+    source <(command rye self completion -s zsh)
+    RYE_COMPLETE=1
+fi
+
 # Other
 export HATCH_CONFIG=$HOME/.config/hatch/config.toml
 
@@ -102,6 +108,7 @@ export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 # ==========
 
 alias k='kubectl'
+alias klogs="kubectl logs"
 alias kgp="kubectl get pod"
 alias kubecl='kubectl'
 alias kubect='kubectl'
