@@ -8,7 +8,7 @@ ANTIDOTE_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/antidote"
 
 # Download antidote, if it's not there yet
 if [ ! -d "$ANTIDOTE_HOME" ]; then
-   mkdir -p "$(dirnam¬e $ANTIDOTE_HOME)"
+   mkdir -p "$(dirname $ANTIDOTE_HOME)"
    git clone --depth=1 https://github.com/mattmc3/antidote.git "$ANTIDOTE_HOME"
 fi
 
