@@ -3,20 +3,20 @@
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/danrodriguez/conda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('$HOME/conda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/Users/danrodriguez/conda/etc/profile.d/conda.sh" ]; then
-        . "/Users/danrodriguez/conda/etc/profile.d/conda.sh"
+    if [ -f "$HOME/conda/etc/profile.d/conda.sh" ]; then
+        . "$HOME/conda/etc/profile.d/conda.sh"
     else
-        export PATH="/Users/danrodriguez/conda/bin:$PATH"
+        export PATH="$HOME/conda/bin:$PATH"
     fi
 fi
 unset __conda_setup
 
-if [ -f "/Users/danrodriguez/conda/etc/profile.d/mamba.sh" ]; then
-    . "/Users/danrodriguez/conda/etc/profile.d/mamba.sh"
+if [ -f "$HOME/conda/etc/profile.d/mamba.sh" ]; then
+    . "$HOME/conda/etc/profile.d/mamba.sh"
 fi
 # <<< conda initialize <<<
 
@@ -53,7 +53,7 @@ export VOLTA_FEATURE_PNPM=1
 
 alias npmreset="rm -rf node_modules"
 
-alias npm_="/Users/danrodriguez/.volta/bin/npm"
+alias npm_="$HOME/.volta/bin/npm"
 alias npm=pnpm
 alias npx=pnpm dlx
 
@@ -62,7 +62,7 @@ export DISABLE_OPENCOLLECTIVE=1
 export ADBLOCK=1
 
 # pnpm
-export PNPM_HOME="/Users/danrodriguez/Library/pnpm"
+export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
