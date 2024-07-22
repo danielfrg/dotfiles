@@ -74,6 +74,12 @@ map("n", "<C-l>", "<cmd>TmuxNavigateRight<CR>", { desc = "window right" })
 map("n", "<C-j>", "<cmd>TmuxNavigateDown<CR>", { desc = "window down" })
 map("n", "<C-k>", "<cmd>TmuxNavigateUp<CR>", { desc = "window up" })
 
+-- Resize window using <ctrl> arrow keys
+map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
+map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
+map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
+map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
+
 -- tmux sessionizer
 map("n", "<C-f>", "<cmd> silent !tmux neww tmux-sessionizer<CR>")
 
