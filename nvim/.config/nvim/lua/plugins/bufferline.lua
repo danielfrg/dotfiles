@@ -21,10 +21,10 @@ return {
             -- buffline: [tab][sep][tab]fill-background
             -- [tab]: [indicator-buffer(visible|selected)-close(selected)]
 
-            -- fill = {
-            --     fg = "#7B7970",
-            --     bg = "#16161E",
-            -- },
+            fill = {
+                fg = "#7B7970",
+                bg = "#16161E",
+            },
             -- background = {
             --     fg = "#ff0000",
             --     bg = "#ff0000",
@@ -51,28 +51,28 @@ return {
             --     fg = "#ff0000",
             --     bg = "#ff0000",
             -- },
-            -- close_button = {
-            --     fg = "#7B7970",
-            --     bg = "#16161E",
-            -- },
-            -- close_button_visible = {
-            --     fg = "#7B7970",
-            --     bg = "#16161E",
-            -- },
-            -- close_button_selected = {
-            --     fg = "#DCD7BB",
-            --     bg = "#363646",
-            -- },
-            -- buffer_visible = {
-            --     fg = "#DCD7BB",
-            --     bg = "#363646",
-            -- },
-            -- buffer_selected = {
-            --     fg = "#DCD7BB",
-            --     bg = "#363646",
-            --     -- bold = true,
-            --     -- italic = false,
-            -- },
+            close_button = {
+                fg = "#7B7970",
+                bg = "#16161E",
+            },
+            close_button_visible = {
+                fg = "#7B7970",
+                bg = "#16161E",
+            },
+            close_button_selected = {
+                fg = "#DCD7BB",
+                bg = "#363646",
+            },
+            buffer_visible = {
+                fg = "#DCD7BB",
+                bg = "#363646",
+            },
+            buffer_selected = {
+                fg = "#DCD7BB",
+                bg = "#363646",
+                -- bold = true,
+                -- italic = false,
+            },
             -- numbers = {
             --     fg = "#ff0000",
             --     bg = "#ff0000",
@@ -229,59 +229,59 @@ return {
             --     bold = true,
             --     italic = true,
             -- },
-            -- modified = {
-            --     -- fg = "#7B7970",
-            --     bg = "#16161E",
+            modified = {
+                -- fg = "#7B7970",
+                bg = "#16161E",
+            },
+            modified_visible = {
+                -- fg = "#7B7970",
+                bg = "#16161E",
+            },
+            modified_selected = {
+                -- fg = "#DCD7BB",
+                bg = "#363646",
+            },
+            duplicate_selected = {
+                fg = "#DCD7BB",
+                bg = "#363646",
+                italic = true,
+            },
+            duplicate_visible = {
+                -- fg = "#DCD7BB",
+                bg = "#16161E",
+                italic = true,
+            },
+            duplicate = {
+                -- fg = "#DCD7BB",
+                bg = "#16161E",
+                italic = true,
+            },
+            separator = {
+                fg = "#16161E",
+                bg = "#16161E",
+            },
+            -- separator_selected = {
+            --     fg = "#ff0000",
+            --     bg = "#ff0000",
             -- },
-            -- modified_visible = {
-            --     -- fg = "#7B7970",
-            --     bg = "#16161E",
+            -- separator_visible = {
+            --     fg = "#ff0000",
+            --     bg = "#ff0000",
             -- },
-            -- modified_selected = {
-            --     -- fg = "#DCD7BB",
-            --     bg = "#363646",
-            -- },
-            -- duplicate_selected = {
-            --     fg = "#DCD7BB",
-            --     bg = "#363646",
-            --     italic = true,
-            -- },
-            -- duplicate_visible = {
-            --     -- fg = "#DCD7BB",
-            --     bg = "#16161E",
-            --     italic = true,
-            -- },
-            -- duplicate = {
-            --     -- fg = "#DCD7BB",
-            --     bg = "#16161E",
-            --     italic = true,
-            -- },
-            -- separator = {
-            --     fg = "#16161E",
-            --     bg = "#16161E",
-            -- },
-            -- -- separator_selected = {
-            -- --     fg = "#ff0000",
-            -- --     bg = "#ff0000",
-            -- -- },
-            -- -- separator_visible = {
-            -- --     fg = "#ff0000",
-            -- --     bg = "#ff0000",
-            -- -- },
-            -- indicator_visible = {
-            --     fg = "#16161E",
-            --     bg = "#16161E",
-            -- },
-            -- indicator_selected = {
-            --     fg = "#363646",
-            --     bg = "#363646",
-            -- },
+            indicator_visible = {
+                fg = "#16161E",
+                bg = "#16161E",
+            },
+            indicator_selected = {
+                fg = "#363646",
+                bg = "#363646",
+            },
 
             -- In captpuccin this generates a border
-            indicator_selected = {
-                fg = "#1E1E2F",
-                bg = "#1E1E2F",
-            },
+            -- indicator_selected = {
+            --     fg = "#1E1E2F",
+            --     bg = "#1E1E2F",
+            -- },
 
             -- pick_selected = {
             --     fg = "#ff0000",
