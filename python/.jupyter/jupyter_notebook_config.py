@@ -26,6 +26,10 @@ c.ServerApp.tornado_settings = {
     "debug": True,  # Auto restart
 }
 
+
+a = 1
+
+a.__or__
 # ------------------------------------------------------------------------------
 # s3contents development
 
