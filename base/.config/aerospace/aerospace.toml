@@ -1,6 +1,8 @@
 enable-normalization-flatten-containers = true
 enable-normalization-opposite-orientation-for-nested-containers = true
 
+accordion-padding = 0
+
 [mode.main.binding]
 cmd-alt-ctrl-shift-h = 'focus left'
 cmd-alt-ctrl-shift-j = 'focus down'
@@ -15,8 +17,9 @@ alt-shift-l = 'move right'
 # alt-h = 'split horizontal'
 # alt-v = 'split vertical'
 
+cmd-alt-ctrl-shift-d = 'fullscreen'
 cmd-alt-ctrl-shift-f = 'fullscreen'
-alt-f = 'fullscreen'
+# alt-f = 'fullscreen'
 
 # alt-s = 'layout v_accordion' # 'layout stacking' in i3
 cmd-alt-ctrl-shift-w = 'layout h_accordion' # 'layout tabbed' in i3
@@ -113,7 +116,7 @@ run = ['move-node-to-workspace 2']
 [[on-window-detected]]
 if.app-id = 'org.mozilla.firefox'
 check-further-callbacks = true
-run = ['move-node-to-workspace 2']
+run = ['move-node-to-workspace 1']
 
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
@@ -124,3 +127,8 @@ run = ['move-node-to-workspace 4']
 if.app-id = 'com.microsoft.Outlook'
 check-further-callbacks = true
 run = ['move-node-to-workspace 5']
+
+[[on-window-detected]]
+if.app-id = 'com.obsproject.obs-studio'
+check-further-callbacks = true
+run = ['move-node-to-workspace 6']

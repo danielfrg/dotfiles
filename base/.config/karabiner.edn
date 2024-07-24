@@ -33,7 +33,7 @@
 
  :main [
    {:des "Change CapsLock ESC"
-      :rules [[:caps_lock :escape]]}
+      :rules [[:caps_lock :escape nil {:alone [:left_control]}]]}
 
    {:des "Change TAB to HYPER/TAB"
       :rules [[:tab :!COTleft_shift nil {:alone [:tab]}]]}

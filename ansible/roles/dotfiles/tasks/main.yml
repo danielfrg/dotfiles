@@ -20,6 +20,7 @@
     - openconnect
     - unzip
     - stow
+    - yazi
     - zsh
 
 - name: Ensure ~/code directory exists

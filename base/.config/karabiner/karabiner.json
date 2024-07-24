@@ -587,6 +587,9 @@
       "rules" : [ {
         "description" : "Change CapsLock ESC",
         "manipulators" : [ {
+          "to_if_alone" : [ {
+            "key_code" : "left_control"
+          } ],
           "from" : {
             "key_code" : "caps_lock"
           },
