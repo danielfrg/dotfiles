@@ -20,6 +20,8 @@ if [ -f "$HOME/conda/etc/profile.d/mamba.sh" ]; then
 fi
 # <<< conda initialize <<<
 
+alias conda=mamba
+
 # Rye
 export PATH="$HOME/.rye/shims:$PATH"
 
@@ -55,7 +57,7 @@ alias npmreset="rm -rf node_modules"
 
 alias npm_="$HOME/.volta/bin/npm"
 alias npm=pnpm
-alias npx=pnpm dlx
+# alias npx=pnpm dlx
 
 export NEXT_TELEMETRY_DEBUG=1.
 export DISABLE_OPENCOLLECTIVE=1
