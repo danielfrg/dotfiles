@@ -72,6 +72,12 @@ case ":$PATH:" in
 esac
 # pnpm end
 
+if [[ -z $PNPM_COMPLETE ]]
+then
+    source <(command pnpm completion zsh)
+    PNPM_COMPLETE=1
+fi
+
 # C/C++
 # ==========
 
