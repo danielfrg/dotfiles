@@ -59,6 +59,7 @@ alias npm_="$HOME/.volta/bin/npm"
 alias npm=pnpm
 # alias npx=pnpm dlx
 
+export ASTRO_TELEMETRY_DISABLED=1
 export NEXT_TELEMETRY_DEBUG=1.
 export DISABLE_OPENCOLLECTIVE=1
 export ADBLOCK=1
