@@ -95,6 +95,18 @@ project_switcher() {
   cd $selected
 }
 
+local FOUND_YAZI=$+commands[yazi]
+if [[ $FOUND_YAZI -eq 1 ]]; then
+  function yy() {
+      local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+      yazi "$@" --cwd-file="$tmp"
+      if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+          builtin cd -- "$cwd"
+      fi
+      rm -f -- "$tmp"
+  }
+fi
+
 # fancy tools
 if command -v eza > /dev/null 2>&1; then
   alias ls='eza'
