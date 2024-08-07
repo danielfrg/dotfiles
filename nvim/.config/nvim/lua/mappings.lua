@@ -12,15 +12,15 @@ map("n", "<leader>n", "<cmd>enew<cr>", { desc = "New file" })
 -- map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>")
 
 -- Disable arrow keys in normal mode
-map('n', '<left>', '<cmd>echo "Use h to move!"<CR>')
-map('n', '<right>', '<cmd>echo "Use l to move!"<CR>')
-map('n', '<up>', '<cmd>echo "Use k to move!"<CR>')
-map('n', '<down>', '<cmd>echo "Use j to move!"<CR>')
+map("n", "<left>", '<cmd>echo "Use h to move!"<CR>')
+map("n", "<right>", '<cmd>echo "Use l to move!"<CR>')
+map("n", "<up>", '<cmd>echo "Use k to move!"<CR>')
+map("n", "<down>", '<cmd>echo "Use j to move!"<CR>')
 -- And in insert mode
-map('i', '<left>', '<cmd>echo "Use h to move!"<CR>')
-map('i', '<right>', '<cmd>echo "Use l to move!"<CR>')
-map('i', '<up>', '<cmd>echo "Use k to move!"<CR>')
-map('i', '<down>', '<cmd>echo "Use j to move!"<CR>')
+map("i", "<left>", '<cmd>echo "Use h to move!"<CR>')
+map("i", "<right>", '<cmd>echo "Use l to move!"<CR>')
+map("i", "<up>", '<cmd>echo "Use k to move!"<CR>')
+map("i", "<down>", '<cmd>echo "Use j to move!"<CR>')
 
 -- Remove search highlights
 map("n", "<Esc>", ":noh<return><esc>")
@@ -35,7 +35,12 @@ map("n", "n", "nzzzv")
 map("n", "N", "Nzzzv")
 
 -- rename
-map("n", "<leader>rr", ":%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>", { desc = "Replace current word" })
+map(
+  "n",
+  "<leader>rr",
+  ":%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>",
+  { desc = "Replace current word" }
+)
 
 -- yank to system clipboard
 map("n", "<leader>y", '"+y', { desc = "Yank to clipboard" })
@@ -65,7 +70,7 @@ map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Last Buffer" })
 map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Last Buffer" })
 map("n", "<S-x>", "<cmd>e #<cr>", { desc = "Switch to Last Buffer" })
-map("n", "<leader>z", "<cmd>Bdelete<cr>", { desc = "Close buffer" })
+map("n", "<leader>x", "<cmd>Bdelete<cr>", { desc = "Close buffer" })
 map("n", "<leader>c", "<cmd>Bdelete<cr>", { desc = "Close buffer" })
 
 -- tmux navigation
@@ -84,16 +89,16 @@ map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window W
 map("n", "<C-f>", "<cmd> silent !tmux neww tmux-sessionizer<CR>")
 
 -- common typos
-vim.api.nvim_create_user_command('W', function()
-    vim.cmd('w')
+vim.api.nvim_create_user_command("W", function()
+  vim.cmd("w")
 end, { nargs = 0 })
 
-vim.api.nvim_create_user_command('Wq', function()
-    vim.cmd('wq')
+vim.api.nvim_create_user_command("Wq", function()
+  vim.cmd("wq")
 end, { nargs = 0 })
 
-vim.api.nvim_create_user_command('WQ', function()
-    vim.cmd('wq')
+vim.api.nvim_create_user_command("WQ", function()
+  vim.cmd("wq")
 end, { nargs = 0 })
 
 --------------------------------------------------------------------------------
