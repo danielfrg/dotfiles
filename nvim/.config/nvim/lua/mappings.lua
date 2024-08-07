@@ -70,14 +70,17 @@ map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Last Buffer" })
 map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Last Buffer" })
 map("n", "<S-x>", "<cmd>e #<cr>", { desc = "Switch to Last Buffer" })
-map("n", "<leader>x", "<cmd>Bdelete<cr>", { desc = "Close buffer" })
-map("n", "<leader>c", "<cmd>Bdelete<cr>", { desc = "Close buffer" })
+map("n", "<leader>z", "<cmd>Bdelete<cr>", { desc = "Close buffer" })
 
 -- tmux navigation
 map("n", "<C-h>", "<cmd>TmuxNavigateLeft<CR>", { desc = "window left" })
 map("n", "<C-l>", "<cmd>TmuxNavigateRight<CR>", { desc = "window right" })
 map("n", "<C-j>", "<cmd>TmuxNavigateDown<CR>", { desc = "window down" })
 map("n", "<C-k>", "<cmd>TmuxNavigateUp<CR>", { desc = "window up" })
+
+-- Split windows
+map("n", "<leader>|", ":vsplit<CR>", { desc = "Vertical split" })
+map("n", "<leader>-", ":split<CR>", { desc = "Horizontal split" })
 
 -- Resize window using <ctrl> arrow keys
 map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })

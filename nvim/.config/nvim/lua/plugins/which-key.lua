@@ -7,14 +7,14 @@ return {
     config = function(_, opts)
       local wk = require("which-key")
       wk.setup(opts)
-      wk.register({
-        ["<leader>c"] = { name = "Code" },
-        ["<leader>f"] = { name = "Find" },
-        ["<leader>g"] = { name = "Git" },
-        ["g"] = { name = "Goto" },
-        ["<leader>h"] = { name = "Harpoon" },
-        ["<leader>s"] = { name = "Search" },
-        ["<leader>x"] = { name = "Trouble" },
+      wk.add({
+        { "<leader>c", group = "Code" },
+        { "<leader>f", group = "Find" },
+        { "<leader>g", group = "Git" },
+        { "<leader>h", group = "Harpoon" },
+        { "<leader>s", group = "Search" },
+        { "<leader>x", group = "Trouble" },
+        { "g", group = "Goto" },
       })
     end,
   },

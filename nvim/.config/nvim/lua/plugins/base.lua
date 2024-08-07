@@ -24,6 +24,11 @@ return {
     event = "VeryLazy",
   },
 
+  {
+    "tpope/vim-unimpaired",
+    event = "VeryLazy",
+  },
+
   -- "gc" to comment visual regions/lines
   {
     "numToStr/Comment.nvim",
