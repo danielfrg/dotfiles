@@ -36,10 +36,10 @@ map("n", "N", "Nzzzv")
 
 -- rename
 map(
-  "n",
-  "<leader>rr",
-  ":%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>",
-  { desc = "Replace current word" }
+    "n",
+    "<leader>rr",
+    ":%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>",
+    { desc = "Replace current word" }
 )
 
 -- yank to system clipboard
@@ -93,15 +93,15 @@ map("n", "<C-f>", "<cmd> silent !tmux neww project-session.sh<CR>")
 
 -- common typos
 vim.api.nvim_create_user_command("W", function()
-  vim.cmd("w")
+    vim.cmd("w")
 end, { nargs = 0 })
 
 vim.api.nvim_create_user_command("Wq", function()
-  vim.cmd("wq")
+    vim.cmd("wq")
 end, { nargs = 0 })
 
 vim.api.nvim_create_user_command("WQ", function()
-  vim.cmd("wq")
+    vim.cmd("wq")
 end, { nargs = 0 })
 
 --------------------------------------------------------------------------------

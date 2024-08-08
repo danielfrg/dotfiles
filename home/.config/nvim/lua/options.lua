@@ -44,7 +44,6 @@ vim.opt.inccommand = 'split'
 
 -- For :command mode
 -- Complete to longest then show list
-vim.opt.wildmode = "list:longest,list:full"
 vim.opt.wildignore:append({ ".javac", "node_modules", "*.pyc" })
 vim.opt.wildignore:append({
     ".o", ".obj", ".dll", ".exe", ".so", ".a", ".lib", ".pyc", ".pyo", ".pyd",
