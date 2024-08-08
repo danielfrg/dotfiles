@@ -16,16 +16,11 @@ ansible TAG:
 fonts:
   bash install-fonts.sh
 
-link:
-  stow -t $HOME base
-  stow -t $HOME bin
-  stow -t $HOME js
-  stow -t $HOME nvim
-  stow -t $HOME python
-  stow -t $HOME zsh
+stow:
+  stow -t $HOME home
 
 unstow:
-  stow -t $HOME -D nvim
+  stow -t $HOME -D home
 
 gpg:
   gpg --list-keys
