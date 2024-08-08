@@ -111,7 +111,7 @@ if command -v eza > /dev/null 2>&1; then
   alias ls='eza'
 fi
 alias l='ls'
-alias ll='ls -l'
+alias ll='ls -la'
 alias la='ls -la'
 alias lt='ls --tree'
 

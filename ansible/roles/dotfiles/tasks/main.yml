@@ -38,7 +38,7 @@
     - repo
 
 - name: Stow files
-  ansible.builtin.command: just link
+  ansible.builtin.command: just stow
   args:
     chdir: /home/{{ setup_user }}/code/dotfiles
 
