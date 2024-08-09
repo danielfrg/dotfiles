@@ -116,7 +116,7 @@ export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 # Kubernetes
 # ==========
 
-alias k='kubectl'
+alias k='kubectl --sort-by=.metadata.name'
 alias klogs="kubectl logs"
 alias kgp="kubectl get pod"
 alias kubecl='kubectl'
