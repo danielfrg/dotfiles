@@ -177,6 +177,7 @@ alias gi='git'
 alias gti='git'
 alias tit='git'
 alias sl='ls'
+alias clera='clear'
 
 # ---------
 # Functions

@@ -2,6 +2,10 @@
 typeset -a precmd_functions
 autoload -U colors && colors
 
+# Test variables
+# USER=asdf
+# SSH_CLIENT=1
+
 # Variables
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[yellow]%}git%{$reset_color%}:"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
@@ -15,10 +19,6 @@ ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[cyan]%}%{+%G%}"
 ZSH_THEME_VIRTUALENV_PREFIX="%{$fg[green]%}  "
 ZSH_THEME_VIRTUALENV_SUFFIX="%{$reset_color%}"
 
-# Test variables
-# USER=asdf
-# SSH_CLIENT=1
-
 # This is the basic prompt that is always printed
 # It will be enclosed to make it newline
 _USER_PROMPT=$(if [[ $USER != "danielfrg" && $USER != "danrodriguez" ]]; then echo ' as %{$fg[magenta]%}%n%{$reset_color%} '; else echo ""; fi)
@@ -28,11 +28,29 @@ _BASE_PROMPT="%{$fg[blue]%}%~%{$reset_color%}% "$_USER_PROMPT$_HOST_PROMPT
 _ZSH_ASYNC_PROMPT=0
 _ZSH_ASYNC_PROMPT_FN="/tmp/.zsh_tmp_prompt_$$"
 
+# Functions
+
+function conda_prompt_info() {
+  [[ -n ${CONDA_DEFAULT_ENV} ]] || return
+  local NAME="${CONDA_DEFAULT_ENV:t}"
+  echo "${ZSH_THEME_VIRTUALENV_PREFIX:=[}${NAME}${ZSH_THEME_VIRTUALENV_SUFFIX:=]}"
+}
+
+function virtualenv_prompt_info() {
+  [[ -n ${VIRTUAL_ENV} ]] || return
+  local NAME="${VIRTUAL_ENV:t}"
+  if [[ $NAME == "venv" || $NAME == "env" || $NAME == ".venv" ]]; then
+    local BASE="${VIRTUAL_ENV:h}"
+    NAME="${BASE:t}"
+  fi
+  echo "${ZSH_THEME_VIRTUALENV_PREFIX:=[}${NAME}${ZSH_THEME_VIRTUALENV_SUFFIX:=]}"
+}
+
 function async_prompt() {
   # Run the git var update here instead of in the parent
   precmd_update_git_vars
 
-  echo -n $'\n'$_BASE_PROMPT$' '$(git_super_status)$(virtualenv_prompt_info) > $_ZSH_ASYNC_PROMPT_FN
+  echo -n $'\n'$_BASE_PROMPT$' '$(git_super_status)$(virtualenv_prompt_info)$(conda_prompt_info) > $_ZSH_ASYNC_PROMPT_FN
   if [[ x$_zsh_async_prompt_rv != x0 ]]; then
     echo -n " exited %{$fg[red]%}$_zsh_async_prompt_rv%{$reset_color%}" >> $_ZSH_ASYNC_PROMPT_FN
   fi
@@ -46,7 +64,7 @@ function async_prompt() {
 # Internal stuff
 
 # This is the base prompt that is rendered sync. It should be
-# fast to render as a result.  The extra whitespace before the
+# fast to render as a result. The extra whitespace before the
 # newine is necessary to avoid some rendering bugs.
 PROMPT=$'\n'$_BASE_PROMPT$'\n❯ '
 RPROMPT='%*'
@@ -56,16 +74,6 @@ RPROMPT='%*'
 # async_prompt() instead
 chpwd_functions=("${(@)chpwd_functions:#chpwd_update_git_vars}")
 precmd_functions=("${(@)precmd_functions:#precmd_update_git_vars}")
-
-function virtualenv_prompt_info() {
-  [[ -n ${VIRTUAL_ENV} ]] || return
-  local NAME="${VIRTUAL_ENV:t}"
-  if [[ $NAME == "venv" || $NAME == "env" || $NAME == ".venv" ]]; then
-    local BASE="${VIRTUAL_ENV:h}"
-    NAME="${BASE:t}"
-  fi
-  echo "${ZSH_THEME_VIRTUALENV_PREFIX:=[}${NAME}${ZSH_THEME_VIRTUALENV_SUFFIX:=]}"
-}
 
 function _zsh_prompt_precmd() {
   _zsh_async_prompt_rv=$?
@@ -101,7 +109,9 @@ precmd_functions+=(_zsh_prompt_precmd)
 zshexit_functions+=(_zsh_prompt_zshexit)
 trap '_zsh_prompt_trapusr1' USR1
 
+# ----------------
 # Transient prompt
+
 zle-line-init() {
     emulate -L zsh
 
