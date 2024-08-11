@@ -116,7 +116,13 @@ export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 # Kubernetes
 # ==========
 
-alias k='kubectl --sort-by=.metadata.name'
+k() {
+  if [[ "$1" == "get" ]]; then
+    kubectl get --sort-by=.metadata.name "${@:2}"
+  else
+    kubectl "$@"
+  fi
+}
 alias klogs="kubectl logs"
 alias kgp="kubectl get pod"
 alias kubecl='kubectl'
@@ -133,6 +139,8 @@ if [[ -z $KUBECTL_COMPLETE ]]
 then
     source <(command kubectl completion zsh)
     KUBECTL_COMPLETE=1
+    # Add the complete to the alias
+    compdef _kubectl k
 fi
 
 k_logs_deploy() {
