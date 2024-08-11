@@ -9,21 +9,21 @@ New MacOS setup
 xcode-select --install
 
 # copy SSH key into ~/.ssh, then:
-chmod 0600 ~/.ssh/id_rsa
+chmod 0600 ~/.ssh/id_ed25519
+/usr/bin/ssh-add --apple-use-keychain ~/.ssh/id_ed25519
 
 # install Homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # clone the dotfiles repo
-mkdir -p ~/code
-git clone https://github.com/danielfrg/dotfiles.git ~/code/dotfiles
+git clone git@github.com:danielfrg/dotfiles.git ~/.dotfiles --recurse-submodules --remote-submodules
 
 # install Brewfile
-cd ~/code/dotfiles/macos
+cd ~/.dotfiles/macos
 brew bundle
 
 # default macos settings
-cd ~/code/dotfiles/macos
+cd ~/.dotfiles/macos
 ./macos-defaults.sh
 
 # reboot

@@ -20,7 +20,7 @@ antidote load
 
 source "${ZSH_CUSTOM}/base.zsh"
 source "${ZSH_CUSTOM}/prompt.zsh"
-source "${HOME}/code/dotfiles/personal/entrypoint.sh"
+source "${HOME}/.dotfiles/personal/entrypoint.sh"
 
 # Completion stuff
 autoload -Uz compinit
