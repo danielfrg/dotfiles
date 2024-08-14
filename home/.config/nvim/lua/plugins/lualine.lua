@@ -61,7 +61,7 @@ return {
                     section_separators = { left = "", right = "" },
                 },
                 sections = {
-                    lualine_b = {},
+                    lualine_b = { "filename" },
                     lualine_c = {
                         {
                             "diff",
