@@ -1,9 +1,12 @@
--- Load options first
+-- Load all the configuration files
 require("options")
+require("mappings")
+require("autocmds")
 
--- Local local.lua if found
+-- Load local.lua if found
 local status, plugin = pcall(require, 'local')
 
+-- Default lazy.nvim config
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
     vim.fn.system({
@@ -17,19 +20,13 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("mappings")
-require("autocmds")
-
 require('lazy').setup("plugins",
     {
-        -- defaults = {
-        --     event = "VeryLazy",
-        --     lazy = true
-        -- },
         change_detection = {
             notify = false,
         },
     }
 );
 
-vim.cmd('colorscheme one')
+
+-- vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = '#ff0000' })

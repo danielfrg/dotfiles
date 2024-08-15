@@ -33,9 +33,10 @@ local ensure_installed = {
 return {
     {
         "nvim-treesitter/nvim-treesitter",
-        event = "VimEnter",
-        build = ":TSUpdate",
-        opts = {
+        -- tag    = "v0.9.2",
+        event  = "VimEnter",
+        build  = ":TSUpdate",
+        opts   = {
             ensure_installed = ensure_installed,
             indent = {
                 enable = true,
