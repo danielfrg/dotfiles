@@ -17,6 +17,7 @@ return {
             require('onedark').setup {
                 colors = {
                     id = "#000000",
+                    bg0 = "#292c32",
                     lightgrey = "#C8CCD4",
                     grey = "#5d636f",
                     red = '#D07277',

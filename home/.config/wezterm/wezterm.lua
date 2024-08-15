@@ -4,12 +4,11 @@ local config = {}
 -- config.color_scheme = "Catppuccin Mocha"
 config.color_scheme = "OneDark (base16)"
 
--- config.colors = {
---     -- The default text color
---     foreground = '#DDDDDD',
---     -- The default background color
---     background = '#282c32',
--- }
+config.colors = {
+    -- The default background color
+    -- background = '#282c32',
+    background = '#292c32',
+}
 
 config.font_size = 15.0
 config.font = wezterm.font("JetBrainsMono Nerd Font")
