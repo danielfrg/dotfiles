@@ -1,8 +1,8 @@
 local wezterm = require("wezterm")
 local config = {}
 
-config.color_scheme = "nord"
--- config.color_scheme = "Catppuccin Mocha"
+-- config.color_scheme = "nord"
+config.color_scheme = "Catppuccin Mocha"
 
 -- config.color_scheme = "OneDark (base16)"
 -- config.colors = {
