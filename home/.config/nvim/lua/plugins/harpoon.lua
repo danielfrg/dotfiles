@@ -8,8 +8,8 @@ return {
         local map = vim.keymap.set
         local harpoon = require("harpoon")
 
-        map("n", "<leader>ha", function()
-            harpoon:list():append()
+        map("n", "<leader>a", function()
+            harpoon:list():add()
         end, { desc = "[Harpoon] Add file to list" })
         map("n", "<C-e>", function()
             harpoon.ui:toggle_quick_menu(harpoon:list())

@@ -29,12 +29,6 @@ return {
         event = "VeryLazy",
     },
 
-    -- "gc" to comment visual regions/lines
-    {
-        "numToStr/Comment.nvim",
-        event = "VeryLazy",
-    },
-
     -- fancy TODO comments
     {
         "folke/todo-comments.nvim",

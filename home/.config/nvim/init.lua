@@ -27,6 +27,3 @@ require('lazy').setup("plugins",
         },
     }
 );
-
-
--- vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = '#ff0000' })

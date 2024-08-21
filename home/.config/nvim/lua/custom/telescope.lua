@@ -42,10 +42,10 @@ require("telescope").setup({
 
         -- native FZF support
         fzf = {
-            fuzzy = true,             -- false will only do exact matching
+            fuzzy = true,                   -- false will only do exact matching
             override_generic_sorter = true, -- override the generic sorter
-            override_file_sorter = true, -- override the file sorter
-            case_mode = "smart_case", -- "smart_case" or "ignore_case" or "respect_case"
+            override_file_sorter = true,    -- override the file sorter
+            case_mode = "smart_case",       -- "smart_case" or "ignore_case" or "respect_case"
         },
 
         ["ui-select"] = {
@@ -108,7 +108,7 @@ vim.keymap.set(
     "<cmd>Telescope git_files<CR>",
     { desc = "Find Files (git-files)" }
 )
-vim.keymap.set("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", { desc = "Recent/old Files" })
+vim.keymap.set("n", "<leader>fo", "<cmd>Telescope buffers<CR>", { desc = "Open Buffers" })
 vim.keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<CR>", { desc = "Recent/old Files" })
 vim.keymap.set("n", "<leader>fc", builtin.commands, { desc = "Find Command" })
 vim.keymap.set("n", "<leader>:", "<cmd>Telescope command_history<CR>", { desc = "Command History" })

@@ -104,6 +104,10 @@ vim.api.nvim_create_user_command("WQ", function()
     vim.cmd("wq")
 end, { nargs = 0 })
 
+vim.api.nvim_create_user_command("Q", function()
+    vim.cmd("q!")
+end, { nargs = 0 })
+
 --------------------------------------------------------------------------------
 -- PLUGINS
 
