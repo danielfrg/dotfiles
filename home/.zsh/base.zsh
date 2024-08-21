@@ -249,8 +249,7 @@ port_listening_who() { lsof -i ":$1" | grep LISTEN }
 
 # Determine if we are an SSH connection
 if [[ -n "$SSH_CLIENT" ]] || [[ -n "$SSH_TTY" ]]; then
-    export IS_SSH=true
-    export TMUX=1
+    export IS_SSH=1
 else
     case $(ps -o comm= -p $PPID) in
         sshd|*/sshd) IS_SSH=true
