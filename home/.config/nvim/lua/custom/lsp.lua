@@ -42,11 +42,10 @@ local ruff_lsp = {
     },
 }
 
--- typescript
+-- cpp
 local clangd = {
     on_attach = function(client, bufnr)
         client.server_capabilities.signatureHelpProvider = false
-        base_on_attach(client, bufnr)
     end,
 }
 
