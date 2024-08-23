@@ -1,4 +1,3 @@
-# Init
 typeset -a precmd_functions
 autoload -U colors && colors
 
@@ -6,7 +5,12 @@ autoload -U colors && colors
 # USER=asdf
 # SSH_CLIENT=1
 
-# Variables
+PROMPT_BASE="%{$fg[blue]%}%~%{$reset_color%}% "$PROMPT_USER$PROMPT_HOST
+
+PROMPT_VIRTUALENV_PREFIX="%{$fg[green]%}  "
+PROMPT_CONDA_PREFIX="%{$fg[green]%}  "
+PROMPT_VIRTUALENV_SUFFIX="%{$reset_color%}"
+
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[yellow]%}git%{$reset_color%}:"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[green]%}+"
@@ -16,100 +20,95 @@ ZSH_THEME_GIT_PROMPT_CLEAN=""
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[green]?%G%}"
 ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[cyan]%}%{+%G%}"
 
-ZSH_THEME_VIRTUALENV_PREFIX="%{$fg[green]%}  "
-ZSH_THEME_VIRTUALENV_SUFFIX="%{$reset_color%}"
-
 # This is the basic prompt that is always printed
 # It will be enclosed to make it newline
-_USER_PROMPT=$(if [[ $USER != "danielfrg" && $USER != "danrodriguez" ]]; then echo ' as %{$fg[magenta]%}%n%{$reset_color%} '; else echo ""; fi)
-_HOST_PROMPT=$(if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then echo ' 🌐 %{$fg[red]%}%m%{$reset_color%}'; else echo ""; fi)
-_BASE_PROMPT="%{$fg[blue]%}%~%{$reset_color%}% "$_USER_PROMPT$_HOST_PROMPT
+PROMPT_USER=$(if [[ $USER != "danielfrg" && $USER != "danrodriguez" ]]; then echo ' as %{$fg[magenta]%}%n%{$reset_color%} '; else echo ""; fi)
+PROMPT_HOST=$(if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then echo '@%{$fg[red]%}%m%{$reset_color%}'; else echo ""; fi)
 
-_ZSH_ASYNC_PROMPT=0
-_ZSH_ASYNC_PROMPT_FN="/tmp/.zsh_tmp_prompt_$$"
+PROMPT=$'\n'$PROMPT_BASE$'\n❯ '
+RPROMPT=''
 
-# Functions
+COMPLETED=0  # This is a test variable
 
-function conda_prompt_info() {
-  [[ -n ${CONDA_DEFAULT_ENV} ]] || return
-  local NAME="${CONDA_DEFAULT_ENV:t}"
-  echo "${ZSH_THEME_VIRTUALENV_PREFIX:=[}${NAME}${ZSH_THEME_VIRTUALENV_SUFFIX:=]}"
+# Compute new values for the prompt
+update_prompt() {
+    precmd_update_git_vars
+
+    local -A info
+	info[pwd]=$PWD
+	info[git]=$(git_super_status)
+
+	[[ -n ${VIRTUAL_ENV} ]] || info[venv]=""
+    local NAME="${VIRTUAL_ENV:t}"
+    if [[ $NAME == "venv" || $NAME == "env" || $NAME == ".venv" ]]; then
+        local BASE="${VIRTUAL_ENV:h}"
+        NAME="${BASE:t}"
+        info[venv]=$NAME
+    fi
+
+    if [[ -n ${CONDA_DEFAULT_ENV} ]]; then
+        info[conda]=$CONDA_DEFAULT_ENV
+    else
+        info[conda]=""
+    fi
+
+	print -r - ${(@kvq)info}
 }
 
-function virtualenv_prompt_info() {
-  [[ -n ${VIRTUAL_ENV} ]] || return
-  local NAME="${VIRTUAL_ENV:t}"
-  if [[ $NAME == "venv" || $NAME == "env" || $NAME == ".venv" ]]; then
-    local BASE="${VIRTUAL_ENV:h}"
-    NAME="${BASE:t}"
-  fi
-  echo "${ZSH_THEME_VIRTUALENV_PREFIX:=[}${NAME}${ZSH_THEME_VIRTUALENV_SUFFIX:=]}"
+
+# This updates the PROMPT based on the output of the async job
+function callback() {
+    local job=$1 code=$2 output=$3 exec_time=$4 next_pending=$6
+    # echo "Callback: $job $output"
+
+    case $job in
+		update_prompt)
+		    local -A info
+           	typeset -gA prompt_pure_vcs_info
+
+           	# Parse output (z) and unquote as array (Q@).
+           	info=("${(Q@)${(z)output}}")
+
+           	git_info=$info[git]
+
+           	if [[ -n ${info[conda]} ]]; then
+                    conda_info="${PROMPT_CONDA_PREFIX:=[}${info[conda]}${PROMPT_VIRTUALENV_SUFFIX:=]}"
+                else
+                    conda_info=""
+                fi
+           	conda_info="${PROMPT_CONDA_PREFIX:=[}${info[conda]}${PROMPT_VIRTUALENV_SUFFIX:=]}"
+
+           	PROMPT=$'\n'$PROMPT_BASE' '$git_info$conda_info$'\n❯ '
+
+            # COMPLETED=$(( COMPLETED + 1 ))
+            # RPROMPT=${COMPLETED}
+            # RPROMPT=${info}
+
+            zle && zle reset-prompt
+			;;
+	esac
 }
 
-function async_prompt() {
-  # Run the git var update here instead of in the parent
-  precmd_update_git_vars
+# --------------------------------------------------
+# INTERNAL
 
-  echo -n $'\n'$_BASE_PROMPT$' '$(git_super_status)$(virtualenv_prompt_info)$(conda_prompt_info) > $_ZSH_ASYNC_PROMPT_FN
-  if [[ x$_zsh_async_prompt_rv != x0 ]]; then
-    echo -n " exited %{$fg[red]%}$_zsh_async_prompt_rv%{$reset_color%}" >> $_ZSH_ASYNC_PROMPT_FN
-  fi
-  echo -n $'\n❯ ' >> $_ZSH_ASYNC_PROMPT_FN
+# Initialize a new worker (with notify option)
+async_start_worker prompt_worker -u -n
+async_register_callback prompt_worker callback
 
-  # signal parent
-  kill -s USR1 $$
+function prompt_precmd() {
+    async_worker_eval prompt_worker builtin cd -q $PWD
+    async_job prompt_worker update_prompt
 }
 
-# --------------
-# Internal stuff
-
-# This is the base prompt that is rendered sync. It should be
-# fast to render as a result. The extra whitespace before the
-# newine is necessary to avoid some rendering bugs.
-PROMPT=$'\n'$_BASE_PROMPT$'\n❯ '
-RPROMPT='%*'
-
-# Remove the default git var update from chpwd and precmd to speed
-# up the shell prompt.  We will do the precmd_update_git_vars in
-# async_prompt() instead
+# Remove git functions from chpwd_functions and precmd_functions
+# We run this on our precmd function
 chpwd_functions=("${(@)chpwd_functions:#chpwd_update_git_vars}")
 precmd_functions=("${(@)precmd_functions:#precmd_update_git_vars}")
 
-function _zsh_prompt_precmd() {
-  _zsh_async_prompt_rv=$?
+# Add our function to precmd_functions
+precmd_functions+=(prompt_precmd)
 
-  # If we still have a prompt async process we kill it to make sure
-  # we do not backlog with useless prompt things.  This also makes
-  # sure that we do not have prompts interleave in the tempfile.
-  if [[ "${_ZSH_ASYNC_PROMPT}" != 0 ]]; then
-    kill -s HUP $_ZSH_ASYNC_PROMPT >/dev/null 2>&1 || :
-  fi
-
-  # start background computation
-  async_prompt &!
-  _ZSH_ASYNC_PROMPT=$!
-}
-
-# This is the trap for the signal that updates our prompt and
-# redraws it.  We intentionally do not delete the tempfile here
-# so that we can reuse the last prompt for successive commands
-function _zsh_prompt_trapusr1() {
-  PROMPT="$(cat $_ZSH_ASYNC_PROMPT_FN)"
-  _ZSH_ASYNC_PROMPT=0
-  zle && zle reset-prompt
-}
-
-# Make sure we clean up our tempfile on exit
-function _zsh_prompt_zshexit() {
-  /bin/rm -f $_ZSH_ASYNC_PROMPT_FN
-}
-
-# Hook our precmd and zshexit functions and USR1 trap
-precmd_functions+=(_zsh_prompt_precmd)
-zshexit_functions+=(_zsh_prompt_zshexit)
-trap '_zsh_prompt_trapusr1' USR1
-
-# ----------------
 # Transient prompt
 
 zle-line-init() {

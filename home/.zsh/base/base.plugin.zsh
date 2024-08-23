@@ -1,3 +1,4 @@
+
 if [[ $(uname) == "Darwin" ]]; then
     # Pasted here explicitly to make it faster
     # Start: eval $($brew_path/brew shellenv)
@@ -255,3 +256,5 @@ else
         sshd|*/sshd) IS_SSH=true
     esac
 fi
+
+# eval "$(oh-my-posh init zsh --config ~/.dotfiles/theme.omp.toml)"

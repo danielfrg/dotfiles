@@ -1,9 +1,9 @@
 local wezterm = require("wezterm")
 local config = {}
 
+config.color_scheme = "Tokyo Night"
 -- config.color_scheme = "nord"
-config.color_scheme = "Catppuccin Mocha"
-
+--
 -- config.color_scheme = "OneDark (base16)"
 -- config.colors = {
 --     foreground = "#DDDDDD",
@@ -32,7 +32,7 @@ config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
 
 config.keys = {
     -- Make Option-Left equivalent to Alt-b which many line editors interpret as backward-word
-    { key = "LeftArrow", mods = "OPT", action = wezterm.action({ SendString = "\x1bb" }) },
+    { key = "LeftArrow",  mods = "OPT", action = wezterm.action({ SendString = "\x1bb" }) },
     -- { key = "LeftArrow", mods = "CTRL", action = wezterm.action({ SendString = "\x1bb" }) },
     -- Make Option-Right equivalent to Alt-f; forward-word
     { key = "RightArrow", mods = "OPT", action = wezterm.action({ SendString = "\x1bf" }) },

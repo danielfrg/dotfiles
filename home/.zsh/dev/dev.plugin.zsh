@@ -22,15 +22,6 @@ fi
 
 alias conda=mamba
 
-# Rye
-export PATH="$HOME/.rye/shims:$PATH"
-
-if [[ -z $RYE_COMPLETE ]]
-then
-    source <(command rye self completion -s zsh)
-    RYE_COMPLETE=1
-fi
-
 # Other
 export HATCH_CONFIG=$HOME/.config/hatch/config.toml
 
@@ -106,7 +97,7 @@ goinstalltools() {
 # RUST
 # ==========
 
-# source $HOME/.cargo/env
+source $HOME/.cargo/env
 
 # JAVA
 # ==========

@@ -46,8 +46,8 @@ outer.right = 0
 # All possible commands: https://nikitabobko.github.io/AeroSpace/commands
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
-# cmd-slash = 'layout tiles horizontal vertical'
-# cmd-comma = 'layout accordion horizontal vertical'
+alt-slash = 'layout tiles horizontal vertical'
+alt-comma = 'layout accordion horizontal vertical'
 
 cmd-alt-ctrl-shift-h = 'focus left'
 cmd-alt-ctrl-shift-j = 'focus down'
@@ -58,6 +58,11 @@ ctrl-shift-h = 'move left'
 ctrl-shift-j = 'move down'
 ctrl-shift-k = 'move up'
 ctrl-shift-l = 'move right'
+
+alt-shift-h = ['join-with left']
+alt-shift-j = ['join-with down']
+alt-shift-k = ['join-with up']
+alt-shift-l = ['join-with right']
 
 # alt-h = 'split horizontal'
 # alt-v = 'split vertical'
@@ -121,6 +126,11 @@ esc = ['reload-config', 'mode main']
 
 [[on-window-detected]]
 if.app-id = 'com.apple.finder'
+check-further-callbacks = true
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.aone.keka'
 check-further-callbacks = true
 run = ['layout floating']
 

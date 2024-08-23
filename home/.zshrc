@@ -1,30 +1,49 @@
-# Based on https://github.com/getantidote/zdotdir
+# Download zinit, if it's not there yet
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 
-# Zsh options
-setopt extended_glob
+# Start zinit
+source "${ZINIT_HOME}/zinit.zsh"
 
-# Set the directory we want to store antidote
-ANTIDOTE_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/antidote"
+# Completion
+autoload -Uz compinit
+compinit
 
-# Download antidote, if it's not there yet
-if [ ! -d "$ANTIDOTE_HOME" ]; then
-   mkdir -p "$(dirname $ANTIDOTE_HOME)"
-   git clone --depth=1 https://github.com/mattmc3/antidote.git "$ANTIDOTE_HOME"
-fi
+zinit ice wait lucid
+zinit load Aloxaf/fzf-tab
+
+zinit ice wait lucid
+zinit load zsh-users/zsh-syntax-highlighting
+
+zinit ice wait lucid
+zinit load zsh-users/zsh-completions
+
+zinit ice wait lucid
+zinit load zsh-users/zsh-autosuggestions
+
+zinit ice wait lucid
+zinit load zsh-users/zsh-history-substring-search
+
+# zinit wait lucid for OMZL::git.zsh
+# zinit snippet OMZP::git-prompt
+
+# Don't ice this one so we can use zsh-async on prompt.zsh
+zinit load mafredri/zsh-async
+
+# Don't ice this one so we can remove the hooks on prompt.zsh
+zinit load olivierverdier/zsh-git-prompt
 
 export ZSH_CUSTOM="${HOME}/.zsh"
 
-# load antidote
-source "${ANTIDOTE_HOME}/antidote.zsh"
-antidote load
+source "${ZSH_CUSTOM}/base/base.plugin.zsh"
+source "${ZSH_CUSTOM}/dev/dev.plugin.zsh"
 
-source "${ZSH_CUSTOM}/base.zsh"
+# Load this at the end
 source "${ZSH_CUSTOM}/prompt.zsh"
-source "${HOME}/.dotfiles/personal/entrypoint.sh"
 
-# Completion stuff
-autoload -Uz compinit
-compinit
+# Personal settings
+source "${HOME}/.dotfiles/personal/entrypoint.sh"
 
 # ---------------------------------
 # Stuff that is not to be committed
@@ -32,4 +51,3 @@ compinit
 if [ -f ~/.zshrc.local ]; then
     source ~/.zshrc.local
 fi
-
