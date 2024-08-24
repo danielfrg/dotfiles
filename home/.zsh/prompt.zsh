@@ -69,26 +69,24 @@ function callback() {
            	# Parse output (z) and unquote as array (Q@).
            	info=("${(Q@)${(z)output}}")
 
-           	if [[ -n ${info[conda]} ]]; then
-           	    git_info=$info[git]
-            else
-                git_info=""
+            local git_info=""
+            local conda_info=""
+
+            if [[ -n ${info[git]} ]]; then
+                git_info="${info[git]}"
             fi
 
-           	if [[ -n ${info[conda]} ]]; then
+            if [[ -n ${info[conda]} ]]; then
                 conda_info="${PROMPT_CONDA_PREFIX:=[}${info[conda]}${PROMPT_VIRTUALENV_SUFFIX:=]}"
-            else
-                conda_info=""
             fi
 
-           	PROMPT=$'\n'$PROMPT_BASE' '$git_info$conda_info$'\n❯ '
+           	PROMPT=$'\n'$PROMPT_BASE' '${git_info}${conda_info}$'\n❯ '
 
             # COMPLETED=$(( COMPLETED + 1 ))
             # RPROMPT=${COMPLETED}
             # RPROMPT=${info}
 
-            zle && zle reset-prompt
-			;;
+            zle && zle reset-prompt;;
 	esac
 }
 

@@ -68,8 +68,8 @@ alt-shift-l = ['join-with right']
 # alt-v = 'split vertical'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#resize
-cmd-shift-minus = 'resize smart -50'
-cmd-shift-equal = 'resize smart +50'
+alt-shift-minus = 'resize smart -50'
+alt-shift-equal = 'resize smart +50'
 
 cmd-alt-ctrl-shift-d = 'fullscreen'
 cmd-alt-ctrl-shift-f = 'fullscreen'
