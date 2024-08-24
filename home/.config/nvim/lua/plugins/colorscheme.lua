@@ -21,8 +21,10 @@ return {
         config = function()
             vim.cmd([[colorscheme onenord]])
 
-            -- Telescope colors
+            -- Plugins
             vim.api.nvim_set_hl(0, "TelescopeSelection", { bg = "#414C5F" })
+            vim.api.nvim_set_hl(0, "BufferLineFill", { bg = "#21242a" })
+            vim.api.nvim_set_hl(0, "BufferLineIndicatorSelected", { fg = "#2d3441" })
         end,
     },
 

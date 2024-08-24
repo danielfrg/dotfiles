@@ -99,6 +99,8 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 -- so that `` is visible in markdown files
 vim.opt.conceallevel = 0
 
+vim.opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
+
 -- vim.opt.title = true
 
 -- suppress ruff lsp warning:

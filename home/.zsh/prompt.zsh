@@ -69,14 +69,17 @@ function callback() {
            	# Parse output (z) and unquote as array (Q@).
            	info=("${(Q@)${(z)output}}")
 
-           	git_info=$info[git]
+           	if [[ -n ${info[conda]} ]]; then
+           	    git_info=$info[git]
+            else
+                git_info=""
+            fi
 
            	if [[ -n ${info[conda]} ]]; then
-                    conda_info="${PROMPT_CONDA_PREFIX:=[}${info[conda]}${PROMPT_VIRTUALENV_SUFFIX:=]}"
-                else
-                    conda_info=""
-                fi
-           	conda_info="${PROMPT_CONDA_PREFIX:=[}${info[conda]}${PROMPT_VIRTUALENV_SUFFIX:=]}"
+                conda_info="${PROMPT_CONDA_PREFIX:=[}${info[conda]}${PROMPT_VIRTUALENV_SUFFIX:=]}"
+            else
+                conda_info=""
+            fi
 
            	PROMPT=$'\n'$PROMPT_BASE' '$git_info$conda_info$'\n❯ '
 

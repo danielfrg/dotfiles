@@ -18,13 +18,19 @@ return {
                 view_options = {
                     show_hidden = true,
                 },
+                float = {
+                    -- Padding around the floating window
+                    padding = 10,
+                }
             })
 
             -- Open parent directory in current window
-            vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "[Oil] Open parent directory" })
+            -- vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "[Oil] Open parent directory" })
+            -- vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "[Oil] Open parent directory" })
 
             -- Open parent directory in floating window
-            vim.keymap.set("n", "<space>-", require("oil").toggle_float)
+            vim.keymap.set("n", "-", require("oil").toggle_float, { desc = "[Oil] Open parent directory" })
+            -- vim.keymap.set("n", "<space>-", require("oil").toggle_float)
         end,
     },
 }
