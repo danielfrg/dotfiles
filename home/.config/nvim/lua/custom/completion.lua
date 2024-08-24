@@ -6,13 +6,22 @@ lspkind.init({})
 
 local cmp = require("cmp")
 
+local base_sources = {
+    { name = "nvim_lsp", group_index = 2 },
+    { name = "path",     group_index = 3 },
+    { name = "buffer",   group_index = 4 },
+}
+
+local copilot_source = { name = "copilot", group_index = 1 }
+
+-- Create a shallow copy of base_sources
+local sources = { unpack(base_sources) }
+
+-- Add copilot_source to the copy
+table.insert(sources, copilot_source)
+
 cmp.setup({
-    sources = {
-        { name = "copilot", group_index = 2 },
-        { name = "nvim_lsp" },
-        { name = "path" },
-        { name = "buffer" },
-    },
+    sources = base_sources,
     mapping = {
         ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
         ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
@@ -52,4 +61,30 @@ cmp.setup.cmdline(':', {
             }
         }
     })
+})
+
+vim.api.nvim_create_user_command("CopilotDisable", function(args)
+    vim.g.disable_copilot = true
+    cmp.setup({
+        sources = base_sources,
+    })
+end, {
+    desc = "Disable Copilot",
+    bang = true,
+})
+
+vim.api.nvim_create_user_command("CopilotEnable", function(args)
+    vim.g.disable_copilot = false
+
+    -- Create a shallow copy of base_sources
+    local sources = { unpack(base_sources) }
+    -- Add copilot_source to the copy
+    table.insert(sources, copilot_source)
+
+    cmp.setup({
+        sources = sources,
+    })
+end, {
+    desc = "Disable Copilot",
+    bang = true,
 })
