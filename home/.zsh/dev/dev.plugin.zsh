@@ -1,6 +1,8 @@
 # PYTHON
 # ------
 
+export PATH=$HOME/.pixi/bin:$PATH
+
 # # >>> conda initialize >>>
 # # !! Contents within this block are managed by 'conda init' !!
 # __conda_setup="$($HOME'/conda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"

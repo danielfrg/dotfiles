@@ -35,12 +35,11 @@ zinit load mafredri/zsh-async
 zinit load olivierverdier/zsh-git-prompt
 
 export ZSH_CUSTOM="${HOME}/.zsh"
+zinit load "$ZSH_CUSTOM/prompt"
+zinit load "$ZSH_CUSTOM/base"
 
-source "${ZSH_CUSTOM}/base/base.plugin.zsh"
-source "${ZSH_CUSTOM}/dev/dev.plugin.zsh"
-
-# Load this at the end
-source "${ZSH_CUSTOM}/prompt.zsh"
+zinit ice wait lucid
+zinit load "$ZSH_CUSTOM/dev"
 
 # Personal settings
 source "${HOME}/.dotfiles/personal/entrypoint.sh"
@@ -51,3 +50,10 @@ source "${HOME}/.dotfiles/personal/entrypoint.sh"
 if [ -f ~/.zshrc.local ]; then
     source ~/.zshrc.local
 fi
+
+# bun completions
+[ -s "/Users/danrodriguez/.bun/_bun" ] && source "/Users/danrodriguez/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

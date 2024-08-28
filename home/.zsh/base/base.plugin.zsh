@@ -41,9 +41,6 @@ export PATH=$HOME/.local/bin:$HOME/.local/scripts:$PATH
 # Cargo binaries
 export PATH=$HOME/.cargo/bin:$PATH
 
-export PATH=$HOME/.pixi/bin:$PATH
-
-
 # History config
 HISTSIZE=1000000000
 HISTFILE=~/.zsh_history
@@ -259,5 +256,3 @@ else
         sshd|*/sshd) IS_SSH=true
     esac
 fi
-
-# eval "$(oh-my-posh init zsh --config ~/.dotfiles/theme.omp.toml)"
