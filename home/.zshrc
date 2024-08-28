@@ -35,7 +35,7 @@ zinit load mafredri/zsh-async
 zinit load olivierverdier/zsh-git-prompt
 
 export ZSH_CUSTOM="${HOME}/.zsh"
-zinit load "$ZSH_CUSTOM/prompt"
+source "$ZSH_CUSTOM/prompt/prompt.plugin.zsh"
 zinit load "$ZSH_CUSTOM/base"
 
 zinit ice wait lucid
