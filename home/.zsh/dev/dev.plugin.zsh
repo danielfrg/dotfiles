@@ -3,28 +3,6 @@
 
 export PATH=$HOME/.pixi/bin:$PATH
 
-# # >>> conda initialize >>>
-# # !! Contents within this block are managed by 'conda init' !!
-# __conda_setup="$($HOME'/conda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-# if [ $? -eq 0 ]; then
-#     eval "$__conda_setup"
-# else
-#     if [ -f "$HOME/conda/etc/profile.d/conda.sh" ]; then
-#     . "$HOME/conda/etc/profile.d/conda.sh"
-#     else
-#         export PATH="$HOME/conda/bin:$PATH"
-#     fi
-# fi
-# unset __conda_setup
-#
-# if [ -f "$HOME/conda/etc/profile.d/mamba.sh" ]; then
-#     . "$HOME/conda/etc/profile.d/mamba.sh"
-# fi
-# # <<< conda initialize <<<
-#
-# alias conda=mamba
-
-# Other
 export HATCH_CONFIG=$HOME/.config/hatch/config.toml
 
 function pyclean() {
@@ -109,6 +87,10 @@ export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 # Kubernetes
 # ==========
 
+if ! type __start_kubectl >/dev/null 2>&1; then
+    source <(command kubectl completion zsh)
+fi
+
 k() {
   if [[ "$1" == "get" ]]; then
     kubectl get --sort-by=.metadata.name "${@:2}"
@@ -116,6 +98,9 @@ k() {
     kubectl "$@"
   fi
 }
+
+compdef k='kubectl'
+
 alias klogs="kubectl logs"
 alias kgp="kubectl get pod"
 alias kubecl='kubectl'
@@ -127,14 +112,6 @@ alias kns='kubens'
 alias kctx='kubectx'
 alias terrafrom='terraform'
 alias tf='terraform'
-
-if [[ -z $KUBECTL_COMPLETE ]]
-then
-    source <(command kubectl completion zsh)
-    KUBECTL_COMPLETE=1
-    # Add the complete to the alias
-    compdef _kubectl k
-fi
 
 k_logs_deploy() {
   if [ -n "$1" ]

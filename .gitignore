@@ -1,17 +1,12 @@
-*.zsh.zwc
+home/.config/karabiner/assets
+home/.config/karabiner/automatic_backups
 
-/base/.config/karabiner/assets
-/base/.config/karabiner/automatic_backups
+home/.ipython/profile_default/history.sqlite
+!home/.ipython/profile_default/ipython_config.py
 
-/bin/.local/share
-/bin/.local/state
+home/.jupyter/lab/
+home/.jupyter/serverconfig/
+home/.jupyter/migrated
 
-/python/.ipython/profile_default/*
-!/python/.ipython/profile_default/ipython_config.py
-
-/python/.jupyter/lab/
-/python/.jupyter/serverconfig/
-/python/.jupyter/migrated
-
-/nvim/.config/nvim/lua/local.lua
-/nvim/.config/nvim/lazy-lock.json
+home/.config/nvim/lua/local.lua
+home/.config/nvim/lazy-lock.json

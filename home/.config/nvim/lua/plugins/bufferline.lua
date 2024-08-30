@@ -27,13 +27,13 @@ return {
             -- See colorscheme.lua for theme highlights
 
             fill = {
-                fg = '#21242a',
-                bg = '#21242a',
+                -- fg = '#21242a',
+                -- bg = '#21242a',
             },
             background = {
                 -- Non selected buffer
-                fg = '#AAAAAA',
-                bg = '#21242a',
+                -- fg = '#AAAAAA',
+                -- bg = '#21242a',
             },
             tab = {
                 -- fg = '#FF0000',
@@ -59,8 +59,8 @@ return {
             },
             close_button = {
                 -- Non-selected buffer
-                fg = '#AAAAAA',
-                bg = '#21242a',
+                -- fg = '#AAAAAA',
+                -- bg = '#21242a',
             },
             close_button_visible = {
                 -- fg = '#FF0000',
@@ -69,7 +69,7 @@ return {
             close_button_selected = {
                 -- Selected buffer
                 fg = '#FFFFFF',
-                bg = '#2d3441',
+                -- bg = '#2d3441',
             },
             buffer_visible = {
                 -- fg = '#FF0000',
@@ -77,7 +77,7 @@ return {
             },
             buffer_selected = {
                 fg = '#FFFFFF',
-                bg = '#2d3441',
+                -- bg = '#2d3441',
                 bold = true,
                 italic = true,
             },
@@ -240,7 +240,7 @@ return {
             modified = {
                 -- non-selected buffer
                 -- fg = '#FF0000',
-                bg = '#21242a',
+                -- bg = '#21242a',
             },
             modified_visible = {
                 -- fg = '#FF0000',
@@ -249,7 +249,7 @@ return {
             modified_selected = {
                 -- Save indicator
                 -- fg = '#FF0000',
-                bg = '#2d3441',
+                -- bg = '#FF0000',
             },
             duplicate_selected = {
                 -- fg = '#FF0000',
@@ -276,16 +276,16 @@ return {
             },
             separator = {
                 -- Same as background
-                fg = '#21242a',
-                bg = '#21242a',
+                -- fg = '#21242a',
+                -- bg = '#21242a',
             },
             indicator_visible = {
                 -- fg = '#FF0000',
                 -- bg = '#FF0000',
             },
             indicator_selected = {
-                -- fg = '#FF0000',
-                -- bg = '#FF0000',
+                fg = '#181616',
+                -- bg = '#000000',
             },
             pick_selected = {
                 -- fg = '#FF0000',

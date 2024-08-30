@@ -1,76 +1,48 @@
 return {
-    -- {
-    --     "catppuccin/nvim",
-    --     name = "catppuccin",
-    --     priority = 1000,
-    --     lazy = false,
-    --     config = function()
-    --         vim.cmd([[colorscheme catppuccin-mocha]])
-    --     end,
-    -- },
+    "rebelot/kanagawa.nvim",
+    priority = 1000,
+    config = function()
+        require("kanagawa").setup({
+            -- transparent = true,
+            theme = "lotus",
+            compile = false,
+            colors = {
+                theme = {
+                    all = {
+                        ui = {
+                            bg_gutter = "none",
+                        },
+                    },
+                },
+            },
+            overrides = function(colors)
+                local theme = colors.theme
+                return {
+                    LineNr = { bg = 'none' },
 
-    -- {
-    --     "shaunsingh/nord.nvim",
-    --     config = function()
-    --         vim.cmd([[colorscheme nord]])
-    --     end,
-    -- },
+                    NormalFloat = { bg = "none" },
+                    FloatBorder = { bg = "none" },
+                    FloatTitle = { bg = "none" },
 
-    {
-        "rmehri01/onenord.nvim",
-        config = function()
-            vim.cmd([[colorscheme onenord]])
+                    CmpDocumentation = { bg = "none" },
 
-            -- Plugins
-            vim.api.nvim_set_hl(0, "TelescopeSelection", { bg = "#414C5F" })
-            vim.api.nvim_set_hl(0, "BufferLineFill", { bg = "#21242a" })
-            vim.api.nvim_set_hl(0, "BufferLineIndicatorSelected", { fg = "#2d3441" })
-        end,
-    },
+                    -- telescope
+                    TelescopeTitle = { fg = theme.ui.special, bold = true },
+                    TelescopePromptNormal = { bg = theme.ui.bg_p1 },
+                    TelescopePromptBorder = { fg = theme.ui.bg_p1, bg = theme.ui.bg_p1 },
+                    TelescopeResultsNormal = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m1 },
+                    TelescopeResultsBorder = { fg = theme.ui.bg_m1, bg = theme.ui.bg_m1 },
+                    TelescopePreviewNormal = { bg = theme.ui.bg_dim },
+                    TelescopePreviewBorder = { bg = theme.ui.bg_dim, fg = theme.ui.bg_dim },
 
-    -- {
-    --     "navarasu/onedark.nvim",
-    --     priority = 1000,
-    --     lazy = false,
-    --     config = function()
-    --         require("onedark").setup({
-    --             colors = {
-    --                 id = "#000000",
-    --                 bg0 = "#292c32",
-    --                 lightgrey = "#C8CCD4",
-    --                 grey = "#5d636f",
-    --                 red = "#D07277",
-    --                 cyan = "#70b3bd",
-    --                 yellow = "#DFC184",
-    --                 orange = "#bf956a",
-    --                 green = "#A1C181",
-    --                 blue = "#73ADE9",
-    --                 purple = "#B477CF",
-    --             },
-    --             highlights = {
-    --                 ["@attribute"] = { fg = "$blue" },
-    --                 ["@boolean"] = { fg = "$yellow" },
-    --                 ["@constant"] = { fg = "$yellow" },
-    --                 ["@constructor"] = { fg = "$cyan" },
-    --                 ["@constant.builtin"] = { fg = "$yellow" },
-    --                 ["@function.builtin"] = { fg = "$blue" },
-    --                 ["@property"] = { fg = "$red" },
-    --                 ["@type"] = { fg = "$cyan" },
-    --                 ["@type.builtin"] = { fg = "$cyan" },
-    --                 ["@variable"] = { fg = "$lightgrey" },
-    --                 ["@variable.builtin"] = { fg = "$orange" },
-    --                 ["@variable.member"] = { fg = "$red" },
-    --                 ["@variable.parameter"] = { fg = "$lightgrey" },
-
-    --                 zshDeref = { fg = "$red" },
-
-    --                 TelescopeBorder = { fg = "$blue" },
-    --                 TelescopePromptBorder = { fg = "$lightgrey" },
-    --                 TelescopeResultsBorder = { fg = "$lightgrey" },
-    --                 TelescopePreviewBorder = { fg = "$lightgrey" },
-    --             },
-    --         })
-    --         vim.cmd([[colorscheme onedark]])
-    --     end,
-    -- },
+                    -- popup menus
+                    Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1, blend = vim.o.pumblend }, -- add `blend = vim.o.pumblend` to enable transparency
+                    PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
+                    PmenuSbar = { bg = theme.ui.bg_m1 },
+                    PmenuThumb = { bg = theme.ui.bg_p2 },
+                }
+            end,
+        })
+        vim.cmd("colorscheme kanagawa-dragon")
+    end,
 }
