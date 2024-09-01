@@ -1,4 +1,3 @@
-
 if [[ $(uname) == "Darwin" ]]; then
     # Pasted here explicitly to make it faster
     # Start: eval $($brew_path/brew shellenv)
@@ -25,8 +24,6 @@ if [[ $(uname) == "Darwin" ]]; then
     alias rm="trash"
 
     zle -N project_switcher{,}
-else
-    # echo 'Unknown OS!'
 fi
 
 alias cdc='project-session.sh'

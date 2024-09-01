@@ -27,13 +27,13 @@ return {
             -- See colorscheme.lua for theme highlights
 
             fill = {
-                -- fg = '#21242a',
-                -- bg = '#21242a',
+                -- fg = '#FFFFFF',
+                bg = '#1C2021',
             },
             background = {
                 -- Non selected buffer
-                -- fg = '#AAAAAA',
-                -- bg = '#21242a',
+                -- fg = '#FF0000',
+                -- bg = '#FF0000',
             },
             tab = {
                 -- fg = '#FF0000',
@@ -276,15 +276,15 @@ return {
             },
             separator = {
                 -- Same as background
-                -- fg = '#21242a',
-                -- bg = '#21242a',
+                fg = '#1C2021',
+                bg = '#1C2021',
             },
             indicator_visible = {
                 -- fg = '#FF0000',
                 -- bg = '#FF0000',
             },
             indicator_selected = {
-                fg = '#181616',
+                fg = '#232934',
                 -- bg = '#000000',
             },
             pick_selected = {

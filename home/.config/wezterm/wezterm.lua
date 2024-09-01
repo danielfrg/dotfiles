@@ -3,12 +3,12 @@ local config = {}
 
 config.color_scheme = "Gruvbox dark, hard (base16)"
 -- config.color_scheme = "Tokyo Night"
---
+--````
 -- config.color_scheme = "OneDark (base16)"
--- config.colors = {
---     foreground = "#DDDDDD",
---     background = '#292c32',
--- }
+config.colors = {
+    foreground = "#DDDDDD",
+    -- background = '#292c32',
+}
 
 config.font_size = 15.0
 config.font = wezterm.font("JetBrainsMono Nerd Font")

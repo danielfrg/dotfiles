@@ -95,4 +95,6 @@ return {
         lazy = true,
         -- event = "VeryLazy",
     },
+
+    { "norcalli/nvim-colorizer.lua" },
 }
