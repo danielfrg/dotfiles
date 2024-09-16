@@ -89,9 +89,7 @@ export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 # Kubernetes
 # ==========
 
-if ! type kubectl >/dev/null 2>&1; then
-    echo "kubectl is not installed or not in PATH"
-else
+if type kubectl >/dev/null 2>&1; then
     if ! type __start_kubectl >/dev/null 2>&1; then
         source <(command kubectl completion zsh)
     fi
