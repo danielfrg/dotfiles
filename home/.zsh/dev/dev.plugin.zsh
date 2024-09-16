@@ -89,7 +89,8 @@ export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 # Kubernetes
 # ==========
 
-if type kubectl >/dev/null 2>&1; then
+if ! type kubectl >/dev/null 2>&1; then
+else
     if ! type __start_kubectl >/dev/null 2>&1; then
         source <(command kubectl completion zsh)
     fi
