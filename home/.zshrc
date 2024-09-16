@@ -6,6 +6,8 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 # Start zinit
 source "${ZINIT_HOME}/zinit.zsh"
 
+fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
+
 # Completion
 autoload -Uz compinit
 compinit

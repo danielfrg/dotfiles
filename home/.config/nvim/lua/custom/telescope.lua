@@ -3,6 +3,8 @@ local data = assert(vim.fn.stdpath("data")) --[[@as string]]
 local actions = require("telescope.actions")
 local open_with_trouble = require("trouble.sources.telescope").open
 
+local border_chars_none = { " ", " ", " ", " ", " ", " ", " ", " " }
+
 require("telescope").setup({
     defaults = {
         file_ignore_patterns = { ".git/" },
@@ -23,6 +25,11 @@ require("telescope").setup({
         mappings = {
             i = { ["<c-t>"] = open_with_trouble },
             n = { ["<c-t>"] = open_with_trouble },
+        },
+        borderchars = {
+            prompt = border_chars_none,
+            results = border_chars_none,
+            preview = border_chars_none,
         },
     },
     pickers = {

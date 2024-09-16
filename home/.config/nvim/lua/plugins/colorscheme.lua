@@ -4,7 +4,19 @@ return {
         lazy = false,
         priority = 1000,
         config = function()
+            require 'nordic'.setup {
+                cursorline = {
+                    bold_number = true,
+                    theme = 'light',
+                    blend = 0.85,
+                },
+            }
             require 'nordic'.load()
+
+            vim.cmd [[highlight TelescopeSelection guifg=#ffffff guibg=#2C323F gui=bold]]
+
+            vim.api.nvim_set_hl(0, "FloatBorder", { link = "TelescopeBorder" })
+            vim.api.nvim_set_hl(0, "FloatTitle", { link = "TelescopeTitle" })
         end
     },
 
