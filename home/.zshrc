@@ -48,16 +48,9 @@ source "$ZSH_CUSTOM/dev/dev.plugin.zsh"
 source "${HOME}/.dotfiles/personal/entrypoint.sh"
 
 
-# ---------------------------------
-# Stuff that is not to be committed
+# -------------------------------------
+# For stuff that is not to be committed
 
 if [ -f ~/.zshrc.local ]; then
     source ~/.zshrc.local
 fi
-
-# bun completions
-[ -s "/Users/danrodriguez/.bun/_bun" ] && source "/Users/danrodriguez/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
