@@ -131,7 +131,7 @@ if [[ $(uname) == "Darwin" ]]; then
   eval "$(zoxide init zsh --cmd cd)"
 fi
 
-export ZELLIJ_CONFIG_DIR=/$HOME/.config/zellij
+export ZELLIJ_CONFIG_DIR=$HOME/.config/zellij
 
 # GNU tools
 alias md5sum='md5 -r'

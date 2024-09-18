@@ -17,7 +17,6 @@ function pyclean() {
 # disables virtual_env/bin/activate prompt
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
-
 # JS
 # ==========
 
