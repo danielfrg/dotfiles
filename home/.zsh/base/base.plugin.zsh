@@ -26,9 +26,15 @@ if [[ $(uname) == "Darwin" ]]; then
     zle -N project_switcher{,}
 fi
 
+export EDITOR=nvim
+
 alias cdc='project-session.sh'
 # ctrl-f for tmux-sessionizer
 bindkey -s "^F" "project-session.sh\n"
+
+# Add tmuxifer to the path
+export PATH=$HOME/.tmux/plugins/tmuxifier/bin:$PATH
+export TMUXIFIER_LAYOUT_PATH=$HOME/.config/tmux/layouts
 
 export XDG_CONFIG_HOME=$HOME/.config
 
