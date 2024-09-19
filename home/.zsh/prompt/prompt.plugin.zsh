@@ -5,7 +5,15 @@ autoload -U colors && colors
 # USER=asdf
 # SSH_CLIENT=1
 
-PROMPT_BASE="%{$fg[blue]%}%~%{$reset_color%}% "$PROMPT_USER$PROMPT_HOST
+# This is the basic prompt that is always printed
+# It will be enclosed to make it newline
+PROMPT_USER=$(if [[ $USER != "danielfrg" && $USER != "danrodriguez" ]]; then echo '%{$fg[red]%}%n@%{$reset_color%}'; else echo ""; fi)
+PROMPT_HOST=$(if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then echo '%{$fg[red]%}%m%{$reset_color%}'; else echo ""; fi)
+
+PROMPT_SSH=$(if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then echo "%{$fg[yellow]%}[SSH]%{$reset_color%} "; else echo ""; fi)
+PROMPT_OS=$(if [[ "$(uname)" == "Linux" ]]; then echo "🐧 "; else echo ""; fi)
+
+PROMPT_BASE=$PROMPT_SSH$PROMPT_USER$PROMPT_HOST" %{$fg[blue]%}%~%{$reset_color%}% "
 
 PROMPT_VIRTUALENV_PREFIX="%{$fg[green]%}  "
 PROMPT_CONDA_PREFIX="%{$fg[green]%}  "
@@ -20,10 +28,6 @@ ZSH_THEME_GIT_PROMPT_CLEAN=""
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[green]?%G%}"
 ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[cyan]%}%{+%G%}"
 
-# This is the basic prompt that is always printed
-# It will be enclosed to make it newline
-PROMPT_USER=$(if [[ $USER != "danielfrg" && $USER != "danrodriguez" ]]; then echo ' as %{$fg[magenta]%}%n%{$reset_color%} '; else echo ""; fi)
-PROMPT_HOST=$(if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then echo '@%{$fg[red]%}%m%{$reset_color%}'; else echo ""; fi)
 
 PROMPT=$'\n'$PROMPT_BASE$'\n❯ '
 RPROMPT=''
