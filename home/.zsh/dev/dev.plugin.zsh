@@ -163,5 +163,6 @@ kexec() {
 docker-stop-all() { docker stop $(docker ps -a -q) }
 docker-prune() { docker system prune -f }
 docker-clean() { docker-stop-all; docker-prune; }
+alias docker-rmi-empty='docker rmi $(docker images -f "dangling=true" -q)'
 docker-rmi-prefix () { docker rmi -f $(docker images --filter=reference='prefix*' --format '{{.Repository}}:{{.Tag}}') }
 docker-rmi-all () { docker rmi -f $(docker images --format '{{.ID}}') }
