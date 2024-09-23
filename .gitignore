@@ -7,6 +7,7 @@ home/.ipython/profile_default/history.sqlite
 home/.jupyter/lab/
 home/.jupyter/serverconfig/
 home/.jupyter/migrated
+home/.jupyter/lab/workspaces/
 
 home/.config/nvim/lua/local.lua
 home/.config/nvim/lazy-lock.json

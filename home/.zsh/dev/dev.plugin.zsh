@@ -17,6 +17,25 @@ function pyclean() {
 # disables virtual_env/bin/activate prompt
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
+# Conda optional stuff
+
+if [ -d "$HOME/conda" ]; then
+    # >>> conda initialize >>>
+    # !! Contents within this block are managed by 'conda init' !!
+    __conda_setup="$('$HOME/conda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
+    else
+        if [ -f "$HOME/conda/etc/profile.d/conda.sh" ]; then
+            . "$HOME/conda/etc/profile.d/conda.sh"
+        else
+            export PATH="$HOME/conda/bin:$PATH"
+        fi
+    fi
+    unset __conda_setup
+    # <<< conda initialize <
+fi
+
 # JS
 # ==========
 
@@ -96,22 +115,21 @@ export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 # Kubernetes
 # ==========
 
+k() {
+    if [[ "$1" == "get" ]]; then
+        kubectl get --sort-by=.metadata.name "${@:2}"
+    else
+        kubectl "$@"
+    fi
+}
+
 if ! type kubectl >/dev/null 2>&1; then
 else
     if ! type __start_kubectl >/dev/null 2>&1; then
         source <(command kubectl completion zsh)
     fi
+    compdef k='kubectl'
 fi
-
-k() {
-  if [[ "$1" == "get" ]]; then
-    kubectl get --sort-by=.metadata.name "${@:2}"
-  else
-    kubectl "$@"
-  fi
-}
-
-compdef k='kubectl'
 
 alias klogs="kubectl logs"
 alias kgp="kubectl get pod"
