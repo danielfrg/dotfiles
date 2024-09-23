@@ -13,11 +13,14 @@ PROMPT_HOST=$(if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then echo '%{$fg[red
 PROMPT_SSH=$(if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then echo "%{$fg[yellow]%}[SSH]%{$reset_color%} "; else echo ""; fi)
 PROMPT_OS=$(if [[ "$(uname)" == "Linux" ]]; then echo "🐧 "; else echo ""; fi)
 
-PROMPT_BASE=$PROMPT_SSH$PROMPT_USER$PROMPT_HOST" %{$fg[blue]%}%~%{$reset_color%}% "
-
 PROMPT_VIRTUALENV_PREFIX="%{$fg[green]%}  "
-PROMPT_CONDA_PREFIX="%{$fg[green]%}  "
 PROMPT_VIRTUALENV_SUFFIX="%{$reset_color%}"
+
+PROMPT_CONDA_PREFIX="%{$fg[green]%}  "
+PROMPT_CONDA_SUFFIX="%{$reset_color%}"
+PROMPT_CONDA=$PROMPT_CONDA_PREFIX'${CONDA_DEFAULT_ENV:+"%F{green}$CONDA_DEFAULT_ENV%f "}'$PROMPT_CONDA_SUFFIX
+
+PROMPT_BASE=$PROMPT_SSH$PROMPT_USER$PROMPT_HOST" %{$fg[blue]%}%~%{$reset_color%}% "
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[yellow]%}git%{$reset_color%}:"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
@@ -80,8 +83,13 @@ function callback() {
                 git_info="${info[git]}"
             fi
 
-            if [[ -n ${info[conda]} ]]; then
-                conda_info="${PROMPT_CONDA_PREFIX:=[}${info[conda]}${PROMPT_VIRTUALENV_SUFFIX:=]}"
+            # This is not working because I async call happens on another shell
+            # But this is fast since its just reading an env var
+            # if [[ -n ${info[conda]} ]]; then
+            #     conda_info="${PROMPT_CONDA_PREFIX:=[}${info[conda]}${PROMPT_VIRTUALENV_SUFFIX:=]}"
+            # fi
+            if [[ -n ${CONDA_DEFAULT_ENV} ]]; then
+                conda_info=$PROMPT_CONDA
             fi
 
            	PROMPT=$'\n'$PROMPT_BASE' '${git_info}${conda_info}$'\n❯ '

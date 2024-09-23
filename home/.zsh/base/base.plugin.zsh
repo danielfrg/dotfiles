@@ -29,6 +29,11 @@ fi
 # Need this for tmux emacs keybindings to work
 bindkey -e
 
+# Force delete to be delete-char
+# sometimes this is missconfigured?
+# https://superuser.com/questions/997593/why-does-zsh-insert-a-when-i-press-the-delete-key
+bindkey "^[[3~" delete-char
+
 alias cdc='project-session.sh'
 # ctrl-f for tmux-sessionizer
 bindkey -s "^F" "project-session.sh\n"
