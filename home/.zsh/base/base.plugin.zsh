@@ -26,7 +26,8 @@ if [[ $(uname) == "Darwin" ]]; then
     zle -N project_switcher{,}
 fi
 
-export EDITOR=nvim
+# Need this for tmux emacs keybindings to work
+bindkey -e
 
 alias cdc='project-session.sh'
 # ctrl-f for tmux-sessionizer

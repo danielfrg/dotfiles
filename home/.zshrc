@@ -47,7 +47,6 @@ source "$ZSH_CUSTOM/dev/dev.plugin.zsh"
 # Personal settings
 source "${HOME}/.dotfiles/personal/entrypoint.sh"
 
-
 # -------------------------------------
 # For stuff that is not to be committed
 

@@ -3,7 +3,7 @@ local config = {}
 
 config.color_scheme = "Gruvbox dark, hard (base16)"
 -- config.color_scheme = "Tokyo Night"
---````
+
 -- config.color_scheme = "OneDark (base16)"
 config.colors = {
     foreground = "#DDDDDD",
