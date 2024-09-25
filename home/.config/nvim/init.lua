@@ -30,3 +30,5 @@ require('lazy').setup("plugins",
         },
     }
 );
+
+require("custom.statusline")
