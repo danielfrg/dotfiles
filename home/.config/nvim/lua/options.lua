@@ -1,18 +1,13 @@
-vim.loader.enable()
-
--- Remap space as leader key
+-- set <space> as the leader key
+-- NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
-vim.opt.cmdheight = 1
-
--- no splash screen
-vim.opt.shortmess:append "I"
-
 -- don't show the mode, since it's already in the status line
-vim.opt.showmode = false
+vim.opt.showmode = true
 
 -- make line numbers default
 vim.opt.number = true
@@ -35,6 +30,10 @@ vim.opt.wrap = true
 -- enable mouse mode
 vim.opt.mouse = "a"
 
+-- case insensitive searching UNLESS /C or capital in search
+vim.o.ignorecase = true
+vim.o.smartcase = true
+
 -- highlight on search terms
 vim.opt.hlsearch = true
 -- highligh as you type
@@ -44,47 +43,36 @@ vim.opt.inccommand = 'split'
 
 -- For :command mode
 -- Complete to longest then show list
-vim.opt.wildignore:append({ ".javac", "node_modules", "*.pyc" })
+vim.opt.wildignore:append({ "node_modules" })
 vim.opt.wildignore:append({
     ".o", ".obj", ".dll", ".exe", ".so", ".a", ".lib", ".pyc", ".pyo", ".pyd",
     ".swp", ".swo", ".class", ".DS_Store", ".git", ".hg", ".orig"
 })
-vim.opt.suffixesadd:append({ ".java", ".rs" })
 
--- sync/nosync clipboard between OS and Neovim
-vim.opt.clipboard = "" -- nosync
--- vim.opt.clipboard = "unnamedplus" -- sync
+-- sync clipboard between OS and Neovim
+-- Comment to keep them separated
+-- vim.opt.clipboard = "unnamedplus"
 
--- disable backups and let undotree handle history
+-- disable backups
 vim.opt.backup = false
 vim.opt.swapfile = false
+
+-- save undo history
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
 -- enable break indent
 vim.opt.breakindent = true
 
--- sessions
-vim.o.sessionoptions = "globals"
+-- Keep signcolumn on by default
+vim.opt.signcolumn = 'yes'
 
--- case insensitive searching UNLESS /C or capital in search
-vim.o.ignorecase = true
-vim.o.smartcase = true
+-- Decrease update time
+vim.opt.updatetime = 250
 
--- good colors
-vim.opt.termguicolors = true
-
--- scroll padding
-vim.opt.scrolloff = 10
-vim.opt.sidescrolloff = 8
-vim.opt.signcolumn = "yes"
-vim.opt.isfname:append("@-@")
-
-vim.opt.colorcolumn = "80"
-
--- decrease update time
-vim.o.updatetime = 50
-vim.o.timeoutlen = 300
+-- Decrease mapped sequence wait time
+-- Displays which-key popup sooner
+vim.opt.timeoutlen = 300
 
 -- Configure how new splits should be opened
 vim.opt.splitright = true
@@ -96,23 +84,35 @@ vim.opt.splitbelow = true
 vim.opt.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
+-- Show which line your cursor is on
+vim.opt.cursorline = true
+
+-- Minimal number of screen lines to keep above and below the cursor.
+vim.opt.scrolloff = 10
+vim.opt.sidescrolloff = 10
+
+vim.opt.colorcolumn = "80"
+
 -- so that `` is visible in markdown files
 vim.opt.conceallevel = 0
 
+-- session: save this variables
 vim.opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
 
--- vim.opt.title = true
+-- folding: use treesitter
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldlevel = 99
+vim.opt.foldcolumn = "0" -- don't show fold column
+
+-- no splash screen
+vim.opt.shortmess:append "I"
+
+-- Disables the Netrw banner. Press 'I' to toggle.
+vim.g.netrw_banner = 0
+-- netrw tree view
+vim.g.netrw_liststyle = 3
 
 -- suppress ruff lsp warning:
 -- https://github.com/nvimtools/none-ls.nvim/discussions/81
 -- vim.g.nonels_suppress_issue58 = true
-
-if vim.g.neovide then
-    vim.o.guifont = "JetbrainsMono Nerd Font:h10"
-
-    vim.g.neovide_refresh_rate = 75
-    vim.g.neovide_cursor_vfx_mode = "railgun"
-
-    vim.keymap.set("i", "<c-s-v>", "<c-r>+")
-    vim.keymap.set("i", "<c-r>", "<c-s-v>")
-end

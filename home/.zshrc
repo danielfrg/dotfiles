@@ -1,3 +1,5 @@
+# Add deno completions to search path
+if [[ ":$FPATH:" != *":/Users/danrodriguez/.zsh/completions:"* ]]; then export FPATH="/Users/danrodriguez/.zsh/completions:$FPATH"; fi
 # Download zinit, if it's not there yet
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"

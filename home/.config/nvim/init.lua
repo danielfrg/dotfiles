@@ -4,7 +4,7 @@ require("mappings")
 require("autocmds")
 
 -- Load local.lua if found
-local status, plugin = pcall(require, 'local')
+local status, local_file = pcall(require, 'local')
 
 -- Default lazy.nvim config
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -19,6 +19,9 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
     })
 end
 vim.opt.rtp:prepend(lazypath)
+
+-- empty setup
+-- require('lazy').setup({})
 
 require('lazy').setup("plugins",
     {

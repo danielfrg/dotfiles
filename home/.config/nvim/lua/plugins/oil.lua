@@ -7,6 +7,7 @@ return {
 
         config = function()
             require("oil").setup({
+                default_file_explorer = false,
                 columns = { "icon" },
                 delete_to_trash = false,
                 -- Skip the confirmation popup for simple operations (:help oil.skip_confirm_for_simple_edits)

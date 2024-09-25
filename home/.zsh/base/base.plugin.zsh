@@ -132,8 +132,6 @@ if [[ $(uname) == "Darwin" ]]; then
   alias df_='/usr/df'
   alias grep='rg'
   alias grep_='/usr/bin/grep -i --color=always'
-  alias find='fd -H'
-  alias find_='/usr/bin/find'
   alias ping='prettyping --nolegend'
   alias ping_='/sbin/ping'
   alias top='btm'

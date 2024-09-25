@@ -39,6 +39,10 @@ fi
 # JS
 # ==========
 
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
+export VOLTA_FEATURE_PNPM=1
+
 # bun completions
 [ -s "/Users/danrodriguez/.bun/_bun" ] && source "/Users/danrodriguez/.bun/_bun"
 
@@ -46,20 +50,6 @@ fi
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
-export VOLTA_FEATURE_PNPM=1
-
-alias npmreset="rm -rf node_modules"
-
-alias npm_="$HOME/.volta/bin/npm"
-alias npm=pnpm
-# alias npx=pnpm dlx
-
-export ASTRO_TELEMETRY_DISABLED=1
-export NEXT_TELEMETRY_DEBUG=1.
-export DISABLE_OPENCOLLECTIVE=1
-export ADBLOCK=1
 
 # pnpm
 export PNPM_HOME="$HOME/Library/pnpm"
@@ -74,6 +64,14 @@ esac
 #     source <(command pnpm completion zsh)
 #     PNPM_COMPLETE=1
 # fi
+
+alias npmreset="rm -rf node_modules"
+
+export ASTRO_TELEMETRY_DISABLED=1
+export NEXT_TELEMETRY_DEBUG=1.
+export DISABLE_OPENCOLLECTIVE=1
+export ADBLOCK=1
+
 
 # C/C++
 # ==========

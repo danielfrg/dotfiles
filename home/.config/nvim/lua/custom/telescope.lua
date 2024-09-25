@@ -1,7 +1,10 @@
-local data = assert(vim.fn.stdpath("data")) --[[@as string]]
+local open_with_trouble = false
+local trouble_loaded, trouble = pcall(require, "trouble.providers.telescope")
+if trouble_loaded then
+    open_with_trouble = trouble.open
+end
 
 local actions = require("telescope.actions")
-local open_with_trouble = require("trouble.sources.telescope").open
 
 local border_chars_none = { " ", " ", " ", " ", " ", " ", " ", " " }
 
@@ -44,7 +47,7 @@ require("telescope").setup({
 
         file_browser = {
             -- theme = "dropdown",
-            hijack_netrw = true,
+            -- hijack_netrw = true,
         },
 
         -- native FZF support
@@ -107,7 +110,8 @@ vim.keymap.set(
     "<cmd>Telescope grep_string hidden=true cwd=false<CR>",
     { desc = "Find current [W]ord" }
 )
--- vim.keymap.set("n", "<leader><leader>", <cmd>Telescope buffers sort_mru=true sort_lastused=true<CR>, { desc = "Find existing buffers" })
+vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<CR>",
+    { desc = "Find existing buffers" })
 -- vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<CR>", { desc = "Buffers" })
 vim.keymap.set(
     "n",
@@ -123,18 +127,18 @@ vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "Find Keymaps" })
 vim.keymap.set("n", "<space>fh", builtin.help_tags, { desc = "Find Help tags" })
 
 -- File Browser
-vim.keymap.set(
-    "n",
-    "<space>fB",
-    ":Telescope file_browser hidden=true<CR>",
-    { desc = "File browser" }
-)
-vim.keymap.set(
-    "n",
-    "<space>fb",
-    ":Telescope file_browser path=%:p:h select_buffer=true hidden=true<CR>",
-    { desc = "File Browser (cwd)" }
-)
+-- vim.keymap.set(
+--     "n",
+--     "<space>fB",
+--     ":Telescope file_browser hidden=true<CR>",
+--     { desc = "File browser" }
+-- )
+-- vim.keymap.set(
+--     "n",
+--     "<space>fb",
+--     ":Telescope file_browser path=%:p:h select_buffer=true hidden=true<CR>",
+--     { desc = "File Browser (cwd)" }
+-- )
 
 -- Search
 vim.keymap.set(
