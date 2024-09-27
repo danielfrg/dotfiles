@@ -51,6 +51,7 @@ vim.opt.wildignore:append({
 
 -- sync clipboard between OS and Neovim
 -- Comment to keep them separated
+vim.opt.clipboard = ""
 -- vim.opt.clipboard = "unnamedplus"
 
 -- disable backups
