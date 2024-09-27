@@ -27,7 +27,12 @@ require("telescope").setup({
         qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
         mappings = {
             i = { ["<c-t>"] = open_with_trouble },
-            n = { ["<c-t>"] = open_with_trouble },
+            n = {
+                ["d"] = require('telescope.actions').delete_buffer,
+                ["q"] = require("telescope.actions").close,
+                ["<c-t>"] = open_with_trouble
+            },
+
         },
         borderchars = {
             prompt = border_chars_none,
@@ -110,7 +115,7 @@ vim.keymap.set(
     "<cmd>Telescope grep_string hidden=true cwd=false<CR>",
     { desc = "Find current [W]ord" }
 )
-vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<CR>",
+vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true initial_mode=normal<CR>",
     { desc = "Find existing buffers" })
 -- vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<CR>", { desc = "Buffers" })
 vim.keymap.set(

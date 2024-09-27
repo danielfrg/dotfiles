@@ -11,7 +11,8 @@ config.colors = {
 }
 
 config.font_size = 15.0
-config.font = wezterm.font("JetBrainsMono Nerd Font")
+config.font = wezterm.font("Berkeley Mono")
+-- config.font = wezterm.font("JetBrainsMono Nerd Font")
 
 config.enable_tab_bar = false
 -- config.macos_window_background_blur = 30
