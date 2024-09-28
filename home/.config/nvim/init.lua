@@ -1,7 +1,5 @@
 -- Load all the configuration files
 require("options")
-require("mappings")
-require("autocmds")
 
 -- Load local.lua if found
 local status, local_file = pcall(require, 'local')
@@ -14,7 +12,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
         "clone",
         "--filter=blob:none",
         "https://github.com/folke/lazy.nvim.git",
-        "--branch=stable", -- latest stable release
+        y "--branch=stable", -- latest stable release
         lazypath,
     })
 end
@@ -31,4 +29,6 @@ require('lazy').setup("plugins",
     }
 );
 
+require("mappings")
+require("autocmds")
 require("custom.statusline")

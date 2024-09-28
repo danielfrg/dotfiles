@@ -36,7 +36,8 @@ map(
 )
 
 -- yank to system clipboard
-map("n", "<leader>y", '"+y', { desc = "Yank to clipboard" })
+map("v", "<leader>y", '"+y', { desc = "Yank to clipboard" })
+-- map("n", "<leader>y", '"+y', { desc = "Yank to clipboard" })
 
 -- paste without changing current register
 map("n", "<leader>p", '"*p', { desc = "Paste from clipboard" })
