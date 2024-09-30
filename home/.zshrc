@@ -40,11 +40,12 @@ zinit load olivierverdier/zsh-git-prompt
 
 export ZSH_CUSTOM="${HOME}/.zsh"
 source "$ZSH_CUSTOM/prompt/prompt.plugin.zsh"
-zinit load "$ZSH_CUSTOM/base"
+source "$ZSH_CUSTOM/base/base.plugin.zsh"
+# zinit load "$ZSH_CUSTOM/base"
 
 # zinit ice wait lucid
 # zinit load "$ZSH_CUSTOM/dev"
-source "$ZSH_CUSTOM/dev/dev.plugin.zsh"
+# source "$ZSH_CUSTOM/dev/dev.plugin.zsh"
 
 # Personal settings
 source "${HOME}/.dotfiles/personal/entrypoint.sh"
