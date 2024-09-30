@@ -113,6 +113,36 @@ if [[ $FOUND_ATUIN -eq 1 ]]; then
 fi
 
 # =========================
+# Expand aliases core
+# =========================
+typeset -a ealiases
+ealiases=()
+
+function ealias()
+{
+  alias $1
+  ealiases+=(${1%%\=*})
+}
+
+function expand-ealias()
+{
+if [[ $LBUFFER =~ "(^|[;|&])\s*(${(j:|:)ealiases})\$" ]]; then
+    zle _expand_alias
+    zle expand-word
+fi
+zle magic-space
+}
+
+zle -N expand-ealias
+
+bindkey -M viins ' '    expand-ealias
+bindkey -M emacs ' '    expand-ealias
+bindkey -M viins '^ '   magic-space     # control-space to bypass completion
+bindkey -M emacs '^ '   magic-space
+bindkey -M isearch ' '  magic-space # normal space during searches
+
+
+# =========================
 # ALIASES
 # =========================
 
@@ -306,47 +336,45 @@ docker-rmi-all () { docker rmi -f $(docker images --format '{{.ID}}') }
 # Kubernetes
 # =========================
 
-k() {
-  if [ -n "$KUBE_NAMESPACE" ]; then
-      if [[ "$1" == "get" ]]; then
-          kubectl --namespace "$KUBE_NAMESPACE" get --sort-by=.metadata.name "${@:2}"
-      else
-        kubectl --namespace "$KUBE_NAMESPACE" "$@"
-      fi
-  else
-      kubectl  $@
-  fi
-}
+ealias kg='k get '
+ealias kl="k logs"
+ealias kgp='k get po '
+ealias kgn='k get no '
+ealias kgd='k get deploy '
+ealias krmp='k delete po '
+ealias kdp='k describe po '
+ealias uek='unset KUBECONFIG'
+ealias uekns='unset KUBE_NAMESPACE'
 
-alias kg='k get '
-alias kgp='k get po '
-alias kgn='k get no '
-alias kgd='k get deploy '
-alias krmp='k delete po '
-alias kdp='k describe po '
-alias uek='unset KUBECONFIG'
-alias uekns='unset KUBE_NAMESPACE'
+alias kubectl=kubecolor
+alias tf="terraform"
 
-alias kl="kubectl logs"
-alias tf='terraform'
-
+# Check if kubectl exists
 if type kubectl >/dev/null 2>&1; then
-    alias kubectl=kubecolor
+    # Source kubectl completion *before* aliasing
+    source <(kubectl completion zsh)
 
-    # Remove default config
+    # Function k
+    k() {
+        if [ -n "$KUBE_NAMESPACE" ]; then
+            kubectl --namespace "$KUBE_NAMESPACE" "$@"
+        else
+            kubectl "$@"
+        fi
+    }
+
+    compdef _kubectl k
+    compdef _kubectl kubecolor
+
+    # Backup and remove/symlink ~/.kube/config (this part is unrelated to completion)
     if [[ -f ~/.kube/config && ! -L ~/.kube/config ]]; then
         mv ~/.kube/config ~/.kube/config.backup_$(date +%Y%m%d_%H%M%S)
         echo "Existing ~/.kube/config backed up."
     fi
 
-    # Create or update the symlink
+    # Remove default kubeconfig
     ln -sf /dev/null ~/.kube/config
-
-    source <(kubectl completion zsh)
-    compdef k='kubectl'
-    compdef kubecolor=kubectl
 fi
-
 
 # export kubeconfig
 # From: https://gist.github.com/rothgar/a2092f73b06465ddda0e855cc1f6ec2b
@@ -363,6 +391,14 @@ ek() {
     # PROFILE=$(yq '.users[0].user.exec.env[0].value' $KUBECONFIG)
     # REGION=$(yq '.users[0].user.exec.args' $KUBECONFIG | grep -A1 region | tail -1 | awk '{print $2}')
     # awsp $PROFILE $REGION
+}
+
+# helper for setting a namespace
+# List namespaces, preview the pods within, and save as variable
+function ekns() {
+  namespaces=$(kubectl get ns -o=custom-columns=:.metadata.name)
+  export KUBE_NAMESPACE=$(echo $namespaces | fzf --select-1 --preview "kubectl --namespace {} get pods")
+  echo "Set namespace to $KUBE_NAMESPACE"
 }
 
 k_logs_deploy() {
@@ -507,3 +543,7 @@ fi
 # =========================
 
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+
+
+
+ealias g="git"
