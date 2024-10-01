@@ -117,3 +117,12 @@ vim.g.netrw_liststyle = 3
 -- suppress ruff lsp warning:
 -- https://github.com/nvimtools/none-ls.nvim/discussions/81
 -- vim.g.nonels_suppress_issue58 = true
+
+-- Check if rg (ripgrep) exists
+local rg_exists = vim.fn.executable("rg") > 0
+
+if rg_exists then
+  vim.o.grepprg = [[rg --glob "!.git" --no-heading --vimgrep --follow $*]]
+end
+
+vim.opt.grepformat = vim.opt.grepformat ^ { "%f:%l:%c:%m" }
