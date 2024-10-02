@@ -33,3 +33,10 @@ function _G.statusline()
 end
 
 vim.o.statusline = "%{%v:lua._G.statusline()%}"
+
+
+-- -- Set status line background color
+-- vim.cmd('highlight StatusLine ctermbg=darkgray guibg=#3c3836')
+
+-- -- Set status line text color
+-- vim.cmd('highlight StatusLine ctermfg=white guifg=#ebdbb2')

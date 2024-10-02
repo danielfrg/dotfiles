@@ -33,7 +33,7 @@ return {
             },
         },
         config = function()
-            require("custom.completion")
+            require("config.completion")
         end,
     },
 }

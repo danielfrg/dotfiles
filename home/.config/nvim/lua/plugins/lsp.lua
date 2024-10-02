@@ -13,8 +13,8 @@ return {
             -- "b0o/SchemaStore.nvim",
         },
         config = function()
-            require("custom.lsp")
-            require("custom.fmt")
+            require("config.lsp")
+            require("config.fmt")
         end,
     },
 }
