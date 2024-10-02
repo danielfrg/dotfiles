@@ -10,10 +10,4 @@ return {
 
     -- Detect tabstop and shiftwidth automatically
     { 'tpope/vim-sleuth' },
-
-    -- tmux integration
-    {
-        "christoomey/vim-tmux-navigator",
-        event = "VeryLazy",
-    },
 }
