@@ -56,3 +56,4 @@ source "${HOME}/.dotfiles/personal/entrypoint.sh"
 if [ -f ~/.zshrc.local ]; then
     source ~/.zshrc.local
 fi
+

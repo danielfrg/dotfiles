@@ -5,6 +5,7 @@ create_default_packages:
 
 channels:
   - conda-forge
+  - nodefaults
 
 update_dependencies: false
-channel_priority: true
+channel_priority: strict

@@ -453,8 +453,27 @@ function pyclean() {
 # disables virtual_env/bin/activate prompt
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
-# Conda optional stuff
+# Micromamba optional stuff
+if [ -f "$HOME/.local/bin/micromamba" ]; then
+    # >>> mamba initialize >>>
+    # !! Contents within this block are managed by 'micromamba shell init' !!
+    export MAMBA_EXE='$HOME/.local/bin/micromamba';
+    export MAMBA_ROOT_PREFIX='$HOME/micromamba';
+    __mamba_setup="$($HOME/.local/bin/micromamba 'shell' 'hook' '--shell' 'zsh' '--root-prefix' "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__mamba_setup"
+        alias mamba=micromamba
+    else
+        # Fallback on help from micromamba activate
+        alias micromamba="$MAMBA_EXE"
+        alias mamba=micromamba
+    fi
+    unset __mamba_setup
+    # <<< mamba initialize <<<
+fi
 
+
+# Conda optional stuff
 if [ -d "$HOME/conda" ]; then
     # >>> conda initialize >>>
     # !! Contents within this block are managed by 'conda init' !!
