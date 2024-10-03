@@ -462,12 +462,12 @@ if [ -f "$HOME/.local/bin/micromamba" ]; then
     __mamba_setup="$($HOME/.local/bin/micromamba 'shell' 'hook' '--shell' 'zsh' '--root-prefix' "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
     if [ $? -eq 0 ]; then
         eval "$__mamba_setup"
-        alias mamba=micromamba
     else
         # Fallback on help from micromamba activate
         alias micromamba="$MAMBA_EXE"
-        alias mamba=micromamba
     fi
+    alias mamba=micromamba
+    alias conda=micromamba
     unset __mamba_setup
     # <<< mamba initialize <<<
 fi

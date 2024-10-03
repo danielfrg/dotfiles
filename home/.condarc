@@ -8,4 +8,4 @@ channels:
   - nodefaults
 
 update_dependencies: false
-channel_priority: strict
+channel_priority: true
