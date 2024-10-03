@@ -337,7 +337,7 @@ docker-rmi-all () { docker rmi -f $(docker images --format '{{.ID}}') }
 # =========================
 
 ealias kg='k get '
-ealias kl="k logs"
+ealias kl='k logs'
 ealias kgp='k get po '
 ealias kgn='k get no '
 ealias kgd='k get deploy '
@@ -346,11 +346,15 @@ ealias kdp='k describe po '
 ealias uek='unset KUBECONFIG'
 ealias uekns='unset KUBE_NAMESPACE'
 
-alias kubectl=kubecolor
+
 alias tf="terraform"
 
 # Check if kubectl exists
 if type kubectl >/dev/null 2>&1; then
+    if type kubectl >/dev/null 2>&1; then
+        alias kubectl=kubecolor
+    fi
+
     # Source kubectl completion *before* aliasing
     source <(kubectl completion zsh)
 
