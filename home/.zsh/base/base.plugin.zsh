@@ -457,8 +457,8 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 if [ -f "$HOME/.local/bin/micromamba" ]; then
     # >>> mamba initialize >>>
     # !! Contents within this block are managed by 'micromamba shell init' !!
-    export MAMBA_EXE='$HOME/.local/bin/micromamba';
-    export MAMBA_ROOT_PREFIX='$HOME/micromamba';
+    export MAMBA_EXE="$HOME/.local/bin/micromamba";
+    export MAMBA_ROOT_PREFIX="$HOME/micromamba";
     __mamba_setup="$($HOME/.local/bin/micromamba 'shell' 'hook' '--shell' 'zsh' '--root-prefix' "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
     if [ $? -eq 0 ]; then
         eval "$__mamba_setup"
