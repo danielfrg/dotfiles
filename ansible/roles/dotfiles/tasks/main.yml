@@ -6,7 +6,6 @@
     state: present
     update_cache: true
   with_items:
-    - base-devel
     - git
     - git-delta
     - eza
@@ -16,18 +15,11 @@
     - less
     - lazygit
     - neovim
-    - nodejs
-    - npm
     - openconnect
     - unzip
     - stow
     - yazi
     - zsh
-
-- name: Ensure ~/code directory exists
-  file:
-    dest: "{{ ansible_env.HOME }}/code"
-    state: directory
 
 - name: Clone dotfiles repo
   ansible.builtin.git:

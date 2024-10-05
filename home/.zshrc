@@ -27,14 +27,10 @@ zinit load zsh-users/zsh-autosuggestions
 zinit ice wait lucid
 zinit load zsh-users/zsh-history-substring-search
 
-# zinit wait lucid for OMZL::git.zsh
-# zinit snippet OMZP::git-prompt
-
 # Don't ice this one so we can use zsh-async on prompt.zsh
 zinit load mafredri/zsh-async
 
-# Don't ice this one so we can remove the hooks on prompt.zsh
-zinit load olivierverdier/zsh-git-prompt
+# zinit load olivierverdier/zsh-git-prompt
 
 export ZSH_CUSTOM="${HOME}/.zsh"
 source "$ZSH_CUSTOM/prompt/prompt.plugin.zsh"

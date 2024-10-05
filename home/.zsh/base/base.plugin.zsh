@@ -6,7 +6,6 @@ setopt no_nomatch
 setopt auto_pushd
 setopt pushd_ignore_dups
 setopt autocd
-setopt correct
 setopt extended_glob
 
 # macOS specific configurations

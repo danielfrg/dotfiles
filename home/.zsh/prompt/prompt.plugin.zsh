@@ -22,20 +22,15 @@ PROMPT_CONDA=$PROMPT_CONDA_PREFIX'${CONDA_DEFAULT_ENV:+"%F{green}$CONDA_DEFAULT_
 
 PROMPT_BASE=$PROMPT_SSH$PROMPT_USER$PROMPT_HOST" %{$fg[blue]%}%~%{$reset_color%}% "
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[yellow]%}git%{$reset_color%}:"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[green]%}+"
-ZSH_THEME_GIT_PROMPT_BRANCH=""
-ZSH_THEME_GIT_PROMPT_SEPARATOR=""
-ZSH_THEME_GIT_PROMPT_CLEAN=""
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[green]?%G%}"
-ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[cyan]%}%{+%G%}"
-
+# NOTE: Git prompt on git-status.zsh
 
 PROMPT=$'\n'$PROMPT_BASE$'\n❯ '
 RPROMPT=''
 
-COMPLETED=0  # This is a test variable
+# Debug variable
+COMPLETED=0
+
+source "${0:A:h}/git-status.zsh"
 
 # Compute new values for the prompt
 update_prompt() {
@@ -96,9 +91,9 @@ function callback() {
 
             # COMPLETED=$(( COMPLETED + 1 ))
             # RPROMPT=${COMPLETED}
-            # RPROMPT=${info}
+            # RPROMPT="a${info[git]}a"
 
-            zle && zle reset-prompt;;
+            zle && zle reset-prompt;
 	esac
 }
 
@@ -116,8 +111,8 @@ function prompt_precmd() {
 
 # Remove git functions from chpwd_functions and precmd_functions
 # We run this on our precmd function
-chpwd_functions=("${(@)chpwd_functions:#chpwd_update_git_vars}")
-precmd_functions=("${(@)precmd_functions:#precmd_update_git_vars}")
+# chpwd_functions=("${(@)chpwd_functions:#chpwd_update_git_vars}")
+# precmd_functions=("${(@)precmd_functions:#precmd_update_git_vars}")
 
 # Add our function to precmd_functions
 precmd_functions+=(prompt_precmd)
