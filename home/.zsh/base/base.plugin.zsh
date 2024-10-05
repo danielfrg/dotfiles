@@ -42,8 +42,6 @@ bindkey -e
 # (Sometimes this is misconfigured)
 bindkey "^[[3~" delete-char
 
-# Project sessions
-
 # Project Switcher Function
 project_switcher() {
   selected=$(find_ ~/code ~/code/danielfrg ~/code/inmatura ~/nvidia -mindepth 1 -maxdepth 1 -type d | fzf)
@@ -87,7 +85,10 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
-eval "$(fzf --zsh)"
+local FOUND_FZF=$+commands[fzf]
+if [[ $FOUND_FZF -eq 1 ]]; then
+  eval "$(fzf --zsh)"
+fi
 
 # =========================
 # History Configuration
@@ -437,8 +438,6 @@ kexec() {
 # PYTHON
 # =========================
 
-export PATH="$HOME/.pixi/bin:$PATH"
-
 export HATCH_CONFIG="$HOME/.config/hatch/config.toml"
 
 function pyclean() {
@@ -490,6 +489,8 @@ if [ -d "$HOME/conda" ]; then
     unset __conda_setup
     # <<< conda initialize <<<
 fi
+
+# export PATH="$HOME/.pixi/bin:$PATH"
 
 # =========================
 # JAVASCRIPT

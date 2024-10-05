@@ -20,6 +20,9 @@ return {
 
             {
                 "zbirenbaum/copilot.lua",
+                cond = function()
+                    return vim.fn.executable("node") == 1
+                end,
                 opts = {
                     suggestion = { enabled = false },
                     panel = { enabled = false },

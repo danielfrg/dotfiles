@@ -1,5 +1,3 @@
-# Add deno completions to search path
-if [[ ":$FPATH:" != *":/Users/danrodriguez/.zsh/completions:"* ]]; then export FPATH="/Users/danrodriguez/.zsh/completions:$FPATH"; fi
 # Download zinit, if it's not there yet
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
@@ -41,11 +39,8 @@ zinit load olivierverdier/zsh-git-prompt
 export ZSH_CUSTOM="${HOME}/.zsh"
 source "$ZSH_CUSTOM/prompt/prompt.plugin.zsh"
 source "$ZSH_CUSTOM/base/base.plugin.zsh"
-# zinit load "$ZSH_CUSTOM/base"
-
 # zinit ice wait lucid
 # zinit load "$ZSH_CUSTOM/dev"
-# source "$ZSH_CUSTOM/dev/dev.plugin.zsh"
 
 # Personal settings
 source "${HOME}/.dotfiles/personal/entrypoint.sh"
@@ -56,4 +51,3 @@ source "${HOME}/.dotfiles/personal/entrypoint.sh"
 if [ -f ~/.zshrc.local ]; then
     source ~/.zshrc.local
 fi
-
