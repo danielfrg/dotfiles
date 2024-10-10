@@ -438,6 +438,7 @@ kexec() {
 # =========================
 
 export HATCH_CONFIG="$HOME/.config/hatch/config.toml"
+export UV_PYTHON_PREFERENCE=only-managed
 
 function pyclean() {
     find_ . -type f -name '*.py[co]' -delete
@@ -451,7 +452,7 @@ function pyclean() {
 # disables virtual_env/bin/activate prompt
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
-# Micromamba optional stuff
+# Micromamba
 if [ -f "$HOME/.local/bin/micromamba" ]; then
     # >>> mamba initialize >>>
     # !! Contents within this block are managed by 'micromamba shell init' !!
@@ -470,8 +471,7 @@ if [ -f "$HOME/.local/bin/micromamba" ]; then
     # <<< mamba initialize <<<
 fi
 
-
-# Conda optional stuff
+# Conda
 if [ -d "$HOME/conda" ]; then
     # >>> conda initialize >>>
     # !! Contents within this block are managed by 'conda init' !!
@@ -566,7 +566,3 @@ fi
 # =========================
 
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
-
-
-
-ealias g="git"
