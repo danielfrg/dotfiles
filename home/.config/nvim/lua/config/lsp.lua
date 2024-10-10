@@ -1,6 +1,10 @@
 local lspconfig = require("lspconfig")
 
-lspconfig.astro.setup {}
-lspconfig.ts_ls.setup {}
+
+
+if vim.fn.executable("node") == 1 then 
+    lspconfig.astro.setup {}
+    lspconfig.ts_ls.setup {}
+end 
 
 lspconfig.clangd.setup {}
