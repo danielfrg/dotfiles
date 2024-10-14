@@ -8,7 +8,7 @@ require("config.statusline")
 local status, local_file = pcall(require, "local")
 
 -- NVChad custom plugins location
-vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46/"
+-- vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46/"
 
 -- Load lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -36,8 +36,8 @@ require("lazy").setup("plugins",
 );
 
 -- NVChad UI: put this after lazy setup
-dofile(vim.g.base46_cache .. "defaults")
-dofile(vim.g.base46_cache .. "syntax")
-dofile(vim.g.base46_cache .. "telescope")
-dofile(vim.g.base46_cache .. "cmp")
-dofile(vim.g.base46_cache .. "statusline")
+-- dofile(vim.g.base46_cache .. "defaults")
+-- dofile(vim.g.base46_cache .. "syntax")
+-- dofile(vim.g.base46_cache .. "telescope")
+-- dofile(vim.g.base46_cache .. "cmp")
+-- dofile(vim.g.base46_cache .. "statusline")

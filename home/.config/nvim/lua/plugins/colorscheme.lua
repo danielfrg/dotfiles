@@ -1,6 +1,16 @@
 return {
     "nvim-lua/plenary.nvim",
 
+    {
+        "folke/tokyonight.nvim",
+        lazy = false,
+        priority = 1000,
+        opts = {},
+        config = function()
+            vim.api.nvim_command("colorscheme tokyonight")
+        end,
+    }
+
     -- {
     --     "nvchad/ui",
     --     -- config = function()
@@ -15,15 +25,6 @@ return {
     --         require("base46").load_all_highlights()
     --     end,
     -- },
-
-    {
-        "scottmckendry/cyberdream.nvim",
-        lazy = false,
-        priority = 1000,
-        config = function()
-            vim.cmd("colorscheme cyberdream")
-        end
-    },
 
     -- {
     --     'AlexvZyl/nordic.nvim',
