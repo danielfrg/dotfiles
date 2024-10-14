@@ -142,6 +142,8 @@ bindkey -M emacs '^ '   magic-space
 bindkey -M isearch ' '  magic-space # normal space during searches
 
 
+eval "$(direnv hook zsh)"
+
 # =========================
 # ALIASES
 # =========================
@@ -500,10 +502,10 @@ export PATH="$VOLTA_HOME/bin:$PATH"
 export VOLTA_FEATURE_PNPM=1
 
 # bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-# bun completions
-[ -s "/Users/danrodriguez/.bun/_bun" ] && source "/Users/danrodriguez/.bun/_bun"
+# export BUN_INSTALL="$HOME/.bun"
+# export PATH="$BUN_INSTALL/bin:$PATH"
+# # bun completions
+# [ -s "/Users/danrodriguez/.bun/_bun" ] && source "/Users/danrodriguez/.bun/_bun"
 
 # pnpm
 export PNPM_HOME="$HOME/Library/pnpm"
