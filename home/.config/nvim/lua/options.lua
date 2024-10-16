@@ -124,7 +124,7 @@ vim.g.netrw_liststyle = 3
 local rg_exists = vim.fn.executable("rg") > 0
 
 if rg_exists then
-  vim.o.grepprg = [[rg --glob "!.git" --no-heading --vimgrep --follow $*]]
+    vim.o.grepprg = [[rg --glob "!.git" --no-heading --vimgrep --follow $*]]
 end
 
 vim.opt.grepformat = vim.opt.grepformat ^ { "%f:%l:%c:%m" }

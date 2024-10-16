@@ -12,7 +12,7 @@ local base_sources = {
     { name = "buffer",   group_index = 4 },
 }
 
-local copilot_source = { name = "copilot", group_index = 1 }
+local copilot_source = { name = "copilot", group_index = 2 }
 
 -- Create a shallow copy of base_sources
 local sources = { unpack(base_sources) }

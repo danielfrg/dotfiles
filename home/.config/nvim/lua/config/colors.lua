@@ -14,10 +14,13 @@ palette = {
     black = "#000000",
     gray1 = "#5D636F",
     gray2 = "#21252B",
+    gray3 = "#2B2D32",
     white0 = "#eef1f8",
 }
 
-set_hl(0, "Normal", { bg = palette.bg, fg = palette.white0 })
+set_hl(0, "Normal", { bg = palette.bg, fg = palette.white0, blend = 0 })
+vim.api.nvim_set_hl(0, "NormalNC", { bg = palette.bg, fg = palette.white0, blend = 0 })
+
 set_hl(0, "Identifier", { fg = palette.white0 })
 set_hl(0, "Keyword", { fg = palette.orange })
 set_hl(0, "Boolean", { fg = palette.yellow })
@@ -36,12 +39,16 @@ set_hl(0, "@tag.builtin.tsx", { fg = palette.white0 })
 set_hl(0, "@tag.delimiter.tsx", { fg = palette.white0 })
 set_hl(0, "@tag.attribute.tsx", { fg = palette.white0 })
 
-set_hl(0, "StatusLine",  { fg="#505259", bg=palette.black })
+-- Statusline
+set_hl(0, "StatusLine", { fg = "#505259", bg = palette.black })
 
--- Telescope.
-set_hl(0, "TelescopePromptPrefix",  { fg=palette.yellow, bg=palette.gray2 })
-set_hl(0, "TelescopeTitle",  { fg=palette.bg, bg=palette.orange })
+-- Telescope
+set_hl(0, "TelescopePromptPrefix", { fg = palette.yellow, bg = palette.gray2 })
+set_hl(0, "TelescopeTitle", { fg = palette.bg, bg = palette.orange })
 set_hl(0, "TelescopeNormal", { bg = palette.gray2 })
+
+-- CMP
+set_hl(0, "NormalFloat", { bg = palette.gray3, fg = palette.white0 })
 
 function set_highlights_table(table)
     for group, config in pairs(table) do
