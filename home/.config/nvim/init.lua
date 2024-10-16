@@ -2,6 +2,7 @@
 require("options")
 require("mappings")
 require("autocmds")
+require("config.colors")
 require("config.statusline")
 
 -- Load local.lua if found

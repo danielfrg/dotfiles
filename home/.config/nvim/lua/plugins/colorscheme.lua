@@ -1,4 +1,13 @@
 return {
+    -- {
+    --     "folke/tokyonight.nvim",
+    --     lazy = false,
+    --     priority = 1000,
+    --     opts = {},
+    --     config = function()
+    --         vim.api.nvim_command("colorscheme tokyonight")
+    --     end,
+    -- },
 
     -- {
     --     "rebelot/kanagawa.nvim",
@@ -33,44 +42,39 @@ return {
     -- }
 
     -- {
-    --     "folke/tokyonight.nvim",
+    --     'AlexvZyl/nordic.nvim',
     --     lazy = false,
     --     priority = 1000,
-    --     opts = {},
     --     config = function()
-    --         vim.api.nvim_command("colorscheme tokyonight")
-    --     end,
-    -- }
+    --         require 'nordic'.setup {
+    --             bright_border = false,
+    --             -- Reduce the overall amount of blue in the theme (diverges from base Nord).
+    --             reduced_blue = false,
+    --             cursorline = {
+    --                 bold_number = true,
+    --                 theme = 'light',
+    --                 blend = 1,
+    --             },
+    --             telescope = {
+    --                 -- Available styles: `classic`, `flat`.
+    --                 style = 'flat',
+    --             },
+    --         }
 
-    {
-        'AlexvZyl/nordic.nvim',
-        lazy = false,
-        priority = 1000,
-        config = function()
-            require 'nordic'.setup {
-                bright_border = false,
-                -- Reduce the overall amount of blue in the theme (diverges from base Nord).
-                reduced_blue = true,
-                cursorline = {
-                    bold_number = true,
-                    theme = 'light',
-                    blend = 1,
-                },
-            }
-            require 'nordic'.load()
+    --         vim.cmd.colorscheme('nordic')
 
-            vim.cmd [[highlight CursorLine guibg=#303e4e]]
-            vim.cmd [[highlight Visual guibg=#303e4e guifg=None]]
+    --         vim.cmd [[highlight CursorLine guibg=#303e4e]]
+    --         vim.cmd [[highlight Visual guibg=#303e4e guifg=None]]
 
-            vim.cmd [[highlight TelescopeSelection guifg=#ffffff guibg=#2C323F gui=bold]]
+    --         vim.cmd [[highlight TelescopeSelection guifg=#ffffff guibg=#2C323F gui=bold]]
 
-            vim.cmd [[
-                  highlight PmenuSel guibg=#4C566A
-                  highlight Pmenu guibg=#1D222B
-                ]]
+    --         vim.cmd [[
+    --               highlight PmenuSel guibg=#4C566A
+    --               highlight Pmenu guibg=#1D222B
+    --             ]]
 
-            vim.api.nvim_set_hl(0, "FloatBorder", { link = "TelescopeBorder" })
-            vim.api.nvim_set_hl(0, "FloatTitle", { link = "TelescopeTitle" })
-        end
-    },
+    --         vim.api.nvim_set_hl(0, "FloatBorder", { link = "TelescopeBorder" })
+    --         vim.api.nvim_set_hl(0, "FloatTitle", { link = "TelescopeTitle" })
+    --     end
+    -- },
 }
