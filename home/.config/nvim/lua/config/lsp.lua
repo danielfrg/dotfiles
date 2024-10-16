@@ -1,6 +1,8 @@
 local lspconfig = require("lspconfig")
 
-
+if vim.fn.executable("ruff") == 1 then 
+    lspconfig.ruff.setup {}
+end 
 
 if vim.fn.executable("node") == 1 then 
     lspconfig.astro.setup {}
@@ -8,3 +10,4 @@ if vim.fn.executable("node") == 1 then
 end 
 
 lspconfig.clangd.setup {}
+

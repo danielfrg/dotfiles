@@ -142,7 +142,10 @@ bindkey -M emacs '^ '   magic-space
 bindkey -M isearch ' '  magic-space # normal space during searches
 
 
-eval "$(direnv hook zsh)"
+local FOUND_DIRENV=$+commands[direnv]
+if [[ $FOUND_DIRENV -eq 1 ]]; then
+  eval "$(direnv hook zsh)"
+fi
 
 # =========================
 # ALIASES
