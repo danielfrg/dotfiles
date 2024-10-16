@@ -34,6 +34,8 @@ vim.opt.mouse = "a"
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
+vim.o.termguicolors = true
+
 -- highlight on search terms
 vim.opt.hlsearch = true
 -- highligh as you type
