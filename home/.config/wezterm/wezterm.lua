@@ -8,7 +8,7 @@ config.color_scheme = "Tokyo Night"
 
 config.colors = {
     -- foreground = "#DDDDDD",
-    -- background = '#292c32',
+    -- background = "#292c32",
 }
 
 config.font_size = 15.0
