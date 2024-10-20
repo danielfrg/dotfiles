@@ -4,7 +4,8 @@ local set_hl = vim.api.nvim_set_hl
 vim.cmd("colorscheme default")
 
 palette = {
-    bg = "#16181D",
+    -- bg = "#16181D",
+    bg = "#252738",
     red = "#f08080",
     green = "#a1c181",
     yellow = "#fce094",
@@ -19,7 +20,9 @@ palette = {
 }
 
 set_hl(0, "Normal", { bg = palette.bg, fg = palette.white0, blend = 0 })
-vim.api.nvim_set_hl(0, "NormalNC", { bg = palette.bg, fg = palette.white0, blend = 0 })
+set_hl(0, "NormalNC", { bg = palette.bg, fg = palette.white0, blend = 0 })
+set_hl(0, "CursorLine", { bg = "#474C66" })
+set_hl(0, "Visual", { bg = "#474C66" })
 
 set_hl(0, "Identifier", { fg = palette.white0 })
 set_hl(0, "Keyword", { fg = palette.orange })
@@ -29,18 +32,24 @@ set_hl(0, "Function", { fg = palette.blue })
 set_hl(0, "Special", { fg = palette.yellow })
 set_hl(0, "Comment", { fg = palette.gray1 })
 
+-- Tree and Oil
+set_hl(0, "Directory", { fg = palette.yellow })
+
 -- Python
 set_hl(0, "@operator.python", { fg = palette.orange })
 set_hl(0, "@attribute.python", { fg = palette.orange })
 
 -- JS
 set_hl(0, "@tag.tsx", { fg = palette.white0 })
-set_hl(0, "@tag.builtin.tsx", { fg = palette.white0 })
+set_hl(0, "@tag.builtin.tsx", { fg = palette.blue })
 set_hl(0, "@tag.delimiter.tsx", { fg = palette.white0 })
-set_hl(0, "@tag.attribute.tsx", { fg = palette.white0 })
+set_hl(0, "@tag.attribute.tsx", { fg = palette.blue })
+
+-- Markdown
+set_hl(0, "@markup.heading", { fg = palette.orange })
 
 -- Statusline
-set_hl(0, "StatusLine", { fg = "#505259", bg = palette.black })
+set_hl(0, "StatusLine", { bg = "#1E1E2F", fg = palette.gray1 })
 
 -- Telescope
 set_hl(0, "TelescopePromptPrefix", { fg = palette.yellow, bg = palette.gray2 })

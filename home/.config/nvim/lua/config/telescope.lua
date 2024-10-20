@@ -115,7 +115,7 @@ vim.keymap.set(
     "<cmd>Telescope grep_string hidden=true cwd=false<CR>",
     { desc = "Find current [W]ord" }
 )
-vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true initial_mode=normal<CR>",
+vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true initial_mode=insert<CR>",
     { desc = "Find existing buffers" })
 -- vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<CR>", { desc = "Buffers" })
 vim.keymap.set(

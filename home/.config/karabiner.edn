@@ -38,6 +38,9 @@
    {:des "Change TAB to HYPER/TAB"
       :rules [[:tab :!COTleft_shift nil {:alone [:tab]}]]}
 
+   {:des "Change right opt to ctrl"
+      :rules [[:right_option :left_option]]}
+
    ; {:des "HYPER + space = backspace"
    ; :rules [[:!!spacebar :delete_or_backspace]]}
 
