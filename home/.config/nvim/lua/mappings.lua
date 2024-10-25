@@ -54,6 +54,7 @@ map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move lines up" })
 map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move lines down" })
 
 -- buffers
+map("n", "<C-i>", "<cmd>e #<cr>", { desc = "Switch to alternate file" })
 map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 map("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
