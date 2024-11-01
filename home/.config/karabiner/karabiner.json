@@ -353,7 +353,7 @@
           "type" : "basic"
         } ]
       }, {
-        "description" : "Change TAB to HYPER/TAB",
+        "description" : "Hold TAB to HYPER - Press TAB",
         "manipulators" : [ {
           "to_if_alone" : [ {
             "key_code" : "tab"

@@ -98,6 +98,35 @@ vim.keymap.set("n", "<leader>/", function()
     }))
 end, { desc = "Fuzzily search in current buffer" })
 
+-- File Browser
+vim.keymap.set(
+    "n",
+    "<space>fB",
+    ":Telescope file_browser hidden=true<CR>",
+    { desc = "File browser" }
+)
+vim.keymap.set(
+    "n",
+    "<space>fb",
+    ":Telescope file_browser path=%:p:h select_buffer=true hidden=true<CR>",
+    { desc = "File Browser (cwd)" }
+)
+
+-- Git
+vim.keymap.set(
+    "n",
+    "<leader>gc",
+    "<cmd>Telescope git_commits<CR>",
+    { desc = "Telescope Git commits" }
+)
+vim.keymap.set(
+    "n",
+    "<leader>gs",
+    "<cmd>Telescope git_status<CR>",
+    { desc = "Telescope Git Status" }
+)
+
+
 -- vim.keymap.set(
 --     "n",
 --     "<leader><space>",
@@ -150,35 +179,6 @@ end, { desc = "Fuzzily search in current buffer" })
 -- vim.keymap.set("n", "<leader>:", "<cmd>Telescope command_history<CR>", { desc = "Command History" })
 -- vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "Find Keymaps" })
 -- vim.keymap.set("n", "<space>fh", builtin.help_tags, { desc = "Find Help tags" })
-
--- File Browser
--- vim.keymap.set(
---     "n",
---     "<space>fB",
---     ":Telescope file_browser hidden=true<CR>",
---     { desc = "File browser" }
--- )
--- vim.keymap.set(
---     "n",
---     "<space>fb",
---     ":Telescope file_browser path=%:p:h select_buffer=true hidden=true<CR>",
---     { desc = "File Browser (cwd)" }
--- )
-
-
--- Git
-vim.keymap.set(
-    "n",
-    "<leader>gc",
-    "<cmd>Telescope git_commits<CR>",
-    { desc = "Telescope Git commits" }
-)
-vim.keymap.set(
-    "n",
-    "<leader>gs",
-    "<cmd>Telescope git_status<CR>",
-    { desc = "Telescope Git Status" }
-)
 
 -- -- load extensions
 -- for _, ext in ipairs(opts.extensions_list) do

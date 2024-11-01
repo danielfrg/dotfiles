@@ -3,23 +3,23 @@
 ;;;; define things
 
  :profiles {
-    :Goku {:default true
-           :sim 200
-           :delay 500
-           :alone 1000
-           :held 500
-    }
+     :Goku {:default true     ; Applies these settings as default for all rules
+            :sim 200          ; Maximum time (ms) between simultaneous key presses
+            :delay 500        ; Delay (ms) before the key press is handled
+            :alone 1000       ; Time window (ms) for "pressed alone" to trigger
+            :held 500        ; How long (ms) a key must be held to count as "held"
+         }
   }
 
- :applications {:vim-mode-disabled-application ["^com\\.apple\\.Terminal$",
-                                                "^com\\.googlecode\\.iterm2$",
-                                                "^co\\.zeit\\.hyperterm$",
-                                                "^co\\.zeit\\.hyper$",
-                                                "^io\\.alacritty$",
-                                                "^net\\.kovidgoyal\\.kitty$",
-                                                "^org\\.vim\\.",
-                                                "^com\\.qvacua\\.VimR$"
-  ]}
+ ;; :applications {:vim-mode-disabled-application ["^com\\.apple\\.Terminal$",
+ ;;                                                "^com\\.googlecode\\.iterm2$",
+ ;;                                                "^co\\.zeit\\.hyperterm$",
+ ;;                                                "^co\\.zeit\\.hyper$",
+ ;;                                                "^io\\.alacritty$",
+ ;;                                                "^net\\.kovidgoyal\\.kitty$",
+ ;;                                                "^org\\.vim\\.",
+ ;;                                                "^com\\.qvacua\\.VimR$"
+ ;;  ]}
 
 ;; layers are basically "hyper" keys
 ;; press this in combination with something else and depending on your rule, make things happen
@@ -28,18 +28,34 @@
     ; :hyper-mode {:key :caps_lock :alone {:key :escape}} ;; make the caps_lock key the hyper key
 } ;; layers
 
-:simlayers {:vi-mode {:key :d}
-             :vi-visual-mode {:key :v :condi :!vim-mode-disabled-application}}
+:simlayers {
+    :vi-mode {:key :d}
+    :vi-visual-mode {:key :v :condi :!vim-mode-disabled-application}
+}
 
- :main [
+:main [
    {:des "Change CapsLock ESC"
       :rules [[:caps_lock :escape nil {:alone [:left_control]}]]}
 
-   {:des "Change TAB to HYPER/TAB"
+   {:des "Hold TAB to HYPER - Press TAB"
       :rules [[:tab :!COTleft_shift nil {:alone [:tab]}]]}
 
    {:des "Change right opt to ctrl"
       :rules [[:right_option :left_option]]}
+
+   ; Home how modifiers:
+   ;; {:des "Hold A to Super"
+   ;;  :rules [[:a :left_command nil {:alone :a}]]}
+
+   ;; {:des "Hold S to Shift"
+   ;;  :rules [[:s :left_shift nil {:alone :s}]]}
+
+   ;; {:des "Hold D to Alt"
+   ;;  :rules [[:d :left_alt nil {:alone :d}]]}
+
+   ;; {:des "Hold F to Control"
+   ;;  :rules [[:f :left_control nil {:alone :f}]]}
+
 
    ; {:des "HYPER + space = backspace"
    ; :rules [[:!!spacebar :delete_or_backspace]]}
