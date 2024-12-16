@@ -10,7 +10,7 @@ local border_chars_none = { " ", " ", " ", " ", " ", " ", " ", " " }
 
 require("telescope").setup({
     defaults = {
-        file_ignore_patterns = { ".git/" },
+        file_ignore_patterns = { "^.git/" },
         vimgrep_arguments = {
             "rg",
             "-L",
@@ -41,6 +41,9 @@ require("telescope").setup({
         },
     },
     pickers = {
+        find_files = {
+            hidden = true,         -- This will show dot files
+        },
         live_grep = {
             additional_args = function(opts)
                 return { "--hidden" }

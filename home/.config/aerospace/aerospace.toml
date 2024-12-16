@@ -155,6 +155,26 @@ check-further-callbacks = true
 run = ['layout floating']
 
 [[on-window-detected]]
+if.app-id = 'com.apple.music'
+check-further-callbacks = true
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.iphonesimulator'
+check-further-callbacks = true
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.colliderli.iina'
+check-further-callbacks = true
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'org.chromium.Chromium'
+check-further-callbacks = true
+run = ['move-node-to-workspace 1']
+
+[[on-window-detected]]
 if.app-id = 'org.mozilla.firefox'
 check-further-callbacks = true
 run = ['move-node-to-workspace 1']
@@ -166,6 +186,11 @@ run = ['move-node-to-workspace 1']
 
 [[on-window-detected]]
 if.app-id = 'com.github.wez.wezterm'
+check-further-callbacks = true
+run = ['move-node-to-workspace 2']
+
+[[on-window-detected]]
+if.app-id = 'com.mitchellh.ghostty'
 check-further-callbacks = true
 run = ['move-node-to-workspace 2']
 

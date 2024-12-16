@@ -4,10 +4,10 @@
 
  :profiles {
      :Goku {:default true     ; Applies these settings as default for all rules
-            :sim 200          ; Maximum time (ms) between simultaneous key presses
+            :sim 50           ; Maximum time (ms) between simultaneous key presses
             :delay 500        ; Delay (ms) before the key press is handled
             :alone 1000       ; Time window (ms) for "pressed alone" to trigger
-            :held 500        ; How long (ms) a key must be held to count as "held"
+            :held 500         ; How long (ms) a key must be held to count as "held"
          }
   }
 
