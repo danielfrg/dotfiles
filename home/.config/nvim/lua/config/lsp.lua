@@ -1,15 +1,32 @@
 local lspconfig = require("lspconfig")
 
+-- Add the capabilities configuration
+local function setup_server(server, extra_config)
+    local config = {
+        capabilities = require('blink.cmp').get_lsp_capabilities()
+    }
+
+    -- Merge extra config if provided
+    if extra_config then
+        for k, v in pairs(extra_config) do
+            config[k] = v
+        end
+    end
+
+    lspconfig[server].setup(config)
+end
+
+-- Set up individual servers with the enhanced configuration
 if vim.fn.executable("ruff") == 1 then
-    lspconfig.ruff.setup {}
+    setup_server("ruff")
 end
 
 if vim.fn.executable("node") == 1 then
-    lspconfig.astro.setup {}
-    lspconfig.ts_ls.setup {}
+    setup_server("astro")
+    setup_server("ts_ls")
 end
 
-lspconfig.clangd.setup {}
+setup_server("clangd")
 
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
