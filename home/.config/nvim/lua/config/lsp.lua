@@ -1,32 +1,41 @@
 local lspconfig = require("lspconfig")
+local blink = require("blink.cmp")
 
--- Add the capabilities configuration
-local function setup_server(server, extra_config)
-    local config = {
-        capabilities = require('blink.cmp').get_lsp_capabilities()
-    }
+local function setup_server(server, user_config)
+    -- Initialize config with an empty table if no config is provided
+    local config = user_config or {}
 
-    -- Merge extra config if provided
-    if extra_config then
-        for k, v in pairs(extra_config) do
-            config[k] = v
-        end
-    end
+    -- Get the base capabilities
+    local base_capabilities = config.capabilities or {}
+
+    -- Update capabilities
+    config.capabilities = blink.get_lsp_capabilities(base_capabilities)
 
     lspconfig[server].setup(config)
 end
 
--- Set up individual servers with the enhanced configuration
 if vim.fn.executable("ruff") == 1 then
     setup_server("ruff")
+
+    setup_server("pyright", {
+        settings = {
+            python = {
+                analysis = {
+                    typeCheckingMode = "basic",
+                    autoSearchPaths = true,
+                    useLibraryCodeForTypes = true,
+                },
+            },
+        },
+    })
 end
 
 if vim.fn.executable("node") == 1 then
-    setup_server("astro")
-    setup_server("ts_ls")
+    lspconfig.astro.setup {}
+    lspconfig.ts_ls.setup {}
 end
 
-setup_server("clangd")
+lspconfig.clangd.setup {}
 
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
