@@ -34,15 +34,15 @@ require("telescope").setup({
             },
 
         },
-        borderchars = {
-            prompt = border_chars_none,
-            results = border_chars_none,
-            preview = border_chars_none,
-        },
+        -- borderchars = {
+        --     prompt = border_chars_none,
+        --     results = border_chars_none,
+        --     preview = border_chars_none,
+        -- },
     },
     pickers = {
         find_files = {
-            hidden = true,         -- This will show dot files
+            hidden = true, -- This will show dot files
         },
         live_grep = {
             additional_args = function(opts)

@@ -330,6 +330,7 @@ fi
 # DOCKER
 # =========================
 
+docker-rm-all() { docker rm -f $(docker ps -a -q) }
 docker-stop-all() { docker stop $(docker ps -a -q) }
 docker-prune() { docker system prune -f }
 docker-clean() { docker-stop-all; docker-prune; }
@@ -356,12 +357,12 @@ alias tf="terraform"
 
 # Check if kubectl exists
 if type kubectl >/dev/null 2>&1; then
+    # Source kubectl completion *before* aliasing
+    source <(kubectl completion zsh)
+
     if type kubectl >/dev/null 2>&1; then
         alias kubectl=kubecolor
     fi
-
-    # Source kubectl completion *before* aliasing
-    source <(kubectl completion zsh)
 
     # Function k
     k() {

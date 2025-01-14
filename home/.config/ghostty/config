@@ -6,5 +6,6 @@ theme = tokyonight
 
 cursor-color = #73ADE8
 shell-integration-features = no-cursor
+window-padding-color = extend
 
 clipboard-paste-protection = false
