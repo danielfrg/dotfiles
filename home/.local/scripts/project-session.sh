@@ -23,7 +23,7 @@ else
     fi
 
     if [[ -d ~/nvidia ]]; then
-        base_dirs+=(~/code/nvidia)
+        base_dirs+=(~/nvidia)
     fi
 
     selected=$(
