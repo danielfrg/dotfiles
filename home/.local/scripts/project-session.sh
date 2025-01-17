@@ -17,14 +17,22 @@ else
 
     # Combine directories and tmuxifier sessions
     if [[ -d ~/code ]]; then
-        selected=$( ( echo ~/.dotfiles;
-                     find ~/code ~/code/danielfrg ~/code/inmatura ~/code/nvidia -mindepth 1 -maxdepth 1 -type d;
-                     echo "$tmuxifier_sessions" ) | grep -v '^$' | fzf )
+        base_dirs=(~/code ~/code/danielfrg ~/code/nvidia ~/code/inmatura)
     else
-        selected=$( ( echo ~/.dotfiles;
-                     find ~ ! -name ".*" -mindepth 1 -maxdepth 1 -type d;
-                     echo "$tmuxifier_sessions" ) | grep -v '^$' | fzf )
+        base_dirs=(~/)
     fi
+
+    if [[ -d ~/nvidia ]]; then
+        base_dirs+=(~/code/nvidia)
+    fi
+
+    selected=$(
+        {
+            echo ~/.dotfiles
+            find "${base_dirs[@]}" -mindepth 1 -maxdepth 1 -type d
+            echo "$tmuxifier_sessions"
+        } | grep -v '^$' | fzf
+    )
 fi
 
 if [[ -z $selected ]]; then
