@@ -47,3 +47,6 @@ source "${HOME}/.dotfiles/personal/entrypoint.sh"
 if [ -f ~/.zshrc.local ]; then
     source ~/.zshrc.local
 fi
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/danrodriguez/.lmstudio/bin"

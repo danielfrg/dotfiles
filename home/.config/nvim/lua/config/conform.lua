@@ -10,6 +10,9 @@ require("conform").setup({
         html = { "prettier" },
         terraform = { "terraform_fmt" },
         lua = { "stylua" },
+
+        json = { "jq" },
+        yaml = { "yamlfmt" },
         ["_"] = { "trim_whitespace" },
     },
     format_on_save = function(bufnr)
