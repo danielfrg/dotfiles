@@ -10,7 +10,7 @@ local border_chars_none = { " ", " ", " ", " ", " ", " ", " ", " " }
 
 require("telescope").setup({
     defaults = {
-        file_ignore_patterns = { "^.git/" },
+        file_ignore_patterns = { "^.git/", "node_modules/*", },
         vimgrep_arguments = {
             "rg",
             "-L",
@@ -40,16 +40,16 @@ require("telescope").setup({
         --     preview = border_chars_none,
         -- },
     },
+
     pickers = {
         find_files = {
-            hidden = true, -- This will show dot files
+            hidden = true,
         },
-        live_grep = {
-            additional_args = function(opts)
-                return { "--hidden" }
-            end,
+        git_files = {
+            hidden = true,
         },
     },
+
     extensions = {
         wrap_results = true,
 
@@ -77,8 +77,8 @@ require("telescope").setup({
 })
 
 pcall(require("telescope").load_extension, "fzf")
--- pcall(require("telescope").load_extension, "smart_history")
 pcall(require("telescope").load_extension, "ui-select")
+pcall(require("telescope").load_extension("git_file_history"))
 
 local builtin = require("telescope.builtin")
 
@@ -128,62 +128,3 @@ vim.keymap.set(
     "<cmd>Telescope git_status<CR>",
     { desc = "Telescope Git Status" }
 )
-
-
--- vim.keymap.set(
---     "n",
---     "<leader><space>",
---     "<cmd>Telescope find_files hidden=true<CR>",
---     { desc = "Find Files" }
--- )
--- vim.keymap.set(
---     "n",
---     "<leader>fr",
---     "<cmd>Telescope resume<CR>",
---     { desc = "Find (resume) previous search" }
--- )
--- vim.keymap.set(
---     "n",
---     "<leader>ff",
---     "<cmd>Telescope find_files hidden=true<CR>",
---     { desc = "Find Files" }
--- )
--- vim.keymap.set(
---     "n",
---     "<leader>fF",
---     "<cmd>Telescope find_files hidden=true cwd=false<CR>",
---     { desc = "Find Files (cwd)" }
--- )
--- vim.keymap.set(
---     "n",
---     "<leader>fw",
---     "<cmd>Telescope live_grep hidden=true<CR>",
---     { desc = "Find grep" }
--- )
--- vim.keymap.set(
---     "n",
---     "<leader>fW",
---     "<cmd>Telescope grep_string hidden=true cwd=false<CR>",
---     { desc = "Find current [W]ord" }
--- )
--- vim.keymap.set("n", "<leader>b", "<cmd>Telescope buffers sort_mru=true sort_lastused=true initial_mode=insert<CR>",
---     { desc = "Find existing buffers" })
-
--- -- vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<CR>", { desc = "Buffers" })
--- vim.keymap.set(
---     "n",
---     "<leader>fg",
---     "<cmd>Telescope git_files<CR>",
---     { desc = "Find Files (git-files)" }
--- )
--- vim.keymap.set("n", "<leader>fo", "<cmd>Telescope buffers<CR>", { desc = "Open Buffers" })
--- vim.keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<CR>", { desc = "Recent/old Files" })
--- vim.keymap.set("n", "<leader>fc", builtin.commands, { desc = "Find Command" })
--- vim.keymap.set("n", "<leader>:", "<cmd>Telescope command_history<CR>", { desc = "Command History" })
--- vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "Find Keymaps" })
--- vim.keymap.set("n", "<space>fh", builtin.help_tags, { desc = "Find Help tags" })
-
--- -- load extensions
--- for _, ext in ipairs(opts.extensions_list) do
---     telescope.load_extension(ext)
--- end

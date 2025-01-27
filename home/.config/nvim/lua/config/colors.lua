@@ -1,5 +1,3 @@
--- One Dark theme
-
 -- Function to set custom highlight groups
 local set_hl = vim.api.nvim_set_hl
 
@@ -15,7 +13,7 @@ local palette = {
     cyan = "#56B6C2",
     white = "#ABB2BF",
     black = "#282C34",
-    light_black = "#2C323C",
+    light_black = "#3E4452",
     gray = "#3E4452",
     faint_gray = "#3B4048",
     light_gray = "#5C6370",

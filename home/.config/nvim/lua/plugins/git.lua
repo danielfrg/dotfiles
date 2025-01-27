@@ -4,5 +4,10 @@ return {
         config = function()
             require('gitsigns').setup()
         end
+    },
+
+    {
+        "tpope/vim-fugitive",
+        config = function() end,
     }
 }

@@ -111,6 +111,9 @@ vim.opt.foldcolumn = "0" -- don't show fold column
 -- no splash screen
 vim.opt.shortmess:append "I"
 
+-- disable netrw at the very start of your init.lua
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 -- Disables the Netrw banner. Press 'I' to toggle.
 vim.g.netrw_banner = 0
 -- netrw tree view
