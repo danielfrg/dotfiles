@@ -56,7 +56,6 @@
    ;; {:des "Hold F to Control"
    ;;  :rules [[:f :left_control nil {:alone :f}]]}
 
-
    ; {:des "HYPER + space = backspace"
    ; :rules [[:!!spacebar :delete_or_backspace]]}
 
