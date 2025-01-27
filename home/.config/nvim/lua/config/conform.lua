@@ -1,3 +1,12 @@
+-- Files types that will format on save
+local autoformat_filetypes = {
+    "python",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+}
+
 require("conform").setup({
     formatters_by_ft = {
         python = { "ruff_format" },
@@ -20,7 +29,18 @@ require("conform").setup({
         if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
             return
         end
-        return { timeout_ms = 2000, lsp_format = "fallback" } -- Kept longer timeout from first file
+
+        -- Only format on save these file types
+        local ft = vim.api.nvim_buf_get_option(bufnr, "filetype")
+        if vim.tbl_contains(autoformat_filetypes, ft) then
+            return {
+                timeout_ms = 2000,
+                lsp_format = "fallback",
+            }
+        end
+
+        -- Return nil for all other filetypes to skip autoformat on save
+        return nil
     end,
 })
 

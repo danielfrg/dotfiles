@@ -16,8 +16,8 @@ else
     fi
 
     # Combine directories and tmuxifier sessions
-    if [[ -d ~/code ]]; then
-        base_dirs=(~/code ~/code/danielfrg ~/code/nvidia ~/code/inmatura)
+    if [[ -d ~/dev ]]; then
+        base_dirs=(~/dev ~/dev/danielfrg ~/dev/nvidia ~/dev/inmatura)
     else
         base_dirs=(~/)
     fi

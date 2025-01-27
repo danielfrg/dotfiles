@@ -1,6 +1,9 @@
 default:
   just --list
 
+ansible TAG:
+  cd ansible; ansible-playbook local.yml --tags "{{TAG}}"
+
 ansible-laptop:
   cd ansible; ansible-playbook local.yml --tags "laptop"
 
@@ -9,9 +12,6 @@ ansible-nvidia:
 
 ansible-homelab:
   cd ansible; ansible-playbook homelab.yml --limit homelab
-
-ansible TAG:
-  cd ansible; ansible-playbook local.yml --tags "{{TAG}}"
 
 fonts:
   bash install-fonts.sh

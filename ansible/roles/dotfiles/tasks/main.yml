@@ -18,6 +18,7 @@
     - openconnect
     - unzip
     - stow
+    - tailscale
     - yazi
     - zsh
 
@@ -34,11 +35,6 @@
   ansible.builtin.command: just stow
   args:
     chdir: /home/{{ setup_user }}/.dotfiles
-
-# - name: Remove .tmux.conf
-#   file:
-#     path: /home/{{ setup_user }}/.tmux.conf
-#     state: absent
 
 - name: Change shell to zsh
   become: true
