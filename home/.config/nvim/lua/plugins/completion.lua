@@ -3,7 +3,14 @@ return {
         'saghen/blink.cmp',
 
         -- optional: provides snippets for the snippet source
-        dependencies = 'rafamadriz/friendly-snippets',
+        dependencies = {
+            {
+                'rafamadriz/friendly-snippets',
+            },
+            {
+                "giuxtaposition/blink-cmp-copilot",
+            },
+        },
 
         -- use a release tag to download pre-built binaries
         version = 'v0.*',
@@ -35,21 +42,33 @@ return {
             -- default list of enabled providers defined so that you can extend it
             -- elsewhere in your config, without redefining it, due to `opts_extend`
             sources = {
-                default = { 'lsp', 'path', 'snippets', 'buffer' },
+                default = { 'copilot', 'lsp', 'path', 'buffer', },
                 -- optionally disable cmdline completions
                 -- cmdline = {},
+
+                providers = {
+                    copilot = {
+                        name = "copilot",
+                        module = "blink-cmp-copilot",
+                        score_offset = 100,
+                        async = true,
+                    },
+                },
             },
 
             completion = {
                 menu = {
+                    border = 'single',
                     draw = {
                         columns = { { "label", "label_description", gap = 1 }, { "kind" } },
-                    }
+                    },
+                    -- documentation = { window = { border = 'single' } },
                 }
+
             },
 
             -- experimental signature help support
-            -- signature = { enabled = true }
+            signature = { enabled = true, window = { border = 'single' } },
         },
         -- allows extending the providers array elsewhere in your config
         -- without having to redefine it
