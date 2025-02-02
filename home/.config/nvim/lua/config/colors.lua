@@ -12,10 +12,10 @@ local palette = {
     gold = "#D19A66",
     cyan = "#56B6C2",
     white = "#ABB2BF",
-    black = "#282C34",
-    light_black = "#3E4452",
+    black = "#191D25",
+    light_black = "#222630",
     gray = "#3E4452",
-    faint_gray = "#3B4048",
+    faint_gray = "#222630",
     light_gray = "#5C6370",
     linenr = "#4B5263"
 }
