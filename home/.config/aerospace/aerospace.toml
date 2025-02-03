@@ -71,7 +71,6 @@ alt-shift-l = ['join-with right']
 alt-shift-minus = 'resize smart -50'
 alt-shift-equal = 'resize smart +50'
 
-cmd-alt-ctrl-shift-d = 'fullscreen'
 cmd-alt-ctrl-shift-f = 'fullscreen'
 # alt-f = 'fullscreen'
 
