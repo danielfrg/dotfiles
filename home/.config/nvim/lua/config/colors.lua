@@ -15,7 +15,7 @@ local palette = {
     black = "#191D25",
     light_black = "#222630",
     gray = "#3E4452",
-    faint_gray = "#222630",
+    faint_gray = "#2d3137",
     light_gray = "#5C6370",
     linenr = "#4B5263"
 }

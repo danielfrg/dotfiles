@@ -1,6 +1,10 @@
 font-family = Berkeley Mono Variable
 
+# Normal
 font-size = 15
+
+# Recoding
+# font-size = 28
 
 theme = tokyonight
 
