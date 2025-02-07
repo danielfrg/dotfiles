@@ -17,9 +17,25 @@ else
 
     # Combine directories and tmuxifier sessions
     if [[ -d ~/dev ]]; then
-        base_dirs=(~/dev ~/dev/danielfrg ~/dev/nvidia ~/dev/inmatura)
+        base_dirs=(~/dev)
     else
         base_dirs=(~/)
+    fi
+
+    if [[ -d ~/dev/danielfrg ]]; then
+        base_dirs+=(~/dev/danielfrg)
+    fi
+
+    if [[ -d ~/dev/youtube ]]; then
+        base_dirs+=(~/dev/youtube)
+    fi
+
+    if [[ -d ~/dev/inmatura ]]; then
+        base_dirs+=(~/dev/inmatura)
+    fi
+
+    if [[ -d ~/dev/nvidia ]]; then
+        base_dirs+=(~/dev/nvidia)
     fi
 
     if [[ -d ~/nvidia ]]; then
