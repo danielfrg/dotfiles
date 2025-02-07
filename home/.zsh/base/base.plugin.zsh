@@ -32,6 +32,9 @@ if [[ $(uname) == "Darwin" ]]; then
 
     # Git and GPG config
     export GPG_TTY="$TTY"
+
+    export HOMEBREW_NO_AUTO_UPDATE=1
+    export HOMEBREW_NO_INSTALL_CLEANUP=1
 fi
 
 # Enable emacs keybindings in tmux

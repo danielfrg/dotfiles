@@ -19,3 +19,6 @@ default.profraw
 
 # Terraform
 local-terraform
+
+# Other
+.ckpt
