@@ -39,21 +39,11 @@
 	tool = nvimdiff
     diffFilter = delta --color-only
 
-[difftool "nvimdiff"]
-	cmd = nvim -d \"$LOCAL\" \"$REMOTE\" -c \"wincmd w\" -c \"wincmd L\"
-
 [delta]
     navigate = true    # use n and N to move between diff sections
-
     # delta detects terminal colors automatically; set one of these to disable auto-detection
     # dark = true
     # light = true
-
-# [gpg]
-#     program = gpg
-
-# [commit]
-#     gpgsign = true
 
 [tag]
     forceSignAnnotated = true
@@ -74,12 +64,11 @@
     algorithm = patience
     colorMoved = default
 
+[status]
+    submoduleSummary = true
+
 [submodule]
     recurse = true
-
-[help]
-    # Automatically correct and execute mistyped commands
-    autocorrect = 1
 
 [alias]
     # View the current working tree status using the short format
@@ -115,10 +104,10 @@
     amend = commit --amend --reuse-message=HEAD
 
     rebase-branch = "!f() { git rebase -i $(git merge-base $(git main-branch) HEAD); }; f"
-    yolo = !git commit -am \"$(curl -s whatthecommit.com/index.txt)\" && git push
-    yoloc = !git commit -am \"$curl -s whatthecommit.com/intex.txt)\"
     nope = "!f() { git reset HEAD --hard && git clean -fd; } ; f"
-      fuckit = "!f() { git clean -d -x -f; git reset --hard; } ; f"
+    wt-clone = "!f() { bash git-worktree.sh clone_as_worktree \"$@\"; }; f"
+    wt-new = "!f() { bash git-worktree.sh new_worktree \"$@\"; }; f"
+
 
 [filter "lfs"]
     clean = git-lfs clean -- %f
@@ -145,6 +134,10 @@
     changed = green
     untracked = cyan
 
+[help]
+    # Automatically correct and execute mistyped commands
+    autocorrect = 1
+
 [url "git://github.com/"]
     insteadOf = "github:"
 
@@ -164,10 +157,8 @@
     helper = !/opt/homebrew/bin/gh auth git-credential
     helper = !/usr/bin/gh auth git-credential
 
-[status] submoduleSummary = true
+# [gpg]
+#     program = gpg
 
-# [url "https://github.com/"]
-#     insteadOf = git@github.com:
-
-# [url "https://"]
-#     insteadOf = git://
+# [commit]
+#     gpgsign = true
