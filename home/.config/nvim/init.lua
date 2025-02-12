@@ -8,4 +8,5 @@ require("config.statusline")
 -- Load local.lua if found
 local status, local_file = pcall(require, "local")
 
+-- Load plugins
 require("config.lazy")

@@ -154,7 +154,7 @@ if [[ $(uname) == "Darwin" ]]; then
   alias grep='rg'
   alias md5sum='md5 -r'
   alias sha256sum="shasum -a 256"
-  alias rm="trash"
+  alias rm="/opt/homebrew/opt/trash-cli/bin/trash"
 fi
 
 # git

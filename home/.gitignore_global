@@ -22,3 +22,5 @@ local-terraform
 
 # Other
 .ckpt
+
+.aider*

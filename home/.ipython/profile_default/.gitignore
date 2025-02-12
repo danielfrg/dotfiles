@@ -1,1 +1,2 @@
-serverconfig
+*
+!ipython_config.py

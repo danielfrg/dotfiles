@@ -27,6 +27,11 @@ else
         spec = {
             { import = "plugins" },
         },
+        config = {
+            defaults = {
+                lazy = true
+            }
+        },
         checker = {
             enabled = true,
             notify = false,
