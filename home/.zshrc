@@ -8,10 +8,6 @@ source "${ZINIT_HOME}/zinit.zsh"
 
 fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
 
-# Completion
-autoload -Uz compinit
-compinit
-
 zinit ice wait lucid
 zinit load Aloxaf/fzf-tab
 
@@ -39,7 +35,7 @@ source "$ZSH_CUSTOM/base/base.plugin.zsh"
 # zinit load "$ZSH_CUSTOM/dev"
 
 # Personal settings
-source "${HOME}/.dotfiles/personal/entrypoint.sh"
+source "${HOME}/.dotfiles/personal/entrypoint.zsh"
 
 # -------------------------------------
 # For stuff that is not to be committed
@@ -47,6 +43,3 @@ source "${HOME}/.dotfiles/personal/entrypoint.sh"
 if [ -f ~/.zshrc.local ]; then
     source ~/.zshrc.local
 fi
-
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/danrodriguez/.lmstudio/bin"
