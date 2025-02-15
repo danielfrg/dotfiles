@@ -27,10 +27,8 @@ else
         spec = {
             { import = "plugins" },
         },
-        config = {
-            defaults = {
-                lazy = true
-            }
+        defaults = {
+            lazy = true
         },
         checker = {
             enabled = true,

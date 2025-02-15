@@ -1,7 +1,8 @@
 return {
     {
         "folke/persistence.nvim",
-        event = "VimEnter",
+        event = "VeryLazy",
+
         opts = {},
         -- stylua: ignore
         keys = {

@@ -33,7 +33,7 @@ local ensure_installed = {
 return {
     {
         "nvim-treesitter/nvim-treesitter",
-        event  = "VimEnter",
+        event  = "VeryLazy",
         build  = ":TSUpdate",
         opts   = {
             ensure_installed = ensure_installed,
