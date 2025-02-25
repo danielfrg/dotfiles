@@ -176,9 +176,6 @@
     helper = !/opt/homebrew/bin/gh auth git-credential
     helper = !/usr/bin/gh auth git-credential
 
-# [gpg]
-#     program = gpg
-
 [commit]
     verbose = true
     ; gpgsign = true
@@ -186,3 +183,6 @@
 [rerere]
     enabled = true
     autoupdate = true
+
+# [gpg]
+#     program = gpg
