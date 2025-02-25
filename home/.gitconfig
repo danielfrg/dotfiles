@@ -26,8 +26,14 @@
     pager = delta
     editor = nvim
 
+[column]
+    ui = auto
+
 [init]
     defaultBranch = main
+
+[branch]
+    sort = -committerdate
 
 [apply]
     # Detect whitespace errors when applying a patch
@@ -46,11 +52,18 @@
     # light = true
 
 [tag]
+    sort = version:refname
     forceSignAnnotated = true
+
+[fetch]
+    prune = true
+    pruneTags = true
+    all = true
 
 [push]
     default = simple
     autoSetupRemote = true
+    followTags = true
 
 [pull]
     rebase = false
@@ -60,9 +73,16 @@
     log = true
     conflictstyle = diff3
 
+[rebase]
+        autoSquash = true
+        autoStash = true
+        updateRefs = true
+
 [diff]
-    algorithm = patience
-    colorMoved = default
+    algorithm = histogram
+    colorMoved = plain
+    mnemonicPrefix = true
+    renames = true
 
 [status]
     submoduleSummary = true
@@ -135,7 +155,6 @@
     untracked = cyan
 
 [help]
-    # Automatically correct and execute mistyped commands
     autocorrect = 1
 
 [url "git://github.com/"]
@@ -160,5 +179,10 @@
 # [gpg]
 #     program = gpg
 
-# [commit]
-#     gpgsign = true
+[commit]
+    verbose = true
+    ; gpgsign = true
+
+[rerere]
+    enabled = true
+    autoupdate = true

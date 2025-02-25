@@ -13,7 +13,8 @@ setopt extended_glob
 
 # Function to add paths efficiently
 prepend_path() {
-  [[ ":$PATH:" != *":$1:"* ]] && export PATH="$1:$PATH"
+    export PATH="$1:$PATH"
+    # [[ ":$PATH:" != *":$1:"* ]] && export PATH="$1:$PATH"
 }
 
 # macOS specific configurations
