@@ -299,17 +299,21 @@ docker-rmi-all () { docker rmi -f $(docker images --format '{{.ID}}') }
 # Kubernetes
 # ---------------------------
 
+
+
+
 if command -v kubectl &>/dev/null; then
     # Source kubectl completion
     source <(kubectl completion zsh)
 
-    # Function k (defined before aliases)
     k() {
-        if [ -n "$KUBE_NAMESPACE" ]; then
-            kubectl --namespace "$KUBE_NAMESPACE" "$@"
-        else
-            kubectl "$@"
-        fi
+        kubectl "$@"
+        # the --namespace flag breaks completions :(
+        # if [ -n "$KUBE_NAMESPACE" ]; then
+        #     kubectl --namespace "$KUBE_NAMESPACE" "$@"
+        # else
+        #     kubectl "$@"
+        # fi
     }
 
     compdef _kubectl k
@@ -356,9 +360,13 @@ ek() {
 # helper for setting a namespace
 # List namespaces, preview the pods within, and save as variable
 function ekns() {
-  namespaces=$(kubectl get ns -o=custom-columns=:.metadata.name)
-  export KUBE_NAMESPACE=$(echo $namespaces | fzf --select-1 --preview "kubectl --namespace {} get pods")
-  echo "Set namespace to $KUBE_NAMESPACE"
+    namespaces=$(kubectl get ns -o=custom-columns=:.metadata.name)
+    export KUBE_NAMESPACE=$(echo $namespaces | fzf --select-1 --preview "kubectl --namespace {} get pods")
+    # echo "Set namespace to $KUBE_NAMESPACE"
+
+    # Ideally we wouldnt do this and just do it with --namepace in kubectl but that breaks tab complete :(
+    kubectl config set-context --current --namespace="$KUBE_NAMESPACE"
+    echo "Set namespace to $namespace in config: ${KUBECONFIG:-~/.kube/config}"
 }
 
 k_logs_deploy() {
