@@ -10,15 +10,20 @@ setopt auto_pushd
 setopt pushd_ignore_dups
 setopt autocd
 setopt extended_glob
+setopt aliases
 
 # Function to add paths efficiently
 prepend_path() {
     export PATH="$1:$PATH"
-    # [[ ":$PATH:" != *":$1:"* ]] && export PATH="$1:$PATH"
 }
 
 # macOS specific configurations
 if [[ $(uname) == "Darwin" ]]; then
+    # Reset PATH
+    # This resets the stuff added by: /etc/profile
+    # That calls: /usr/libexec/path_helper -s
+    export PATH="/bin:/usr/bin:/usr/local/bin"
+
     export HOMEBREW_PREFIX="/opt/homebrew"
     export HOMEBREW_CELLAR="/opt/homebrew/Cellar"
     export HOMEBREW_REPOSITORY="/opt/homebrew"
@@ -45,7 +50,8 @@ if [[ $(uname) == "Darwin" ]]; then
 fi
 
 # Keybindings
-bindkey -e   # Emacs keybindings
+bindkey -v    # VIM keybindings
+# bindkey -e   # Emacs keybindings
 bindkey "^[[3~" delete-char  # Fix delete key misconfig
 
 # Optimized Completion Configuration
@@ -62,10 +68,44 @@ else
 fi
 
 # History Configuration
-HISTSIZE=1000000000
+HISTSIZE=1000
 HISTFILE=~/.zsh_history
 SAVEHIST="$HISTSIZE"
 setopt appendhistory sharehistory hist_ignore_space hist_ignore_all_dups hist_save_no_dups hist_ignore_dups hist_find_no_dups globdots
+
+# Abbreviations
+typeset -a ealiases
+ealiases=()
+
+# Function to add an alias and record it in ealiases
+function abbr() {
+    alias $1
+    ealiases+=(${1%%\=*})
+}
+
+# Expand any aliases in the current line buffer
+function expand-ealias() {
+    # Extract the last word from the left side of the cursor
+    local last_word=${LBUFFER##* }
+
+    # Loop through each registered abbreviation in ealiases
+    for a in ${ealiases[@]}; do
+        if [[ $last_word == $a ]]; then
+            zle _expand_alias
+            zle expand-word
+            break
+        fi
+    done
+    zle magic-space
+}
+zle -N expand-ealias
+
+# Bind the space key to our new expand function (control-space bypasses it)
+bindkey ' '  expand-ealias
+bindkey '^ ' magic-space
+bindkey -M isearch " " magic-space
+
+# END: Abreviations
 
 # fzf
 if command -v fzf &>/dev/null; then
@@ -76,24 +116,6 @@ fi
 if command -v atuin &>/dev/null; then
   source <(atuin init zsh --disable-up-arrow)
 fi
-
-# Alias Expansion
-typeset -a ealiases
-ealiases=()
-
-ealias() { alias "$1"; ealiases+=("${1%%\=*}"); }
-
-expand-ealias() {
-  if [[ $LBUFFER =~ "(^|[;|&])\s*(${(j:|:)ealiases})\$" ]]; then
-      zle _expand_alias
-      zle expand-word
-  fi
-  zle magic-space
-}
-zle -N expand-ealias
-
-bindkey -M viins ' ' expand-ealias
-bindkey -M emacs ' ' expand-ealias
 
 # direnv
 if command -v direnv &>/dev/null; then
@@ -159,39 +181,36 @@ if [[ $(uname) == "Darwin" ]]; then
 fi
 
 # git
-alias g='git'
-alias it='git'
-alias gi='git'
-alias gti='git'
-alias tit='git'
-alias gc='git commit '
-alias gp='git push '
+abbr g='git'
+abbr it='git'
+abbr gi='git'
+abbr gti='git'
+abbr tit='git'
+abbr gc='git commit '
+abbr gp='git push '
 
 # Other
-alias cl="clear"
-alias clera='clear'
-alias kk="clear"
-alias kl="clear"
-alias df='df -kTh'
-alias du='du -kh' # Makes a more readable output
-alias echopath='echo -e ${PATH//:/\\n}'
-alias echolibpath='echo -e ${LD_LIBRARY_PATH//:/\\n}'
-alias h='history'
-alias preview="fzf --preview 'bat --color \"always\" {}'"
-alias sl='ls'
-alias t="tmux"
-alias ta="tmux attach"
-alias tf="terraform"
-alias untar='tar xvf'
-alias watch="watch "
-alias which='type -a'
+abbr cl="clear"
+abbr clera='clear'
+abbr kk="clear"
+abbr kl="clear"
+abbr df='df -kTh'
+abbr du='du -kh'
+abbr echopath='echo -e ${PATH//:/\\n}'
+abbr echolibpath='echo -e ${LD_LIBRARY_PATH//:/\\n}'
+abbr preview="fzf --preview 'bat --color \"always\" {}'"
+abbr sl='ls'
+abbr t="tmux"
+abbr ta="tmux attach"
+abbr tf="terraform"
+abbr untar='tar xvf'
+abbr which='type -a'
 alias sudo='sudo ' # Enable aliases to be sudo’ed
 
 # Neovim
-alias n="nvim -c 'Telescope oldfiles'"
-alias vim_="/usr/bin/vim"
 alias vim="nvim"
-alias vimdiff="nvim -d"
+alias vim_="/usr/bin/vim"
+abbr vimdiff="nvim -d"
 
 nvim() { [[ $1 == "." ]] && command nvim || command nvim "$@"; }
 
@@ -212,11 +231,8 @@ fi
 # FUNCTIONS
 # ---------------------------
 
-exportpathhere() { export PATH="$(pwd):$PATH" }
-
-# Create a new directory and enter it
-function mkd() {
-  mkdir -p "$@" && cd "$_"
+addpwdtopath() {
+    export PATH="$(pwd):$PATH"
 }
 
 function search() {
@@ -247,10 +263,6 @@ function clipvideo() {
   else
     ffmpeg -i "$1" -ss "$2" -to "$3" -c:v copy -c:a copy "$4"
   fi
-}
-
-function printpath() {
-  echo "$PATH" | sed 's/:/\n/g'
 }
 
 # ---------------------------
@@ -299,36 +311,24 @@ docker-rmi-all () { docker rmi -f $(docker images --format '{{.ID}}') }
 # Kubernetes
 # ---------------------------
 
-
-
-
 if command -v kubectl &>/dev/null; then
     # Source kubectl completion
     source <(kubectl completion zsh)
 
-    k() {
-        kubectl "$@"
-        # the --namespace flag breaks completions :(
-        # if [ -n "$KUBE_NAMESPACE" ]; then
-        #     kubectl --namespace "$KUBE_NAMESPACE" "$@"
-        # else
-        #     kubectl "$@"
-        # fi
-    }
-
-    compdef _kubectl k
+    # compdef _kubectl k
     compdef _kubectl kubecolor
 
     # Now define other kubectl-related aliases
-    ealias kg='k get '
-    ealias kl='k logs'
-    ealias kgp='k get po '
-    ealias kgn='k get no '
-    ealias kgd='k get deploy '
-    ealias krmp='k delete po '
-    ealias kdp='k describe po '
-    ealias uek='unset KUBECONFIG'
-    ealias uekns='unset KUBE_NAMESPACE'
+    abbr k='kubectl '
+    abbr kg='kubectl get '
+    abbr kl='kubectl logs'
+    abbr kgp='kubectl get po '
+    abbr kgn='kubectl get no '
+    abbr kgd='kubectl get deploy '
+    abbr krmp='kubectl delete po '
+    abbr kdp='kubectl describe po '
+    abbr uek='unset KUBECONFIG'
+    abbr uekns='unset KUBE_NAMESPACE'
 
     # Backup and remove/symlink ~/.kube/config
     if [[ -f ~/.kube/config && ! -L ~/.kube/config ]]; then

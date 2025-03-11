@@ -1,5 +1,8 @@
 font-family = Berkeley Mono Variable
 
+# command = /opt/homebrew/bin/fish --interactive
+# shell-integration = zsh
+
 # Normal
 font-size = 15
 

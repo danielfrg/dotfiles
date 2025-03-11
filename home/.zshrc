@@ -24,7 +24,7 @@ zinit ice wait lucid
 zinit load zsh-users/zsh-history-substring-search
 
 # Don't ice this one so we can use zsh-async on prompt.zsh
-zinit load mafredri/zsh-async
+# zinit load mafredri/zsh-async
 
 # zinit load olivierverdier/zsh-git-prompt
 
