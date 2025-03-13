@@ -35,7 +35,9 @@ source "$ZSH_CUSTOM/base/base.plugin.zsh"
 # zinit load "$ZSH_CUSTOM/dev"
 
 # Personal settings
-source "${HOME}/.dotfiles/personal/entrypoint.zsh"
+if [[ -f "${HOME}/.dotfiles2/entrypoint.zsh" ]]; then
+    source "${HOME}/.dotfiles2/entrypoint.zsh"
+fi
 
 # -------------------------------------
 # For stuff that is not to be committed
