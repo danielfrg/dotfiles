@@ -1,7 +1,9 @@
-changeps1: false
+channels:
+  - conda-forge
+  - nodefaults
 
 create_default_packages:
   - pip
 
 update_dependencies: false
-channel_priority: true
+changeps1: false
