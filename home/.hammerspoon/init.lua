@@ -1,5 +1,6 @@
 --------------------------------------------------------------------------------
 -- Google Drive opener
+
 local googleModal = hs.hotkey.modal.new({ 'ctrl', 'shift', 'alt', 'cmd' }, 'd')
 
 function googleModal:entered()
@@ -25,6 +26,7 @@ end)
 
 --------------------------------------------------------------------------------
 -- CMD+[]
+
 hs.hotkey.bind({ "cmd" }, "[", function()
     local app = hs.application.frontmostApplication()
     if app and app:name() == "Google Chrome" then
@@ -38,6 +40,36 @@ hs.hotkey.bind({ "cmd" }, "]", function()
         hs.eventtap.keyStroke({ "cmd", "alt" }, "right")
     end
 end)
+
+--------------------------------------------------------------------------------
+-- MSTeams Cleanup
+
+local teamsFolder = os.getenv("HOME") .. "/Downloads/MSTeams"
+
+function deleteTeamsFolder()
+    local exists = hs.fs.attributes(teamsFolder)
+
+    if exists then
+        local success, output, errorOutput = hs.execute("rm -rf '" .. teamsFolder .. "'")
+
+        if success then
+            print("Successfully deleted " .. teamsFolder)
+        else
+            print("Failed to delete " .. teamsFolder .. ": " .. (errorOutput or "Unknown error"))
+        end
+    else
+        print("MS Teams folder not found, nothing to delete")
+    end
+end
+
+-- Timer that runs every hour
+local cleanupTimer = hs.timer.new(3600, deleteTeamsFolder)
+
+-- Start timer
+cleanupTimer:start()
+
+-- Run once on config load
+deleteTeamsFolder()
 
 --------------------------------------------------------------------------------
 -- Auto reload config
