@@ -34,7 +34,7 @@ local Gmail = hs.hotkey.modal.new({ 'ctrl', 'shift', 'alt', 'cmd' }, 's')
 
 function Gmail:entered()
     -- Optional: Show some UI feedback that you're in the modal
-    -- hs.alert.show('Google Drive Select Mode')
+    -- hs.alert.show('Gmail Select Mode')
 end
 
 Gmail:bind('', 'escape', function()
@@ -44,13 +44,13 @@ end)
 Gmail:bind('', '1', function()
     hs.application.launchOrFocus("Chromium")
     hs.execute('open "https://mail.google.com/mail/u/0/#inbox"')
-    Gdrive:exit()
+    Gmail:exit()
 end)
 
 Gmail:bind('', '2', function()
     hs.application.launchOrFocus("Chromium")
     hs.execute('open "https://mail.google.com/mail/u/2/#inbox"')
-    Gdrive:exit()
+    Gmail:exit()
 end)
 
 --------------------------------------------------------------------------------
