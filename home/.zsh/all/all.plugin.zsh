@@ -112,6 +112,11 @@ if command -v fzf &>/dev/null; then
   eval "$(fzf --zsh)"
 fi
 
+# Git extensions
+if [[ -f ~/.local/scripts/git-worktree.sh ]]; then
+  source ~/.local/scripts/git-worktree.sh
+fi
+
 # Atuin
 if command -v atuin &>/dev/null; then
   source <(atuin init zsh --disable-up-arrow)

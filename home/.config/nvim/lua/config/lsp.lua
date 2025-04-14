@@ -56,6 +56,14 @@ lspconfig.gopls.setup {
     },
 }
 
+lspconfig.golangci_lint_ls.setup {
+    cmd = { "go", "tool", "-modfile=golangci-lint.mod", "golangci-lint-langserver" },
+    init_options = {
+        command = { "go", "tool", "-modfile=golangci-lint.mod", 'golangci-lint', 'run', '--output.json.path=stdout', '--show-stats=false' },
+    },
+    root_markers = { "golangci-lint.mod", "go.mod", ".git" },
+}
+
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
     callback = function(event)

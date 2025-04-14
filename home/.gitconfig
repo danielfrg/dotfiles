@@ -125,8 +125,12 @@
 
     rebase-branch = "!f() { git rebase -i $(git merge-base $(git main-branch) HEAD); }; f"
     nope = "!f() { git reset HEAD --hard && git clean -fd; } ; f"
-    wt-clone = "!f() { bash git-worktree.sh clone_as_worktree \"$@\"; }; f"
-    wt-new = "!f() { bash git-worktree.sh new_worktree \"$@\"; }; f"
+
+    wt = "worktree"
+    wtclone = "!f() { git-wt-clone \"$@\"; }; f"
+    wtadd = "!f() { git-wt-new \"$@\"; }; f"
+    wtls = "worktree list"
+    wtrm = "worktree remove"
 
 
 [filter "lfs"]

@@ -30,7 +30,7 @@ zinit load zsh-users/zsh-history-substring-search
 
 export ZSH_CUSTOM="${HOME}/.zsh"
 source "$ZSH_CUSTOM/prompt/prompt.plugin.zsh"
-source "$ZSH_CUSTOM/base/base.plugin.zsh"
+source "$ZSH_CUSTOM/all/all.plugin.zsh"
 # zinit ice wait lucid
 # zinit load "$ZSH_CUSTOM/dev"
 
