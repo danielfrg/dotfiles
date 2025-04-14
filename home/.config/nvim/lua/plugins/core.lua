@@ -10,4 +10,9 @@ return {
 
     -- Detect tabstop and shiftwidth automatically
     { 'tpope/vim-sleuth' },
+
+    {
+      "malev/hola.nvim",
+      dependencies = { "nvim-lua/plenary.nvim" },
+    }
 }

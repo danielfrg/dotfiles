@@ -5,6 +5,7 @@ local autoformat_filetypes = {
     "javascriptreact",
     "typescript",
     "typescriptreact",
+    -- "go"
 }
 
 require("conform").setup({
@@ -20,12 +21,13 @@ require("conform").setup({
         terraform = { "terraform_fmt" },
         lua = { "stylua" },
 
+        -- go = { "gofmt" },
+
         json = { "jq" },
         yaml = { "yamlfmt" },
         ["_"] = { "trim_whitespace" },
     },
     format_on_save = function(bufnr)
-        -- Disable with a global or buffer-local variable
         if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
             return
         end

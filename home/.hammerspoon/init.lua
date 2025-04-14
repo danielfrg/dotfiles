@@ -1,27 +1,56 @@
 --------------------------------------------------------------------------------
--- Google Drive opener
+-- Gmail/Google Drive opener
 
-local googleModal = hs.hotkey.modal.new({ 'ctrl', 'shift', 'alt', 'cmd' }, 'd')
+local Gdrive = hs.hotkey.modal.new({ 'ctrl', 'shift', 'alt', 'cmd' }, 'd')
 
-function googleModal:entered()
+function Gdrive:entered()
     -- Optional: Show some UI feedback that you're in the modal
     -- hs.alert.show('Google Drive Select Mode')
 end
 
-googleModal:bind('', 'escape', function()
-    googleModal:exit()
+Gdrive:bind('', 'escape', function()
+    Gdrive:exit()
 end)
 
-googleModal:bind('', '1', function()
+Gdrive:bind('', '1', function()
     hs.application.launchOrFocus("Chromium")
     hs.execute('open "https://drive.google.com/drive/u/0/my-drive"')
-    googleModal:exit()
+    Gdrive:exit()
 end)
 
-googleModal:bind('', '2', function()
+Gdrive:bind('', '2', function()
     hs.application.launchOrFocus("Chromium")
     hs.execute('open "https://drive.google.com/drive/u/1/my-drive"')
-    googleModal:exit()
+    Gdrive:exit()
+end)
+
+Gdrive:bind('', '3', function()
+    hs.application.launchOrFocus("Chromium")
+    hs.execute('open "https://drive.google.com/drive/u/2/my-drive"')
+    Gdrive:exit()
+end)
+
+local Gmail = hs.hotkey.modal.new({ 'ctrl', 'shift', 'alt', 'cmd' }, 's')
+
+function Gmail:entered()
+    -- Optional: Show some UI feedback that you're in the modal
+    -- hs.alert.show('Google Drive Select Mode')
+end
+
+Gmail:bind('', 'escape', function()
+    Gmail:exit()
+end)
+
+Gmail:bind('', '1', function()
+    hs.application.launchOrFocus("Chromium")
+    hs.execute('open "https://mail.google.com/mail/u/0/#inbox"')
+    Gdrive:exit()
+end)
+
+Gmail:bind('', '2', function()
+    hs.application.launchOrFocus("Chromium")
+    hs.execute('open "https://mail.google.com/mail/u/2/#inbox"')
+    Gdrive:exit()
 end)
 
 --------------------------------------------------------------------------------

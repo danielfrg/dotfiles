@@ -1,4 +1,5 @@
 local lspconfig = require("lspconfig")
+local util = require("lspconfig/util")
 
 local function setup_server(server, user_config)
     -- Initialize config with an empty table if no config is provided
@@ -39,8 +40,24 @@ end
 
 lspconfig.clangd.setup {}
 
+lspconfig.gopls.setup {
+    cmd = { "go", "tool", "gopls" },
+    root_dir = util.root_pattern("go.mod", ".git"),
+    settings = {
+        gopls = {
+            completeUnimported = true,
+            usePlaceholders = true,
+            analyses = {
+                unusedparams = true,
+            },
+            staticcheck = true,
+            gofumpt = true,
+        },
+    },
+}
+
 vim.api.nvim_create_autocmd('LspAttach', {
-    group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
+    group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
     callback = function(event)
         -- NOTE: Remember that Lua is a real programming language, and as such it is possible
         -- to define small helper and utility functions so you don't have to repeat yourself.
@@ -131,6 +148,24 @@ vim.api.nvim_create_autocmd('LspAttach', {
             map('<leader>th', function()
                 vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
             end, '[T]oggle Inlay [H]ints')
+        end
+
+        -- Formatting: Check if the server supports formatting
+        if client.supports_method("textDocument/formatting") then
+            vim.keymap.set({ 'n', 'v' }, '<leader>fm', function()
+                vim.lsp.buf.format({ async = true })
+            end, { buffer = bufnr, noremap = true, silent = true, desc = "Format code (LSP)" })
+
+            -- Format on Save Setup
+            local format_group = vim.api.nvim_create_augroup("LSPFormatOnSave", { clear = true })
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                group = format_group,
+                buffer = bufnr, -- Only for the current buffer
+                callback = function()
+                    -- Use timeout and make it synchronous for BufWritePre
+                    vim.lsp.buf.format({ bufnr = bufnr, timeout_ms = 1500, async = false })
+                end
+            })
         end
     end,
 })

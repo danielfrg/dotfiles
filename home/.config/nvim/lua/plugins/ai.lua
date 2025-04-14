@@ -3,16 +3,26 @@ local function has_node()
 end
 
 return {
+    -- {
+    --     "zbirenbaum/copilot.lua",
+    --     cmd = "Copilot",
+    --     event = "VeryLazy",
+    --     cond = has_node, -- Only load if node is available
+    --     config = function()
+    --         require("copilot").setup({
+    --             suggestion = { enabled = false },
+    --             panel = { enabled = false },
+    --         })
+    --     end,
+    -- },
     {
-        "zbirenbaum/copilot.lua",
-        cmd = "Copilot",
-        event = "VeryLazy",
-        cond = has_node, -- Only load if node is available
+        "olimorris/codecompanion.nvim",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-treesitter/nvim-treesitter",
+        },
         config = function()
-            require("copilot").setup({
-                suggestion = { enabled = false },
-                panel = { enabled = false },
-            })
+            require("config.ai")
         end,
-    }
+    },
 }

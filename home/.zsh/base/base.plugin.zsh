@@ -22,7 +22,7 @@ if [[ $(uname) == "Darwin" ]]; then
     # Reset PATH
     # This resets the stuff added by: /etc/profile
     # That calls: /usr/libexec/path_helper -s
-    export PATH="/bin:/usr/bin:/usr/local/bin"
+    export PATH="/bin:/sbin:/usr/bin:/usr/local/bin"
 
     export HOMEBREW_PREFIX="/opt/homebrew"
     export HOMEBREW_CELLAR="/opt/homebrew/Cellar"
@@ -50,8 +50,8 @@ if [[ $(uname) == "Darwin" ]]; then
 fi
 
 # Keybindings
-bindkey -v    # VIM keybindings
-# bindkey -e   # Emacs keybindings
+bindkey -e   # Emacs keybindings
+# bindkey -v    # VIM keybindings
 bindkey "^[[3~" delete-char  # Fix delete key misconfig
 
 # Optimized Completion Configuration
@@ -159,7 +159,7 @@ export PATH="$HOME/.cargo/bin:$PATH"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
-alias cp='cp -i'
+abbr cp='cp -i'
 alias mv='mv -i'
 alias mkdir='mkdir -p'
 
@@ -174,7 +174,6 @@ alias lt='ls --tree'
 
 # macOS specific aliases
 if [[ $(uname) == "Darwin" ]]; then
-  alias grep='rg'
   alias md5sum='md5 -r'
   alias sha256sum="shasum -a 256"
   alias rm="/opt/homebrew/opt/trash-cli/bin/trash"
