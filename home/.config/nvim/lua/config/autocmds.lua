@@ -11,7 +11,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     end,
 })
 
--- Do not use <CR> for flash in quickfix so i can open files!
+-- Do not use <CR> for flash in quickfix so i can open files
 vim.api.nvim_create_autocmd("BufReadPost", {
     pattern = "quickfix",
     callback = function()

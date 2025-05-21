@@ -1,3 +1,5 @@
+auto-update = off
+
 font-family = Berkeley Mono Variable
 
 # command = /opt/homebrew/bin/fish --interactive

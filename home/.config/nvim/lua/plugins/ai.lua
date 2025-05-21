@@ -15,14 +15,15 @@ return {
     --         })
     --     end,
     -- },
-    {
-        "olimorris/codecompanion.nvim",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-treesitter/nvim-treesitter",
-        },
-        config = function()
-            require("config.ai")
-        end,
-    },
+
+    -- {
+    --     "olimorris/codecompanion.nvim",
+    --     dependencies = {
+    --         "nvim-lua/plenary.nvim",
+    --         "nvim-treesitter/nvim-treesitter",
+    --     },
+    --     config = function()
+    --         require("config.ai")
+    --     end,
+    -- },
 }

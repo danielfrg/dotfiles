@@ -33,10 +33,16 @@ if vim.fn.executable("ruff") == 1 then
     })
 end
 
-if vim.fn.executable("node") == 1 then
-    lspconfig.astro.setup {}
-    lspconfig.ts_ls.setup {}
-end
+-- if vim.fn.executable("bun") == 1 then
+--     lspconfig.astro.setup {
+--         cmd = { "bunx", "astro-ls", "--stdio" }
+--     }
+-- end
+
+lspconfig.ts_ls.setup {
+    cmd = { "npx", "typescript-language-server", "--stdio" },
+    root_dir = util.root_pattern("package-lock.json"),
+}
 
 lspconfig.clangd.setup {}
 
