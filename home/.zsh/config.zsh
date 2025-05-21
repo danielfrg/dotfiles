@@ -59,14 +59,6 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 
-autoload -Uz compinit
-if [[ ! -f ~/.zcompdump ]] || [[ $(find ~/.zcompdump -mtime +7) ]]; then
-  compinit -C
-  touch ~/.zcompdump
-else
-  compinit -d ~/.zcompdump
-fi
-
 # History Configuration
 HISTSIZE=1000
 HISTFILE=~/.zsh_history
@@ -129,7 +121,7 @@ fi
 
 # Project Switcher
 project_switcher() {
-  selected=$(find_ ~/code ~/code/danielfrg ~/code/inmatura ~/nvidia -mindepth 1 -maxdepth 1 -type d | fzf)
+  selected=$(find ~/code ~/code/danielfrg ~/code/inmatura ~/nvidia -mindepth 1 -maxdepth 1 -type d | fzf)
 
   if [[ -z $selected ]]; then
       exit 0
@@ -323,6 +315,7 @@ if command -v kubectl &>/dev/null; then
     compdef _kubectl kubecolor
 
     # Now define other kubectl-related aliases
+    alias kubectl="kubecolor"
     abbr k='kubectl '
     abbr kg='kubectl get '
     abbr kl='kubectl logs'

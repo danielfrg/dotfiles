@@ -1,42 +1,126 @@
-# Download zinit, if it's not there yet
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
-[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+export PROFILING_MODE=0
+if [ $PROFILING_MODE -ne 0 ]; then
+    zmodload zsh/zprof
+fi
 
-# Start zinit
-source "${ZINIT_HOME}/zinit.zsh"
+# -------------------------------------
+# Plugin manager
 
-fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
+ZSH_PLUGINS_DIR="${XDG_DATA_HOME:-${HOME}/.local/share}/zsh_plugins"
 
-zinit ice wait lucid
-zinit load Aloxaf/fzf-tab
+# List of plugins to install from GitHub: owner/repo
+_zsh_plugins_list=(
+    "Aloxaf/fzf-tab"
+    "zsh-users/zsh-autosuggestions"
+    "zsh-users/zsh-completions"
+    "zsh-users/zsh-history-substring-search"
+    "zsh-users/zsh-syntax-highlighting"
+)
 
-zinit ice wait lucid
-zinit load zsh-users/zsh-syntax-highlighting
+# Function to install/update plugins
+install_zsh_plugins() {
+    if ! command -v git >/dev/null; then
+        echo "Error: git command not found. Cannot install or update plugins." >&2
+        return 1
+    fi
 
-zinit ice wait lucid
-zinit load zsh-users/zsh-completions
+    if [ ! -d "$ZSH_PLUGINS_DIR" ]; then
+        echo "Creating plugin directory: $ZSH_PLUGINS_DIR"
+        mkdir -p "$ZSH_PLUGINS_DIR"
+    fi
 
-zinit ice wait lucid
-zinit load zsh-users/zsh-autosuggestions
+    for plugin_src in "${_zsh_plugins_list[@]}"; do
+        local repo_owner_name="${plugin_src%%/*}"
+        local repo_name="${plugin_src##*/}"
+        local plugin_path="$ZSH_PLUGINS_DIR/$repo_name"
 
-zinit ice wait lucid
-zinit load zsh-users/zsh-history-substring-search
+        if [ ! -d "$plugin_path/.git" ]; then
+            echo "Installing $repo_name (from $plugin_src)..."
+            if git clone --depth 1 "https://github.com/$plugin_src.git" "$plugin_path"; then
+                echo "$repo_name installed successfully."
+            else
+                echo "Failed to clone $repo_name. Please check the path and network." >&2
+            fi
+        else
+            echo "Updating $repo_name (in $plugin_path)..."
+            echo "Note: If you have local changes in $plugin_path, 'git pull' might fail."
+            echo "Commit or stash your changes before updating if needed."
+            if (cd "$plugin_path" && git pull); then # Subshell to keep `pwd` clean
+                echo "$repo_name updated successfully."
+            else
+                echo "Failed to update $repo_name. Please check $plugin_path manually." >&2
+            fi
+        fi
+    done
+    echo ""
+    echo "Plugin installation/update check complete. Restart Zsh."
+}
 
-# Don't ice this one so we can use zsh-async on prompt.zsh
-# zinit load mafredri/zsh-async
+# -------------------------------------
+# FPATH and Completions
 
-# zinit load olivierverdier/zsh-git-prompt
+# Add zsh-completions to fpath if installed
+ZSH_COMPLETIONS_PATH="$ZSH_PLUGINS_DIR/zsh-completions"
+if [ -d "$ZSH_COMPLETIONS_PATH/src" ]; then
+    fpath=("$ZSH_COMPLETIONS_PATH/src" $fpath)
+fi
 
-export ZSH_CUSTOM="${HOME}/.zsh"
-source "$ZSH_CUSTOM/prompt/prompt.plugin.zsh"
-source "$ZSH_CUSTOM/all/all.plugin.zsh"
-# zinit ice wait lucid
-# zinit load "$ZSH_CUSTOM/dev"
+# Initialize completions (ensure this runs after fpath is set up)
+# -C: Check if .zcompdump is up-to-date, if so, do nothing.
+# -i: Ignore insecure directories for initial dump file creation.
+# -d <dumpfile>: Specify a custom dump file location.
+if (( ${+functions[compinit]} )); then
+  # If compinit is already a function, check if it needs to be run
+  compinit -C -i -d "${ZDOTDIR:-$HOME}/.zcompdump-${ZSH_VERSION}"
+else
+  # If compinit is not yet loaded, load and run it
+  autoload -Uz compinit
+  compinit -i -d "${ZDOTDIR:-$HOME}/.zcompdump-${ZSH_VERSION}"
+fi
 
-# Personal settings
-if [[ -f "${HOME}/.dotfiles2/entrypoint.zsh" ]]; then
-    source "${HOME}/.dotfiles2/entrypoint.zsh"
+# -------------------------------------
+# Load Plugins
+
+# Aloxaf/fzf-tab
+_fzf_tab_plugin_file="$ZSH_PLUGINS_DIR/fzf-tab/fzf-tab.zsh"
+if [ -f "$_fzf_tab_plugin_file" ]; then
+    source "$_fzf_tab_plugin_file"
+else
+    echo "Warning: zsh-syntax-highlighting plugin not found. Run 'install_zsh_plugins'." >&2
+fi
+
+# zsh-users/zsh-autosuggestions
+_autosuggestions_plugin_file="$ZSH_PLUGINS_DIR/zsh-autosuggestions/zsh-autosuggestions.zsh"
+if [ -f "$_autosuggestions_plugin_file" ]; then
+    source "$_autosuggestions_plugin_file"
+else
+    echo "Warning: zsh-syntax-highlighting plugin not found. Run 'install_zsh_plugins'." >&2
+fi
+
+# zsh-users/zsh-history-substring-search
+_history_substring_search_plugin_file="$ZSH_PLUGINS_DIR/zsh-history-substring-search/zsh-history-substring-search.zsh"
+if [ -f "$_history_substring_search_plugin_file" ]; then
+    source "$_history_substring_search_plugin_file"
+else
+    echo "Warning: zsh-syntax-highlighting plugin not found. Run 'install_zsh_plugins'." >&2
+fi
+
+# zsh-users/zsh-syntax-highlighting (KEEP THIS THE LAST)
+_syntax_highlighting_plugin_file="$ZSH_PLUGINS_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+if [ -f "$_syntax_highlighting_plugin_file" ]; then
+    source "$_syntax_highlighting_plugin_file"
+else
+    echo "Warning: zsh-syntax-highlighting plugin not found. Run 'install_zsh_plugins'." >&2
+fi
+
+# -------------------------------------
+# My config
+
+source ~/.zsh/config.zsh
+source ~/.zsh/prompt.zsh
+
+if [ $PROFILING_MODE -ne 0 ]; then
+    zprof
 fi
 
 # -------------------------------------
