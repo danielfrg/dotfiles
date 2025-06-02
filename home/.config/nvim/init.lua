@@ -1,12 +1,15 @@
--- Load the base config
-require("config.options")
-require("config.mappings")
-require("config.autocmds")
-require("config.colors")
-require("config.statusline")
+-- options first
+require("core.options")
 
--- Load local.lua if found
+-- them other core config
+require("core.autocmds")
+require("core.lsp")
+require("core.mappings")
+require("core.statusline")
+require("core.theme")
+
+-- load local.lua if found
 local status, local_file = pcall(require, "local")
 
--- Load plugins
-require("config.lazy")
+-- load plugins
+require("core.lazy")

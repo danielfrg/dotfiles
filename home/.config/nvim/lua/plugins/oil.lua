@@ -2,7 +2,6 @@ return {
     {
         "stevearc/oil.nvim",
         event = "VeryLazy",
-        lazy = false,
 
         dependencies = { "nvim-tree/nvim-web-devicons" },
 
@@ -10,7 +9,7 @@ return {
             require("oil").setup({
                 default_file_explorer = false,
                 columns = { "icon" },
-                delete_to_trash = false,
+                delete_to_trash = true,
                 -- Skip the confirmation popup for simple operations (:help oil.skip_confirm_for_simple_edits)
                 skip_confirm_for_simple_edits = false,
                 keymaps = {

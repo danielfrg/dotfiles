@@ -38,16 +38,19 @@ end
 ---Returns an empty string if there aren't any attached LSP clients.
 ---@return string
 local function lsp_status()
-    local attached_clients = vim.lsp.get_clients({ bufnr = 0 })
-    if #attached_clients == 0 then
+    local bufnr = vim.api.nvim_get_current_buf()
+    local clients = vim.lsp.get_clients and vim.lsp.get_clients({ bufnr = bufnr }) or
+        vim.lsp.get_active_clients({ bufnr = bufnr })
+
+    if #clients == 0 then
         return ""
     end
-    local it = vim.iter(attached_clients)
-    it:map(function(client)
-        local name = client.name:gsub("language.server", "ls")
-        return name
-    end)
-    local names = it:totable()
+
+    local names = {}
+    for _, client in ipairs(clients) do
+        table.insert(names, client.name)
+    end
+
     return "[" .. table.concat(names, ", ") .. "]"
 end
 

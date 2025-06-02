@@ -9,7 +9,6 @@ return {
             wk.setup(opts)
             wk.add({
                 { "<leader>c", group = "Code" },
-                { "<leader>f", group = "Find" },
                 { "<leader>g", group = "Git" },
                 { "<leader>h", group = "Harpoon" },
                 { "<leader>s", group = "Search" },

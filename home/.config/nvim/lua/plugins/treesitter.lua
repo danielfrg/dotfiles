@@ -2,8 +2,6 @@ local ensure_installed = {
     -- Python
     "python",
     "ninja",
-    "rst",
-    "toml",
 
     -- C/C++
     "c",
@@ -14,20 +12,22 @@ local ensure_installed = {
     "html",
     "css",
     "javascript",
-    -- "jsx",
     "typescript",
     "tsx",
-
-    "bash",
-    "just",
-    "markdown",
-    "markdown_inline",
-    "terraform",
-    "yaml",
 
     -- nvim
     "vim",
     "lua",
+
+    -- general
+    "bash",
+    "just",
+    "markdown",
+    "markdown_inline",
+    "rst",
+    "toml",
+    "terraform",
+    "yaml",
 }
 
 return {

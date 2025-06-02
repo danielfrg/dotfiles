@@ -103,18 +103,18 @@ vim.keymap.set("n", "<leader>/", function()
 end, { desc = "Fuzzily search in current buffer" })
 
 -- File Browser
-vim.keymap.set(
-    "n",
-    "<space>fB",
-    ":Telescope file_browser hidden=true<CR>",
-    { desc = "File browser" }
-)
-vim.keymap.set(
-    "n",
-    "<space>fb",
-    ":Telescope file_browser path=%:p:h select_buffer=true hidden=true<CR>",
-    { desc = "File Browser (cwd)" }
-)
+-- vim.keymap.set(
+--     "n",
+--     "<space>fB",
+--     ":Telescope file_browser hidden=true<CR>",
+--     { desc = "File browser" }
+-- )
+-- vim.keymap.set(
+--     "n",
+--     "<space>fb",
+--     ":Telescope file_browser path=%:p:h select_buffer=true hidden=true<CR>",
+--     { desc = "File Browser (cwd)" }
+-- )
 
 -- Git
 vim.keymap.set(
