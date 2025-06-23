@@ -65,6 +65,15 @@ HISTFILE=~/.zsh_history
 SAVEHIST="$HISTSIZE"
 setopt appendhistory sharehistory hist_ignore_space hist_ignore_all_dups hist_save_no_dups hist_ignore_dups hist_find_no_dups globdots
 
+# Set default config directory
+export XDG_CONFIG_HOME=$HOME/.config
+
+# Local binaries
+export PATH="$HOME/.local/bin:$HOME/.local/scripts:$PATH"
+
+# Cargo binaries
+export PATH="$HOME/.cargo/bin:$PATH"
+
 # Abbreviations
 typeset -a ealiases
 ealiases=()
@@ -102,6 +111,11 @@ bindkey -M isearch " " magic-space
 # fzf
 if command -v fzf &>/dev/null; then
   eval "$(fzf --zsh)"
+fi
+
+# fzf
+if command -v zoxide &>/dev/null; then
+  eval "$(zoxide init zsh)"
 fi
 
 # Git extensions
@@ -143,14 +157,13 @@ bindkey -s "^F" "project-session.sh\n"
 prepend_path "$HOME/.tmux/plugins/tmuxifier/bin"
 export TMUXIFIER_LAYOUT_PATH=$HOME/.config/tmux/layouts
 
-# Set default config directory
-export XDG_CONFIG_HOME=$HOME/.config
-
-# Local binaries
-export PATH="$HOME/.local/bin:$HOME/.local/scripts:$PATH"
-
-# Cargo binaries
-export PATH="$HOME/.cargo/bin:$PATH"
+rgf() {
+  local file
+  file=$(rg --files-with-matches --hidden --glob '!.git' "$1" | fzf --preview 'bat --color=always --style=numbers --line-range :500 {}')
+  if [[ -n "$file" ]]; then
+    nvim "$file"
+  fi
+}
 
 # Aliases
 alias ..="cd .."
@@ -460,11 +473,7 @@ export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 export VOLTA_FEATURE_PNPM=1
 
-# bun
-# export BUN_INSTALL="$HOME/.bun"
-# export PATH="$BUN_INSTALL/bin:$PATH"
-# # bun completions
-# [ -s "/Users/danrodriguez/.bun/_bun" ] && source "/Users/danrodriguez/.bun/_bun"
+export PATH="$HOME/.bun/bin:$PATH"
 
 alias npmreset="rm -rf node_modules"
 

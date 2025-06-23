@@ -1,6 +1,6 @@
 return {
     cmd = {
-        "npx", "typescript-language-server", "--stdio"
+        "bunx", "typescript-language-server", "--stdio"
     },
     filetypes = {
         "javascript", "typescript", "javascriptreact", "typescriptreact", "js", "jsx", "ts", "tsx",
