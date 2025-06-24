@@ -22,8 +22,7 @@ brew 'gpg2'
 brew 'gnupg'
 brew 'gnu-sed'
 brew 'gnu-tar'
-tap 'yqrashawn/goku'
-brew 'yqrashawn/goku/goku'
+brew 'goku'
 brew 'grep'
 brew 'helm'
 brew 'httpie'
@@ -85,12 +84,12 @@ cask 'visual-studio-code'
 cask 'zed'
 
 # Fonts
-tap 'homebrew/cask-fonts'
-cask 'font-jetbrains-mono-nerd-font'
+# tap 'homebrew/cask-fonts'
+# cask 'font-jetbrains-mono-nerd-font'
 # cask 'font-fira-code-nerd-font'
 # cask 'font-cascadia-code'
 
 # VPN
 
 brew 'vpn-slice'
-cask 'openconnect-gui'
+brew 'openconnect'
