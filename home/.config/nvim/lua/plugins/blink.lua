@@ -33,6 +33,7 @@ return {
                     },
                 },
                 keymap = {
+                    ["<C-k>"] = {}, -- keep digraph working for accents
                     ["<C-f>"] = {},
                 },
                 cmdline = {

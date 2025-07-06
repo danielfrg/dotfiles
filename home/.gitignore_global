@@ -5,7 +5,7 @@
 tmp
 default.profraw
 
-# Secret (shhh)
+# Secret
 /secret
 
 # Environment
@@ -23,4 +23,6 @@ local-terraform
 # Other
 .ckpt
 
-.aider*
+# AI
+.claude
+repomix*
