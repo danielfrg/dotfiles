@@ -132,3 +132,4 @@ fi
 
 # bun completions
 [ -s "/Users/danrodriguez/.bun/_bun" ] && source "/Users/danrodriguez/.bun/_bun"
+export PATH="/Users/danrodriguez/.pixi/bin:$PATH"

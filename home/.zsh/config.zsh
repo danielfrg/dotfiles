@@ -186,7 +186,7 @@ alias lt='ls --tree'
 if [[ $(uname) == "Darwin" ]]; then
   alias md5sum='md5 -r'
   alias sha256sum="shasum -a 256"
-  # alias rm="/opt/homebrew/opt/trash-cli/bin/trash"
+  alias rm="/opt/homebrew/opt/trash-cli/bin/trash"
 fi
 
 # git
@@ -463,7 +463,7 @@ if [ -d "$HOME/conda" ]; then
     # <<< conda initialize <<<
 fi
 
-# export PATH="$HOME/.pixi/bin:$PATH"
+export PATH="$HOME/.pixi/bin:$PATH"
 
 # ---------------------------
 # JAVASCRIPT

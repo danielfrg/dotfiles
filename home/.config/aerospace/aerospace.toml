@@ -84,12 +84,12 @@ alt-shift-space = 'layout floating tiling' # 'floating toggle' in i3
 # should be supported at all https://github.com/nikitabobko/AeroSpace/issues/5
 # alt-a = 'focus parent'
 
-cmd-alt-ctrl-shift-1 = 'workspace 1'
-cmd-alt-ctrl-shift-2 = 'workspace 2'
-cmd-alt-ctrl-shift-3 = 'workspace 3'
-cmd-alt-ctrl-shift-4 = 'workspace 4'
-cmd-alt-ctrl-shift-5 = 'workspace 5'
-cmd-alt-ctrl-shift-6 = 'workspace 6'
+# cmd-alt-ctrl-shift-1 = 'workspace 1'
+# cmd-alt-ctrl-shift-2 = 'workspace 2'
+# cmd-alt-ctrl-shift-3 = 'workspace 3'
+# cmd-alt-ctrl-shift-4 = 'workspace 4'
+# cmd-alt-ctrl-shift-5 = 'workspace 5'
+# cmd-alt-ctrl-shift-6 = 'workspace 6'
 
 cmd-1 = 'workspace --auto-back-and-forth 1'
 cmd-2 = 'workspace --auto-back-and-forth 2'

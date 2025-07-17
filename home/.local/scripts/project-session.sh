@@ -21,25 +21,20 @@ else
     else
         base_dirs=(~/)
     fi
-
-    if [[ -d ~/dev/danielfrg ]]; then
-        base_dirs+=(~/dev/danielfrg)
+    if [[ -d ~/Documents ]]; then
+        base_dirs+=(~/Documents)
     fi
 
-    if [[ -d ~/dev/youtube ]]; then
-        base_dirs+=(~/dev/youtube)
+    if [[ -d ~/Documents/danielfrg ]]; then
+        base_dirs+=(~/Documents/danielfrg)
     fi
 
-    if [[ -d ~/dev/inmatura ]]; then
-        base_dirs+=(~/dev/inmatura)
+    if [[ -d ~/Documents/inmatura ]]; then
+        base_dirs+=(~/Documents/inmatura)
     fi
 
-    if [[ -d ~/dev/nvidia ]]; then
-        base_dirs+=(~/dev/nvidia)
-    fi
-
-    if [[ -d ~/nvidia ]]; then
-        base_dirs+=(~/nvidia)
+    if [[ -d ~/Documents/nvidia ]]; then
+        base_dirs+=(~/Documents/nvidia)
     fi
 
     selected=$(
