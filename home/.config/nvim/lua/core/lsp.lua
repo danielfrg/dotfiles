@@ -2,6 +2,7 @@ vim.lsp.enable({
     "ruff",
     "pyright",
     "ts",
+    "biome",
     "gopls",
 })
 
@@ -36,13 +37,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
         -- defaults:
         -- https://neovim.io/doc/user/news-0.11.html#_defaults
-        map("n", "gl", vim.diagnostic.open_float, { desc = "Open Diagnostic Float" })
-        -- map("K", vim.lsp.buf.hover, "Hover Documentation")
+        map("n", "gl", vim.diagnostic.open_float, { desc = "LSP: Open Diagnostic Float" })
+        map("n", "K", vim.lsp.buf.hover, { desc = "LSP: Hover Documentation" })
         -- map("gs", vim.lsp.buf.signature_help, "Signature Documentation")
         -- map("gD", vim.lsp.buf.declaration, "Goto Declaration")
         -- map("<leader>la", vim.lsp.buf.code_action, "Code Action")
-        map("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename all references"})
-        -- map("<leader>lf", vim.lsp.buf.format, "Format")
+        map("n", "<leader>lr", vim.lsp.buf.rename, { desc = "LSP: Rename all references" })
+        map("n", "<leader>lf", vim.lsp.buf.format, { desc = "LSP: Format" })
         -- map("<leader>v", "<cmd>vsplit | lua vim.lsp.buf.definition()<cr>", "Goto Definition in Vertical Split")
 
         local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
@@ -50,15 +51,36 @@ vim.api.nvim_create_autocmd('LspAttach', {
             -- Create a keymap for vim.lsp.buf.implementation ...
         end
 
-        -- Auto-format ("lint") on save.
-        -- Usually not needed if server supports "textDocument/willSaveWaitUntil".
-        if not client:supports_method('textDocument/willSaveWaitUntil')
-            and client:supports_method('textDocument/formatting') then
+        -- Auto-format on save
+        local bufnr = args.buf
+        if client.supports_method('textDocument/formatting') then
             vim.api.nvim_create_autocmd('BufWritePre', {
-                group = vim.api.nvim_create_augroup('my.lsp', { clear = false }),
-                buffer = args.buf,
+                group = vim.api.nvim_create_augroup('my.lsp.format_on_save', { clear = false }),
+                buffer = bufnr,
                 callback = function()
-                    vim.lsp.buf.format({ bufnr = args.buf, id = client.id, timeout_ms = 1000 })
+                    local format_logic = {
+                        -- For typescript and javascript, prefer biome
+                        typescript = 'biome',
+                        typescriptreact = 'biome',
+                        javascript = 'biome',
+                        javascriptreact = 'biome',
+                        -- For python, prefer ruff
+                        python = 'ruff',
+                    }
+
+                    local filetype = vim.bo[bufnr].filetype
+                    local preferred_formatter = format_logic[filetype]
+
+                    vim.lsp.buf.format({
+                        bufnr = bufnr,
+                        filter = function(c)
+                            if preferred_formatter then
+                                return c.name == preferred_formatter
+                            end
+                            return true
+                        end,
+                        timeout_ms = 2000,
+                    })
                 end,
             })
         end

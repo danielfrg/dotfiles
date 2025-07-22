@@ -6,6 +6,6 @@ return {
         "javascript", "typescript", "javascriptreact", "typescriptreact", "js", "jsx", "ts", "tsx",
     },
     root_markers = {
-        "package-lock.json"
+        "bun.lock"
     },
 }
