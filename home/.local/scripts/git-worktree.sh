@@ -75,22 +75,42 @@ git-wt-clone() {
     # Set up worktree structure
     echo "Setting up worktree structure..."
 
-    # Create main worktree relative to the bare repo's location
-    git --git-dir=.bare worktree add main || {
+    # Determine the default branch from the bare repository
+    local default_branch
+    default_branch=$(git --git-dir=.bare symbolic-ref --short HEAD)
+
+    # Create main worktree from the default branch
+    git --git-dir=.bare worktree add "$default_branch" || {
         echo "Error: Failed to create main worktree."
         cd ..
         rm -rf "$dir_name"
         return 1
     }
 
+    # Navigate into the main worktree to set the upstream branch
+    cd "$default_branch" || {
+        echo "Error: Could not enter the main worktree directory."
+        cd ../..
+        rm -rf "$dir_name"
+        return 1
+    }
+
+    echo "Configuring the main branch to track origin..."
+    # Set the upstream for the main branch
+    git branch --set-upstream-to="origin/$default_branch" "$default_branch" || {
+        echo "Warning: Failed to set the upstream branch for the main worktree."
+        # Not a fatal error, so we continue
+    }
+
+    # Go back to the project root
+    cd ..
+
     echo "Repository cloned with worktree structure in '$PWD'"
     echo "Project structure created:"
     echo "├── .bare/          # Bare repository"
-    echo "└── main/           # Main branch worktree"
+    echo "└── $default_branch/           # Main branch worktree"
 
-    # Go back to original directory
-    cd ..
-    echo "You can now cd into $dir_name/main to start working"
+    cd ../$dir_name/$default_branch
 }
 
 # Create a new worktree in an existing worktree project

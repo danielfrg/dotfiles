@@ -58,14 +58,14 @@ end)
 
 hs.hotkey.bind({ "cmd" }, "[", function()
     local app = hs.application.frontmostApplication()
-    if app and app:name() == "Google Chrome" then
+    if app and app:name() == "Chromium" then
         hs.eventtap.keyStroke({ "cmd", "alt" }, "left")
     end
 end)
 
 hs.hotkey.bind({ "cmd" }, "]", function()
     local app = hs.application.frontmostApplication()
-    if app and app:name() == "Google Chrome" then
+    if app and app:name() == "Chromium" then
         hs.eventtap.keyStroke({ "cmd", "alt" }, "right")
     end
 end)

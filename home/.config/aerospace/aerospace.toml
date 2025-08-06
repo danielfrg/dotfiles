@@ -13,7 +13,7 @@ default-root-container-layout = 'tiles'
 # Possible values: horizontal|vertical|auto
 # 'auto' means: wide monitor (anything wider than high) gets horizontal orientation,
 #               tall monitor (anything higher than wide) gets vertical orientation
-default-root-container-orientation = 'vertical'
+default-root-container-orientation = 'auto'
 
 # See: https://nikitabobko.github.io/AeroSpace/guide#layouts
 # The 'accordion-padding' specifies the size of accordion padding
@@ -84,19 +84,19 @@ alt-shift-space = 'layout floating tiling' # 'floating toggle' in i3
 # should be supported at all https://github.com/nikitabobko/AeroSpace/issues/5
 # alt-a = 'focus parent'
 
-# cmd-alt-ctrl-shift-1 = 'workspace 1'
-# cmd-alt-ctrl-shift-2 = 'workspace 2'
-# cmd-alt-ctrl-shift-3 = 'workspace 3'
-# cmd-alt-ctrl-shift-4 = 'workspace 4'
-# cmd-alt-ctrl-shift-5 = 'workspace 5'
-# cmd-alt-ctrl-shift-6 = 'workspace 6'
+cmd-alt-ctrl-shift-1 = 'workspace 1'
+cmd-alt-ctrl-shift-2 = 'workspace 2'
+cmd-alt-ctrl-shift-3 = 'workspace 3'
+cmd-alt-ctrl-shift-4 = 'workspace 4'
+cmd-alt-ctrl-shift-5 = 'workspace 5'
+cmd-alt-ctrl-shift-6 = 'workspace 6'
 
-cmd-1 = 'workspace --auto-back-and-forth 1'
-cmd-2 = 'workspace --auto-back-and-forth 2'
-cmd-3 = 'workspace --auto-back-and-forth 3'
-cmd-4 = 'workspace --auto-back-and-forth 4'
-cmd-5 = 'workspace --auto-back-and-forth 5'
-cmd-6 = 'workspace --auto-back-and-forth 6'
+cmd-1 = 'workspace 1'
+cmd-2 = 'workspace 2'
+cmd-3 = 'workspace 3'
+cmd-4 = 'workspace 4'
+cmd-5 = 'workspace 5'
+cmd-6 = 'workspace 6'
 
 cmd-shift-1 = 'move-node-to-workspace 1'
 cmd-shift-2 = 'move-node-to-workspace 2'
@@ -166,6 +166,11 @@ run = ['layout floating']
 if.app-id = 'com.colliderli.iina'
 check-further-callbacks = true
 run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'app.zen-browser.zen'
+check-further-callbacks = true
+run = ['move-node-to-workspace 1']
 
 [[on-window-detected]]
 if.app-id = 'org.chromium.Chromium'
