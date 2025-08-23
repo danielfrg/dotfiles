@@ -213,7 +213,6 @@ abbr t="tmux"
 abbr ta="tmux attach"
 abbr tf="terraform"
 abbr untar='tar xvf'
-abbr which='type -a'
 alias sudo='sudo ' # Enable aliases to be sudo’ed
 
 # Neovim

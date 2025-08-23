@@ -15,12 +15,6 @@ else
         tmuxifier_sessions=""
     fi
 
-    # Combine directories and tmuxifier sessions
-    if [[ -d ~/dev ]]; then
-        base_dirs=(~/dev)
-    else
-        base_dirs=(~/)
-    fi
     if [[ -d ~/Documents ]]; then
         base_dirs+=(~/Documents)
     fi
