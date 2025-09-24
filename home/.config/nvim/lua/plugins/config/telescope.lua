@@ -83,7 +83,7 @@ pcall(require("telescope").load_extension("git_file_history"))
 local builtin = require("telescope.builtin")
 
 vim.keymap.set('n', '<leader><leader>', builtin.find_files, { desc = '[ ] Search Files' })
-vim.keymap.set('n', '<leader>sb', builtin.buffers, { desc = 'Seach [B]uffers' })
+vim.keymap.set('n', '<leader>sb', function() builtin.buffers({ sort_lastused = true }) end, { desc = 'Seach [B]uffers' })
 vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
 vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
