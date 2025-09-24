@@ -127,27 +127,19 @@ def git-wt-new [...args] {
 # Tools
 
 # Atuin
-let atuin_config = $"($env.HOME)/.local/share/atuin/init.nu"
-if not ($atuin_config | path exists) {
-    atuin init nu --disable-up-arrow | save ~/.local/share/atuin/init.nu
-}
+
+# Run setup.nu to configure atuin and carapace
 source ~/.local/share/atuin/init.nu
-
-# Carapace: completions
-let carapace_init = $"($env.HOME)/.cache/carapace/init.nu"
-if not ($carapace_init | path exists) {
-    $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense'
-    mkdir ~/.cache/carapace
-    carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
-}
-
 source ~/.cache/carapace/init.nu
+
 
 # ---------------------------
 # Python
 
 $env.PATH = ($env.PATH | prepend $"($env.HOME)/.cargo/bin")
 $env.UV_PYTHON_PREFERENCE = "only-managed"
+
+$env.PATH = ($env.PATH | prepend $"($env.HOME)/conda/bin")
 
 # ---------------------------
 # JAVASCRIPT
@@ -230,3 +222,6 @@ export def --env ekns [] {
   let cfg = ($env.KUBECONFIG | default "~/.kube/config")
   print $"Set namespace to ($ns) in config: ($cfg)"
 }
+
+
+use conda.nu

@@ -12,3 +12,6 @@ home/.jupyter/lab/workspaces/
 
 home/.config/nvim/lua/local.lua
 home/.config/nvim/lazy-lock.json
+
+home/.gnupg/crls.d/
+
