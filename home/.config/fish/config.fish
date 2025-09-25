@@ -70,9 +70,8 @@ if command -q direnv
     direnv hook fish | source
 end
 
-if test -f "$HOME/.local/scripts/git-worktree.fish"
-    source "$HOME/.local/scripts/git-worktree.fish"
-end
+# Project Switcher
+bind \cf 'project_switcher'
 
 # -----------------------------------------------
 # Python

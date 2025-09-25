@@ -1,6 +1,4 @@
-# ------------------------------------------------------------------------------
 # Fish functions for managing git worktrees with a .bare repository structure.
-# ------------------------------------------------------------------------------
 
 # Function to find the project root by searching upwards for a .bare directory
 # Outputs the path to the project root directory if found, and returns 0.
