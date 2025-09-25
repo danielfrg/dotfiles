@@ -71,7 +71,7 @@ if command -q direnv
 end
 
 # Project Switcher
-bind \cf 'project_switcher'
+bind \cf 'project-switcher'
 
 # -----------------------------------------------
 # Python
