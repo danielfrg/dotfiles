@@ -52,6 +52,8 @@ prepend_path "$HOME/.cargo/bin"
 # -----------------------------------------------
 # Tools
 
+alias vim=nvim
+
 if command -q fzf
     fzf --fish | source
 end
