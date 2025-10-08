@@ -95,6 +95,19 @@ end
 # Disables virtualenv's prompt modification
 set -gx VIRTUAL_ENV_DISABLE_PROMPT 1
 
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+if test -f ~/conda/bin/conda
+    eval ~/conda/bin/conda "shell.fish" "hook" $argv | source
+else
+    if test -f "~/conda/etc/fish/conf.d/conda.fish"
+        . ~/conda/etc/fish/conf.d/conda.fish
+    else
+        set -x PATH "~/conda/bin" $PATH
+    end
+end
+# <<< conda initialize <<<
+
 # -----------------------------------------------
 # Javascript
 
@@ -234,6 +247,7 @@ if command -q starship
 end
 
 # Added by LM Studio CLI (lms)
-set -gx PATH $PATH /Users/danrodriguez/.lmstudio/bin
+# set -gx PATH $PATH /Users/danrodriguez/.lmstudio/bin
 # End of LM Studio CLI section
+
 
