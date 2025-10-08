@@ -167,3 +167,5 @@ else
 fi
 unset __mamba_setup
 # <<< mamba initialize <<<
+export PATH="/Users/danrodriguez/.config/herd-lite/bin:$PATH"
+export PHP_INI_SCAN_DIR="/Users/danrodriguez/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"

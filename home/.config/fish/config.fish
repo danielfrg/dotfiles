@@ -232,3 +232,8 @@ end
 if command -q starship
     starship init fish | source
 end
+
+# Added by LM Studio CLI (lms)
+set -gx PATH $PATH /Users/danrodriguez/.lmstudio/bin
+# End of LM Studio CLI section
+
