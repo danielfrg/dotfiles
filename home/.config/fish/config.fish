@@ -75,6 +75,8 @@ end
 # Project Switcher
 bind \cf 'project-switcher'
 
+prepend_path "$HOME/.opencode/bin"
+
 # -----------------------------------------------
 # Python
 
@@ -97,15 +99,15 @@ set -gx VIRTUAL_ENV_DISABLE_PROMPT 1
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-if test -f ~/conda/bin/conda
-    eval ~/conda/bin/conda "shell.fish" "hook" $argv | source
-else
-    if test -f "~/conda/etc/fish/conf.d/conda.fish"
-        . ~/conda/etc/fish/conf.d/conda.fish
-    else
-        set -x PATH "~/conda/bin" $PATH
-    end
-end
+# if test -f ~/conda/bin/conda
+#     eval ~/conda/bin/conda "shell.fish" "hook" $argv | source
+# else
+#     if test -f "~/conda/etc/fish/conf.d/conda.fish"
+#         . ~/conda/etc/fish/conf.d/conda.fish
+#     else
+#         set -x PATH "~/conda/bin" $PATH
+#     end
+# end
 # <<< conda initialize <<<
 
 # -----------------------------------------------
@@ -185,17 +187,23 @@ end
 
 # Helper for setting a namespace
 function ekns
-    # Capture list of namespaces into a Fish list
-    set -l namespaces (kubectl get ns -o=custom-columns=:.metadata.name | tail -n +2)
+    # Capture list of namespaces into a Fish list, filtering out the header
+    set -l namespaces (kubectl get ns -o jsonpath='{.items[*].metadata.name}')
 
-    # Use the list with fzf
-    set -l selected_ns (echo $namespaces | fzf --select-1 --preview "kubectl --namespace {} get pods")
+    # Check if any namespaces were found
+    if test -z "$namespaces"
+        echo "No namespaces found."
+        return 1
+    end
 
-    # Proceed only if a namespace was selected (fzf output is not empty)
+    # Use the list with fzf, passing one namespace per line
+    set -l selected_ns (string split ' ' -- $namespaces | fzf --select-1 --preview "kubectl --namespace {} get pods")
+
+    # Proceed only if a namespace was selected
     if test -n "$selected_ns"
       set -gx KUBE_NAMESPACE $selected_ns
-      kubectl config set-context --current --namespace="$KUBE_NAMESPACE"
-      echo "Set namespace to $KUBE_NAMESPACE in current kubeconfig context."
+      kubectl config set-context --current --namespace="$selected_ns"
+      echo "Set namespace for current context to: $selected_ns"
     else
       echo "No namespace selected."
     end
@@ -249,5 +257,3 @@ end
 # Added by LM Studio CLI (lms)
 # set -gx PATH $PATH /Users/danrodriguez/.lmstudio/bin
 # End of LM Studio CLI section
-
-

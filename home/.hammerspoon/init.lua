@@ -13,19 +13,19 @@ Gdrive:bind('', 'escape', function()
 end)
 
 Gdrive:bind('', '1', function()
-    hs.application.launchOrFocus("Chromium")
+    hs.application.launchOrFocus("Brave")
     hs.execute('open "https://drive.google.com/drive/u/0/my-drive"')
     Gdrive:exit()
 end)
 
 Gdrive:bind('', '2', function()
-    hs.application.launchOrFocus("Chromium")
+    hs.application.launchOrFocus("Brave")
     hs.execute('open "https://drive.google.com/drive/u/1/my-drive"')
     Gdrive:exit()
 end)
 
 Gdrive:bind('', '3', function()
-    hs.application.launchOrFocus("Chromium")
+    hs.application.launchOrFocus("Brave")
     hs.execute('open "https://drive.google.com/drive/u/2/my-drive"')
     Gdrive:exit()
 end)
@@ -42,13 +42,13 @@ Gmail:bind('', 'escape', function()
 end)
 
 Gmail:bind('', '1', function()
-    hs.application.launchOrFocus("Chromium")
+    hs.application.launchOrFocus("Brave")
     hs.execute('open "https://mail.google.com/mail/u/0/#inbox"')
     Gmail:exit()
 end)
 
 Gmail:bind('', '2', function()
-    hs.application.launchOrFocus("Chromium")
+    hs.application.launchOrFocus("Brave")
     hs.execute('open "https://mail.google.com/mail/u/2/#inbox"')
     Gmail:exit()
 end)
@@ -58,14 +58,14 @@ end)
 
 hs.hotkey.bind({ "cmd" }, "[", function()
     local app = hs.application.frontmostApplication()
-    if app and app:name() == "Chromium" then
+    if app and app:name() == "Brave" then
         hs.eventtap.keyStroke({ "cmd", "alt" }, "left")
     end
 end)
 
 hs.hotkey.bind({ "cmd" }, "]", function()
     local app = hs.application.frontmostApplication()
-    if app and app:name() == "Chromium" then
+    if app and app:name() == "Brave" then
         hs.eventtap.keyStroke({ "cmd", "alt" }, "right")
     end
 end)

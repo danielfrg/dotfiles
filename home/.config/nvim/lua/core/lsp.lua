@@ -3,7 +3,8 @@ vim.lsp.enable({
     "pyright",
     "ts",
     "biome",
-    "gopls",
+    -- "gopls",
+    "zls"
 })
 
 vim.diagnostic.config({
