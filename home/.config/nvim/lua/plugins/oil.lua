@@ -22,6 +22,7 @@ return {
                 float = {
                     -- Padding around the floating window
                     padding = 10,
+                    border = "rounded",
                 }
             })
 
