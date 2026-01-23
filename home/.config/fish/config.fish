@@ -135,15 +135,15 @@ set -gx VIRTUAL_ENV_DISABLE_PROMPT 1
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-# if test -f ~/conda/bin/conda
-#     eval ~/conda/bin/conda "shell.fish" "hook" $argv | source
-# else
-#     if test -f "~/conda/etc/fish/conf.d/conda.fish"
-#         . ~/conda/etc/fish/conf.d/conda.fish
-#     else
-#         set -x PATH "~/conda/bin" $PATH
-#     end
-# end
+if test -f ~/conda/bin/conda
+    eval ~/conda/bin/conda "shell.fish" "hook" $argv | source
+else
+    if test -f "~/conda/etc/fish/conf.d/conda.fish"
+        . ~/conda/etc/fish/conf.d/conda.fish
+    else
+        set -x PATH "~/conda/bin" $PATH
+    end
+end
 # <<< conda initialize <<<
 
 # -----------------------------------------------
