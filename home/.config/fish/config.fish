@@ -293,4 +293,6 @@ end
 # -----------------------------------------------
 
 # Export local config
-source ~/.config.local.fish
+if test -f ~/.config.local.fish
+    source ~/.config.local.fish
+end
