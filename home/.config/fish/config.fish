@@ -40,6 +40,36 @@ if test (uname) = "Darwin"
     set -gx HOMEBREW_NO_INSTALL_CLEANUP 1
 end
 
+# Fish config
+# ctrl+x ctrl+e: edit command buffer
+bind \cx\ce edit_command_buffer
+
+# ctrl+z: undo
+bind \cz undo
+
+# ctrl+y: redo
+bind \cy redo
+
+# Execute a command based on the extension
+function fish_command_not_found
+    set -l cmd $argv[1]
+    if string match -q "*.json" $cmd
+        jq . $cmd
+    else if string match -q "*.md" $cmd
+        bat $cmd
+    else
+        __fish_default_command_not_found_handler $argv
+    end
+end
+
+abbr -a NA --position anywhere '>/dev/null 2>&1'
+abbr -a NO --position anywhere '>/dev/null'
+abbr -a NE --position anywhere '2>/dev/null'
+abbr -a C --position anywhere '| pbcopy'
+
+# Set editor
+set -gx EDITOR nvim
+
 # Set default config directory
 set -gx XDG_CONFIG_HOME "$HOME/.config"
 
@@ -76,6 +106,12 @@ end
 bind \cf 'project-switcher'
 
 prepend_path "$HOME/.opencode/bin"
+
+abbr -a t 'tmux'
+abbr -a tf 'terraform'
+
+# Things
+alias things="bun --cwd $HOME/Documents/things cli"
 
 # -----------------------------------------------
 # Python
@@ -254,6 +290,7 @@ if command -q starship
     starship init fish | source
 end
 
-# Added by LM Studio CLI (lms)
-# set -gx PATH $PATH /Users/danrodriguez/.lmstudio/bin
-# End of LM Studio CLI section
+# -----------------------------------------------
+
+# Export local config
+source ~/.config.local.fish
