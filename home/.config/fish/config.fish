@@ -76,6 +76,9 @@ set -gx XDG_CONFIG_HOME "$HOME/.config"
 # Local binaries
 set -gx PATH "$HOME/.local/bin" "$HOME/.local/scripts" $PATH
 
+# Thinigs
+prepend_path "$HOME/.things/bin"
+
 # Cargo binaries
 prepend_path "$HOME/.cargo/bin"
 
@@ -110,9 +113,6 @@ prepend_path "$HOME/.opencode/bin"
 abbr -a t 'tmux'
 abbr -a tf 'terraform'
 
-# Things
-alias things="bun --cwd $HOME/Documents/things cli"
-
 # -----------------------------------------------
 # Python
 
@@ -133,18 +133,18 @@ end
 # Disables virtualenv's prompt modification
 set -gx VIRTUAL_ENV_DISABLE_PROMPT 1
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-if test -f ~/conda/bin/conda
-    eval ~/conda/bin/conda "shell.fish" "hook" $argv | source
-else
-    if test -f "~/conda/etc/fish/conf.d/conda.fish"
-        . ~/conda/etc/fish/conf.d/conda.fish
+# conda initialize
+function condainit
+    if test -f ~/conda/bin/conda
+        eval ~/conda/bin/conda "shell.fish" "hook" $argv | source
     else
-        set -x PATH "~/conda/bin" $PATH
+        if test -f "~/conda/etc/fish/conf.d/conda.fish"
+            . ~/conda/etc/fish/conf.d/conda.fish
+        else
+            set -x PATH "~/conda/bin" $PATH
+        end
     end
 end
-# <<< conda initialize <<<
 
 # -----------------------------------------------
 # Javascript
