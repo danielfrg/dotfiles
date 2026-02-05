@@ -2,6 +2,11 @@
 
 set fish_greeting ""
 
+# Set TERM for compatibility with tools like ghostty when SSH'ing
+if not set -q TERM; or test "$TERM" = "dumb"
+    set -gx TERM xterm-256color
+end
+
 function prepend_path
     set -gx PATH $argv[1] $PATH
 end
