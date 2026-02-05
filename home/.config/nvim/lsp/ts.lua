@@ -1,11 +1,11 @@
 return {
     cmd = {
-        "bunx", "typescript-language-server", "--stdio"
+        "bunx", "--bun", "typescript-language-server", "--stdio"
     },
     filetypes = {
         "javascript", "typescript", "javascriptreact", "typescriptreact", "js", "jsx", "ts", "tsx",
     },
     root_markers = {
-        "bun.lock"
+        "bun.lock", "tsconfig.json", "package.json"
     },
 }
