@@ -132,6 +132,15 @@
     wtls = "worktree list"
     wtrm = "worktree remove"
 
+    gh = "!f() { \
+        remote_url=$(git config --get remote.origin.url); \
+        if [ -z \"$remote_url\" ]; then \
+            echo \"No remote 'origin' found\"; \
+            exit 1; \
+        fi; \
+        url=$(echo \"$remote_url\" | sed -e 's|git@github.com:|https://github.com/|' -e 's|\\.git$||'); \
+        open \"$url\"; \
+    }; f"
 
 [filter "lfs"]
     clean = git-lfs clean -- %f
