@@ -81,7 +81,7 @@ set -gx XDG_CONFIG_HOME "$HOME/.config"
 # Local binaries
 set -gx PATH "$HOME/.local/bin" "$HOME/.local/scripts" $PATH
 
-# Thinigs
+# Things
 prepend_path "$HOME/.things/bin"
 
 # Cargo binaries
