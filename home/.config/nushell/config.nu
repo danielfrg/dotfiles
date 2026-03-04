@@ -1,23 +1,75 @@
 $env.config.show_banner = false
 $env.config.highlight_resolved_externals = true
+$env.config.buffer_editor = "nvim"
 
-# Homebrew setup
-if ('/opt/homebrew' | path type) == 'dir' {
-  $env.HOMEBREW_PREFIX = '/opt/homebrew'
-  $env.HOMEBREW_CELLAR = '/opt/homebrew/Cellar'
-  $env.HOMEBREW_REPOSITORY = '/opt/homebrew'
-  $env.PATH = $env.PATH? | prepend [
-    '/opt/homebrew/bin'
-    '/opt/homebrew/sbin'
-  ]
-  $env.MANPATH = $env.MANPATH? | prepend '/opt/homebrew/share/man'
-  $env.INFOPATH = $env.INFOPATH? | prepend '/opt/homebrew/share/info'
+# Set TERM for compatibility with tools like ghostty when SSH'ing
+if ($env.TERM? | default "dumb") == "dumb" {
+  $env.TERM = "xterm-256color"
 }
 
-$env.EDITOR = 'nvim'
+# -----------------------------------------------
+# macOS specific configurations
 
-# -----------------
+if (sys host | get name) == "Darwin" {
+  # Reset PATH to a clean state
+  $env.PATH = ["/bin" "/sbin" "/usr/bin" "/usr/local/bin"]
+
+  # Set Homebrew environment variables
+  $env.HOMEBREW_PREFIX = "/opt/homebrew"
+  $env.HOMEBREW_CELLAR = "/opt/homebrew/Cellar"
+  $env.HOMEBREW_REPOSITORY = "/opt/homebrew"
+
+  # Add Homebrew paths
+  $env.PATH = $env.PATH | prepend [
+    "/opt/homebrew/bin"
+    "/opt/homebrew/sbin"
+  ]
+
+  # GNU tools from Homebrew
+  $env.PATH = $env.PATH | prepend [
+    "/opt/homebrew/opt/coreutils/libexec/gnubin"
+    "/opt/homebrew/opt/findutils/libexec/gnubin"
+    "/opt/homebrew/opt/gnu-sed/libexec/gnubin"
+    "/opt/homebrew/opt/grep/libexec/gnubin"
+  ]
+
+  # Keg-only brew formulas
+  $env.PATH = $env.PATH | prepend [
+    "/usr/local/opt/curl/bin"
+    "/opt/homebrew/opt/libpq/bin"
+  ]
+
+  # Git and GPG config
+  $env.GPG_TTY = (try { tty } catch { "" })
+
+  # Disable Homebrew auto updates for speed
+  $env.HOMEBREW_NO_AUTO_UPDATE = "1"
+  $env.HOMEBREW_NO_INSTALL_CLEANUP = "1"
+
+  $env.MANPATH = ($env.MANPATH? | default "" | prepend "/opt/homebrew/share/man")
+  $env.INFOPATH = ($env.INFOPATH? | default "" | prepend "/opt/homebrew/share/info")
+}
+
+# -----------------------------------------------
+# Environment variables
+
+$env.EDITOR = "nvim"
+$env.XDG_CONFIG_HOME = $"($env.HOME)/.config"
+
+# -----------------------------------------------
+# PATH
+
+$env.PATH = $env.PATH | prepend [
+  $"($env.HOME)/.local/bin"
+  $"($env.HOME)/.local/scripts"
+  $"($env.HOME)/.things/bin"
+  $"($env.HOME)/.cargo/bin"
+  $"($env.HOME)/.opencode/bin"
+]
+
+# -----------------------------------------------
 # Prompt
+
 $env.STARSHIP_SHELL = "nu"
 
 def create_left_prompt [] {
@@ -32,20 +84,28 @@ $env.PROMPT_INDICATOR_VI_INSERT = ": "
 $env.PROMPT_INDICATOR_VI_NORMAL = "〉"
 $env.PROMPT_MULTILINE_INDICATOR = "::: "
 
-# -----------------
+# -----------------------------------------------
 # Abbreviations
 
 let abbreviations = {
-    "..": 'cd ..'
-    "cd..": 'cd ..'
-    g: 'git'
-    k: 'kubectl'
-    kgp: 'kubectl get pods'
-    kgd: 'kubectl get deployments'
-    kg: 'kubectl get'
+    "..": "cd .."
+    "cd..": "cd .."
+    g: "git"
+    t: "tmux"
+    tf: "terraform"
+    k: "kubectl"
+    kg: "kubectl get"
+    kl: "kubectl logs"
+    kgp: "kubectl get pods"
+    kgn: "kubectl get nodes"
+    kgd: "kubectl get deployments"
+    krmp: "kubectl delete pod"
+    kdp: "kubectl describe pod"
+    uek: "hide-env KUBECONFIG"
+    uekns: "hide-env KUBE_NAMESPACE"
 }
 
-$env.config = {
+$env.config = ($env.config | merge {
     keybindings: [
       {
         name: abbr_menu
@@ -94,9 +154,12 @@ $env.config = {
             }
         }
     ]
-}
+})
 
-# Project session
+# -----------------------------------------------
+# Keybindings
+
+# Ctrl+F: Project session switcher
 $env.config.keybindings ++= [{
     name: run_project_session
     modifier: control
@@ -108,7 +171,35 @@ $env.config.keybindings ++= [{
     }
 }]
 
+# -----------------------------------------------
+# Aliases
+
+alias vim = nvim
+
+# -----------------------------------------------
+# Tools
+
+# Regenerate cached init files for atuin, carapace, and zoxide.
+# Run after installing or updating these tools.
+def setup-nu-cache [
+    --force (-f) # Regenerate all files even if they exist
+] {
+    let flag = (if $force { ["--force"] } else { [] })
+    nu ($nu.default-config-dir | path join "setup.nu") ...$flag
+}
+
+# Atuin (Magical Shell History)
+source ~/.local/share/atuin/init.nu
+
+# Carapace (Completions)
+source ~/.cache/carapace/init.nu
+
+# Zoxide (Smart cd)
+source ~/.cache/zoxide/init.nu
+
+# -----------------------------------------------
 # Git Worktree
+
 $env.GIT_WT_SCRIPT = $"($env.HOME)/.local/scripts/git-worktree.sh"
 
 def git-find-root [] {
@@ -123,46 +214,114 @@ def git-wt-new [...args] {
     bash -c $"source ($env.GIT_WT_SCRIPT) && git-wt-new \"$@\"" _ ...$args
 }
 
-# ---------------------------
-# Tools
-
-# Atuin
-
-# Run setup.nu to configure atuin and carapace
-source ~/.local/share/atuin/init.nu
-source ~/.cache/carapace/init.nu
-
-
-# ---------------------------
+# -----------------------------------------------
 # Python
 
-$env.PATH = ($env.PATH | prepend $"($env.HOME)/.cargo/bin")
+$env.HATCH_CONFIG = $"($env.HOME)/.config/hatch/config.toml"
 $env.UV_PYTHON_PREFERENCE = "only-managed"
+$env.VIRTUAL_ENV_DISABLE_PROMPT = "1"
 
 $env.PATH = ($env.PATH | prepend $"($env.HOME)/conda/bin")
 
-# ---------------------------
-# JAVASCRIPT
+# Clean Python build artifacts and caches
+def pyclean [] {
+    glob "**/*.py[co]" | each { |f| rm $f } | ignore
+    glob "**/__pycache__" | each { |d| rm -rf $d } | ignore
+    glob "**/dist" | each { |d| rm -rf $d } | ignore
+    glob "**/.ipynb_checkpoints" | each { |d| rm -rf $d } | ignore
+    glob "**/.pytest_cache" | each { |d| rm -rf $d } | ignore
+    glob "**/.venv" | each { |d| rm -rf $d } | ignore
+    print "Cleaned Python artifacts."
+}
 
-# if not ("VOLTA_HOME" in $env) {
-#     $env.VOLTA_HOME = $"($env.HOME)/.volta"
-# }
-# $env.PATH = ($env.PATH | prepend $"($env.VOLTA_HOME)/bin")
+# Explicit conda initialization (lazy-load alternative)
+def --env condainit [] {
+    let conda_bin = $"($env.HOME)/conda/bin/conda"
+    if ($conda_bin | path exists) {
+        # Delegate to the conda.nu module
+        use conda.nu
+        print "Conda initialized. Use `conda activate` and `conda deactivate`."
+    } else {
+        print "Conda not found at ~/conda/bin/conda"
+    }
+}
 
-# Bun
+# -----------------------------------------------
+# Javascript
+
 $env.PATH = ($env.PATH | prepend $"($env.HOME)/.bun/bin")
 
-# Set other environment variables.
-$env.ASTRO_TELEMETRY_DISABLED = 1
-$env.NEXT_TELEMETRY_DEBUG = 1
-$env.DISABLE_OPENCOLLECTIVE = 1
-$env.ADBLOCK = 1
-$env.VOLTA_FEATURE_PNPM = 1
+$env.ASTRO_TELEMETRY_DISABLED = "1"
+$env.NEXT_TELEMETRY_DEBUG = "1"
+$env.DISABLE_OPENCOLLECTIVE = "1"
+$env.ADBLOCK = "1"
 
 alias npmreset = rm -rf node_modules
 
+# -----------------------------------------------
+# Docker
+
+def docker-rm-all [] {
+    let ids = (docker ps -a -q | lines)
+    if ($ids | is-empty) { print "No containers."; return }
+    docker rm -f ...$ids
+}
+
+def docker-stop-all [] {
+    let ids = (docker ps -a -q | lines)
+    if ($ids | is-empty) { print "No containers."; return }
+    docker stop ...$ids
+}
+
+def docker-prune [] {
+    docker system prune -f
+}
+
+def docker-clean [] {
+    docker-stop-all
+    docker-prune
+}
+
+def docker-rmi-empty [] {
+    let ids = (docker images -f "dangling=true" -q | lines)
+    if ($ids | is-empty) { print "No dangling images."; return }
+    docker rmi ...$ids
+}
+
+def docker-rmi-prefix [prefix: string] {
+    let images = (docker images --filter $"reference=($prefix)*" --format "{{.Repository}}:{{.Tag}}" | lines)
+    if ($images | is-empty) { print "No matching images."; return }
+    docker rmi -f ...$images
+}
+
+def docker-rmi-all [] {
+    let ids = (docker images --format "{{.ID}}" | lines)
+    if ($ids | is-empty) { print "No images."; return }
+    docker rmi -f ...$ids
+}
+
+# -----------------------------------------------
 # Kubernetes
 
+if (which kubectl | is-not-empty) {
+    # Backup and symlink ~/.kube/config to /dev/null
+    let kube_config = $"($env.HOME)/.kube/config"
+    if ($kube_config | path exists) and (not ($kube_config | path type | $in == "symlink")) {
+        let backup = $"($env.HOME)/.kube/config.backup_(date now | format date '%Y%m%d_%H%M%S')"
+        mv $kube_config $backup
+        print $"Existing ~/.kube/config backed up to ($backup)."
+    }
+    if not ($kube_config | path exists) {
+        ln -sf /dev/null $kube_config
+    }
+}
+
+# Alias kubectl to kubecolor if available
+if (which kubecolor | is-not-empty) {
+    alias kubectl = kubecolor
+}
+
+# Export kubeconfig (interactive fzf selector)
 def --env ek [
   query?: string
 ] {
@@ -204,7 +363,7 @@ def --env ek [
 }
 
 # Select and set a Kubernetes namespace
-export def --env ekns [] {
+def --env ekns [] {
   let namespaces = (try { kubectl get ns -o=custom-columns=:.metadata.name | lines } catch { [] })
   if ($namespaces | is-empty) {
     print "No namespaces found."
@@ -219,9 +378,40 @@ export def --env ekns [] {
 
   $env.KUBE_NAMESPACE = $ns
   kubectl config set-context --current --namespace $ns | ignore
-  let cfg = ($env.KUBECONFIG | default "~/.kube/config")
+  let cfg = ($env.KUBECONFIG? | default "~/.kube/config")
   print $"Set namespace to ($ns) in config: ($cfg)"
 }
 
+# -----------------------------------------------
+# Functions
+
+# Show directory sizes
+def dirsize [...paths: string] {
+    if ($paths | is-empty) {
+        du . | select path apparent physical | first 20
+    } else {
+        $paths | each { |p| du $p } | flatten | select path apparent physical
+    }
+}
+
+# Clip a video segment using ffmpeg
+def clipvideo [
+    input: string    # Input file
+    start: string    # Start time (e.g., 00:01:30)
+    end_time: string # End time (e.g., 00:02:45)
+    output: string   # Output file
+] {
+    ffmpeg -i $input -ss $start -to $end_time -c:v copy -c:a copy $output
+}
+
+# -----------------------------------------------
+# Conda
 
 use conda.nu
+
+# -----------------------------------------------
+
+# Source local config for machine-specific settings (optional).
+# Create ~/.config.local.nu to add overrides not tracked in the dotfiles repo.
+const local_config = (if ("~/.config.local.nu" | path exists) { "~/.config.local.nu" } else { null })
+source $local_config

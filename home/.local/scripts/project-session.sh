@@ -15,20 +15,20 @@ else
         tmuxifier_sessions=""
     fi
 
-    if [[ -d ~/Documents ]]; then
-        base_dirs+=(~/Documents)
+    if [[ -d ~/code]]; then
+        base_dirs+=(~/code)
     fi
 
     if [[ -d ~/Documents/danielfrg ]]; then
-        base_dirs+=(~/Documents/danielfrg)
+        base_dirs+=(~/code/danielfrg)
     fi
 
     if [[ -d ~/Documents/inmatura ]]; then
-        base_dirs+=(~/Documents/inmatura)
+        base_dirs+=(~/code/inmatura)
     fi
 
     if [[ -d ~/Documents/nvidia ]]; then
-        base_dirs+=(~/Documents/nvidia)
+        base_dirs+=(~/code/nvidia)
     fi
 
     selected=$(
