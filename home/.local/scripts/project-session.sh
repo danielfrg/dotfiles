@@ -15,19 +15,19 @@ else
         tmuxifier_sessions=""
     fi
 
-    if [[ -d ~/code]]; then
+    if [[ -d ~/code ]]; then
         base_dirs+=(~/code)
     fi
 
-    if [[ -d ~/Documents/danielfrg ]]; then
+    if [[ -d ~/code/danielfrg ]]; then
         base_dirs+=(~/code/danielfrg)
     fi
 
-    if [[ -d ~/Documents/inmatura ]]; then
+    if [[ -d ~/code/inmatura ]]; then
         base_dirs+=(~/code/inmatura)
     fi
 
-    if [[ -d ~/Documents/nvidia ]]; then
+    if [[ -d ~/code/nvidia ]]; then
         base_dirs+=(~/code/nvidia)
     fi
 
