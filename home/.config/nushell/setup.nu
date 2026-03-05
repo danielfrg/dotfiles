@@ -23,7 +23,7 @@ def main [
     let carapace_init = $"($env.HOME)/.cache/carapace/init.nu"
     if $force or not ($carapace_init | path exists) {
         print "Configuring carapace..."
-        $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense'
+        $env.CARAPACE_BRIDGES = 'zsh,bash,inshellisense'
         mkdir ($carapace_init | path dirname)
         carapace _carapace nushell | save --force $carapace_init
         print $"  Saved to ($carapace_init)"
