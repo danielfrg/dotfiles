@@ -2,7 +2,7 @@ vim.lsp.enable({
     "ruff",
     "pyright",
     "ts",
-    -- "biome", -- Disabled: Project uses Prettier via conform.nvim
+    -- "biome", -- Disabled: formatting is handled by conform.nvim
     -- "gopls",
     "zls"
 })
@@ -62,10 +62,26 @@ vim.api.nvim_create_autocmd('LspAttach', {
                     local format_logic = {
                         -- For python, prefer ruff
                         python = 'ruff',
-                        -- TypeScript/JavaScript formatting handled by conform.nvim + Prettier
+                    }
+
+                    local conform_filetypes = {
+                        javascript = true,
+                        javascriptreact = true,
+                        typescript = true,
+                        typescriptreact = true,
+                        json = true,
+                        jsonc = true,
+                        yaml = true,
+                        markdown = true,
+                        html = true,
+                        css = true,
                     }
 
                     local filetype = vim.bo[bufnr].filetype
+                    if conform_filetypes[filetype] then
+                        return
+                    end
+
                     local preferred_formatter = format_logic[filetype]
 
                     vim.lsp.buf.format({
