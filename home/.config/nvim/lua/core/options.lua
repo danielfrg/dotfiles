@@ -3,6 +3,14 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- ensure system tools are on PATH (GUI launches may miss /usr/bin)
+if vim.fn.executable("tree-sitter") == 0 then
+    local path = vim.env.PATH or ""
+    if not path:match("(^|:)/usr/bin(:|$)") then
+        vim.env.PATH = "/usr/local/bin:/usr/bin:/bin:" .. path
+    end
+end
+
 -- set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 

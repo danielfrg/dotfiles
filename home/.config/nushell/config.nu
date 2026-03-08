@@ -2,11 +2,6 @@ $env.config.show_banner = false
 $env.config.highlight_resolved_externals = true
 $env.config.buffer_editor = "nvim"
 
-# Set TERM for compatibility with tools like ghostty when SSH'ing
-if ($env.TERM? | default "dumb") == "dumb" {
-  $env.TERM = "xterm-256color"
-}
-
 # -----------------------------------------------
 # macOS specific configurations
 
@@ -55,6 +50,8 @@ if (sys host | get name) == "Darwin" {
 
 $env.EDITOR = "nvim"
 $env.XDG_CONFIG_HOME = $"($env.HOME)/.config"
+$env.LANG = "en_US.utf8"
+$env.LC_ALL = "en_US.utf8"
 
 # -----------------------------------------------
 # PATH

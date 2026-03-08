@@ -38,6 +38,7 @@ return {
         -- event  = "VeryLazy",
         build  = ":TSUpdate",
         opts   = {
+            install_dir = vim.fn.stdpath("data") .. "/lazy/nvim-treesitter",
             indent = {
                 enable = true,
                 -- disable = {
@@ -49,9 +50,9 @@ return {
                 use_languagetree = true,
             },
         },
-        -- config = function(_, opts)
-        --     require("nvim-treesitter.configs").setup(opts)
-        -- end
+        config = function(_, opts)
+            require("nvim-treesitter").setup(opts)
+        end,
     },
 
     {
