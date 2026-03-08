@@ -87,6 +87,8 @@ $env.PROMPT_MULTILINE_INDICATOR = "::: "
 let abbreviations = {
     "..": "cd .."
     "cd..": "cd .."
+    ll: "ls -l"
+    la: "ls -la"
     g: "git"
     t: "tmux"
     tf: "terraform"
