@@ -268,7 +268,8 @@ $env.HATCH_CONFIG = $"($env.HOME)/.config/hatch/config.toml"
 $env.UV_PYTHON_PREFERENCE = "only-managed"
 $env.VIRTUAL_ENV_DISABLE_PROMPT = "1"
 
-$env.PATH = ($env.PATH | prepend $"($env.HOME)/conda/bin")
+$env.PATH = ($env.PATH | append $"($env.HOME)/.pixi/bin")
+$env.PATH = ($env.PATH | append $"($env.HOME)/conda/bin")
 
 # Clean Python build artifacts and caches
 def pyclean [] {
