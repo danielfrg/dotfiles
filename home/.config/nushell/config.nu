@@ -193,54 +193,6 @@ source ~/.local/share/atuin/init.nu
 # Carapace (Completions)
 source ~/.cache/carapace/init.nu
 
-# Patch: wrap the carapace completer to fix kubectl subcommands that complete
-# resource types instead of pod names (carapace-bin bug).
-# Affected commands: kubectl logs <pod>, kubectl exec <pod>
-let carapace_base = $env.config.completions.external.completer
-
-let kubectl_pod_completer = {|spans|
-    # Commands where positional arg 1 should be a pod name
-    let pod_name_cmds = ["logs" "exec"]
-
-    # Resolve alias: kubectl -> kubecolor
-    let resolved = (scope aliases | where name == $spans.0 | $in.0?.expansion? | default $spans.0 | split row " " | first)
-    let is_kubectl = ($resolved == "kubectl" or $resolved == "kubecolor")
-
-    # Check if we're completing the pod-name positional: `kubectl logs <TAB>` or `kubectl exec <TAB>`
-    # spans = [kubectl, logs, <partial>]  -> length >= 2, subcmd matches, completing arg at position 2
-    let subcmd = ($spans | get 1?)
-    let completing_positional_1 = (
-        $is_kubectl
-        and ($subcmd != null)
-        and ($subcmd in $pod_name_cmds)
-        and ($spans | length) == 3
-        and not (($spans | last) | str starts-with "-")
-    )
-
-    if $completing_positional_1 {
-        # Respect -n / --namespace flag if already typed
-        let ns_idx = ($spans | enumerate | where { $in.item == "-n" or $in.item == "--namespace" } | get 0? | get index?)
-        let ns_args = if $ns_idx != null { ["-n" ($spans | get ($ns_idx + 1))] } else { [] }
-
-        try {
-            kubectl get pods ...$ns_args -o custom-columns="NAME:.metadata.name,NAMESPACE:.metadata.namespace" --no-headers
-            | lines
-            | where { ($in | str trim) != "" }
-            | each {|line|
-                let parts = ($line | split row " " | where { ($in | str trim) != "" })
-                let ns = ($parts | get 1? | default "")
-                { value: ($parts | first), description: $"Pod ($ns)" }
-            }
-        } catch {
-            do $carapace_base $spans
-        }
-    } else {
-        do $carapace_base $spans
-    }
-}
-
-$env.config = ($env.config | upsert completions.external.completer $kubectl_pod_completer)
-
 # Zoxide (Smart cd)
 source ~/.cache/zoxide/init.nu
 
