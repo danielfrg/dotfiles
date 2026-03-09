@@ -1,0 +1,7 @@
+# Delegate kubecolor completions to kubectl (carapace-bin completer).
+# Needed because `alias kubectl = kubecolor` in Nushell causes Carapace to
+# resolve the alias and call `carapace kubecolor` instead of `carapace kubectl`.
+name: kubecolor
+description: kubecolor wraps kubectl with colorized output
+completion:
+  positionalany: ["$carapace.bridge.CarapaceBin([\"kubectl\"])"]
