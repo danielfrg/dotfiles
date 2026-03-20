@@ -223,15 +223,68 @@ $env.VIRTUAL_ENV_DISABLE_PROMPT = "1"
 $env.PATH = ($env.PATH | append $"($env.HOME)/.pixi/bin")
 $env.PATH = ($env.PATH | append $"($env.HOME)/conda/bin")
 
-# Clean Python build artifacts and caches
-def pyclean [] {
-    glob "**/*.py[co]" | each { |f| rm $f } | ignore
-    glob "**/__pycache__" | each { |d| rm -rf $d } | ignore
-    glob "**/dist" | each { |d| rm -rf $d } | ignore
-    glob "**/.ipynb_checkpoints" | each { |d| rm -rf $d } | ignore
-    glob "**/.pytest_cache" | each { |d| rm -rf $d } | ignore
-    glob "**/.venv" | each { |d| rm -rf $d } | ignore
-    print "Cleaned Python artifacts."
+# Recursively remove Python build artifacts, caches, and virtual environments
+def py-clean [
+    path?: string   # directory to clean (defaults to current directory)
+    --dry-run (-d)  # list what would be removed without deleting
+] {
+    let target = ($path | default ".")
+
+    let dir_patterns = [
+        "**/__pycache__"
+        "**/.pytest_cache"
+        "**/.mypy_cache"
+        "**/.ruff_cache"
+        "**/.ipynb_checkpoints"
+        "**/.venv"
+        "**/dist"
+        "**/*.egg-info"
+        "**/build"
+        "**/.tox"
+        "**/.nox"
+    ]
+
+    let file_patterns = [
+        "**/*.py[co]"
+    ]
+
+    let dir_matches = ($dir_patterns
+        | each { |p| glob ($target | path join $p) }
+        | flatten
+        | uniq
+        | sort
+    )
+
+    let file_matches = ($file_patterns
+        | each { |p| glob ($target | path join $p) }
+        | flatten
+        | uniq
+        | sort
+    )
+
+    if ($dir_matches | is-empty) and ($file_matches | is-empty) {
+        print "Nothing to clean."
+        return
+    }
+
+    let dir_total = if ($dir_matches | is-empty) { 0b } else {
+        $dir_matches | each { |d| du $d | get 0.apparent } | math sum
+    }
+    let file_total = if ($file_matches | is-empty) { 0b } else {
+        $file_matches | each { |f| ls $f | get 0.size } | math sum
+    }
+    let total = $dir_total + $file_total
+
+    if $dry_run {
+        print $"Would remove ($dir_matches | length) directories and ($file_matches | length) files \(($total)\):"
+        $dir_matches | each { |d| print $"  ($d)/" } | ignore
+        $file_matches | each { |f| print $"  ($f)" } | ignore
+        return
+    }
+
+    $dir_matches | each { |d| rm -rf $d } | ignore
+    $file_matches | each { |f| rm $f } | ignore
+    print $"Removed ($dir_matches | length) directories and ($file_matches | length) files, freed ~($total)."
 }
 
 # Explicit conda initialization (lazy-load alternative)
@@ -251,12 +304,58 @@ def --env condainit [] {
 
 $env.PATH = ($env.PATH | prepend $"($env.HOME)/.bun/bin")
 
+$env.PATH = ($env.PATH | prepend $"($env.HOME)/.vite-plus/bin")
+
 $env.ASTRO_TELEMETRY_DISABLED = "1"
 $env.NEXT_TELEMETRY_DEBUG = "1"
 $env.DISABLE_OPENCOLLECTIVE = "1"
 $env.ADBLOCK = "1"
 
 alias npmreset = rm -rf node_modules
+
+# Recursively remove node_modules and other JS dependency/cache directories
+def node-clean [
+    path?: string   # directory to clean (defaults to current directory)
+    --dry-run (-d)  # list what would be removed without deleting
+] {
+    let target = ($path | default ".")
+
+    let patterns = [
+        "**/node_modules"
+        "**/.next"
+        "**/.nuxt"
+        "**/.turbo"
+        "**/.cache"
+        "**/.parcel-cache"
+        "**/.svelte-kit"
+        "**/.output"
+        "**/dist"
+        "**/.vercel"
+    ]
+
+    let matches = ($patterns
+        | each { |p| glob ($target | path join $p) }
+        | flatten
+        | uniq
+        | sort
+    )
+
+    if ($matches | is-empty) {
+        print "Nothing to clean."
+        return
+    }
+
+    let total = ($matches | each { |d| du $d | get 0.apparent } | math sum)
+
+    if $dry_run {
+        print $"Would remove ($matches | length) directories \(($total)\):"
+        $matches | each { |d| print $"  ($d)" } | ignore
+        return
+    }
+
+    $matches | each { |d| rm -rf $d } | ignore
+    print $"Removed ($matches | length) directories, freed ~($total)."
+}
 
 # -----------------------------------------------
 # Docker
