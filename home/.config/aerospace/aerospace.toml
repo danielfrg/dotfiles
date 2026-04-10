@@ -200,7 +200,7 @@ run = ['move-node-to-workspace 2']
 [[on-window-detected]]
 if.app-id = 'com.mitchellh.ghostty'
 check-further-callbacks = true
-run = ['move-node-to-workspace 2']
+run = ['move-node-to-workspace 2', "layout floating"]
 
 [[on-window-detected]]
 if.app-id = 'com.microsoft.VSCode'

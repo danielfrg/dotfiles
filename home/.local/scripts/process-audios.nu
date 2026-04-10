@@ -31,7 +31,7 @@ def run-parakeet [parakeet_dir: string, audio_path: string] {
 
 def main [
     --input-dir: string = "~/Downloads/audios"
-    --parakeet-dir: string = "~/code/parakeet-asr"
+    --parakeet-dir: string = "~/code/danielfrg/parakeet-asr"
     --completed-dir: string = "~/Downloads/audios/completed"
 ] {
     let input_dir = ($input_dir | path expand)

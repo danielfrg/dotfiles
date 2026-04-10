@@ -90,6 +90,7 @@ map("n", "<leader>n", "<cmd>enew<cr>", { desc = "New file" })
 
 -- save
 map("n", "<leader>s", "<cmd>w!<cr><esc>", { desc = "Save file" })
+map("n", "<leader>S", "<cmd>noautocmd w!<cr>", { desc = "Save without formatting" })
 
 -- Open file explorer
 -- map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>")
