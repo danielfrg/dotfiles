@@ -1,0 +1,15 @@
+# Pi runtime state and credentials (machine-local)
+auth.json
+trust.json
+models.json
+models-store.json
+sessions/
+
+# Pi-managed packages and generated dependencies
+git/
+npm/
+node_modules/
+
+# Local artifacts
+.DS_Store
+*.log

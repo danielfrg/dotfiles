@@ -172,6 +172,3 @@ export PHP_INI_SCAN_DIR="/Users/danrodriguez/.config/herd-lite/bin:$PHP_INI_SCAN
 
 # opencode
 export PATH=/Users/danrodriguez/.opencode/bin:$PATH
-
-# Vite+ bin (https://viteplus.dev)
-. "$HOME/.vite-plus/env"

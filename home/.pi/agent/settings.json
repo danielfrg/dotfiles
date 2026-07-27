@@ -1,0 +1,7 @@
+{
+  "lastChangelogVersion": "0.82.0",
+  "defaultProvider": "nvidia-openai",
+  "defaultModel": "azure/openai/gpt-5.6-sol",
+  "defaultThinkingLevel": "xhigh",
+  "theme": "dark"
+}
