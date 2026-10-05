@@ -138,7 +138,6 @@ export PATH="/Users/danrodriguez/.pixi/bin:$PATH"
 export PATH="$PATH:/Users/danrodriguez/.lmstudio/bin"
 # End of LM Studio CLI section
 
-
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/danielfrg/conda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
@@ -153,7 +152,6 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
 
 # >>> mamba initialize >>>
 # !! Contents within this block are managed by 'mamba shell init' !!
@@ -172,3 +170,5 @@ export PHP_INI_SCAN_DIR="/Users/danrodriguez/.config/herd-lite/bin:$PHP_INI_SCAN
 
 # opencode
 export PATH=/Users/danrodriguez/.opencode/bin:$PATH
+
+export PATH="$HOME/.local/bin:$PATH"

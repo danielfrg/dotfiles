@@ -33,12 +33,25 @@ sudo reboot
 Link/stow files:
 
 ```terminal
-just link
+just stow
 
 # or
 
 stow -t $HOME home
 ```
+
+## Global agent instructions
+
+Shared instructions live in `~/.agents/AGENTS.md`. Stow links that file to each agent's supported global instructions path:
+
+| Agent | Global instructions path |
+| --- | --- |
+| Claude Code | `~/.claude/CLAUDE.md` |
+| Codex | `~/.codex/AGENTS.md` |
+| Pi | `~/.pi/agent/AGENTS.md` |
+| OpenCode | `~/.config/opencode/AGENTS.md` |
+
+Edit only `home/.agents/AGENTS.md`, then restart the agent (or reload its context, when supported). Pi intentionally uses `AGENTS.md`; its `SYSTEM.md` would replace Pi's built-in system prompt rather than augment it.
 
 Fonts:
 

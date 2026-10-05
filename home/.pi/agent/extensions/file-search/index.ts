@@ -123,8 +123,10 @@ export default function fileSearchTools(pi: ExtensionAPI) {
   const target = currentTarget();
   const initializers = makeBinaryInitializers(binDir, target, liveBinaryEnv);
 
-  pi.on("session_start", async (_event, ctx) => {
-    const exit = await Effect.runPromiseExit(
+  pi.on("session_start", (_event, ctx) => {
+    // Warm the binary cache without holding up Pi's startup. Tool execution
+    // still awaits the same cached initializers if it starts immediately.
+    void Effect.runPromiseExit(
       Effect.gen(function* () {
         const initialized = yield* Effect.all(
           {
@@ -150,15 +152,15 @@ export default function fileSearchTools(pi: ExtensionAPI) {
           }
         }
       }),
-    );
-
-    if (Exit.isFailure(exit) && ctx.hasUI && !notified) {
-      notified = true;
-      ctx.ui.notify(
-        `file-search setup failed: ${causeMessage(exit.cause)}`,
-        "error",
-      );
-    }
+    ).then((exit) => {
+      if (Exit.isFailure(exit) && ctx.hasUI && !notified) {
+        notified = true;
+        ctx.ui.notify(
+          `file-search setup failed: ${causeMessage(exit.cause)}`,
+          "error",
+        );
+      }
+    });
   });
 
   /** Await init, stream the binary output to disk, and classify its exit. */

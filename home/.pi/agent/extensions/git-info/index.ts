@@ -197,7 +197,9 @@ export default function gitInfo(pi: ExtensionAPI) {
       await getRuntime().runPromise(Fiber.interrupt(previousPollingFiber));
     }
 
-    await runEffect(getRuntime(), refresh(ctx));
+    // Populate the dashboard in the background. In particular, `gh pr view`
+    // may take up to GH_TIMEOUT_MS and must not delay Pi's editor becoming ready.
+    refreshInBackground(ctx);
     pollingFiber = forkBackground(poll());
   });
 

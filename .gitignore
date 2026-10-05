@@ -1,3 +1,8 @@
+# Track the Claude Code alias despite a user-level `.claude` ignore rule.
+!home/.claude/
+home/.claude/*
+!home/.claude/CLAUDE.md
+
 home/.config/karabiner/assets
 home/.config/karabiner/automatic_backups
 
