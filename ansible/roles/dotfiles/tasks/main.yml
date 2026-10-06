@@ -36,8 +36,27 @@
   args:
     chdir: /home/{{ setup_user }}/.dotfiles
 
+- name: Create Zsh plugin directory
+  ansible.builtin.file:
+    path: "/home/{{ setup_user }}/.local/share/zsh_plugins"
+    state: directory
+    mode: "0755"
+
+- name: Install Zsh plugins
+  ansible.builtin.git:
+    repo: "https://github.com/{{ item }}.git"
+    dest: "/home/{{ setup_user }}/.local/share/zsh_plugins/{{ item | basename }}"
+    depth: 1
+    update: true
+  loop:
+    - Aloxaf/fzf-tab
+    - zsh-users/zsh-autosuggestions
+    - zsh-users/zsh-completions
+    - zsh-users/zsh-history-substring-search
+    - zsh-users/zsh-syntax-highlighting
+
 - name: Change shell to zsh
   become: true
-  user:
+  ansible.builtin.user:
     name: "{{ setup_user }}"
     shell: /usr/bin/zsh
