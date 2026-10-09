@@ -11,6 +11,9 @@ default.profraw
 # Environment
 .env
 
+# Syncthing
+.stfolder*
+
 # Visual Studio Code
 /.vscode/
 
