@@ -18,5 +18,8 @@ home/.jupyter/lab/workspaces/
 home/.config/nvim/lua/local.lua
 home/.config/nvim/lazy-lock.json
 
+# Shell history may contain credentials.
+home/.config/nushell/history.*
+
 home/.gnupg/crls.d/
 
