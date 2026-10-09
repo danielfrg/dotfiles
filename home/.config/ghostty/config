@@ -2,8 +2,7 @@ auto-update = off
 
 font-family = Berkeley Mono Variable
 
-# command = /opt/homebrew/bin/zsh
-command = /opt/homebrew/bin/nu --login --config ~/.config/nushell/config.nu
+# Use the account login shell (Zsh on managed macOS and Linux systems).
 
 # Normal
 font-size = 15

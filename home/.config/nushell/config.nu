@@ -46,6 +46,44 @@ if (sys host | get name) == "Darwin" {
 }
 
 # -----------------------------------------------
+# Nix (multi-user installation)
+
+let nix_default_profile = "/nix/var/nix/profiles/default"
+if ($nix_default_profile | path exists) {
+  let nix_state_profile = (($env.XDG_STATE_HOME? | default $"($env.HOME)/.local/state") | path join "nix/profile")
+  let nix_legacy_profile = ($env.HOME | path join ".nix-profile")
+  let nix_user_profile = if ($nix_state_profile | path exists) {
+    $nix_state_profile
+  } else {
+    $nix_legacy_profile
+  }
+
+  $env.NIX_PROFILES = $"($nix_default_profile) ($nix_user_profile)"
+  $env.PATH = $env.PATH | prepend [
+    ($nix_user_profile | path join "bin")
+    ($nix_default_profile | path join "bin")
+  ]
+
+  let xdg_data_dirs = ($env.XDG_DATA_DIRS?
+    | default "/usr/local/share:/usr/share"
+    | split row ":"
+  )
+  $env.XDG_DATA_DIRS = ($xdg_data_dirs
+    | append [
+      ($nix_user_profile | path join "share")
+      ($nix_default_profile | path join "share")
+    ]
+    | uniq
+    | str join ":"
+  )
+
+  let nix_ca_bundle = ($nix_default_profile | path join "etc/ssl/certs/ca-bundle.crt")
+  if (($env.NIX_SSL_CERT_FILE? | default "") | is-empty) and ($nix_ca_bundle | path exists) {
+    $env.NIX_SSL_CERT_FILE = $nix_ca_bundle
+  }
+}
+
+# -----------------------------------------------
 # Environment variables
 
 $env.EDITOR = "nvim"

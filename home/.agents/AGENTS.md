@@ -1,0 +1,2 @@
+- I have all my code in ~/code and for nvidia projects I have a ~/code/nvidia when searching for codebases search on those directories
+- My interactive shell is zsh. When writing commands for me to paste into a terminal use zsh I ask for another shell
