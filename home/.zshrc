@@ -1,4 +1,12 @@
 export PROFILING_MODE=${PROFILING_MODE:-0}
+
+# SSH forwards Ghostty's TERM value, but older remote hosts often do not have
+# its terminfo entry. Fall back before plugins or tools try to use the terminal.
+if [[ ${TERM:-} == xterm-ghostty ]] && \
+   { (( ! $+commands[infocmp] )) || ! command infocmp "$TERM" >/dev/null 2>&1; }; then
+    export TERM=xterm-256color
+fi
+
 if (( PROFILING_MODE )); then
     zmodload zsh/zprof
 fi
