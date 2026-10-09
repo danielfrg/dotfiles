@@ -1,4 +1,4 @@
-# Use the same tracked Starship prompt in Zsh and Nushell.
+# Use the tracked Starship prompt when it is available.
 if (( $+commands[starship] )); then
     _cache_zsh_init starship-zsh-v1 "${commands[starship]}" init zsh
 else
