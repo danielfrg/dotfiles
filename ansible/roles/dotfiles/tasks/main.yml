@@ -6,6 +6,8 @@
     state: present
     update_cache: true
   with_items:
+    - atuin
+    - bat
     - git
     - git-delta
     - eza
@@ -16,10 +18,13 @@
     - lazygit
     - neovim
     - openconnect
+    - ripgrep
+    - starship
     - unzip
     - stow
     - tailscale
     - yazi
+    - zoxide
     - zsh
 
 - name: Clone dotfiles repo

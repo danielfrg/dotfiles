@@ -59,8 +59,7 @@ if [[ $OSTYPE == darwin* ]]; then
         export GPG_TTY="$(tty)"
     fi
 
-    # This is the locale spelling available on macOS. Do not inherit the
-    # invalid en_US.utf8 value previously set by Nushell.
+    # This is the locale spelling available on macOS.
     export LANG="en_US.UTF-8"
     export LC_CTYPE="en_US.UTF-8"
     unset LC_ALL
@@ -369,7 +368,13 @@ clipvideo() {
 # Networking
 
 alias publicip='dig +short myip.opendns.com @resolver1.opendns.com'
-alias localip='ipconfig getifaddr en0'
+if [[ $OSTYPE == darwin* ]]; then
+    alias localip='ipconfig getifaddr en0'
+    alias httpserver='open http://localhost:8000 && python3 -m http.server 8000'
+else
+    localip() { ip route get 1.1.1.1 | awk '{print $7; exit}' }
+    alias httpserver='python3 -m http.server 8000'
+fi
 alias urlencode='python3 -c "import sys, urllib.parse; print(urllib.parse.quote_plus(sys.argv[1]))"'
 
 for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
@@ -377,7 +382,6 @@ for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
 done
 unset method
 
-alias httpserver='open http://localhost:8000 && python3 -m http.server 8000'
 port_listening_who() { lsof -i ":$1" | grep LISTEN }
 
 if [[ -n ${SSH_CLIENT:-} || -n ${SSH_TTY:-} ]]; then
