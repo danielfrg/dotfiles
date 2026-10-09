@@ -247,9 +247,9 @@ project_switcher() {
 zle -N project_switcher
 
 project_session_widget() {
-    zle -I
-    "$HOME/.local/scripts/project-session.sh"
-    zle reset-prompt
+    BUFFER="$HOME/.local/scripts/project-session.sh"
+    CURSOR=${#BUFFER}
+    zle accept-line
 }
 zle -N project_session_widget
 bindkey '^F' project_session_widget

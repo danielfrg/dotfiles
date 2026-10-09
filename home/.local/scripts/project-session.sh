@@ -61,24 +61,28 @@ fi
 
 # Handle directory-based session (original functionality)
 selected_name=$(basename "$selected" | tr . _)
-existingSession=$(tmux list-sessions -F '#S' | grep "^$selected_name$")
+if tmux has-session -t "=$selected_name" 2>/dev/null; then
+    session_exists=1
+else
+    session_exists=0
+fi
 
 if [[ -z $TMUX ]]; then
     # not in tmux session
-    if [[ -z $existingSession ]]; then
+    if (( session_exists == 0 )); then
         # session does not exist
-        tmux new-session -s $selected_name -c $selected
+        tmux new-session -s "$selected_name" -c "$selected"
     else
         # session exists... attach to it
-        tmux attach -t $selected_name
+        tmux attach -t "=$selected_name"
     fi
 else
     # inside tmux session
-    if [[ -z $existingSession ]]; then
+    if (( session_exists == 0 )); then
         # session does not exist... create it
-        tmux new-session -d -s $selected_name -c $selected
+        tmux new-session -d -s "$selected_name" -c "$selected" || exit
     fi
 
     # switch to the session
-    tmux switch-client -t $selected_name
+    tmux switch-client -t "=$selected_name"
 fi
