@@ -79,8 +79,10 @@ map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
 map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
 map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
 
--- tmux sessionizer
-map("n", "<C-f>", "<cmd> silent !tmux neww project-session.sh<CR>")
+-- Rex handles Ctrl+F itself; this also opens its picker from other terminals.
+map("n", "<C-f>", function()
+  vim.fn.jobstart({ vim.fn.expand("~/.local/scripts/project-session-rex.sh"), "--palette" })
+end, { desc = "Rex project session" })
 
 -- Diagnostic keymaps
 map('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })

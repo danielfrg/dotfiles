@@ -173,7 +173,7 @@ check-further-callbacks = true
 run = ['move-node-to-workspace 1']
 
 [[on-window-detected]]
-if.app-id = 'app.zen-browser.zen'
+if.app-id =  'app.zen-browser.zen'
 check-further-callbacks = true
 run = ['move-node-to-workspace 1']
 
@@ -193,29 +193,39 @@ check-further-callbacks = true
 run = ['move-node-to-workspace 1']
 
 [[on-window-detected]]
-if.app-id = 'com.github.wez.wezterm'
+if.app-id = 'com.openai.codex'
 check-further-callbacks = true
 run = ['move-node-to-workspace 2']
 
 [[on-window-detected]]
-if.app-id = 'com.mitchellh.ghostty'
-check-further-callbacks = true
-run = ['move-node-to-workspace 2', "layout floating"]
-
-[[on-window-detected]]
-if.app-id = 'com.microsoft.VSCode'
-check-further-callbacks = true
-run = ['move-node-to-workspace 2']
-
-[[on-window-detected]]
-if.app-id = 'com.tinyspeck.slackmacgap'
+if.app-id = 'com.superlogical.rex'
 check-further-callbacks = true
 run = ['move-node-to-workspace 3']
 
 [[on-window-detected]]
-if.app-id = 'com.microsoft.Outlook'
+if.app-id = 'com.mitchellh.ghostty'
+check-further-callbacks = true
+run = ['move-node-to-workspace 3', "layout floating"]
+
+[[on-window-detected]]
+if.app-id = 'com.github.wez.wezterm'
+check-further-callbacks = true
+run = ['move-node-to-workspace 3']
+
+[[on-window-detected]]
+if.app-id = 'com.microsoft.VSCode'
+check-further-callbacks = true
+run = ['move-node-to-workspace 3']
+
+[[on-window-detected]]
+if.app-id = 'com.tinyspeck.slackmacgap'
 check-further-callbacks = true
 run = ['move-node-to-workspace 4']
+
+[[on-window-detected]]
+if.app-id = 'com.microsoft.Outlook'
+check-further-callbacks = true
+run = ['move-node-to-workspace 5']
 
 [[on-window-detected]]
 if.app-id = 'com.obsproject.obs-studio'

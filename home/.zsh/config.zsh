@@ -246,7 +246,7 @@ project_switcher() {
 zle -N project_switcher
 
 project_session_widget() {
-    BUFFER="$HOME/.local/scripts/project-session.sh"
+    BUFFER="$HOME/.local/scripts/project-session-rex.sh --palette"
     CURSOR=${#BUFFER}
     zle accept-line
 }
