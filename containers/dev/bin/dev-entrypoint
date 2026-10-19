@@ -1,0 +1,139 @@
+#!/usr/bin/env python3
+"""Persistent personal workspace lifecycle; never migrate the database implicitly."""
+import base64
+from contextlib import closing
+from datetime import datetime, timezone
+import fcntl
+import json
+import os
+from pathlib import Path
+import re
+import sqlite3
+import subprocess
+import sys
+import tempfile
+import time
+import urllib.request
+
+
+def paths():
+    home = Path(os.environ["HOME"])
+    database = home / ".local/share/opencode/opencode.db"
+    if os.environ.get("OPENCODE_DB", str(database)) != str(database):
+        raise RuntimeError("OPENCODE_DB must remain on the persistent home volume")
+    return home, database
+
+
+def copy_missing(source, destination):
+    if destination.exists() or destination.is_symlink():
+        return
+    with destination.open("x") as output:
+        output.write(source.read_text())
+
+
+def bootstrap():
+    home, database = paths()
+    profile = Path(os.environ.get("DEV_PROFILE_DIR", "/opt/dev/profile"))
+    for relative in [".config/opencode", ".local/state/opencode", ".local/share/opencode", ".local/bin", ".cache", ".kube"]:
+        (home / relative).mkdir(parents=True, exist_ok=True)
+    for owner in ["danielfrg", "inmatura", "nvidia"]:
+        (home / "code" / owner).mkdir(parents=True, exist_ok=True)
+    for source, destination in [(".zshrc", ".zshrc"), ("starship.toml", ".config/starship.toml"), ("AGENTS.md", ".config/opencode/AGENTS.md"), ("opencode.json", ".config/opencode/opencode.json")]:
+        copy_missing(profile / source, home / destination)
+    os.environ["OPENCODE_DB"] = str(database)
+    service_account = Path("/var/run/secrets/kubernetes.io/serviceaccount")
+    if (service_account / "token").is_file():
+        kubeconfig = home / ".kube/homelab"
+        if not kubeconfig.exists():
+            kubeconfig.write_text(json.dumps({
+                "apiVersion": "v1", "kind": "Config",
+                "clusters": [{"name": "homelab", "cluster": {"server": "https://kubernetes.default.svc", "certificate-authority": str(service_account / "ca.crt")}}],
+                "users": [{"name": "opencode", "user": {"tokenFile": str(service_account / "token")}}],
+                "contexts": [{"name": "homelab", "context": {"cluster": "homelab", "user": "opencode", "namespace": "opencode"}}],
+                "current-context": "homelab",
+            }, indent=2) + "\n")
+        os.environ["KUBECONFIG"] = str(kubeconfig)
+
+
+def serve():
+    bootstrap()
+    home, _ = paths()
+    # Held across exec: a second invocation cannot stop/replace the first service.
+    lock = os.open(home / ".local/state/opencode/workspace.lock", os.O_CREAT | os.O_RDWR, 0o600)
+    try:
+        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except BlockingIOError:
+        raise RuntimeError("Another workspace server already holds this home") from None
+    os.set_inheritable(lock, True)
+    secrets = Path(os.environ.get("DEV_RUNTIME_SECRET_DIR", "/run/secrets/opencode-runtime"))
+    password = (secrets / "server-password").read_text().strip()
+    if not password:
+        raise RuntimeError("A nonempty server-password is required")
+    for key, value in [("hostname", "0.0.0.0"), ("port", "4096"), ("password", password)]:
+        result = subprocess.run(["opencode", "service", "set", key, value], stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=30)
+        if result.returncode:
+            raise RuntimeError("OpenCode service configuration failed")
+    for filename, variable in [("argocd-token", "ARGOCD_AUTH_TOKEN"), ("anthropic-api-key", "ANTHROPIC_API_KEY"), ("openai-api-key", "OPENAI_API_KEY")]:
+        file = secrets / filename
+        if file.is_file() and file.read_text().strip():
+            os.environ[variable] = file.read_text().strip()
+    os.execvp("opencode", ["opencode", "serve", "--service", "--hostname", "0.0.0.0", "--port", "4096"])
+
+
+def health():
+    home, _ = paths()
+    registration = json.loads((home / ".local/state/opencode/service.json").read_text())
+    password = registration["password"]
+    header = "Basic " + base64.b64encode(("opencode:" + password).encode()).decode()
+    request = urllib.request.Request("http://127.0.0.1:4096/api/info", headers={"Authorization": header})
+    # Do not use opencode api here: its normal discovery can start a missing service.
+    with urllib.request.urlopen(request, timeout=3) as response:
+        json.load(response)
+
+
+def backup():
+    _, database = paths()
+    if not database.is_file():
+        raise RuntimeError("No existing OpenCode database to back up")
+    directory = database.parent / "backups"
+    directory.mkdir(mode=0o700, exist_ok=True)
+    descriptor, temporary = tempfile.mkstemp(prefix=".pending-", dir=directory)
+    os.close(descriptor)
+    pending = Path(temporary)
+    deadline = time.monotonic() + 30
+    def progress(status, remaining, total):
+        if time.monotonic() > deadline:
+            raise RuntimeError("Database backup timed out; previous backups are unchanged")
+    try:
+        with closing(sqlite3.connect(database.absolute().as_uri() + "?mode=ro", uri=True, timeout=5)) as source:
+            with closing(sqlite3.connect(pending)) as destination:
+                source.backup(destination, pages=100, progress=progress)
+                if destination.execute("PRAGMA integrity_check").fetchall() != [("ok",)]:
+                    raise RuntimeError("Backup integrity check failed")
+        name = "backup-" + datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ") + ".sqlite3"
+        os.replace(pending, directory / name)
+        pattern = re.compile(r"backup-\d{8}T\d{12}Z\.sqlite3")
+        completed = sorted(p for p in directory.iterdir() if pattern.fullmatch(p.name) and p.is_file() and not p.is_symlink())
+        for old in completed[:-7]:
+            old.unlink()
+        print(str(directory / name))
+    finally:
+        pending.unlink(missing_ok=True)
+
+
+def main():
+    os.umask(0o077)
+    modes = {"bootstrap": bootstrap, "serve": serve, "health": health, "backup": backup}
+    mode = sys.argv[1] if len(sys.argv) == 2 else "serve" if len(sys.argv) == 1 else None
+    if mode not in modes:
+        raise RuntimeError("Usage: dev-entrypoint [bootstrap|serve|health|backup]")
+    modes[mode]()
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except Exception:
+        # No arguments, token contents, subprocess repr, or tracebacks in logs.
+        print("Workspace operation failed; check paths, permissions, credentials, and server state.", file=sys.stderr)
+        sys.exit(1)

@@ -27,3 +27,36 @@ is provided. This image does not provide a Docker daemon or local Compose builds
 No GPU/CUDA, Vite+, Rex server, or SSH server. Do not copy the Mac-oriented dotfiles
 home or laptop credentials into the image. The homelab repository owns deployment,
 NAS paths, runtime secrets, administrative grants, and backup policy.
+
+## Persistent runtime
+
+`dev-entrypoint bootstrap` initializes only missing configuration, code directories,
+and writable user paths. It never overwrites an existing `.zshrc` or OpenCode config.
+`serve` requires a nonempty `server-password` file under
+`/run/secrets/opencode-runtime`, sets service configuration through OpenCode V2,
+then execs `opencode serve --service`. The normal TUI and `opencode pair` discover
+this same foreground-managed service. Use `--entrypoint zsh` for a shell-only
+container; the default command starts the server, not a shell.
+
+Mount your persistent home at `/home/danielfrg`; verify its UID/GID permissions.
+Bind the server port only to localhost for local testing. Kubernetes uses a
+ClusterIP plus port-forward, not public exposure. `DEV_PROFILE_DIR` and
+`DEV_RUNTIME_SECRET_DIR` allow local profile/secret-directory selection; their
+defaults are `/opt/dev/profile` and `/run/secrets/opencode-runtime`.
+
+`OPENCODE_DB` must equal `$HOME/.local/share/opencode/opencode.db`; the launcher
+rejects relocation. It never patches SQLite settings or starts a hidden local DB.
+One lock-held server uses the home. `health` makes an authenticated HTTP health
+request without starting a server or opening its database.
+
+`dev-entrypoint backup` uses SQLite's online backup API inside the same container,
+validates integrity, and publishes private timestamped artifacts under
+`~/.local/share/opencode/backups`. It retains the newest seven successful artifacts,
+preserves unrelated files, and fails without replacing older backups. Schedule and
+off-NAS retention belong to deployment operations. Never copy only a live `.db`
+file or start another OpenCode server on the same database for a restore check.
+
+Client disconnects do not govern the server's lifetime. Container/pod termination
+still interrupts active processes. The local container tests cover authentication,
+pairing, graceful SIGTERM, initialization, and backups; they do not prove NFS WAL
+safety or guarantee job resumption.

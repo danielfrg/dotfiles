@@ -41,4 +41,11 @@ RUN usermod --login danielfrg --home /home/danielfrg --shell /bin/zsh node \
     && chown -R 1000:1000 /home/danielfrg
 USER 1000:1000
 WORKDIR /home/danielfrg
-CMD ["zsh"]
+USER root
+COPY profile/ /opt/dev/profile/
+COPY bin/ /usr/local/bin/
+RUN chmod 0755 /usr/local/bin/dev-entrypoint
+USER 1000:1000
+EXPOSE 4096
+ENTRYPOINT ["dev-entrypoint"]
+CMD ["serve"]

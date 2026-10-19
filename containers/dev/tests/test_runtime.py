@@ -1,0 +1,176 @@
+"""Real bootstrap/backup filesystem tests and authenticated container lifecycle."""
+import base64
+from contextlib import closing
+import json
+import os
+from pathlib import Path
+import sqlite3
+import subprocess
+import tempfile
+import time
+import unittest
+import urllib.error
+import urllib.request
+import uuid
+
+ROOT = Path(__file__).resolve().parents[1]
+ENTRYPOINT = ROOT / "bin/dev-entrypoint"
+IMAGE = os.environ.get("DEV_IMAGE", "daniel-dev:test")
+
+
+class RuntimeTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.home = Path(self.temp.name) / "home"
+        self.home.mkdir()
+        self.env = {**os.environ, "HOME": str(self.home), "DEV_PROFILE_DIR": str(ROOT / "profile")}
+        for key in ["OPENCODE_DB", "XDG_CONFIG_HOME", "XDG_STATE_HOME", "XDG_DATA_HOME"]:
+            self.env.pop(key, None)
+
+    def launch(self, mode):
+        self.assertTrue(ENTRYPOINT.is_file(), "dev-entrypoint is not implemented")
+        return subprocess.run(["python3", str(ENTRYPOINT), mode], env=self.env, capture_output=True, text=True)
+
+    def bootstrap(self):
+        result = self.launch("bootstrap")
+        self.assertEqual(result.returncode, 0, result.stderr)
+
+    def database(self):
+        self.bootstrap()
+        db = self.home / ".local/share/opencode/opencode.db"
+        with closing(sqlite3.connect(db)) as connection:
+            connection.execute("PRAGMA journal_mode=WAL")
+            connection.execute("CREATE TABLE sentinel(value TEXT)")
+            connection.execute("INSERT INTO sentinel VALUES ('uncommitted-work-is-valuable')")
+            connection.commit()
+        return db
+
+    def test_empty_home_bootstrap(self):
+        self.bootstrap()
+        for owner in ["danielfrg", "inmatura", "nvidia"]:
+            self.assertTrue((self.home / "code" / owner).is_dir())
+        self.assertTrue((self.home / ".zshrc").is_file())
+        config = json.loads((self.home / ".config/opencode/opencode.json").read_text())
+        self.assertEqual(config["shell"], "/bin/zsh")
+        self.assertEqual(config["update"], "disable")
+
+    def test_existing_home_preserved(self):
+        (self.home / ".zshrc").write_text("# user customization\n")
+        self.bootstrap()
+        self.assertEqual((self.home / ".zshrc").read_text(), "# user customization\n")
+
+    def test_bootstrap_idempotent(self):
+        self.bootstrap()
+        config = self.home / ".config/opencode/opencode.json"
+        original = config.stat().st_mtime_ns
+        self.bootstrap()
+        self.assertEqual(config.stat().st_mtime_ns, original)
+
+    def test_unusable_home_fails(self):
+        self.env["HOME"] = str(self.home / "not-a-directory")
+        Path(self.env["HOME"]).write_text("do not delete")
+        self.assertNotEqual(self.launch("bootstrap").returncode, 0)
+        self.assertEqual(Path(self.env["HOME"]).read_text(), "do not delete")
+
+    def test_database_path_not_relocated(self):
+        self.env["OPENCODE_DB"] = str(Path(self.temp.name) / "elsewhere.db")
+        self.assertNotEqual(self.launch("bootstrap").returncode, 0)
+        self.assertFalse(Path(self.env["OPENCODE_DB"]).exists())
+
+    def test_health_does_not_start_missing_server(self):
+        self.bootstrap()
+        result = self.launch("health")
+        self.assertNotEqual(result.returncode, 0)
+        self.assertFalse((self.home / ".local/state/opencode/service.json").exists())
+        self.assertFalse((self.home / ".local/share/opencode/opencode.db").exists())
+
+    def test_backup_restores_integrity(self):
+        self.database()
+        result = self.launch("backup")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        artifacts = list((self.home / ".local/share/opencode/backups").glob("backup-*.sqlite3"))
+        self.assertEqual(len(artifacts), 1)
+        self.assertEqual(artifacts[0].stat().st_mode & 0o777, 0o600)
+        with closing(sqlite3.connect(artifacts[0])) as connection:
+            self.assertEqual(connection.execute("PRAGMA integrity_check").fetchone(), ("ok",))
+            self.assertEqual(connection.execute("SELECT value FROM sentinel").fetchone(), ("uncommitted-work-is-valuable",))
+
+    def test_backup_failure_leaves_database_and_previous_backups(self):
+        db = self.database()
+        self.assertEqual(self.launch("backup").returncode, 0)
+        backups = self.home / ".local/share/opencode/backups"
+        previous = {p.name: p.read_bytes() for p in backups.iterdir()}
+        db.write_bytes(b"not a valid database")
+        self.assertNotEqual(self.launch("backup").returncode, 0)
+        self.assertEqual(db.read_bytes(), b"not a valid database")
+        self.assertEqual({p.name: p.read_bytes() for p in backups.iterdir()}, previous)
+
+    def test_database_backup_retention(self):
+        self.database()
+        backups = self.home / ".local/share/opencode/backups"
+        backups.mkdir()
+        (backups / "notes.txt").write_text("keep unrelated files")
+        for _ in range(9):
+            result = self.launch("backup")
+            self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(len(list(backups.glob("backup-*.sqlite3"))), 7)
+        self.assertEqual((backups / "notes.txt").read_text(), "keep unrelated files")
+
+
+class ServerTests(unittest.TestCase):
+    def test_foreground_server_and_auth_and_signal_shutdown(self):
+        self.assertTrue(ENTRYPOINT.is_file(), "dev-entrypoint is not implemented")
+        with tempfile.TemporaryDirectory() as temp:
+            home = Path(temp) / "home"
+            home.mkdir(mode=0o777)
+            home.chmod(0o777)
+            secrets = Path(temp) / "secrets"
+            secrets.mkdir(mode=0o755)
+            password = "synthetic-test-password-only"
+            (secrets / "server-password").write_text(password)
+            name = "dev-test-" + uuid.uuid4().hex
+            command = ["docker", "run", "-d", "--name", name, "--platform", "linux/amd64", "-p", "127.0.0.1::4096", "-v", f"{home}:/home/danielfrg", "-v", f"{secrets}:/run/secrets/opencode-runtime:ro", IMAGE, "serve"]
+            started = subprocess.run(command, capture_output=True, text=True)
+            self.assertEqual(started.returncode, 0, started.stderr)
+            try:
+                port = subprocess.check_output(["docker", "port", name, "4096/tcp"], text=True).strip().rsplit(":", 1)[1]
+                url = f"http://127.0.0.1:{port}/api/info"
+                header = "Basic " + base64.b64encode(f"opencode:{password}".encode()).decode()
+                deadline = time.monotonic() + 90
+                while True:
+                    try:
+                        with urllib.request.urlopen(urllib.request.Request(url, headers={"Authorization": header}), timeout=3) as response:
+                            info = json.load(response)
+                        break
+                    except (OSError, urllib.error.URLError) as error:
+                        if isinstance(error, urllib.error.HTTPError):
+                            error.close()
+                        if time.monotonic() >= deadline:
+                            logs = subprocess.check_output(["docker", "logs", name], stderr=subprocess.STDOUT, text=True)
+                            self.assertNotIn(password, logs, "server logs leaked its password")
+                            self.fail("Server did not become healthy: " + logs[-2500:])
+                        time.sleep(0.5)
+                self.assertIsInstance(info, dict)
+                with self.assertRaises(urllib.error.HTTPError) as error:
+                    urllib.request.urlopen(url)
+                self.assertEqual(error.exception.code, 401)
+                error.exception.close()
+                health = subprocess.run(["docker", "exec", name, "dev-entrypoint", "health"], capture_output=True, text=True)
+                self.assertEqual(health.returncode, 0, health.stderr)
+                pairing = subprocess.run(["docker", "exec", name, "opencode", "pair", "--url", f"http://127.0.0.1:{port}"], capture_output=True, text=True, timeout=30)
+                self.assertEqual(pairing.returncode, 0, pairing.stderr)
+                self.assertIn("/auth/connect/", pairing.stdout)
+                logs = subprocess.check_output(["docker", "logs", name], stderr=subprocess.STDOUT, text=True)
+                self.assertNotIn(password, logs)
+                self.assertTrue((home / ".local/share/opencode/opencode.db").is_file())
+                subprocess.run(["docker", "stop", "--time", "15", name], check=True, capture_output=True)
+                state = json.loads(subprocess.check_output(["docker", "inspect", name, "--format", "{{json .State}}"], text=True))
+                self.assertFalse(state["Running"])
+                self.assertNotEqual(state["ExitCode"], 137, "SIGTERM required forced SIGKILL")
+            finally:
+                subprocess.run(["docker", "rm", "-f", name], capture_output=True)
+
+
+if __name__ == "__main__":
+    unittest.main()
