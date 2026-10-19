@@ -13,8 +13,14 @@ if [[ ${1:-} == --layer ]]; then
 fi
 
 rex_bin=${commands[rex]:-}
-if [[ -z $rex_bin && -x '/Applications/Rex Beta.app/Contents/Helpers/Rex Server.app/Contents/MacOS/rex' ]]; then
-    rex_bin='/Applications/Rex Beta.app/Contents/Helpers/Rex Server.app/Contents/MacOS/rex'
+if [[ -z $rex_bin ]]; then
+    for candidate in '/Applications/Rex Beta.app/Contents/Helpers/Rex Server.rex/Contents/MacOS/rex' \
+        '/Applications/Rex Beta.app/Contents/Helpers/Rex Server.app/Contents/MacOS/rex'; do
+        if [[ -x $candidate ]]; then
+            rex_bin=$candidate
+            break
+        fi
+    done
 fi
 [[ -n $rex_bin ]] || { print -u2 'Rex CLI not found. Install Rex first.'; exit 1; }
 if [[ ${1:-} == --palette ]]; then

@@ -53,8 +53,9 @@ function M.refresh(cache_dir)
     if a.label == b.label then return a.session_id < b.session_id end
     return a.label < b.label
   end)
-  local quoted_dir = "'" .. cache_dir:gsub("'", "'\\''") .. "'"
-  os.execute("mkdir -p " .. quoted_dir)
+  local directory, mkdir_err = rex.exec{ "/bin/mkdir", "-p", cache_dir }
+  if not directory then error(mkdir_err, 0) end
+  if not directory.ok then error(directory.stderr, 0) end
   local cache_path = cache_dir .. "/session-actions.lua"
   local file, err = io.open(cache_path .. ".tmp", "w")
   if not file then error(err, 0) end

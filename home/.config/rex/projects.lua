@@ -1,9 +1,5 @@
 local M = {}
 
-local function shell_quote(value)
-  return "'" .. value:gsub("'", "'\\''") .. "'"
-end
-
 function M.discover(home)
   local projects, seen = {}, {}
   local roots = {
@@ -16,11 +12,20 @@ function M.discover(home)
   for i = 2, #roots do containers[roots[i]] = true end
 
   local function scan(root, depth)
-    local quoted = shell_quote(root)
-    local command = "if [ -d " .. quoted .. " ]; then /usr/bin/find " .. quoted
-      .. " -mindepth " .. depth .. " -maxdepth " .. depth .. " -type d; fi"
-    local pipe = assert(io.popen(command, "r"))
-    for path in pipe:lines() do
+    local directory, err = rex.exec{ "/bin/test", "-d", root }
+    if not directory then error(err, 0) end
+    if not directory.ok then
+      if directory.code == 1 then return end -- An optional project root is absent.
+      error(directory.stderr, 0)
+    end
+    local result
+    result, err = rex.exec{
+      "/usr/bin/find", root, "-mindepth", tostring(depth),
+      "-maxdepth", tostring(depth), "-type", "d", "-print0",
+    }
+    if not result then error(err, 0) end
+    if not result.ok then error(result.stderr, 0) end
+    for path in result.stdout:gmatch("([^%z]+)%z") do
       local basename = path:match("([^/]+)$")
       if not seen[path] and not containers[path]
         and (depth == 0 or basename:sub(1, 1) ~= ".") then
@@ -30,7 +35,6 @@ function M.discover(home)
         seen[path] = true
       end
     end
-    pipe:close()
   end
 
   scan(home .. "/.dotfiles", 0)
