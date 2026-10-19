@@ -1,7 +1,13 @@
 {
   "lastChangelogVersion": "1.0.0",
   "defaultProvider": "nvidia-openai",
-  "defaultModel": "azure/openai/gpt-5.6-sol",
+  "defaultModel": "azure/openai/gpt-6.1-sol",
   "defaultThinkingLevel": "xhigh",
+  "enabledModels": [
+    "nvidia-openai/azure/openai/gpt-6.1-sol",
+    "nvidia-openai/openai/openai/gpt-6-luna",
+    "nvidia-chat/azure/anthropic/claude-opus-5-5",
+    "nvidia-chat/nvidia/zai-org/glm-5.2"
+  ],
   "theme": "dark"
 }
