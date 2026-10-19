@@ -1,0 +1,16 @@
+[
+  {"url":"https://github.com/astral-sh/uv/releases/download/0.13.2/uv-x86_64-unknown-linux-gnu.tar.gz","sha256":"e14d48c117ec33601d6f860dda47aa5ea490d77a5a9ef770529c448fa6747d9f","binaries":{"uv":"uv","uvx":"uvx"}},
+  {"url":"https://github.com/oven-sh/bun/releases/download/bun-v1.4.3/bun-linux-x64.zip","sha256":"3e730528d89775f03f87f05c06787c4df4099d0a37f3f252e7b829cb23816e18","binaries":{"bun":"bun"}},
+  {"url":"https://github.com/casey/just/releases/download/1.59.0/just-1.59.0-x86_64-unknown-linux-musl.tar.gz","sha256":"409044617b6f06517c1035e55ca38c8c856ff8b650e41bc2aa1ef82d5903a23e","binaries":{"just":"just"}},
+  {"url":"https://github.com/starship/starship/releases/download/v1.27.0/starship-x86_64-unknown-linux-musl.tar.gz","sha256":"10c8eb4cb3b761d9bf59ea828444c2dab36c900b7d69a69e08814b286969df89","binaries":{"starship":"starship"}},
+  {"url":"https://github.com/argoproj/argo-cd/releases/download/v3.5.5/argocd-linux-amd64","sha256":"c3ddfa606fc3e89ab14f55bda6600b207c355b028f8eaabe69b817a4c4621aba","binaries":{"":"argocd"}},
+  {"url":"https://github.com/mikefarah/yq/releases/download/v4.54.1/yq_linux_amd64","sha256":"8e34fc298390875de416e6a4afcb8cabeceb25d9aa8506c1a2f9353cf702ea5f","binaries":{"":"yq"}},
+  {"url":"https://github.com/google/yamlfmt/releases/download/v0.21.0/yamlfmt_0.21.0_Linux_x86_64.tar.gz","sha256":"1f300d9257b232bb3b541d7fb1b0e6b3c121bcbab381c86cd38cb8722be8a566","binaries":{"yamlfmt":"yamlfmt"}},
+  {"url":"https://github.com/cli/cli/releases/download/v2.102.0/gh_2.102.0_linux_amd64.tar.gz","sha256":"bb766f710eef8ede859c18578c72c327597cd4c8a85b06001b1f3843c6019386","binaries":{"gh":"gh"}},
+  {"url":"https://github.com/junegunn/fzf/releases/download/v0.74.5/fzf-0.74.5-linux_amd64.tar.gz","sha256":"d47d7f882972c7d674dbbba998ffa4116e68379616ffac7695d0671e9a722c5f","binaries":{"fzf":"fzf"}},
+  {"url":"https://github.com/ajeetdsouza/zoxide/releases/download/v0.10.0/zoxide-0.10.0-x86_64-unknown-linux-musl.tar.gz","sha256":"2d93385b99f3e82cf2701609a1bffcad863fbeb75aa3fe7eb6be4d29be68b1ae","binaries":{"zoxide":"zoxide"}},
+  {"url":"https://github.com/eza-community/eza/releases/download/v0.23.5/eza_x86_64-unknown-linux-gnu.tar.gz","sha256":"35c70c5c43c29108075e58b893234c67ef585f0b53a7eaf8e9e7d4eec9f339b4","binaries":{"eza":"eza"}},
+  {"url":"https://dl.k8s.io/release/v1.34.3/bin/linux/amd64/kubectl","sha256":"ab60ca5f0fd60c1eb81b52909e67060e3ba0bd27e55a8ac147cbc2172ff14212","binaries":{"":"kubectl"}},
+  {"url":"https://get.helm.sh/helm-v3.19.0-linux-amd64.tar.gz","sha256":"a7f81ce08007091b86d8bd696eb4d86b8d0f2e1b9f6c714be62f82f96a594496","binaries":{"helm":"helm"}},
+  {"url":"https://releases.hashicorp.com/terraform/1.16.6/terraform_1.16.6_linux_amd64.zip","sha256":"38034b38d03096399a7a1264a14561a8029b2b496fd1f169452656e53968f1b7","binaries":{"terraform":"terraform"}}
+]
