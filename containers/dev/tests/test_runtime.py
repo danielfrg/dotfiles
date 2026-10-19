@@ -85,6 +85,19 @@ class RuntimeTests(unittest.TestCase):
         self.assertFalse((self.home / ".local/state/opencode/service.json").exists())
         self.assertFalse((self.home / ".local/share/opencode/opencode.db").exists())
 
+    def test_existing_git_identity_is_preserved_and_helper_is_added(self):
+        gitconfig = self.home / ".gitconfig"
+        gitconfig.write_text('[user]\n name = Custom Name\n email = custom@example.invalid\n')
+        self.bootstrap()
+        def value(key):
+            result = subprocess.run(["git", "config", "--file", str(gitconfig), "--get", key], capture_output=True, text=True)
+            self.assertEqual(result.returncode, 0, "missing Git setting: " + key)
+            return result.stdout.strip()
+        self.assertEqual(value("user.name"), "Custom Name")
+        self.assertEqual(value("user.email"), "custom@example.invalid")
+        self.assertEqual(value("credential.helper"), "/usr/local/bin/git-credential-workspace")
+        self.assertEqual(value("credential.useHttpPath"), "true")
+
     def test_backup_restores_integrity(self):
         self.database()
         result = self.launch("backup")
@@ -119,6 +132,12 @@ class RuntimeTests(unittest.TestCase):
 
 
 class ServerTests(unittest.TestCase):
+    def test_zsh_profile_startup_navigation_and_tools(self):
+        script = "dev-entrypoint bootstrap && zsh -ic 'cdc; [[ $PWD == $HOME/code ]] && whence starship kubectl uv node >/dev/null && print profile-ok'"
+        result = subprocess.run(["docker", "run", "--rm", "--platform", "linux/amd64", "--entrypoint", "sh", IMAGE, "-c", script], capture_output=True, text=True, timeout=30)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("profile-ok", result.stdout)
+
     def test_foreground_server_and_auth_and_signal_shutdown(self):
         self.assertTrue(ENTRYPOINT.is_file(), "dev-entrypoint is not implemented")
         with tempfile.TemporaryDirectory() as temp:

@@ -60,3 +60,30 @@ Client disconnects do not govern the server's lifetime. Container/pod terminatio
 still interrupts active processes. The local container tests cover authentication,
 pairing, graceful SIGTERM, initialization, and backups; they do not prove NFS WAL
 safety or guarantee job resumption.
+
+## Git authentication
+
+The helper reads `/etc/dev/credential-map.json`, a JSON array of entries:
+
+```json
+[{"host":"github.com","path_prefix":"danielfrg/","username":"x-access-token","token_file":"github-danielfrg"}]
+```
+
+`token_file` is a basename under `/run/secrets/opencode-git`. The helper reads it
+fresh on each `get`, including Kubernetes secret-volume symlink rotation. It sends
+credentials only through Git's private protocol, only for HTTPS and the configured
+host/path boundary. Unknown hosts/owners get no credential; unavailable configured
+tokens fail without disclosure. `store`/`erase` never write credentials.
+`DEV_CREDENTIAL_MAP` and `DEV_GIT_SECRET_DIR` select local test/custom directories.
+
+Bootstrap adds only missing Git identity/credential settings. It never overwrites
+your existing identity, signing preferences, or credential helper. New homes use
+Daniel Rodriguez <daniel@danielfrg.com>; override per repository when appropriate.
+GitHub organization/owner tokens and Forgejo credentials are separate enrollments.
+Use HTTPS remotes, not laptop SSH-agent forwarding, for unattended work.
+
+For the GitHub CLI, authenticate through `gh auth login --with-token` with stdin
+redirected from the chosen mounted token file, or supply `GH_TOKEN` from that file
+for the specific invocation. Do not echo it, put it in a remote URL, or persist it
+in shell history. CLI cached authentication does not automatically track secret
+rotation; repeat enrollment when rotating it. Signing keys are separate opt-ins.

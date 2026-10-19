@@ -44,7 +44,7 @@ WORKDIR /home/danielfrg
 USER root
 COPY profile/ /opt/dev/profile/
 COPY bin/ /usr/local/bin/
-RUN chmod 0755 /usr/local/bin/dev-entrypoint
+RUN chmod 0755 /usr/local/bin/dev-entrypoint /usr/local/bin/git-credential-workspace
 USER 1000:1000
 EXPOSE 4096
 ENTRYPOINT ["dev-entrypoint"]

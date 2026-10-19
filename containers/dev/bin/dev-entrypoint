@@ -40,6 +40,13 @@ def bootstrap():
         (home / "code" / owner).mkdir(parents=True, exist_ok=True)
     for source, destination in [(".zshrc", ".zshrc"), ("starship.toml", ".config/starship.toml"), ("AGENTS.md", ".config/opencode/AGENTS.md"), ("opencode.json", ".config/opencode/opencode.json")]:
         copy_missing(profile / source, home / destination)
+    gitconfig = home / ".gitconfig"
+    for key, value in [("user.name", "Daniel Rodriguez"), ("user.email", "daniel@danielfrg.com"), ("credential.helper", "/usr/local/bin/git-credential-workspace"), ("credential.useHttpPath", "true")]:
+        existing = subprocess.run(["git", "config", "--file", str(gitconfig), "--get", key], capture_output=True)
+        if existing.returncode == 1:
+            subprocess.run(["git", "config", "--file", str(gitconfig), key, value], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        elif existing.returncode:
+            raise RuntimeError("Invalid existing Git configuration")
     os.environ["OPENCODE_DB"] = str(database)
     service_account = Path("/var/run/secrets/kubernetes.io/serviceaccount")
     if (service_account / "token").is_file():
