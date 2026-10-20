@@ -1,75 +1,36 @@
 name: Personal dev image
 
 "on":
-  pull_request:
-    paths:
-      - containers/dev/**
-      - .github/workflows/dev-image.yml
   push:
     tags:
       - dev-v*
-    branches: [main]
-    paths:
-      - containers/dev/**
-      - .github/workflows/dev-image.yml
 
 permissions:
   contents: read
 
 jobs:
-  test:
+  publish:
     runs-on: ubuntu-24.04
     timeout-minutes: 30
+    permissions:
+      contents: read
+      packages: write
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
           persist-credentials: false
       - uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3
-      - name: Build amd64 image
-        run: docker build --platform linux/amd64 -t daniel-dev:test -f containers/dev/Dockerfile containers/dev
-      - name: Test image and runtime
-        run: |
-          python3 -m venv "$RUNNER_TEMP/dev-tests"
-          "$RUNNER_TEMP/dev-tests/bin/pip" install --disable-pip-version-check pyyaml==6.0.3
-          "$RUNNER_TEMP/dev-tests/bin/python" -m unittest discover -s containers/dev/tests -v
-      - name: Save exactly the tested image
-        if: startsWith(github.ref, 'refs/tags/dev-v')
-        run: docker save daniel-dev:test | gzip > "$RUNNER_TEMP/dev-image.tar.gz"
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        if: startsWith(github.ref, 'refs/tags/dev-v')
-        with:
-          name: tested-dev-image
-          path: ${{ runner.temp }}/dev-image.tar.gz
-          compression-level: 0
-          retention-days: 1
-          if-no-files-found: error
-
-  publish:
-    needs: test
-    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/dev-v')
-    runs-on: ubuntu-24.04
-    timeout-minutes: 15
-    permissions:
-      contents: read
-      packages: write
-    steps:
-      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
-        with:
-          name: tested-dev-image
-          path: ${{ runner.temp }}/dev-image
       - uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Publish release and SHA tags without rebuilding
-        env:
-          RELEASE_TAG: ${{ github.ref_name }}
-          COMMIT_SHA: ${{ github.sha }}
-        run: |
-          gzip -dc "$RUNNER_TEMP/dev-image/dev-image.tar.gz" | docker load
-          docker tag daniel-dev:test "ghcr.io/danielfrg/dev:$RELEASE_TAG"
-          docker tag daniel-dev:test "ghcr.io/danielfrg/dev:sha-$COMMIT_SHA"
-          docker push "ghcr.io/danielfrg/dev:$RELEASE_TAG"
-          docker push "ghcr.io/danielfrg/dev:sha-$COMMIT_SHA"
-          docker inspect "ghcr.io/danielfrg/dev:$RELEASE_TAG" --format '{{json .RepoDigests}}' >> "$GITHUB_STEP_SUMMARY"
+      - uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6
+        with:
+          context: containers/dev
+          file: containers/dev/Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: |
+            ghcr.io/danielfrg/dev:${{ github.ref_name }}
+            ghcr.io/danielfrg/dev:sha-${{ github.sha }}

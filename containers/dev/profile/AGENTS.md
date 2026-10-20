@@ -9,3 +9,5 @@ accepted experiment: report locking/integrity failures instead of changing stora
 Never log credentials or embed them in Git remote URLs.
 Broad permissions are not blanket authorization for unrelated or destructive work.
 When present, also read /etc/dev/AGENTS.md for homelab-specific instructions.
+Connect to the existing server with `opencode --server http://127.0.0.1:4096`;
+do not start a second background service against this home.

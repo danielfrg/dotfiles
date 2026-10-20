@@ -22,7 +22,8 @@ ENV HOME=/home/danielfrg \
     GOPATH=/home/danielfrg/go \
     PNPM_HOME=/home/danielfrg/.local/bin \
     UV_PYTHON_PREFERENCE=only-managed \
-    PLAYWRIGHT_BROWSERS_PATH=/home/danielfrg/.cache/ms-playwright
+    PLAYWRIGHT_BROWSERS_PATH=/home/danielfrg/.cache/ms-playwright \
+    OPENCODE_DB=/home/danielfrg/.local/share/opencode/opencode.db
 COPY versions.env tools.lock.json install-tools.py /opt/dev/
 RUN python3 /opt/dev/install-tools.py /opt/dev/tools.lock.json \
     && . /opt/dev/versions.env \
@@ -39,13 +40,11 @@ RUN usermod --login danielfrg --home /home/danielfrg --shell /bin/zsh node \
     && chmod 0440 /etc/sudoers.d/danielfrg \
     && install -d -o 1000 -g 1000 /home/danielfrg \
     && chown -R 1000:1000 /home/danielfrg
-USER 1000:1000
 WORKDIR /home/danielfrg
-USER root
 COPY profile/ /opt/dev/profile/
 COPY bin/ /usr/local/bin/
-RUN chmod 0755 /usr/local/bin/dev-entrypoint /usr/local/bin/git-credential-workspace
+RUN chmod 0755 /usr/local/bin/startup.sh /usr/local/bin/git-credential-workspace
 USER 1000:1000
 EXPOSE 4096
-ENTRYPOINT ["dev-entrypoint"]
-CMD ["serve"]
+ENTRYPOINT ["startup.sh"]
+CMD ["opencode", "serve", "--hostname", "0.0.0.0", "--port", "4096"]

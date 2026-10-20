@@ -1,0 +1,3 @@
+[credential]
+    helper = /usr/local/bin/git-credential-workspace
+    useHttpPath = true
