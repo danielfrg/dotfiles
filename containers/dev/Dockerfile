@@ -24,8 +24,8 @@ ENV HOME=/home/danielfrg \
     UV_PYTHON_PREFERENCE=only-managed \
     PLAYWRIGHT_BROWSERS_PATH=/home/danielfrg/.cache/ms-playwright \
     OPENCODE_DB=/home/danielfrg/.local/share/opencode/opencode.db
-COPY versions.env tools.lock.json install-tools.py /opt/dev/
-RUN python3 /opt/dev/install-tools.py /opt/dev/tools.lock.json \
+COPY versions.env install-tools.py /opt/dev/
+RUN python3 /opt/dev/install-tools.py \
     && . /opt/dev/versions.env \
     && npm install --global --allow-scripts=@opencode/cli "pnpm@$PNPM_VERSION" "@opencode/cli@$OPENCODE_VERSION" \
     && UV_TOOL_DIR=/opt/dev/uv-tools UV_TOOL_BIN_DIR=/usr/local/bin UV_PYTHON_INSTALL_DIR=/opt/dev/python \
