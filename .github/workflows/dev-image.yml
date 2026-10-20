@@ -1,9 +1,7 @@
 name: Personal dev image
 
 "on":
-  push:
-    tags:
-      - dev-v*
+  workflow_dispatch: {}
 
 permissions:
   contents: read
@@ -31,6 +29,4 @@ jobs:
           file: containers/dev/Dockerfile
           platforms: linux/amd64
           push: true
-          tags: |
-            ghcr.io/danielfrg/dev:${{ github.ref_name }}
-            ghcr.io/danielfrg/dev:sha-${{ github.sha }}
+          tags: ghcr.io/danielfrg/dev:latest

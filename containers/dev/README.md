@@ -1,5 +1,9 @@
 # Daniel's Linux development image
 
+Publish manually from GitHub Actions → Personal dev image → Run workflow after
+the workflow is on the default branch. It only publishes `ghcr.io/danielfrg/dev:latest`;
+pushes and Git tags do not trigger builds. GHCR may retain older untagged versions.
+
 Build from the dotfiles repository:
 
 ```zsh
