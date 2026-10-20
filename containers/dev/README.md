@@ -49,6 +49,13 @@ rejects relocation. It never patches SQLite settings or starts a hidden local DB
 One lock-held server uses the home. `health` makes an authenticated HTTP health
 request without starting a server or opening its database.
 
+Startup checks retained service configuration before applying settings. Conflicting
+HOME/XDG/database overrides and enabled remote tunnels are refused, with the user
+configuration left intact. Under the home lock, stale PID-bearing registration from
+a terminated container is reconciled before stop-capable service commands run;
+the database and saved configuration are retained. An already healthy server is
+not replaced. Do not enable `pair --remote` for this port-forward-only deployment.
+
 `dev-entrypoint backup` uses SQLite's online backup API inside the same container,
 validates integrity, and publishes private timestamped artifacts under
 `~/.local/share/opencode/backups`. It retains the newest seven successful artifacts,
@@ -81,6 +88,12 @@ your existing identity, signing preferences, or credential helper. New homes use
 Daniel Rodriguez <daniel@danielfrg.com>; override per repository when appropriate.
 GitHub organization/owner tokens and Forgejo credentials are separate enrollments.
 Use HTTPS remotes, not laptop SSH-agent forwarding, for unattended work.
+
+Both user Git configuration locations and includes are inspected before writing
+defaults. With conditional includes, absent defaults are left alone rather than
+appended after context-specific settings; configure your helper/identity in those
+profiles explicitly. Existing OpenCode JSON **or JSONC** is preserved without
+creating a competing default configuration file.
 
 For the GitHub CLI, authenticate through `gh auth login --with-token` with stdin
 redirected from the chosen mounted token file, or supply `GH_TOKEN` from that file

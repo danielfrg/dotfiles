@@ -60,6 +60,16 @@ class RuntimeTests(unittest.TestCase):
         self.bootstrap()
         self.assertEqual((self.home / ".zshrc").read_text(), "# user customization\n")
 
+    def test_existing_jsonc_configuration_does_not_get_shadowed(self):
+        directory = self.home / ".config/opencode"
+        directory.mkdir(parents=True)
+        config = directory / "opencode.jsonc"
+        content = '// user preferences\n{"shell":"/bin/bash","update":"notify"}\n'
+        config.write_text(content)
+        self.bootstrap()
+        self.assertEqual(config.read_text(), content)
+        self.assertFalse((directory / "opencode.json").exists())
+
     def test_bootstrap_idempotent(self):
         self.bootstrap()
         config = self.home / ".config/opencode/opencode.json"
@@ -77,6 +87,26 @@ class RuntimeTests(unittest.TestCase):
         self.env["OPENCODE_DB"] = str(Path(self.temp.name) / "elsewhere.db")
         self.assertNotEqual(self.launch("bootstrap").returncode, 0)
         self.assertFalse(Path(self.env["OPENCODE_DB"]).exists())
+
+    def test_retained_service_environment_cannot_relocate_persistence(self):
+        configdir = self.home / ".config/opencode"
+        configdir.mkdir(parents=True)
+        file = configdir / "service.json"
+        for key, value in [("OPENCODE_DB", "/tmp/disposable.db"), ("XDG_DATA_HOME", "/tmp/disposable-data"), ("HOME", "/tmp/disposable-home")]:
+            content = json.dumps({"env": {key:value}})
+            file.write_text(content)
+            self.assertNotEqual(self.launch("bootstrap").returncode, 0, key + " was accepted")
+            self.assertEqual(file.read_text(), content)
+
+    def test_retained_remote_access_is_refused_without_rewriting_config(self):
+        configdir = self.home / ".config/opencode"
+        configdir.mkdir(parents=True)
+        file = configdir / "service.json"
+        for remote in [{"route":"synthetic-unused-route"}, True]:
+            content = json.dumps({"remote":remote})
+            file.write_text(content)
+            self.assertNotEqual(self.launch("bootstrap").returncode, 0)
+            self.assertEqual(file.read_text(), content)
 
     def test_health_does_not_start_missing_server(self):
         self.bootstrap()
@@ -97,6 +127,36 @@ class RuntimeTests(unittest.TestCase):
         self.assertEqual(value("user.email"), "custom@example.invalid")
         self.assertEqual(value("credential.helper"), "/usr/local/bin/git-credential-workspace")
         self.assertEqual(value("credential.useHttpPath"), "true")
+
+    def test_included_git_identity_and_helper_chain_are_preserved(self):
+        included = self.home / "identity.gitconfig"
+        included.write_text('[user]\n name = Included User\n email = included@example.invalid\n[credential]\n helper = custom-helper\n')
+        (self.home / ".gitconfig").write_text('[include]\n path = ~/identity.gitconfig\n')
+        self.bootstrap()
+        def value(key):
+            return subprocess.check_output(["git", "config", "--global", "--includes", "--get-all", key], env=self.env, text=True).strip()
+        self.assertEqual(value("user.name"), "Included User")
+        self.assertEqual(value("user.email"), "included@example.invalid")
+        self.assertEqual(value("credential.helper"), "custom-helper")
+
+    def test_xdg_git_configuration_is_preserved(self):
+        directory = self.home / ".config/git"
+        directory.mkdir(parents=True)
+        (directory / "config").write_text('[user]\n name = XDG User\n email = xdg@example.invalid\n[credential]\n helper = xdg-helper\n')
+        self.bootstrap()
+        name = subprocess.check_output(["git", "config", "--includes", "--get", "user.name"], env=self.env, text=True).strip()
+        self.assertEqual(name, "XDG User")
+
+    def test_conditional_git_identity_is_not_overridden(self):
+        repository = self.home / "code/nvidia/example"
+        repository.mkdir(parents=True)
+        subprocess.run(["git", "init", "--quiet", str(repository)], check=True)
+        included = self.home / "work.gitconfig"
+        included.write_text('[user]\n name = Work User\n email = work@example.invalid\n[credential]\n helper = work-helper\n')
+        (self.home / ".gitconfig").write_text(f'[includeIf "gitdir:{self.home.resolve()}/code/nvidia/"]\n path = ~/work.gitconfig\n')
+        self.bootstrap()
+        name = subprocess.check_output(["git", "-C", str(repository), "config", "--get", "user.name"], env=self.env, text=True).strip()
+        self.assertEqual(name, "Work User")
 
     def test_backup_restores_integrity(self):
         self.database()
@@ -132,6 +192,48 @@ class RuntimeTests(unittest.TestCase):
 
 
 class ServerTests(unittest.TestCase):
+    def test_abrupt_termination_replacement_recovers_existing_home(self):
+        with tempfile.TemporaryDirectory() as temp:
+            home = Path(temp) / "home"
+            home.mkdir(mode=0o777)
+            home.chmod(0o777)
+            secrets = Path(temp) / "secrets"
+            secrets.mkdir(mode=0o755)
+            password = "synthetic-restart-password"
+            (secrets / "server-password").write_text(password)
+            names = ["dev-restart-" + uuid.uuid4().hex for _ in range(2)]
+            def start_and_wait(name):
+                command = ["docker", "run", "-d", "--name", name, "--platform", "linux/amd64", "-p", "127.0.0.1::4096", "-v", f"{home}:/home/danielfrg", "-v", f"{secrets}:/run/secrets/opencode-runtime:ro", IMAGE, "serve"]
+                started = subprocess.run(command, capture_output=True, text=True)
+                self.assertEqual(started.returncode, 0, started.stderr)
+                port = subprocess.check_output(["docker", "port", name, "4096/tcp"], text=True).strip().rsplit(":", 1)[1]
+                request = urllib.request.Request(f"http://127.0.0.1:{port}/api/info", headers={"Authorization":"Basic " + base64.b64encode(f"opencode:{password}".encode()).decode()})
+                deadline = time.monotonic() + 60
+                while time.monotonic() < deadline:
+                    try:
+                        with urllib.request.urlopen(request, timeout=2) as response:
+                            self.assertEqual(response.status, 200)
+                        return
+                    except OSError as error:
+                        if isinstance(error, urllib.error.HTTPError):
+                            error.close()
+                        state = json.loads(subprocess.check_output(["docker", "inspect", name, "--format", "{{json .State}}"], text=True))
+                        self.assertTrue(state["Running"], f"Replacement/startup exited {state['ExitCode']}")
+                        time.sleep(0.25)
+                self.fail("Replacement did not become healthy")
+            try:
+                start_and_wait(names[0])
+                sentinel = home / "code/danielfrg/uncommitted-sentinel"
+                sentinel.write_text("retain this work")
+                subprocess.run(["docker", "kill", "--signal", "KILL", names[0]], check=True, capture_output=True)
+                self.assertTrue((home / ".local/state/opencode/service.json").exists())
+                start_and_wait(names[1])
+                self.assertEqual(sentinel.read_text(), "retain this work")
+                with closing(sqlite3.connect(home / ".local/share/opencode/opencode.db")) as database:
+                    self.assertEqual(database.execute("PRAGMA integrity_check").fetchone(), ("ok",))
+            finally:
+                subprocess.run(["docker", "rm", "-f", *names], capture_output=True)
+
     def test_zsh_profile_startup_navigation_and_tools(self):
         script = "dev-entrypoint bootstrap && zsh -ic 'cdc; [[ $PWD == $HOME/code ]] && whence starship kubectl uv node >/dev/null && print profile-ok'"
         result = subprocess.run(["docker", "run", "--rm", "--platform", "linux/amd64", "--entrypoint", "sh", IMAGE, "-c", script], capture_output=True, text=True, timeout=30)
