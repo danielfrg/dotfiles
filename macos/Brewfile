@@ -77,7 +77,11 @@ cask 'nikitabobko/tap/aerospace'
 cask '1password-cli'
 cask 'aerospace'
 cask 'audacity'
-cask 'cleanshot'
+# cask 'cleanshot'
+# Use this checkout as a local tap for fixed-version, licensed apps.
+# The tap reads committed Casks files; refresh it with brew update after committing.
+tap 'danielfrg/dotfiles', File.expand_path('..', __dir__)
+cask 'danielfrg/dotfiles/cleanshot@3', trusted: true, postinstall: 'brew pin --cask cleanshot@3'
 cask 'discord'
 # cask 'docker'
 # cask 'firefox'

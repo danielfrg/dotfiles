@@ -2906,10 +2906,10 @@
           "full_name": "blackhole-2ch"
         }
       },
-      "cleanshot": {
-        "version": "4.7.4",
+      "cleanshot@3": {
+        "version": "3.9.4",
         "options": {
-          "full_name": "cleanshot"
+          "full_name": "danielfrg/dotfiles/cleanshot@3"
         }
       },
       "discord": {
