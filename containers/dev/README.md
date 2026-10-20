@@ -4,7 +4,7 @@ Build from the dotfiles repository:
 
 ```zsh
 docker build --platform linux/amd64 -t daniel-dev:test -f containers/dev/Dockerfile containers/dev
-python3 -m unittest discover -s containers/dev/tests -v
+uv run --with pyyaml python -m unittest discover -s containers/dev/tests -v
 ```
 
 The baseline is Debian, Node 26, pnpm 10, Go 1.25, uv, OpenCode V2, Bun,
@@ -87,3 +87,16 @@ redirected from the chosen mounted token file, or supply `GH_TOKEN` from that fi
 for the specific invocation. Do not echo it, put it in a remote URL, or persist it
 in shell history. CLI cached authentication does not automatically track secret
 rotation; repeat enrollment when rotating it. Signing keys are separate opt-ins.
+
+## Publication
+
+`.github/workflows/dev-image.yml` tests PR/main changes on native amd64. A
+`dev-v<version>` tag tests and publishes `ghcr.io/danielfrg/dev:<tag>` plus a SHA
+tag. The publish job loads the **exact tested image artifact**, not a second build
+with potentially different resolved dependencies. Only that job gets package-write
+permission; checkout does not retain repository credentials. Actions are SHA-pinned.
+
+Tag/push only after approval. Record the GHCR digest from the workflow summary and
+pin homelab to it before registration. GHCR package visibility/image-pull access is
+a separate enrollment; no registry token is built into this image. Test-image
+artifacts expire after one day and use transient GitHub artifact storage.
