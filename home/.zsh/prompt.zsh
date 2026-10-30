@@ -1,3 +1,9 @@
+# Rex shells on the Mac are local; server shells display their hostname.
+unset REX_REMOTE_HOST
+if [[ -n ${REX_SESSION:-} && $OSTYPE != darwin* ]]; then
+    export REX_REMOTE_HOST="${HOST%%.*}"
+fi
+
 # Use the tracked Starship prompt when it is available.
 if (( $+commands[starship] )); then
     _cache_zsh_init starship-zsh-v1 "${commands[starship]}" init zsh

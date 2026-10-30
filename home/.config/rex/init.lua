@@ -1,8 +1,9 @@
 -- Project actions appear in Rex's native command palette.
 local home = os.getenv("HOME")
-require("projects").register(home)
-local sessions = require("sessions")
 local cache_dir = (os.getenv("XDG_CACHE_HOME") or home .. "/.cache") .. "/rex"
+local projects = require("projects")
+projects.register(home, cache_dir)
+local sessions = require("sessions")
 sessions.register(cache_dir)
 
 rex.action{
@@ -11,7 +12,8 @@ rex.action{
   description = "Refresh project and session commands, then open the native palette.",
   run = function(ctx, args)
     if not ctx.client_id then error("Opening the palette needs a connected Rex client.", 0) end
-    sessions.refresh(cache_dir)
+    projects.refresh(home, cache_dir, ctx)
+    sessions.refresh(cache_dir, ctx)
   end,
 }
 

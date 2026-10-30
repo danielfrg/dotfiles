@@ -23,6 +23,12 @@ if [[ -z $rex_bin ]]; then
     done
 fi
 [[ -n $rex_bin ]] || { print -u2 'Rex CLI not found. Install Rex first.'; exit 1; }
+if [[ ${1:-} == --reopen-palette ]]; then
+    (( $# == 2 )) && [[ -n $2 ]] || { print -u2 'A Rex client is required.'; exit 1; }
+    # Config reload fetches the native action list asynchronously.
+    /bin/sleep 0.2
+    exec "$rex_bin" -C "$2" do client.palette.toggle
+fi
 if [[ ${1:-} == --palette ]]; then
     exec "$rex_bin" do session_palette
 fi

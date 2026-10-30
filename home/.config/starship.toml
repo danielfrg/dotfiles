@@ -1,11 +1,15 @@
 add_newline = true
 command_timeout = 200
-format = "$hostname[$directory$git_branch$git_status]($style)$character"
+format = "$hostname${env_var.rex}[$directory$git_branch$git_status]($style)$character"
 
 [hostname]
 ssh_only = true
 format = "[host: $hostname](bold yellow) "
 disabled = false
+
+[env_var.rex]
+variable = "REX_REMOTE_HOST"
+format = "[rex: $env_value](bold yellow) "
 
 [character]
 error_symbol = "[✗](bold cyan)"

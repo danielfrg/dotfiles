@@ -1,4 +1,5 @@
 local M = {}
+local navigation = require("navigation")
 
 local function action_name(id)
   return "session_" .. id:gsub(".", function(char)
@@ -37,7 +38,7 @@ function M.register(cache_dir)
         if not ctx.client_id then error("Switching sessions needs a connected Rex client.", 0) end
         for _, current in ipairs(list_sessions()) do
           if current.session_id == session.session_id then
-            rex.client.queue("session.select", { session_id = session.session_id })
+            navigation.for_context(ctx)(session.session_id)
             return { session_id = session.session_id }
           end
         end
@@ -47,7 +48,7 @@ function M.register(cache_dir)
   end
 end
 
-function M.refresh(cache_dir)
+function M.refresh(cache_dir, ctx)
   local sessions = list_sessions()
   table.sort(sessions, function(a, b)
     if a.label == b.label then return a.session_id < b.session_id end
@@ -69,10 +70,15 @@ function M.refresh(cache_dir)
   if not written then error(write_err, 0) end
   local renamed, rename_err = os.rename(cache_path .. ".tmp", cache_path)
   if not renamed then error(rename_err, 0) end
-  -- Rex forbids a config callback from reloading itself. Ask the app to reload
-  -- after this action returns, then open the palette in the same queue.
+  -- Config reload starts an asynchronous keymap fetch in the app. Opening the
+  -- palette in the same queue can display its old action list. A detached helper
+  -- opens it after the app has had time to receive the refreshed actions.
+  local process, start_err = rex.exec.start({
+    "/bin/zsh", "-l", os.getenv("HOME") .. "/.local/scripts/project-session-rex.sh",
+    "--reopen-palette", ctx.client_id,
+  }, { detach = true, stdout = false, stderr = false })
+  if not process then error(start_err, 0) end
   rex.client.queue("client.config.reload")
-  rex.client.queue("client.palette.toggle")
 end
 
 return M
