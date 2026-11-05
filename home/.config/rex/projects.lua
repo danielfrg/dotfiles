@@ -44,9 +44,9 @@ function M.discover(home)
   return projects
 end
 
-local function discover_remote(ctx)
+local function discover_remote(ctx, api)
   if not ctx.session_id then error("Open the project picker from a remote session.", 0) end
-  local result, err = rex.session.list_blocks{}
+  local result, err = api.session.list_blocks{ session_id = ctx.session_id }
   if not result then error(err, 0) end
   local block_id
   for _, block in ipairs(result.blocks or {}) do
@@ -58,8 +58,8 @@ local function discover_remote(ctx)
   if not block_id then error("The remote project picker needs a terminal in this session.", 0) end
 
   local function list(path, optional)
-    local listing, list_err = rex.block.call("com.superlogical.terminal", "list_dir", {
-      block_id = block_id, path = path,
+    local listing, list_err = api.block.call("com.superlogical.terminal", "list_dir", {
+      session_id = ctx.session_id, block_id = block_id, path = path,
     })
     if not listing then error(list_err, 0) end
     if listing.status == "missing" and optional then return nil end
@@ -98,9 +98,9 @@ local function discover_remote(ctx)
   return projects
 end
 
-function M.refresh(home, cache_dir, ctx)
+function M.refresh(home, cache_dir, ctx, api)
   local server = ctx.server or ""
-  local projects = server ~= "" and discover_remote(ctx) or M.discover(home)
+  local projects = server ~= "" and discover_remote(ctx, api or rex) or M.discover(home)
   local directory, err = rex.exec{ "/bin/mkdir", "-p", cache_dir }
   if not directory then error(err, 0) end
   if not directory.ok then error(directory.stderr, 0) end
@@ -151,7 +151,7 @@ end
 
 function M.register(home, cache_dir)
   local load = loadfile(cache_dir .. "/project-actions.lua")
-  local snapshot = load and load() or { server = "", projects = M.discover(home) }
+  local snapshot = load and require("project-actions") or { server = "", projects = M.discover(home) }
   for _, project in ipairs(snapshot.projects) do
     -- Encode the full label for a stable, unique Lua action name.
     local name = "project_" .. project.label:gsub(".", function(char)

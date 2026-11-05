@@ -23,11 +23,9 @@ if [[ -z $rex_bin ]]; then
     done
 fi
 [[ -n $rex_bin ]] || { print -u2 'Rex CLI not found. Install Rex first.'; exit 1; }
-if [[ ${1:-} == --reopen-palette ]]; then
-    (( $# == 2 )) && [[ -n $2 ]] || { print -u2 'A Rex client is required.'; exit 1; }
-    # Config reload fetches the native action list asynchronously.
-    /bin/sleep 0.2
-    exec "$rex_bin" -C "$2" do client.palette.toggle
+if [[ ${1:-} == --refresh-palette ]]; then
+    (( $# == 2 )) && [[ -n $2 ]] || { print -u2 'A Rex refresh context is required.'; exit 1; }
+    exec "$rex_bin" do "$HOME/.config/rex/refresh-palette.lua" --args "$2"
 fi
 if [[ ${1:-} == --palette ]]; then
     exec "$rex_bin" do session_palette

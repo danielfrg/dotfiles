@@ -1,19 +1,21 @@
 -- Project actions appear in Rex's native command palette.
 local home = os.getenv("HOME")
 local cache_dir = (os.getenv("XDG_CACHE_HOME") or home .. "/.cache") .. "/rex"
+-- Required snapshots participate in Rex's config hash, so cache changes
+-- invalidate the app's action list when the server reloads quietly.
+package.path = cache_dir .. "/?.lua;" .. package.path
 local projects = require("projects")
 projects.register(home, cache_dir)
+local palette = require("palette")
 local sessions = require("sessions")
 sessions.register(cache_dir)
 
 rex.action{
   name = "session_palette",
   title = "Open Command Palette (Refresh Sessions)",
-  description = "Refresh project and session commands, then open the native palette.",
+  description = "Open the native palette immediately and refresh project and session commands in the background.",
   run = function(ctx, args)
-    if not ctx.client_id then error("Opening the palette needs a connected Rex client.", 0) end
-    projects.refresh(home, cache_dir, ctx)
-    sessions.refresh(cache_dir, ctx)
+    palette.open(home, cache_dir, ctx)
   end,
 }
 

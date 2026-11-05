@@ -7,18 +7,18 @@ local function action_name(id)
   end)
 end
 
-local function list_sessions()
-  local result, err = rex.call("session.list")
+local function list_sessions(api)
+  local result, err = (api or rex).call("session.list")
   if not result then error(err, 0) end
   return result.sessions or {}
 end
 
 function M.register(cache_dir)
   -- Actions must be declared at config load, when Rex API calls are unavailable.
-  -- The palette-opening action saves a snapshot before reloading this config.
+  -- The background worker saves a snapshot before reloading this config.
   local load = loadfile(cache_dir .. "/session-actions.lua")
   if not load then return end
-  local sessions = load()
+  local sessions = require("session-actions")
   local counts = {}
   for _, session in ipairs(sessions) do
     counts[session.label] = (counts[session.label] or 0) + 1
@@ -48,8 +48,8 @@ function M.register(cache_dir)
   end
 end
 
-function M.refresh(cache_dir, ctx)
-  local sessions = list_sessions()
+function M.refresh(cache_dir, ctx, api)
+  local sessions = list_sessions(api)
   table.sort(sessions, function(a, b)
     if a.label == b.label then return a.session_id < b.session_id end
     return a.label < b.label
@@ -70,15 +70,6 @@ function M.refresh(cache_dir, ctx)
   if not written then error(write_err, 0) end
   local renamed, rename_err = os.rename(cache_path .. ".tmp", cache_path)
   if not renamed then error(rename_err, 0) end
-  -- Config reload starts an asynchronous keymap fetch in the app. Opening the
-  -- palette in the same queue can display its old action list. A detached helper
-  -- opens it after the app has had time to receive the refreshed actions.
-  local process, start_err = rex.exec.start({
-    "/bin/zsh", "-l", os.getenv("HOME") .. "/.local/scripts/project-session-rex.sh",
-    "--reopen-palette", ctx.client_id,
-  }, { detach = true, stdout = false, stderr = false })
-  if not process then error(start_err, 0) end
-  rex.client.queue("client.config.reload")
 end
 
 return M
