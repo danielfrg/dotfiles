@@ -13,9 +13,6 @@ ansible-nvidia:
 ansible-homelab:
   cd ansible; ansible-playbook homelab.yml --limit homelab
 
-fonts:
-  bash install-fonts.sh
-
 stow:
   stow -t $HOME home
 

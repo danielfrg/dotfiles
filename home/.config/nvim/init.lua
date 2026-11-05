@@ -1,15 +1,10 @@
--- options first
-require("core.options")
+vim.loader.enable()
 
--- them other core config
-require("core.autocmds")
-require("core.lsp")
-require("core.mappings")
-require("core.statusline")
-require("core.theme")
+Utils = require("utils")
 
--- load local.lua if found
-local status, local_file = pcall(require, "local")
+require("config.options")
+require("config.keymaps")
+require("config.autocmds")
+require("config.commands")
 
--- load plugins
-require("core.lazy")
+require("plugins")
