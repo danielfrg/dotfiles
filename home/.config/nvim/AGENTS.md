@@ -54,10 +54,41 @@ Only set what differs from Neovim defaults
 
 ## Autocmds
 
-`lua/config/autocmds.lua`.
-
 - Yanked text flashes briefly.
 - Only the active window shows the cursorline.
+
+## Keymaps
+
+`lua/config/keymaps.lua`: core keymaps that don't use a plugin. No window-navigation maps (no tmux).
+
+| Keys | Action |
+|---|---|
+| Arrow keys (normal, insert) | Disabled, echo a hint to use hjkl |
+| `<Esc>` | Clears search highlight |
+| `n` / `N` | Next/previous match, centered and unfolded |
+| `<leader>rr` | Substitute the word under the cursor across the file |
+| `<C-d>` / `<C-u>` | Half-page scroll, cursor centered |
+| `>` / `<` (visual) | Indent and stay in visual mode |
+| `J` / `K` (visual) | Move selected lines down/up |
+| `<leader>o` / `<leader>O` | Open a line below/above without continuing a comment (`o<Esc>^Da`) |
+| `<leader>y` (visual) | Yank to the system clipboard |
+| `<leader>p` | Paste from the system clipboard |
+| `<leader>d` (visual) | Delete without touching the yank register |
+| `<leader>n` | New empty buffer |
+| `<leader>s` / `<leader>S` | Save / save without autocmds (skips format-on-save) |
+| `<leader>z` | Close buffer |
+| `<S-h>` / `<S-l>` | Previous/next buffer |
+| `<leader>bd` | Close every hidden buffer, except unsaved ones |
+| `<leader>\|` / `<leader>-` | Vertical/horizontal split |
+| `<C-Arrows>` | Resize window |
+| `<leader>q` | Diagnostics to the location list |
+| `<C-f>` | Rex project picker (`~/.local/scripts/project-session-rex.sh --palette`) |
+
+## Commands
+
+`lua/config/commands.lua`.
+
+- Typo commands: `:W` saves, `:Wq` / `:WQ` save and quit, `:Q` quits without saving.
 
 ## Plugins
 
