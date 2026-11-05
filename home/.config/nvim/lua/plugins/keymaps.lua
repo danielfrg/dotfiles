@@ -34,3 +34,8 @@ map("n", "<leader>gs", builtin.git_status, { desc = "Git status" })
 
 -- undotree (built-in)
 map("n", "<leader>u", "<Cmd>Undotree<CR>", { desc = "Undo tree" })
+
+-- conform
+map({ "n", "x" }, "<leader>lf", function()
+	require("conform").format()
+end, { desc = "Format" })

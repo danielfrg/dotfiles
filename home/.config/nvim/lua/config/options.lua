@@ -26,6 +26,11 @@ vim.o.showmode = false
 vim.opt.shortmess:append("I")
 vim.o.winborder = "rounded"
 vim.o.pumheight = 10
+
+-- Completion: built-in autocomplete as you type, LSP (omnifunc) first, then buffer words
+vim.o.autocomplete = true
+vim.opt.complete:prepend("o")
+vim.o.completeopt = "menuone,noselect,popup,fuzzy"
 vim.o.statusline = "%{%v:lua.Utils.statusline.render()%}"
 
 -- Search

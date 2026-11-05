@@ -26,6 +26,14 @@ map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move lines up" })
 map("n", "<leader>o", "o<Esc>^Da", { desc = "Open line below without comment" })
 map("n", "<leader>O", "O<Esc>^Da", { desc = "Open line above without comment" })
 
+-- Completion: autocomplete never preselects, so <C-y> with nothing selected accepts the first item
+map("i", "<C-y>", function()
+	if vim.fn.pumvisible() == 1 and vim.fn.complete_info({ "selected" }).selected == -1 then
+		return "<C-n><C-y>"
+	end
+	return "<C-y>"
+end, { expr = true, desc = "Accept completion (first item if none selected)" })
+
 -- Registers and clipboard
 map("v", "<leader>y", '"+y', { desc = "Yank to clipboard" })
 map("n", "<leader>p", '"+p', { desc = "Paste from clipboard" })

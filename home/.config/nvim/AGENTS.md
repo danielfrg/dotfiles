@@ -9,15 +9,15 @@ Check your work lightly:
 ## Layout
 
 - `init.lua`: enables `vim.loader`, assigns `Utils = require("utils")` (global), then requires in order:
-  `config.options`, `config.keymaps`, `config.autocmds`, `config.commands`, `plugins`
-- `lua/utils/init.lua`: returns a table of shared helper modules, empty for now.
-  Later steps add modules like `utils/editor.lua`.
+  `config.options`, `config.keymaps`, `config.autocmds`, `config.commands`, `config.lsp`, `plugins`
+- `lua/utils/init.lua`: returns a table of shared helper modules (`statusline`, `lsp`).
 - `lua/config/`: plain Neovim settings, one file per name above. No plugin code here.
 - `lua/plugins/`
   - `init.lua`: installs every plugin in one `vim.pack.add` call, then requires each plugin file
   - One file per plugin (e.g. `oil.lua`), configured with `require("<plugin>").setup({ ... })`.
     Plugin files hold no keymaps.
   - `keymaps.lua`: every keymap that uses a plugin, required last so all plugins are set up first.
+- `lsp/<name>.lua`: one native `vim.lsp.config` per language server (see LSP).
 - `.gitignore` lists `nvim-pack-lock.json`.
 - Lua files are indented with tabs, formatted by stylua with its defaults.
 
@@ -45,6 +45,12 @@ Only set what differs from Neovim defaults
 - Timing: updatetime 250, timeoutlen 300.
 - New splits open below and to the right.
 - Folds come from Treesitter, foldlevel 99 so everything starts unfolded.
+- Completion: Neovim's built-in, no plugin.
+  - The menu opens as you type (`autocomplete`).
+  - Sources: the LSP first (`complete` starts with `o`, the LSP omnifunc), then buffer words.
+  - `completeopt`: menuone, noselect, popup (shows item docs), fuzzy.
+  - Autocomplete never preselects an item (Neovim forces `noselect`), so `<C-y>` with nothing
+    selected accepts the first item. `<C-n>` / `<C-p>` move, `<C-e>` cancels.
 - Statusline: my own, no plugin, in `utils/statusline.lua` (exposed as `Utils.statusline`).
   - Left: mode block (`NOR`, `INS`, `VIS`, `COM`, ...) colored by mode: normal blue, insert green,
     visual purple, command yellow (`StatusMode*` groups, set in `plugins/onedark.lua`).
@@ -75,6 +81,7 @@ core keymaps that don't use a plugin.
 | `<C-d>` / `<C-u>` | Half-page scroll, cursor centered |
 | `>` / `<` (visual) | Indent and stay in visual mode |
 | `J` / `K` (visual) | Move selected lines down/up |
+| `<C-y>` (insert) | Accept completion; the first item when none is selected |
 | `<leader>o` / `<leader>O` | Open a line below/above without continuing a comment (`o<Esc>^Da`) |
 | `<leader>y` (visual) | Yank to the system clipboard |
 | `<leader>p` | Paste from the system clipboard |
@@ -91,6 +98,51 @@ core keymaps that don't use a plugin.
 ## Commands
 
 - Typo commands: `:W` saves, `:Wq` / `:WQ` save and quit, `:Q` quits without saving.
+- `:LspInfo` runs `:checkhealth vim.lsp`.
+
+## LSP
+
+No Mason and no global installs. Each project declares and installs the language servers it needs;
+Neovim only starts a server when the project has it.
+
+- `config/lsp.lua` enables the servers, configures diagnostics and LSP keymaps, and turns on
+  `vim.lsp.completion` on attach so accepting an item applies its extras (auto-imports, snippets).
+- `lsp/<name>.lua` defines each server with native `vim.lsp.config`, using `utils/lsp.lua` to find it in the project.
+- How a server is found (`utils/lsp.lua`):
+  - The project root is the nearest marker file (`pyproject.toml`, `package.json`, `go.mod`, ...).
+  - The binary is the project's own: walk up from the file to the first `node_modules/.bin/<bin>` or
+    `.venv/bin/<bin>` (so pnpm monorepos work when the tool is in the workspace root).
+    That directory becomes the LSP root and the server's cwd. Go runs `go tool gopls` when `go.mod` has a `tool` line for it.
+  - Some servers are only expected when the project uses them (e.g. tailwind only if `package.json` mentions `tailwindcss`).
+- Missing servers: when the project expects a server but it isn't installed, show one notice listing them with the fix
+  (`pnpm install` / `uv sync` if declared, otherwise `pnpm add -D ...` / `uv add --dev ...` / `go get -tool ...`).
+  - On startup for the project in cwd, and when opening a file in another project.
+  - Once per tool and project, grouped into a single notice.
+
+| Server | Filetypes | Project needs | Expected when |
+|---|---|---|---|
+| `ruff` | python | `.venv/bin/ruff` (`uv add --dev ruff`) | `pyproject.toml` |
+| `ty` | python | `.venv/bin/ty` (`uv add --dev ty`) | `pyproject.toml` |
+| `ts_ls` | js, jsx, ts, tsx | `typescript-language-server` devDep | `package.json` mentions `typescript`, or `tsconfig.json` exists |
+| `svelte` | svelte | `svelte-language-server` devDep | `package.json` mentions `svelte` |
+| `astro` | astro | `@astrojs/language-server` devDep (uses the project's TypeScript) | `package.json` mentions `astro` |
+| `tailwindcss` | html, css, scss, js, jsx, ts, tsx, svelte, astro | `@tailwindcss/language-server` devDep | `package.json` mentions `tailwindcss` |
+| `gopls` | go, gomod, gowork, gotmpl | `tool golang.org/x/tools/gopls` in `go.mod` | `go.mod` |
+
+Diagnostics:
+- Virtual text, underline, not updated while typing, sorted by severity.
+- Floats show the source.
+- Gutter icons: error `󰅚`, warn `󰀪`, info `󰋽`, hint `󰌶`. Errors and warnings also color the line number.
+
+Keymaps (buffer-local on LspAttach), on top of Neovim's defaults (`K`, `grn`, `gra`, `grr`, `gri`, `grt`, `gO`, `<C-s>`, `[d`, `]d`):
+
+| Keys | Action |
+|---|---|
+| `gl` | Diagnostic float |
+| `gD` | Go to definition |
+| `<leader>lr` | Rename |
+
+Info: `:LspInfo` (`:checkhealth vim.lsp`), `:lsp restart` / `:lsp stop`, attached servers in the statusline.
 
 ## Plugins
 
@@ -150,9 +202,18 @@ Settings:
 
 Neovim 0.12's built-in undotree (`packadd nvim.undotree`), no plugin. Loaded in `plugins/undotree.lua`.
 
+### Formatting
+
+conform.nvim, format on save (1000 ms timeout).
+
+- JS/TS, svelte, json, css, scss, html, markdown, yaml: the first one the project has of oxfmt, biome, prettier.
+  Only from the project's `node_modules/.bin`, never a global install.
+- Python formats through ruff's LSP and Go through gopls. No other LSP formats.
+- Projects without a formatter save as-is, with no notice. `:ConformInfo` shows what's available.
+
 ### Keymap hints
 
-which-key.nvim with defaults. Groups: `<leader>b` Buffers, `<leader>g` Git, `<leader>s` Search.
+which-key.nvim with defaults. Groups: `<leader>b` Buffers, `<leader>g` Git, `<leader>l` LSP, `<leader>s` Search.
 
 ### Plugin keymaps
 
@@ -173,6 +234,7 @@ which-key.nvim with defaults. Groups: `<leader>b` Buffers, `<leader>g` Git, `<le
 | `<leader>/` | Fuzzy search in the current buffer (dropdown, no preview) |
 | `<leader>gc` / `<leader>gs` | Git commits / git status |
 | `<leader>u` | Toggles the built-in undo tree |
+| `<leader>lf` | Format (conform) |
 
 ## Languages
 

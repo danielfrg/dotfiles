@@ -35,6 +35,7 @@ vim.pack.add({
 	"https://github.com/nvim-telescope/telescope.nvim",
 	"https://github.com/nvim-telescope/telescope-fzf-native.nvim",
 	"https://github.com/nvim-telescope/telescope-ui-select.nvim",
+	"https://github.com/stevearc/conform.nvim",
 })
 
 require("plugins.onedark")
@@ -48,6 +49,7 @@ require("plugins.flash")
 require("plugins.which-key")
 require("plugins.telescope")
 require("plugins.undotree")
+require("plugins.conform")
 
 -- Keymaps that use a plugin live here, required last so all plugins are set up first.
 require("plugins.keymaps")
