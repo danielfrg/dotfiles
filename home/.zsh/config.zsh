@@ -91,7 +91,6 @@ _user_paths=(
     "$HOME/.lmstudio/bin"
     "$HOME/.config/herd-lite/bin"
     "$HOME/.orbstack/bin"
-    "$HOME/.tmux/plugins/tmuxifier/bin"
 )
 for (( _path_index=${#_user_paths}; _path_index >= 1; _path_index-- )); do
     prepend_path "${_user_paths[_path_index]}"
