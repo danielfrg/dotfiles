@@ -52,6 +52,13 @@ Only set what differs from Neovim defaults
   - Output of a command I type goes to the command line too, whatever its kind.
     It expands over the bottom of the screen until the next key. Enter moves it into the pager.
 
+## Autocmds
+
+`lua/config/autocmds.lua`.
+
+- Yanked text flashes briefly.
+- Only the active window shows the cursorline.
+
 ## Plugins
 
 Use the native nvim.pack to manage them.
