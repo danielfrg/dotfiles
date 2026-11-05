@@ -1,20 +1,101 @@
+-- onedark.nvim with Zed's One Dark syntax colors, and my editor surfaces from colors/one.lua
 require("onedark").setup({
-	-- Background from colors/one.lua
-	colors = { bg0 = "#191D25" },
-	-- Editor surfaces from colors/one.lua
+	-- Zed One Dark palette
+	colors = {
+		bg0 = "#191D25", -- background from colors/one.lua
+		fg = "#acb2be",
+		red = "#d07277",
+		green = "#a1c181",
+		yellow = "#dec184",
+		blue = "#74ade8",
+		purple = "#b477cf",
+		cyan = "#6eb4bf",
+		orange = "#bf956a",
+		grey = "#5d636f",
+		light_grey = "#878e98",
+		-- Extra Zed colors
+		gold = "#dfc184",
+		bright = "#dce0e5",
+		bracket = "#b2b9c6",
+		special = "#b1574b",
+		hint = "#788ca6",
+		line_nr = "#4e5a5f",
+		line_nr_active = "#d0d4da",
+		border = "#464b57",
+		muted = "#a9afbc",
+	},
+	code_style = {
+		comments = "none",
+	},
 	highlights = {
+		-- Editor surfaces from colors/one.lua
 		CursorLine = { bg = "#2d3137" },
 		Visual = { bg = "#2d3137" },
 		VisualNOS = { bg = "#2d3137" },
 		NormalFloat = { bg = "#222630" },
-		FloatBorder = { bg = "#222630" },
+		-- Borders: one subtle gray everywhere, titles muted (Zed's border and muted text)
+		FloatBorder = { fg = "$border", bg = "#222630" },
+		FloatTitle = { fg = "$muted", bg = "#222630" },
+		WinSeparator = { fg = "$border" },
+		TelescopeNormal = { bg = "#222630" },
+		TelescopePromptNormal = { bg = "#222630" },
+		TelescopeBorder = { fg = "$border", bg = "#222630" },
+		TelescopePromptBorder = { fg = "$border", bg = "#222630" },
+		TelescopeResultsBorder = { fg = "$border", bg = "#222630" },
+		TelescopePreviewBorder = { fg = "$border", bg = "#222630" },
+		TelescopeTitle = { fg = "$muted" },
+		TelescopePromptTitle = { fg = "$muted" },
+		TelescopeResultsTitle = { fg = "$muted" },
+		TelescopePreviewTitle = { fg = "$muted" },
+		TelescopeSelection = { bg = "#2d3137" },
+		TelescopePromptPrefix = { fg = "$blue" },
 		StatusLine = { bg = "#222630" },
 		StatusLineNC = { bg = "#222630" },
 		-- Statusline mode block (utils/statusline.lua)
-		StatusModeNormal = { fg = "#222630", bg = "#61AFEF", fmt = "bold" },
-		StatusModeInsert = { fg = "#222630", bg = "#98C379", fmt = "bold" },
-		StatusModeVisual = { fg = "#222630", bg = "#C678DD", fmt = "bold" },
-		StatusModeCommand = { fg = "#222630", bg = "#E5C07B", fmt = "bold" },
+		StatusModeNormal = { fg = "#222630", bg = "$blue", fmt = "bold" },
+		StatusModeInsert = { fg = "#222630", bg = "$green", fmt = "bold" },
+		StatusModeVisual = { fg = "#222630", bg = "$purple", fmt = "bold" },
+		StatusModeCommand = { fg = "#222630", bg = "$yellow", fmt = "bold" },
+
+		-- Gutter (Zed)
+		LineNr = { fg = "$line_nr" },
+		CursorLineNr = { fg = "$line_nr_active" },
+
+		-- Syntax mapping (Zed One Dark)
+		["@attribute"] = { fg = "$blue" },
+		["@comment.documentation"] = { fg = "$light_grey" },
+		["@constant"] = { fg = "$gold" },
+		["@constant.builtin"] = { fg = "$gold" },
+		["@constructor"] = { fg = "$blue", fmt = "none" },
+		["@type"] = { fg = "$cyan" },
+		["@type.builtin"] = { fg = "$cyan" },
+		["@function.builtin"] = { fg = "$blue" },
+		["@function.macro"] = { fg = "$purple" },
+		["@operator"] = { fg = "$cyan" },
+		["@property"] = { fg = "$red" },
+		["@variable.member"] = { fg = "$red" },
+		["@variable.builtin"] = { fg = "$orange" },
+		["@string.escape"] = { fg = "$light_grey" },
+		["@string.special"] = { fg = "$orange" },
+		["@tag"] = { fg = "$blue" },
+		["@tag.attribute"] = { fg = "$blue" },
+		["@tag.delimiter"] = { fg = "$bracket" },
+		["@punctuation.bracket"] = { fg = "$bracket" },
+		["@punctuation.delimiter"] = { fg = "$bracket" },
+		["@punctuation.special"] = { fg = "$special" },
+		["@markup.heading"] = { fg = "$red", fmt = "none" },
+		["@markup.link.label"] = { fg = "$blue", fmt = "italic" },
+		["@markup.strong"] = { fg = "$orange", fmt = "bold" },
+		["@markup.italic"] = { fg = "$blue", fmt = "italic" },
+		["@module"] = { fg = "$bright" },
+		["@label"] = { fg = "$blue" },
+		["@character"] = { fg = "$green" },
+
+		-- Diagnostics and git (Zed)
+		DiagnosticInfo = { fg = "$blue" },
+		DiagnosticHint = { fg = "$hint" },
+		Changed = { fg = "$yellow" },
+		GitSignsChange = { fg = "$yellow" },
 	},
 })
 require("onedark").load()

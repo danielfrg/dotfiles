@@ -1,0 +1,44 @@
+// Zed keymap, mirrors the Neovim config (~/.config/nvim) where the editors overlap.
+// Leader is space.
+[
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      // Files
+      "space space": "file_finder::Toggle",
+      "space s f": "file_finder::Toggle",
+      "-": "project_panel::ToggleFocus",
+      // Search in the current buffer
+      "space /": "buffer_search::Deploy",
+      // Splits
+      "space |": "pane::SplitRight",
+      "space -": "pane::SplitDown",
+      // Paste from the system clipboard
+      "space p": ["workspace::SendKeystrokes", "\" + p"],
+      // Arrow keys disabled
+      "up": "zed::NoAction",
+      "down": "zed::NoAction",
+      "left": "zed::NoAction",
+      "right": "zed::NoAction"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == visual",
+    "bindings": {
+      // Yank to the system clipboard
+      "space y": ["workspace::SendKeystrokes", "\" + y"],
+      // Delete without touching the yank register
+      "space d": ["workspace::SendKeystrokes", "\" _ d"]
+    }
+  },
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      // Arrow keys disabled
+      "up": "zed::NoAction",
+      "down": "zed::NoAction",
+      "left": "zed::NoAction",
+      "right": "zed::NoAction"
+    }
+  }
+]

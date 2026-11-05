@@ -153,6 +153,8 @@ In general use one config file per plugin.
 
 Active: onedark.nvim (`navarasu/onedark.nvim`), `dark` style, loaded in `plugins/onedark.lua`.
 
+Syntax colors follow Zed's built-in One Dark (`assets/themes/one/one.json` in the Zed repo),
+so both editors look the same.
 ### Icons
 
 mini.icons, also mocking nvim-web-devicons, so every plugin uses one icon source.
@@ -208,6 +210,7 @@ conform.nvim, format on save (1000 ms timeout).
 
 - JS/TS, svelte, json, css, scss, html, markdown, yaml: the first one the project has of oxfmt, biome, prettier.
   Only from the project's `node_modules/.bin`, never a global install.
+  oxfmt (the standard for my projects) doesn't format `.svelte` / `.astro` files yet; it passes them through unchanged.
 - Python formats through ruff's LSP and Go through gopls. No other LSP formats.
 - Projects without a formatter save as-is, with no notice. `:ConformInfo` shows what's available.
 
