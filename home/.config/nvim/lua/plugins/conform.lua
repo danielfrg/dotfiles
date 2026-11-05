@@ -24,6 +24,7 @@ require("conform").setup({
 		typescript = web,
 		typescriptreact = web,
 		svelte = web,
+		astro = web,
 		json = web,
 		jsonc = web,
 		css = web,

@@ -208,9 +208,10 @@ Neovim 0.12's built-in undotree (`packadd nvim.undotree`), no plugin. Loaded in 
 
 conform.nvim, format on save (1000 ms timeout).
 
-- JS/TS, svelte, json, css, scss, html, markdown, yaml: the first one the project has of oxfmt, biome, prettier.
+- JS/TS, svelte, astro, json, css, scss, html, markdown, yaml: the first one the project has of oxfmt, biome, prettier.
   Only from the project's `node_modules/.bin`, never a global install.
-  oxfmt (the standard for my projects) doesn't format `.svelte` / `.astro` files yet; it passes them through unchanged.
+  oxfmt (the standard for my projects) formats `.svelte` / `.astro` when the project enables its `svelte` / `astro`
+  options (`.astro` also needs `@astrojs/compiler-rs`).
 - Python formats through ruff's LSP and Go through gopls. No other LSP formats.
 - Projects without a formatter save as-is, with no notice. `:ConformInfo` shows what's available.
 
