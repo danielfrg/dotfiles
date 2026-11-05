@@ -1,1 +1,3 @@
-return {}
+return {
+	statusline = require("utils.statusline"),
+}

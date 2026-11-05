@@ -26,6 +26,7 @@ vim.o.showmode = false
 vim.opt.shortmess:append("I")
 vim.o.winborder = "rounded"
 vim.o.pumheight = 10
+vim.o.statusline = "%{%v:lua.Utils.statusline.render()%}"
 
 -- Search
 vim.o.ignorecase = true

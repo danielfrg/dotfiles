@@ -45,6 +45,11 @@ Only set what differs from Neovim defaults
 - Timing: updatetime 250, timeoutlen 300.
 - New splits open below and to the right.
 - Folds come from Treesitter, foldlevel 99 so everything starts unfolded.
+- Statusline: my own, no plugin, in `utils/statusline.lua` (exposed as `Utils.statusline`).
+  - Left: mode block (`NOR`, `INS`, `VIS`, `COM`, ...) colored by mode: normal blue, insert green,
+    visual purple, command yellow (`StatusMode*` groups, set in `plugins/onedark.lua`).
+  - Then the file path relative to cwd, with help/preview/modified/readonly flags.
+  - Right: attached LSP clients as `[name1, name2]`, then `line:column`.
 - Messages: Neovim 0.12's experimental ui2 handles messages. It's turned on at the end of `config/options.lua`.
   - Short messages: corner popup up to 30% of the screen tall, gone after 5 seconds.
   - Long output (errors, `:ls`, `:verbose`, shell commands, progress): a scrollable pager up to half the screen.
@@ -59,7 +64,7 @@ Only set what differs from Neovim defaults
 
 ## Keymaps
 
-`lua/config/keymaps.lua`: core keymaps that don't use a plugin. No window-navigation maps (no tmux).
+core keymaps that don't use a plugin.
 
 | Keys | Action |
 |---|---|
@@ -96,6 +101,53 @@ In general use one config file per plugin.
 ### Colorscheme
 
 Active: onedark.nvim (`navarasu/onedark.nvim`), `dark` style, loaded in `plugins/onedark.lua`.
+
+### Icons
+
+mini.icons, also mocking nvim-web-devicons, so every plugin uses one icon source.
+
+### File explorer
+
+oil.nvim, not the default file explorer (netrw stays).
+
+- Columns: icon. Shows hidden files. Deletes go to the trash.
+- Opens as a float with 10 padding.
+- Inside oil: `<C-h>` unmapped, `<M-h>` opens in a split.
+
+### Treesitter
+
+nvim-treesitter, main branch.
+
+- Ensures parsers: python, ninja, c, cpp, astro, html, css, javascript, typescript, tsx,
+  vim, vimdoc, lua, query, bash, just, markdown, markdown_inline, rst, toml, terraform, yaml.
+- A FileType autocmd starts highlighting and Treesitter indent whenever a parser exists.
+- `:TSUpdate` runs on the PackChanged event, so parsers stay in sync with the plugin version.
+
+### Editing
+
+- mini.pairs with defaults.
+- mini.surround with defaults: `sa` add, `sd` delete, `sr` replace (e.g. `saiw)`, `sd"`, `sr)"`).
+
+### Git
+
+gitsigns.nvim with defaults.
+
+### Jumping
+
+flash.nvim with defaults.
+
+### Keymap hints
+
+which-key.nvim with defaults. Groups: `<leader>b` Buffers.
+
+### Plugin keymaps
+
+`lua/plugins/keymaps.lua`.
+
+| Keys | Action |
+|---|---|
+| `-` | Toggles oil as a float |
+| `<CR>` (normal, visual, operator-pending) | Flash jump. In quickfix and the command-line window `<CR>` keeps its default (open the entry) |
 
 ## Languages
 
