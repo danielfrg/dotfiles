@@ -102,8 +102,6 @@ if [[ -d "$HOME/.config/herd-lite/bin" ]]; then
     export PHP_INI_SCAN_DIR="$HOME/.config/herd-lite/bin${PHP_INI_SCAN_DIR:+:$PHP_INI_SCAN_DIR}"
 fi
 
-export TMUXIFIER_LAYOUT_PATH="$HOME/.config/tmux/layouts"
-
 # -----------------------------------------------
 # Keybindings, completion, and history
 
