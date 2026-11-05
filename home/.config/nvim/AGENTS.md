@@ -80,7 +80,6 @@ core keymaps that don't use a plugin.
 | `<leader>p` | Paste from the system clipboard |
 | `<leader>d` (visual) | Delete without touching the yank register |
 | `<leader>n` | New empty buffer |
-| `<leader>s` / `<leader>S` | Save / save without autocmds (skips format-on-save) |
 | `<leader>z` | Close buffer |
 | `<S-h>` / `<S-l>` | Previous/next buffer |
 | `<leader>bd` | Close every hidden buffer, except unsaved ones |
@@ -136,9 +135,24 @@ gitsigns.nvim with defaults.
 
 flash.nvim with defaults.
 
+### Fuzzy finder
+
+telescope.nvim (with plenary.nvim), plus two extensions:
+- telescope-fzf-native: native fzf sorter, smart case. Built with `make` on the PackChanged event.
+- telescope-ui-select: `vim.ui.select` (code actions, etc.) uses telescope's dropdown.
+
+Settings:
+- Ignores `.git/` and `node_modules`. Find files includes hidden files.
+- Grep uses ripgrep, following symlinks, smart case.
+- In normal mode inside a picker: `d` deletes the buffer (buffers picker), `q` closes.
+
+### Undo tree
+
+Neovim 0.12's built-in undotree (`packadd nvim.undotree`), no plugin. Loaded in `plugins/undotree.lua`.
+
 ### Keymap hints
 
-which-key.nvim with defaults. Groups: `<leader>b` Buffers.
+which-key.nvim with defaults. Groups: `<leader>b` Buffers, `<leader>g` Git, `<leader>s` Search.
 
 ### Plugin keymaps
 
@@ -148,6 +162,17 @@ which-key.nvim with defaults. Groups: `<leader>b` Buffers.
 |---|---|
 | `-` | Toggles oil as a float |
 | `<CR>` (normal, visual, operator-pending) | Flash jump. In quickfix and the command-line window `<CR>` keeps its default (open the entry) |
+| `<leader><leader>` / `<leader>sf` | Find files |
+| `<leader>sg` | Live grep |
+| `<leader>sw` | Grep the word under the cursor |
+| `<leader>sb` | Buffers, most recently used first |
+| `<leader>s.` | Recent files |
+| `<leader>sr` | Resume the last picker |
+| `<leader>sd` | Diagnostics |
+| `<leader>sh` / `<leader>sk` / `<leader>ss` | Help / keymaps / list of pickers |
+| `<leader>/` | Fuzzy search in the current buffer (dropdown, no preview) |
+| `<leader>gc` / `<leader>gs` | Git commits / git status |
+| `<leader>u` | Toggles the built-in undo tree |
 
 ## Languages
 

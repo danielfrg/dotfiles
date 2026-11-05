@@ -33,8 +33,6 @@ map("v", "<leader>d", '"_d', { desc = "Delete without yanking" })
 
 -- Files and buffers
 map("n", "<leader>n", "<Cmd>enew<CR>", { desc = "New buffer" })
-map("n", "<leader>s", "<Cmd>w!<CR>", { desc = "Save" })
-map("n", "<leader>S", "<Cmd>noautocmd w!<CR>", { desc = "Save without autocmds" })
 map("n", "<leader>z", "<Cmd>bdelete<CR>", { desc = "Close buffer" })
 map("n", "<S-h>", "<Cmd>bprevious<CR>", { desc = "Previous buffer" })
 map("n", "<S-l>", "<Cmd>bnext<CR>", { desc = "Next buffer" })
