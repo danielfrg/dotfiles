@@ -86,14 +86,16 @@ Only set what differs from Neovim defaults
 
 ## Commands
 
-`lua/config/commands.lua`.
-
 - Typo commands: `:W` saves, `:Wq` / `:WQ` save and quit, `:Q` quits without saving.
 
 ## Plugins
 
 Use the native nvim.pack to manage them.
 In general use one config file per plugin.
+
+### Colorscheme
+
+Active: onedark.nvim (`navarasu/onedark.nvim`), `dark` style, loaded in `plugins/onedark.lua`.
 
 ## Languages
 
