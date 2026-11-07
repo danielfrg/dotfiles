@@ -54,7 +54,6 @@
 
 [tag]
     sort = version:refname
-    forceSignAnnotated = true
 
 [fetch]
     prune = true
