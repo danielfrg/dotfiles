@@ -14,12 +14,13 @@ ansible-homelab:
   cd ansible; ansible-playbook homelab.yml --limit homelab
 
 stow:
+  # Create these directories first so stow links configs individually instead of
+  # folding into the repo (which would put private keys in it)
+  mkdir -p -m 700 $HOME/.gnupg
   stow -t $HOME home
 
 unstow:
   stow -t $HOME -D home
 
 gpg:
-  gpg --list-keys
-  stow -t $HOME gpg
-  echo "Manually run 'gpg --import <file>' for the public and private keys"
+  @echo "Configs are linked by 'just stow'. Manually run 'gpg --import <file>' for the public and private keys"

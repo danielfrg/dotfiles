@@ -1,6 +1,7 @@
 [user]
     name = Daniel Rodriguez
     email = daniel@danielfrg.com
+    signingkey = 0ACC202A161F8183
 
 [include]
     path = .gitconfig.local
@@ -190,11 +191,11 @@
 
 [commit]
     verbose = true
-    ; gpgsign = true
+    gpgsign = true
 
 [rerere]
     enabled = true
     autoupdate = true
 
-# [gpg]
-#     program = gpg
+[gpg]
+    program = /opt/homebrew/bin/gpg
